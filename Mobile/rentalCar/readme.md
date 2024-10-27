@@ -15,7 +15,7 @@
 ## SSS - basic one, even me can understand 
 <img src="https://github.com/user-attachments/assets/430f5103-2b44-4835-81a5-9a6877a7c655" alt="Description" width="300" />
 
-## settings - there will ve theme and lang selection maybe other user infos can be displayed
+## settings - there will be theme and lang selection maybe other user infos can be displayed
 <img src="https://github.com/user-attachments/assets/d61f22a9-3176-45be-a87e-66aac99acd44" alt="Description" width="300" />
 
 ## AboutUs - basic company vision mission
