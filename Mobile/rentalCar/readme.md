@@ -6,6 +6,9 @@
 - npm install @react-navigation/native-stack
 
 ## home page swiper(slider)
+<img src="https://github.com/user-attachments/assets/61a97e93-3ef6-4b88-80cc-e07805b783f3" alt="Description" width="300" />
+<img src="https://github.com/user-attachments/assets/81bf3de9-f621-4419-9f67-44f305c7cc5b" alt="Description" width="300" />
+
 ![WhatsApp Image 2024-10-28 at 01 06 16 (2)](https://github.com/user-attachments/assets/61a97e93-3ef6-4b88-80cc-e07805b783f3)
 ![WhatsApp Image 2024-10-28 at 01 06 16](https://github.com/user-attachments/assets/81bf3de9-f621-4419-9f67-44f305c7cc5b)
 
