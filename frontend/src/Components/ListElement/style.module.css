@@ -1,0 +1,14 @@
+.linkBg {
+  text-decoration: none;
+}
+
+
+.listItem:hover a {
+  color: var(--hover-color) !important;
+}
+
+.listItem a {
+  color: var(--default-color) !important;
+  font-weight: var(--default-boldness) !important;
+  font-size: var(--default-ft-size) !important;
+}
