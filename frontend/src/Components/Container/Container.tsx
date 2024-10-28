@@ -1,15 +1,11 @@
 import React from "react";
-import Infobar from "../InfoBar/Infobar";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
+import "../../app.css";
+import TopNav from "../Navbar/TopNav/TopNav";
 
 function Container() {
   return (
     <div>
-      Container
-      <Infobar />
-      <Navbar />
-      <Footer />
+      <TopNav />
     </div>
   );
 }
