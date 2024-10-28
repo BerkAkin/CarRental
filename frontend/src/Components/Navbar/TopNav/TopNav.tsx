@@ -13,7 +13,7 @@ function TopNav() {
                 text="info@flexper.com.tr"
                 isHref={true}
                 href="mailto:info@flexper.com.tr"
-              />{" "}
+              />
               <div className="vr ms-4 me-3"></div>
               <ListElement text=" +90 543 353 97 37" isHref={false} href="" />
               <div className="vr ms-3 me-3"></div>
