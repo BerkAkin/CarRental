@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -12,7 +12,7 @@ import SSS from './SSS';
 import Icon from '../../components/Icon';
 import { GlobalStyles } from '../../styles/Colours';
 
-const Tabs = createBottomTabNavigator();
+const tabs = createBottomTabNavigator();
 
 const CustomTabBarButton = ({ children, onPress }) => (
     <TouchableOpacity
@@ -34,12 +34,14 @@ const CustomTabBarButton = ({ children, onPress }) => (
     </TouchableOpacity>
 );
 
-function App() {
+function Tabs() {
+    const [tabVisible, setTabVisible] = useState(true);
+
     return (
         <NavigationContainer>
-            <Tabs.Navigator
+            <tabs.Navigator
                 initialRouteName="Home"
-                screenOptions={{
+                screenOptions={({ route }) => ({
                     tabBarShowLabel: false,
                     headerShown: false,
                     tabBarStyle: {
@@ -52,26 +54,28 @@ function App() {
                         borderRadius: 15,
                         height: 90,
                         ...styles.shadow,
+                        display: tabVisible ? 'flex' : 'none',
                     },
-                }}
+                })}
             >
-                <Tabs.Screen
+                <tabs.Screen
                     name="Services"
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <Icon name={'location-outline'} size={30} color={focused ? GlobalStyles.colours.red700 : GlobalStyles.colours.gray700} />
                         ),
-                    }}>{() => <Services />}
-                </Tabs.Screen>
-                <Tabs.Screen
+                        headerShown: false,
+                    }}>{() => <Services setTabVisible={setTabVisible} />}
+                </tabs.Screen>
+                <tabs.Screen
                     name="Aboutus"
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <Icon name={'information-circle-outline'} size={30} color={focused ? GlobalStyles.colours.red700 : GlobalStyles.colours.gray700} />
                         ),
                     }}>{() => <AboutUs />}
-                </Tabs.Screen>
-                <Tabs.Screen
+                </tabs.Screen>
+                <tabs.Screen
                     name="Home"
                     options={{
                         tabBarIcon: ({ focused }) => (
@@ -80,24 +84,25 @@ function App() {
                         tabBarButton: (props) => (
                             <CustomTabBarButton {...props} />
                         ),
-                    }}>{() => <Home />}</Tabs.Screen>
-                <Tabs.Screen
+                    }}>{() => <Home />}
+                </tabs.Screen>
+                <tabs.Screen
                     name="SSS"
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <Icon name={'chatbubbles-outline'} size={30} color={focused ? GlobalStyles.colours.red700 : GlobalStyles.colours.gray700} />
                         ),
                     }}>{() => <SSS />}
-                </Tabs.Screen>
-                <Tabs.Screen
+                </tabs.Screen>
+                <tabs.Screen
                     name="Settings"
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <Icon name={'settings-outline'} size={30} color={focused ? GlobalStyles.colours.red700 : GlobalStyles.colours.gray700} />
                         ),
                     }}>{() => <Settings />}
-                </Tabs.Screen>
-            </Tabs.Navigator>
+                </tabs.Screen>
+            </tabs.Navigator>
         </NavigationContainer>
     );
 }
@@ -112,4 +117,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default App;
+export default Tabs;

@@ -1,55 +1,74 @@
-import React, { useState, useRef  } from 'react';
-import { FlatList, StyleSheet,Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 
-import FlexperGreen from '../screen/FlexperGreen';
-import FlexperNature from '../screen/FlexperNature';
-import FlexperComfort from '../screen/FlexperComfort';
-
+import Category from '../screen/Category';
 import PageHeader from '../../components/PageHeader';
-import TopSlider from '../../components/TopSlider';
 
-const DATA = [
-    { id: '1', component: FlexperGreen, name: 'Flexper Green' },
-    { id: '2', component: FlexperNature, name: 'Flexper Nature' },
-    { id: '3', component: FlexperComfort, name: 'Flexper Comfort' },
-];
+const fetchCategories = async () => {
+    // Simulating API response with dummy data
+    return [
+        { id: '1', name: 'cate1', color: '#f54538' },
+        { id: '2', name: 'cate2', color: '#37fa25' },
+        { id: '3', name: 'cate3', color: '#14a9ff' },
+        { id: '4', name: 'cate4', color: '#ff14f7' },
+        { id: '5', name: 'cate5', color: '#977496' },
+        { id: '6', name: 'cate6', color: '#757575' },
+    ];
+};
+const fetchCars = async () => {
+    // Simulating API response with dummy data
+    return [
+        { id: '1', name: 'car1', cateid: '1' },
+        { id: '2', name: 'car2', cateid: '1' },
+        { id: '3', name: 'car3', cateid: '2' },
+        { id: '4', name: 'car4', cateid: '2' },
+        { id: '5', name: 'car5', cateid: '3' },
+        { id: '6', name: 'car6', cateid: '3' },
+        { id: '7', name: 'car7', cateid: '4' },
+        { id: '8', name: 'car6', cateid: '4' },
+        { id: '55', name: 'car52', cateid: '4' },//just check to see if it's going to break.
+        { id: '9', name: 'car6', cateid: '5' },
+        { id: '10', name: 'car6', cateid: '5' },
+        { id: '11', name: 'car6', cateid: '6' },
+        { id: '12', name: 'car6', cateid: '6' },
+    ];
+};
 
 function Home() {
-    const [currentPageName, setCurrentPageName] = useState(DATA[0].name);
+    const [categories, setCategories] = useState([]);
+    const [cars, setCars] = useState([]);
 
-    const viewabilityConfig = {
-        itemVisiblePercentThreshold: 50,
-    };
+    useEffect(() => {
+        const loadData = async () => {
+            const [categoriesData, carsData] = await Promise.all([fetchCategories(), fetchCars()]);
+            setCategories(categoriesData);
+            setCars(carsData);
+        };
 
-    const onViewableItemsChanged = useRef(({ viewableItems }) => {
-        if (viewableItems.length > 0) {
-            const currentItem = DATA[viewableItems[0].index];
-            setCurrentPageName(currentItem.name);
-        }
-    }).current;
+        loadData();
+    }, []);
 
     const renderItem = ({ item }) => {
-        const Component = item.component;
-        return <Component />;
+        // Filter cars that belong to the current category based on cateid
+        const categoryCars = cars.filter(car => car.cateid === item.id);
+
+        // Pass the filtered cars as a prop to Category component
+        return <Category name={item.name} color={item.color} cars={categoryCars} />;
     };
 
     return (
-        <>
+        <View style={{ flex: 1 }}>
             <PageHeader title={'Ana Sayfa'} />
-            <TopSlider currentPage={currentPageName} />
-            <Text style={{textAlign: 'center'}}> swipable categories </Text>
             <FlatList
-                data={DATA}
+                data={categories}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 style={styles.flatList}
-                onViewableItemsChanged={onViewableItemsChanged}
-                viewabilityConfig={viewabilityConfig}
             />
-        </>
+        </View>
     );
 }
 
