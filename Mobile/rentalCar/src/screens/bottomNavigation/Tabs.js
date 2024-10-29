@@ -65,7 +65,7 @@ function Tabs() {
                             <Icon name={'location-outline'} size={30} color={focused ? GlobalStyles.colours.red700 : GlobalStyles.colours.gray700} />
                         ),
                         headerShown: false,
-                    }}>{() => <Services setTabVisible={setTabVisible} />}
+                    }}>{() => <Services setTabVisible={setTabVisible} tabVisible={tabVisible}/>}
                 </tabs.Screen>
                 <tabs.Screen
                     name="Aboutus"

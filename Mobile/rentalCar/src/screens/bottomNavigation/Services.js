@@ -1,8 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 import CustomBackHeader from '../../components/CustomBackHeader';
+
+import MapViewComp from '../../components/mapView/MapViewComp';
 
 //dummy locs
 const locations = [
@@ -29,39 +30,15 @@ const locations = [
     },
 ];
 
-function Services({ setTabVisible }) {
-
+function Services({ setTabVisible, tabVisible }) {
     const toggleTabVisibility = useCallback(() => {
         setTabVisible(prev => !prev);
     }, [setTabVisible]);
-    
+
     return (
         <View style={styles.container}>
-            <CustomBackHeader title={'Hizmetlerimiz'} position={'left'} func={toggleTabVisibility} icon={'expand-outline'} />
-            <MapView
-                style={styles.map}
-                provider={PROVIDER_GOOGLE}
-                showsUserLocation
-                showsMyLocationButton
-                initialRegion={{
-                    latitude: 40.740387519047935,
-                    longitude: 29.916001353036496,
-                    latitudeDelta: 0.1,
-                    longitudeDelta: 0.1,
-                }}
-            >
-                {locations.map(location => (
-                    <Marker
-                        key={location.id}
-                        coordinate={{
-                            latitude: location.latitude,
-                            longitude: location.longitude,
-                        }}
-                        title={location.title}
-                        description={location.description}
-                    />
-                ))}
-            </MapView>
+            <CustomBackHeader title={'Hizmetlerimiz'} position={'left'} func={toggleTabVisibility} icon={'list-outline'} />
+            <MapViewComp location={locations} showMapList={!tabVisible} />
         </View>
     );
 }
@@ -69,12 +46,8 @@ function Services({ setTabVisible }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#f8f9fa',
     },
-    map: {
-        height: '93%',
-        zIndex: -1,
-        top: -20,
-    }
 })
 
 export default Services;
