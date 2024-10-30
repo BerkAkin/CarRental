@@ -1,0 +1,11 @@
+.textContent {
+    font-weight: 400 !important;
+    color: #7A7A7A;
+    font-family: DM SANS, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6rem;
+}
+
+.textHeader {
+    color: #232323;
+}
