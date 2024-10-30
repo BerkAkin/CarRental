@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { GlobalStyles } from '../styles/Colours';
 
-function CustomBackHeader({ title }) {
+function PageHeader({ title }) {
     return (
         <View style={[styles.header, styles.shadow]}>
             <Text style={styles.headerText}>{title}</Text>
@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingTop: 18,
         paddingBottom: 25,
-        marginBottom: 30,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
     },
@@ -37,4 +36,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CustomBackHeader;
+export default PageHeader;

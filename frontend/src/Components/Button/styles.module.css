@@ -1,0 +1,10 @@
+.ButtonProps {
+    color: var(--btn-color) !important;
+    background-color: var(--btn-BgColor) !important;
+    border-radius: var(--btn-radius) !important;
+    width: var(--btn-wd) !important;
+    height: var(--btn-he) !important;
+    padding: var(--btn-padding) !important;
+    border: var(--btn-border) !important;
+    font-weight: 500;
+}
