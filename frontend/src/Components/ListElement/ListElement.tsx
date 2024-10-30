@@ -13,20 +13,18 @@ interface ListObjectProps {
   boldness: string;
 }
 
-function ListElement({ text, href, isHref, isBold, isHover ,hoverColor, color, fs, boldness}: ListObjectProps) {
+function ListElement({ text, href, isHref, isBold, isHover, hoverColor, color, fs, boldness }: ListObjectProps) {
   const linkStyle = {
     fontWeight: isBold ? "bolder" : "normal",
-    "--hover-color": isHover ?  hoverColor : {}, 
-    "--default-color" : color,
+    "--hover-color": isHover ? hoverColor : {},
+    "--default-color": color,
     "--default-ft-size": fs,
     "--default-boldness": boldness
-  };
+  } as React.CSSProperties;
 
   return (
     <li className={`list-group-item ${styles.listItem}`}>
-        <a className={`${styles.textSmall} ${styles.linkBg}`} href={href} style={linkStyle}>
-          {text}
-        </a>
+      <a className={` ${styles.linkBg}`} href={href} style={linkStyle}>{text}</a>
     </li>
   );
 }
