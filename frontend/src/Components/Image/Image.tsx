@@ -6,12 +6,16 @@ interface ImageParams {
   Width: string;
   Height: string;
   Alt?: string;
+  Round?: boolean;
 }
 
-function Image({ URL, Width, Height, Alt }: ImageParams) {
+function Image({ URL, Width, Height, Alt, Round }: ImageParams) {
+  const ImageProps = {
+    "--img-roundness": Round ? "0.5%" : ""
+  } as React.CSSProperties;
   return (
     <>
-      <img src={URL} width={Width} height={Height} alt={Alt}></img>
+      <img className={styles.roundedImage} style={ImageProps} src={URL} width={Width} height={Height} alt={Alt}></img>
     </>
   )
 }
