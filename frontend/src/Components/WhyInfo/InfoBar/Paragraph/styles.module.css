@@ -1,0 +1,4 @@
+.paragraphOpt {
+    color: #7A7A7A;
+    text-align: var(--why-paragraph-align) !important;
+}
