@@ -31,7 +31,7 @@ function WhyInfo({ Align, InfoBars, ImgURL, Header }: WhyInfoProp) {
                             />
                         ))}</div>
                     <div className={`col-6  ${Align === true ? 'order-2' : ''}`}>
-                        <Image Height='660' Width='660' URL={ImgURL} />
+                        <Image Round={true} Height='660' Width='660' URL={ImgURL} />
                     </div>
                 </div>
             </div>
