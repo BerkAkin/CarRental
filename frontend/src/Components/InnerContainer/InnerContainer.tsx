@@ -3,6 +3,7 @@ import style from './styles.module.css'
 import LandingContainer from '../LandingContainer/LandingContainer'
 import WhyInfo from '../WhyInfo/WhyInfo'
 import images from '../../assets/images/WhyImages/images';
+import ServicesContainer from '../ServicesContainer/ServicesContainer';
 
 
 function InnerContainer() {
@@ -20,6 +21,7 @@ function InnerContainer() {
         { HTitle: "Araç Seçeneği", PTitle: "İstediğiniz araç modelini seçme özgürlüğüne sahip olun." },
         { HTitle: "Her Şey Dahil Paketler", PTitle: "Kapsamlı paket seçeneklerimiz arasından isteğinize uygun olanı seçin." }
       ]} Align={true} />
+      <ServicesContainer />
 
     </div>
   )
