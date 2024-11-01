@@ -5,17 +5,15 @@ interface ListObjectProps {
   text: string;
   href: string;
   isHref: boolean;
-  isBold: boolean;
-  isHover: boolean;
+  isHover?: boolean;
   hoverColor?: string;
   color: string;
   fs: string;
-  boldness: string;
+  boldness?: string;
 }
 
-function ListElement({ text, href, isHref, isBold, isHover, hoverColor, color, fs, boldness }: ListObjectProps) {
+function ListElement({ text, href, isHref, isHover, hoverColor, color, fs, boldness }: ListObjectProps) {
   const linkStyle = {
-    fontWeight: isBold ? "bolder" : "normal",
     "--hover-color": isHover ? hoverColor : {},
     "--default-color": color,
     "--default-ft-size": fs,
