@@ -1,23 +1,26 @@
 import React from 'react'
 import style from "./styles.module.css"
-import { ReactComponent as MyIcon } from '../../../../assets/icons/bullseye.svg';
+import { ReactComponent as Bullseye } from '../../../../assets/icons/bullseye.svg';
 
 interface HeaderProps {
     Text: string;
-    Align: boolean;
+    Align?: boolean | "center";
+    Icon?: boolean;
 }
 
-function Header({ Text, Align }: HeaderProps) {
+function Header({ Text, Align, Icon }: HeaderProps) {
     const props = {
-        "--why-header-align": Align ? 'left' : 'right',
+        "--why-header-align": Align === 'center' ? 'center' : Align ? 'left' : 'right',
     } as React.CSSProperties;
     return (
         <>
-            {Align ? (
-                <h2 className={style.headerOpt} style={props}><span className='me-2'> <MyIcon width="30" height="30" /></span>{Text}</h2>
-            ) : (
-                <h2 className={style.headerOpt} style={props}>{Text}<span> <MyIcon width="30" height="30" /></span></h2>
-            )}
+            {Align ?
+                (
+                    <h2 className={style.headerOpt} style={props}>{Icon && (<span className='me-2'> <Bullseye width="30" height="30" /></span>)}{Text}</h2>
+                ) : (
+                    <h2 className={style.headerOpt} style={props}>{Text}{Icon && (<span className='me-2'> <Bullseye width="30" height="30" /></span>)}</h2 >
+                )
+            }
 
         </>
     )
