@@ -23,7 +23,7 @@ function Footer() {
   const companyItems = [
     { Text: "Biz Kimiz?", Href: "" },
     { Text: "Blog", Href: "" },
-    { Text: "Neler Söylediler", Href: "" },
+    { Text: "Müşteri Görüşleri", Href: "" },
     { Text: "İletişim", Href: "" },
   ];
 
@@ -44,7 +44,7 @@ function Footer() {
         </div>
         <div className='row text-center'>
           <ListComponent Title="İletişim" Items={contactItems} />
-          <ListComponent Title="Hizmetler" Items={aboutItems} />
+          <ListComponent Title="Sık Sorulan Sorular" Items={aboutItems} />
           <ListComponent Title="Hakkımızda" Items={companyItems} />
           <ListComponent Title="Sosyal Medyada Biz" Items={socialItems} />
         </div>
