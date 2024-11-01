@@ -15,19 +15,19 @@ function BotNav() {
             </div>
             <div className='col-9 p-0 d-flex ms-4'>
               <div className='col d-flex align-items-center justify-content-center'>
-                <ListElement color="#1A2B48" text='ANASAYFA' href='' boldness='700' fs='0.9em' isBold={true} isHover={true} hoverColor='#E00000' isHref={true} />
+                <ListElement color="#1A2B48" text='ANASAYFA' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
               </div>
               <div className='col d-flex align-items-center justify-content-center'>
-                <ListElement color="#1A2B48" text='MODELLER' href='' boldness='700' fs='0.9em' isBold={true} isHover={true} hoverColor='#E00000' isHref={true} />
+                <ListElement color="#1A2B48" text='MODELLER' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
               </div>
               <div className='col-3 d-flex align-items-center justify-content-center'>
-                <ListElement color="#1A2B48" text='SIK SORULAN SORULAR' href='' boldness='700' fs='0.9em' isBold={true} isHover={true} hoverColor='#E00000' isHref={true} />
+                <ListElement color="#1A2B48" text='SIK SORULAN SORULAR' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
               </div>
               <div className='col d-flex align-items-center justify-content-center'>
-                <ListElement color="#1A2B48" text='BİZ KİMİZ?' href='' boldness='700' fs='0.9em' isBold={true} isHover={true} hoverColor='#E00000' isHref={true} />
+                <ListElement color="#1A2B48" text='BİZ KİMİZ?' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
               </div>
               <div className='col d-flex align-items-center justify-content-center'>
-                <ListElement color="#1A2B48" text='İLETİŞİM' href='' boldness='700' fs='0.9em' isBold={true} isHover={true} hoverColor='#E00000' isHref={true} />
+                <ListElement color="#1A2B48" text='İLETİŞİM' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
               </div>
             </div>
           </div>
