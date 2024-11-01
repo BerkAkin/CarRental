@@ -23,7 +23,7 @@ function Footer() {
   const companyItems = [
     { Text: "Biz Kimiz?", Href: "" },
     { Text: "Blog", Href: "" },
-    { Text: "Neler Söylediler", Href: "" },
+    { Text: "Müşteri Görüşleri", Href: "" },
     { Text: "İletişim", Href: "" },
   ];
 
@@ -35,21 +35,24 @@ function Footer() {
   ];
 
   return (
-    <div className={`${styles.footerBg} mt-5 pt-5 h-100 container-fluid`}>
-      <footer className="container py-5 bg-light rounded-top">
-        <div className='row mb-5'>
-          <div className='col-3 justify-content-center d-flex '>
-            <Image URL={logo} Width="200" Height="50" />
+    <>
+      <div className='mt-5 pt-5'></div>
+      <div className={`${styles.footerBg} mt-5 pt-5 container-fluid`}>
+        <footer className="container py-5 bg-light rounded-top">
+          <div className='row mb-5'>
+            <div className='col-3 justify-content-center d-flex '>
+              <Image URL={logo} Width="200" Height="50" />
+            </div>
           </div>
-        </div>
-        <div className='row text-center'>
-          <ListComponent Title="İletişim" Items={contactItems} />
-          <ListComponent Title="Hizmetler" Items={aboutItems} />
-          <ListComponent Title="Hakkımızda" Items={companyItems} />
-          <ListComponent Title="Sosyal Medyada Biz" Items={socialItems} />
-        </div>
-      </footer>
-    </div>
+          <div className='row text-center'>
+            <ListComponent Title="İletişim" Items={contactItems} />
+            <ListComponent Title="Sık Sorulan Sorular" Items={aboutItems} />
+            <ListComponent Title="Hakkımızda" Items={companyItems} />
+            <ListComponent Title="Sosyal Medyada Biz" Items={socialItems} />
+          </div>
+        </footer>
+      </div>
+    </>
   );
 }
 

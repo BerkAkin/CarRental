@@ -23,13 +23,9 @@ function WhyInfo({ Align, InfoBars, ImgURL, Header }: WhyInfoProp) {
                             </div>
                         </div>
                         {InfoBars.map((info, index) => (
-                            <InfoBar
-                                key={index}
-                                Alignment={Align}
-                                HTitle={info.HTitle}
-                                PTitle={info.PTitle}
-                            />
-                        ))}</div>
+                            <InfoBar key={index} Alignment={Align} HTitle={info.HTitle} PTitle={info.PTitle} />
+                        ))}
+                    </div>
                     <div className={`col-6  ${Align === true ? 'order-2' : ''}`}>
                         <Image Round={true} Height='660' Width='660' URL={ImgURL} />
                     </div>
