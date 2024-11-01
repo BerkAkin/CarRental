@@ -11,7 +11,7 @@ interface InfoBarProps {
 function InfoBar({ HTitle, PTitle, Alignment }: InfoBarProps) {
     return (
         <div className=' pt-5'>
-            <Header Text={HTitle} Align={Alignment} />
+            <Header Icon={true} Text={HTitle} Align={Alignment} />
             <Paragraph Text={PTitle} Align={Alignment} />
         </div>
     )
