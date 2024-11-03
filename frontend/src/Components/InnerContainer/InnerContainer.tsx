@@ -4,6 +4,8 @@ import LandingContainer from '../LandingContainer/LandingContainer'
 import WhyInfo from '../WhyInfo/WhyInfo'
 import images from '../../assets/images/WhyImages/images';
 import ServicesContainer from '../ServicesContainer/ServicesContainer';
+import Slider from '../Slider/Slider';
+
 
 
 function InnerContainer() {
@@ -22,6 +24,7 @@ function InnerContainer() {
         { HTitle: "Her Şey Dahil Paketler", PTitle: "Kapsamlı paket seçeneklerimiz arasından isteğinize uygun olanı seçin." }
       ]} Align={true} />
       <ServicesContainer />
+      <Slider />
 
     </div>
   )
