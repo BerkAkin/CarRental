@@ -10,9 +10,10 @@ interface buttonProperties {
   Height: string;
   Padding?: string;
   Border?: string;
+  Func?: () => void;
 }
 
-function Button({ Text, Color, BgColor, CrRd, Width, Height, Padding, Border }: buttonProperties) {
+function Button({ Text, Color, BgColor, CrRd, Width, Height, Padding, Border, Func }: buttonProperties) {
   const btnStyle = {
     '--btn-color': Color ? Color : "#000000",
     '--btn-BgColor': BgColor ? BgColor : "#0373FC",
@@ -23,9 +24,15 @@ function Button({ Text, Color, BgColor, CrRd, Width, Height, Padding, Border }: 
     '--btn-border': Border ? Border : ""
   } as React.CSSProperties;
 
+  const handleClick = () => {
+    if (Func) {
+      Func();
+    }
+  };
+
   return (
     <>
-      <button className={styles.ButtonProps} style={btnStyle}>{Text}</button>
+      <button className={styles.ButtonProps} style={btnStyle} onClick={handleClick}>{Text} </button>
     </>
   )
 }
