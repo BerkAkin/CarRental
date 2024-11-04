@@ -1,14 +1,13 @@
 .cardBg {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
+    min-height: 250px;
 }
 
 .textFeatures {
     font-weight: 500;
     font-size: 1.1em;
 }
-
-
 
 .textColor {
     color: rgb(131, 131, 131);
