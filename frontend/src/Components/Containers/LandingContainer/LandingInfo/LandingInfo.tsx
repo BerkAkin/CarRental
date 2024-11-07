@@ -1,10 +1,10 @@
 import React from 'react'
-import Image from '../Image/Image'
-import Button from '../Button/Button'
+import Image from '../../../Image/Image'
+import Button from '../../../Button/Button'
 import styles from './styles.module.css'
-import images from '../../assets/images/LandingImages/images';
+import images from '../../../../assets/images/LandingImages/images';
 
-function LandingContainer() {
+function LandingInfo() {
     return (
         <div>
             <div className='container-fluid mt-3'>
@@ -34,4 +34,4 @@ function LandingContainer() {
     )
 }
 
-export default LandingContainer
+export default LandingInfo

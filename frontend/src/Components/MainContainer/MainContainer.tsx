@@ -2,10 +2,10 @@ import React from "react";
 import "../../app.css";
 import TopNav from "../Navbar/TopNav/TopNav";
 import BotNav from "../Navbar/BotNav/BotNav";
-import InnerContainer from "../InnerContainer/InnerContainer";
+import InnerContainer from "../Containers/LandingContainer/LandingContainer";
 import Footer from "../Footer/Footer";
 
-function Container() {
+function MainContainer() {
   return (
     <div>
       <TopNav />
@@ -16,4 +16,4 @@ function Container() {
   );
 }
 
-export default Container;
+export default MainContainer;
