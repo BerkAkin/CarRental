@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
+import { Link } from "react-router-dom";
 
 interface ListObjectProps {
   text: string;
@@ -22,7 +23,7 @@ function ListElement({ text, href, isHref, isHover, hoverColor, color, fs, boldn
 
   return (
     <li className={`list-group-item ${styles.listItem}`}>
-      <a className={` ${styles.linkBg}`} href={href} style={linkStyle}>{text}</a>
+      <Link style={linkStyle} className={` ${styles.linkBg}`} to={`/` + href}>{text}</Link>
     </li>
   );
 }

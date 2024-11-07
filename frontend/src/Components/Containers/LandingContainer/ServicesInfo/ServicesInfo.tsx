@@ -2,9 +2,10 @@ import React from 'react'
 import styles from './styles.module.css'
 import ServiceCard from './ServiceCard/ServiceCard'
 import { faCar, faGasPump, faHandSparkles, faKey, faParking, faRoad } from '@fortawesome/free-solid-svg-icons'
-import img from '../../assets/images/ServiceImages/images'
-import Image from '../Image/Image'
-function ServicesContainer() {
+import img from '../../../../assets/images/ServiceImages/images'
+import Image from '../../../Image/Image'
+
+function ServicesInfo() {
     return (
         <>
             <div className='container mt-5 pt-5 '>
@@ -45,4 +46,4 @@ function ServicesContainer() {
     )
 }
 
-export default ServicesContainer
+export default ServicesInfo

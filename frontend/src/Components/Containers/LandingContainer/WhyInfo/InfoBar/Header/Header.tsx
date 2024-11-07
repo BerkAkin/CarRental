@@ -1,6 +1,6 @@
 import React from 'react'
 import style from "./styles.module.css"
-import { ReactComponent as Bullseye } from '../../../../assets/icons/bullseye.svg';
+import { ReactComponent as Bullseye } from '../../../../../../assets/icons/bullseye.svg';
 
 interface HeaderProps {
     Text: string;

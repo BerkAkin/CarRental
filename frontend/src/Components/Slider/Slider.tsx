@@ -1,8 +1,19 @@
-import React, { useState, useMemo } from 'react';
-import SliderCard from './SliderCard/SliderCard';
-import styles from './styles.module.css';
-import Button from '../Button/Button';
+import React from "react";
+import Slider from "react-slick";
+import './styles.css'
+import SliderCard from "./SliderCard/SliderCard";
 
+function SampleArrow(props: any) {
+
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className={className}
+            style={{ ...style }}
+            onClick={onClick}
+        />
+    );
+}
 
 const cards = [
     {
@@ -31,52 +42,41 @@ const cards = [
     },
 ];
 
-function Slider() {
-    const [startIndex, setStartIndex] = useState(0);
-    const itemsToShow = 3;
 
-    const displayedCards = useMemo(() => {
-        const wrappedCards = [...cards.slice(startIndex), ...cards.slice(0, startIndex)];
-        return wrappedCards.slice(0, itemsToShow);
-    }, [startIndex]);
-
-    const handleNext = () => {
-        setStartIndex((prevIndex) => (prevIndex + 1) % cards.length);
-    };
-
-    const handlePrevious = () => {
-        setStartIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
+export default function SimpleSlider() {
+    var settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        nextArrow: <SampleArrow />,
+        prevArrow: <SampleArrow />
     };
 
     return (
         <>
-            <div className='container-fluid d-flex justify-content-center align-items-center mt-5 pt-5'>
-                <div className='row '>
-                    <Button Func={handlePrevious} Height="50px" Text='<' Width='25px' BgColor="#1A2B48" Color="white" Padding='0px' CrRd='10%' aria-label="Önceki" />
+            <div className="container mt-4 pt-5">
+                <div className="row mb-3 ms-1">
+                    <h2>Flexper için neler dediler?</h2>
                 </div>
-                <div className='container ms-2 me-2'>
-                    <div className='  row'>
-                        <h1 className={styles.headerSizing}>Flexper için neler dediler</h1>
-                    </div>
-                    <div className={`${styles.sliderContainerRowSizing}   row mt-4`}>
-                        {displayedCards.map((card, index) => (
-                            <SliderCard key={index} Comment={card.Comment} Person={card.Person} StarCount={card.StarCount} Type={card.Type} />
+                <div className="row">
+                    <Slider {...settings}>
+                        {cards.map((card, index) => (
+                            <div key={index} className={`sliderContainerRowSizing mt-4 px-2 `}>
+                                <SliderCard
+                                    Comment={card.Comment}
+                                    Person={card.Person}
+                                    StarCount={card.StarCount}
+                                    Type={card.Type}
+                                />
+                            </div>
                         ))}
-                    </div>
-                    <div className='container d-flex justify-content-end mt-3'>
-                        <div className='row'>
-                            <Button Height="35px" Text='Daha Fazlasını Oku' Width='150px' BgColor="#E00000" Color="white" Padding='0px' CrRd='3px' aria-label="DahaFazla" />
+                    </Slider>
+                </div>
 
-                        </div>
-                    </div>
-                </div>
-                <div className='row'>
-                    <Button Func={handleNext} Height="50px" Text='>' Width='25px' BgColor="#1A2B48" Color="white" Padding='0px' CrRd='10%' aria-label="Sonraki" />
-                </div>
             </div>
-
         </>
+
     );
 }
-
-export default Slider;

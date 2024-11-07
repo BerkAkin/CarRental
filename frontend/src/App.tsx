@@ -1,11 +1,11 @@
-import Container from "./Components/Container/Container";
+import MainContainer from "./Components/MainContainer/MainContainer";
 
 function App() {
   const signatureOfDev = document.createComment("𓃦")
   document.body.appendChild(signatureOfDev);
   return (
     <div className="App">
-      <Container />
+      <MainContainer />
 
     </div>
   );
