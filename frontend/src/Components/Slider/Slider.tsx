@@ -57,8 +57,8 @@ export default function SimpleSlider() {
     return (
         <>
             <div className="container mt-4 pt-5">
-                <div className="row">
-                    <h1>Flexper için ne dediler?</h1>
+                <div className="row mb-3 ms-1">
+                    <h2>Flexper için neler dediler?</h2>
                 </div>
                 <div className="row">
                     <Slider {...settings}>
