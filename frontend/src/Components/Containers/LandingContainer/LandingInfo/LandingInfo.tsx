@@ -22,7 +22,7 @@ function LandingInfo() {
                             </h6>
                         </div>
                         <div className='row justify-content-center my-5'>
-                            <Button Text='Detay' BgColor='#E00000' Color='#FFFFFF' Border="none" CrRd='3px' Width='200px' Height='40px' />
+                            <Button FW='500' Text='Detay' BgColor='#E00000' Color='#FFFFFF' Border="none" CrRd='3px' Width='200px' Height='40px' />
                         </div>
                     </div>
                     <div className='col-8'>
