@@ -10,10 +10,12 @@ interface buttonProperties {
   Height: string;
   Padding?: string;
   Border?: string;
+  FW?: string;
+  tAlign?: string;
   Func?: () => void;
 }
 
-function Button({ Text, Color, BgColor, CrRd, Width, Height, Padding, Border, Func }: buttonProperties) {
+function Button({ Text, Color, BgColor, CrRd, Width, Height, Padding, Border, FW, tAlign, Func }: buttonProperties) {
   const btnStyle = {
     '--btn-color': Color ? Color : "#000000",
     '--btn-BgColor': BgColor ? BgColor : "#0373FC",
@@ -21,7 +23,10 @@ function Button({ Text, Color, BgColor, CrRd, Width, Height, Padding, Border, Fu
     '--btn-wd': Width,
     '--btn-he': Height,
     '--btn-padding': Padding ? Padding : "",
-    '--btn-border': Border ? Border : ""
+    '--btn-border': Border ? Border : "",
+    '--btn-weight': FW ? FW : "",
+    '--btn-text-align': tAlign ? tAlign : ""
+
   } as React.CSSProperties;
 
   const handleClick = () => {

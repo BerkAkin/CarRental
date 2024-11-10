@@ -6,5 +6,6 @@
     height: var(--btn-he) !important;
     padding: var(--btn-padding) !important;
     border: var(--btn-border) !important;
-    font-weight: 500;
+    font-weight: var(--btn-weight) !important;
+    text-align: var(--btn-text-align) !important;
 }
