@@ -4,7 +4,7 @@ import styles from "./styles.module.css"
 interface ImageParams {
   URL: string;
   Width: string;
-  Height: string;
+  Height?: string;
   Alt?: string;
   Round?: boolean;
 }
