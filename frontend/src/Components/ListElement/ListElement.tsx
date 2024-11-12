@@ -21,8 +21,15 @@ function ListElement({ text, href, isHref, isHover, hoverColor, color, fs, boldn
     "--default-boldness": boldness
   } as React.CSSProperties;
 
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
+
   return (
-    <li className={`list-group-item ${styles.listItem}`}>
+    <li onClick={scrollTop} className={`list-group-item ${styles.listItem}`}>
       <Link style={linkStyle} className={` ${styles.linkBg}`} to={`/` + href}>{text}</Link>
     </li>
   );
