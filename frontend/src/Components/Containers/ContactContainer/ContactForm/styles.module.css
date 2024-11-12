@@ -14,8 +14,11 @@
     outline: none;
 }
 
-.inputAreas:hover,
-:focus {
+.inputAreas:focus {
+    border-bottom: red 3px solid;
+}
+
+.inputAreas:hover {
     border-bottom: red 3px solid;
 }
 
@@ -49,8 +52,11 @@
     outline: none;
 }
 
-.otherInputArea:hover,
-:focus {
+.otherInputArea:hover {
+    border-bottom: red 3px solid;
+}
+
+.otherInputArea:focus {
     border-bottom: red 3px solid;
 }
 

@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from './styles.module.css';
 import validationSchema from './ValidationSchema';
-import Image from '../Image/Image';
-import img from '../../assets/logos/logo-flexper.png'
+import Image from '../../../Image/Image';
+import img from '../../../../assets/logos/logo-flexper.png'
+import PPInfo from '../PrivacyPolicyInfo/PPInfo';
+import ListElement from '../../../ListElement/ListElement';
 
 
 interface FormProps {
@@ -30,7 +32,7 @@ const onSubmit = async (values: FormProps, { setSubmitting }: any) => {
     console.log('Form Values:', values.name, values.surname, values.email, values.phone, values.platform, values.otherPlatform, values.permission,);
     try {
         setSubmitting(true);
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        //const response = await fetch('https://jsonplaceholder.typicode.com/posts');
         setTimeout(() => {
             setSubmitting(false);
         }, 2000);
@@ -62,7 +64,7 @@ function ContactForm() {
                     <Form>
                         <div className='container mt-4'>
                             <div className='row'>
-                                <div className={`${styles.headerColoring} rounded-start col-3  d-flex flex-column justify-content-center`}>
+                                <div className={`${styles.headerColoring} col-3  d-flex flex-column justify-content-center`}>
                                     <div className='row'>
                                         <div className='text-center'>
                                             <Image Width='250' URL={img} />
@@ -87,7 +89,7 @@ function ContactForm() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`col-9 border-start  d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
+                                <div className={`col-9 border-start d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
                                     <div className='container '>
                                         <div className='row'>
                                             <p>* Zorunlu Alanlar</p>
@@ -128,8 +130,7 @@ function ContactForm() {
                                         <div className={`row ${styles.permissionTextSize} mt-4`} >
                                             <div className={`${styles.permissionTextColor} row`}>
                                                 <p>
-                                                    6. Gembox Teknoloji Girişimleri Anonim Şirketi Kişisel Verilerin Flexper Süper Abonelik Sistemi Kapsamında İşlenmesine İlişkin Aydınlatma Metni’ne
-                                                    https://www.flexper.com.tr/aydinlatma-metni adresinden ulaşabilirsiniz.
+                                                    6. Gembox Teknoloji Girişimleri Anonim Şirketi Kişisel Verilerin Flexper Süper Abonelik Sistemi Kapsamında İşlenmesine İlişkin Aydınlatma Metni’ne ulaşmak için:<ListElement color='gray' fs='1 em' href='PPInfo' text='Flexper Aydınlatma Metni' isHref={true} />
                                                 </p>
                                             </div>
                                             <div className={`${styles.permissionTextColor} row`}>

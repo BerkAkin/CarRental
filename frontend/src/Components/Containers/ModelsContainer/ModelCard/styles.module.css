@@ -1,0 +1,36 @@
+.imgHover:hover {
+    transform: scale(1.1);
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+.imgHover {
+    transition: all ease 0.3s;
+}
+
+.IconSize {
+    width: 25px;
+}
+
+.typeFontColor {
+    color: #5E6D77;
+    font-weight: 400;
+}
+
+.brandColor {
+    color: #2B90EC;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.priceStyling {
+    color: #1A2B48;
+    font-size: 1.2em;
+    font-weight: 500;
+
+}
+
+.iconFont {
+    font-size: 0.9em;
+}

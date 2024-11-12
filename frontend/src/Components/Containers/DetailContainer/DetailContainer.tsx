@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import { useParams } from 'react-router-dom'
 
 function DetailContainer() {
+
+    const { id } = useParams();
+
+
     return (
-        <div>DetailContainer</div>
+        <div>{id}</div>
     )
 }
 

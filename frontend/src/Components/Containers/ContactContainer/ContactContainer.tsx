@@ -1,5 +1,5 @@
 import React from 'react'
-import ContactForm from '../../ContactForm/ContactForm'
+import ContactForm from './ContactForm/ContactForm'
 
 function ContactContainer() {
     return (
