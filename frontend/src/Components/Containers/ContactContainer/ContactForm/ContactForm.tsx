@@ -64,7 +64,7 @@ function ContactForm() {
                     <Form>
                         <div className='container mt-4'>
                             <div className='row'>
-                                <div className={`${styles.headerColoring} rounded-start col-3  d-flex flex-column justify-content-center`}>
+                                <div className={`${styles.headerColoring} col-3  d-flex flex-column justify-content-center`}>
                                     <div className='row'>
                                         <div className='text-center'>
                                             <Image Width='250' URL={img} />
@@ -89,7 +89,7 @@ function ContactForm() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`col-9 border-start  d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
+                                <div className={`col-9 border-start d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
                                     <div className='container '>
                                         <div className='row'>
                                             <p>* Zorunlu Alanlar</p>
