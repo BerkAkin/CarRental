@@ -10,22 +10,22 @@ function Footer() {
     { Text: "info@flexper.com.tr", Href: "mailto:info@flexper.com.tr" },
     { Text: "+90 543 353 97 37", Href: "" },
     { Text: "WhatsApp", Href: "" },
-    { Text: "Aydınlatma Metni", Href: "" }
+    { Text: "Aydınlatma Metni", Href: "PPInfo" }
   ];
 
   const aboutItems = [
-    { Text: "Flexper Nedir?", Href: "" },
-    { Text: "Araç Aboneliği Nedir?", Href: "" },
-    { Text: "Nasıl Abone Olurum?", Href: "" },
-    { Text: "Aile Paketi Nedir?", Href: "" },
-    { Text: "Abonelik Şartları Nelerdir?", Href: "" },
+    { Text: "Flexper Nedir?", Href: "FAQ" },
+    { Text: "Araç Aboneliği Nedir?", Href: "FAQ" },
+    { Text: "Nasıl Abone Olurum?", Href: "FAQ" },
+    { Text: "Aile Paketi Nedir?", Href: "FAQ" },
+    { Text: "Abonelik Şartları Nelerdir?", Href: "FAQ" },
   ];
 
   const companyItems = [
-    { Text: "Biz Kimiz?", Href: "" },
-    { Text: "Blog", Href: "" },
-    { Text: "Müşteri Görüşleri", Href: "" },
-    { Text: "İletişim", Href: "" },
+    { Text: "Biz Kimiz?", Href: "About" },
+    { Text: "Blog", Href: "Flexblog" },
+    { Text: "Müşteri Görüşleri", Href: "About" },
+    { Text: "İletişim", Href: "Contact" },
   ];
 
   const socialItems = [
