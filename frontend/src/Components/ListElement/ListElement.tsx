@@ -1,15 +1,18 @@
 import React from "react";
 import styles from "./style.module.css";
 import { Link } from "react-router-dom";
+import Image from "../Image/Image";
+
+
 
 interface ListObjectProps {
-  text: string;
+  text: string | React.ReactElement<typeof Image>;
   href: string;
   isHref: boolean;
   isHover?: boolean;
   hoverColor?: string;
-  color: string;
-  fs: string;
+  color?: string;
+  fs?: string;
   boldness?: string;
 }
 
