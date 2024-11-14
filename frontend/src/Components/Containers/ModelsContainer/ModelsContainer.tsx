@@ -7,9 +7,12 @@ import dummyImage from '../../../assets/dummyImg/img'
 function ModelsContainer() {
     return (
         <>
-            <div className='container mt-5'>
+            <div className='container mt-4 pt-3'>
+                <div className='row'>
+                    <h2 style={{ color: "#7A7A7A" }}>Modeller</h2>
+                </div>
+                <div className='row mt-4'>
 
-                <div className='row mt-5'>
                     <div className='col-3'>
                         <ModelCard
                             price="32,900"
