@@ -2,14 +2,18 @@ import React from 'react'
 import Image from '../../Image/Image'
 import img from '../../../assets/images/AboutUsImages/img';
 import styles from './styles.module.css';
-import Slider from 'react-slick';
-import SimpleSlider from '../../Slider/Slider';
+import SimpleSlider from '../../SimpleSlider/SimpleSlider';
+import SliderCommentCard from '../../SliderCommentCard/SliderCommentCard';
+import items from '../../../common/sliderComment'
 
 function AboutContainer() {
     return (
         <>
             <div className='container mt-4 pt-3'>
                 <div className='row'>
+                    <h2 className={`${styles.header}`}>Biz Kimiz ?</h2>
+                </div>
+                <div className='row mt-4'>
                     <div className='col-12 d-flex justify-content-center'>
                         <Image Height='420' Width='1300' URL={img.img} Round={true} Alt='banner'></Image>
                     </div>
@@ -47,7 +51,10 @@ function AboutContainer() {
 
             </div>
             <div className='my-3 pt-5'>
-                <SimpleSlider />
+                <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={items} renderItem={(item) => (
+                    <SliderCommentCard Comment={item.Comment} Person={item.Person} StarCount={item.StarCount} Type={item.Type} />
+                )} />
+
             </div>
         </>
     )
