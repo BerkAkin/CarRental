@@ -24,32 +24,25 @@ interface ModelCardProps {
 function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount, doorCount, price }: ModelCardProps) {
     return (
         <>
-            <div className='border rounded'>
+            <div className={`${styles.cardBg} border rounded`}>
                 <div className={`container overflow-hidden rounded`} >
                     <div className={`${styles.imgHover} row `}>
                         <ListElement isHref={true} href={`Models/${id}`} text={<Image URL={image} Width='310px'></Image>} />
                     </div>
                 </div>
-                <div className='container mt-2'>
-                    <div className='row'>
-                        <div className='col-12'>
-                            <p className={`${styles.typeFontColor} h-100 d-flex align-items-center'`}>{type}</p>
-                        </div>
-                    </div>
-
-                </div>
                 <div className='container'>
                     <p className={`${styles.brandColor}`}>
+                        <span className={`${styles.typeFontColor} h-100 d-flex align-items-center'`}>{type}</span>
                         <ListElement href={`Models/${id}`} isHref={true} text={brandName} /> </p>
-                    <hr style={{ borderColor: "gray" }} />
                 </div>
 
-                <div className='container mt-3 text-center' >
+                <div className='container mt-4 text-center' >
+                    <hr className={`${styles.hrColor}`} />
                     <div className='row'>
-                        <div className='col-3'><img className={`${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
-                        <div className='col-3'><img className={`${styles.IconSize}`} src={Icons.GearIcon}></img></div>
-                        <div className='col-3'> <img className={`${styles.IconSize}`} src={Icons.LuggageIcon}></img></div>
-                        <div className='col-3'><img className={`${styles.IconSize}`} src={Icons.CarDoorIcon}></img></div>
+                        <div className='col-3'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
+                        <div className='col-3'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></div>
+                        <div className='col-3'> <img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.LuggageIcon}></img></div>
+                        <div className='col-3'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.CarDoorIcon}></img></div>
                     </div>
                     <div className='row'>
                         <div className={`${styles.iconFont} col-3`}>{personCount}</div>
@@ -57,6 +50,7 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                         <div className={`${styles.iconFont} col-3`}>{luggageCount}</div>
                         <div className={`${styles.iconFont} col-3`}>{doorCount}</div>
                     </div>
+                    <hr className={`${styles.hrColor}`} />
                 </div>
                 <div className='container mt-4 '>
                     <div className='row '>
