@@ -4,8 +4,9 @@ import LandingInfo from './LandingInfo/LandingInfo'
 import WhyInfo from './WhyInfo/WhyInfo'
 import images from '../../../assets/images/WhyImages/images';
 import ServicesInfo from './ServicesInfo/ServicesInfo';
-import Slider from '../../Slider/Slider';
-
+import Slider from '../../SimpleSlider/SimpleSlider';
+import SliderCommentCard from '../../SliderCommentCard/SliderCommentCard';
+import items from '../../../common/sliderComment'
 
 
 function LandingContainer() {
@@ -24,7 +25,9 @@ function LandingContainer() {
         { HTitle: "Her Şey Dahil Paketler", PTitle: "Kapsamlı paket seçeneklerimiz arasından isteğinize uygun olanı seçin." }
       ]} Align={true} />
       <ServicesInfo />
-      <Slider />
+      <Slider slidesToShow={3} header='Flexper için neler dediler?' items={items} renderItem={(item) => (
+        <SliderCommentCard Comment={item.Comment} Person={item.Person} StarCount={item.StarCount} Type={item.Type} />
+      )} />
 
     </div>
   )

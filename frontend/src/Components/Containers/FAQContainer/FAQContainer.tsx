@@ -5,10 +5,10 @@ import styles from './styles.module.css'
 function FAQContainer() {
     return (
         <>
-            <div className={`${styles.AccordionContainerSizing} mt-5`}>
+            <div className={`${styles.AccordionContainerSizing} mt-4 pt-3`}>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-12 mt-3 mb-4'>
+                        <div className='col-12 mb-4'>
                             <h2 className={styles.headerColor}>Sık Sorulan Sorular</h2>
                         </div>
                     </div>

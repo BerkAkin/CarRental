@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './styles.module.css'
 
-interface SliderCardProps {
+interface CommentCardProps {
     Comment: string;
     StarCount: number | string;
     Person: string;
     Type: string;
 }
-function SliderCard({ Comment, StarCount, Person, Type }: SliderCardProps) {
+function SliderCommentCard({ Comment, StarCount, Person, Type }: CommentCardProps) {
     return (
         <>
             <div className='col'>
@@ -26,4 +26,4 @@ function SliderCard({ Comment, StarCount, Person, Type }: SliderCardProps) {
     )
 }
 
-export default SliderCard
+export default SliderCommentCard

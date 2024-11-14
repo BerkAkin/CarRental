@@ -7,6 +7,7 @@
 
 .imgHover {
     transition: all ease 0.3s;
+
 }
 
 .IconSize {
@@ -17,11 +18,10 @@
 .typeFontColor {
     color: #5E6D77;
     font-weight: 400;
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
 
 .brandColor {
-    color: #1A2B48;
     font-weight: 500;
     font-size: 1.1em;
 }
@@ -37,10 +37,10 @@
     font-size: 0.9em;
 }
 
-.hrColor {
-    border-color: #7A7A7A;
-}
-
 .cardBg {
     box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hrColor {
+    border-color: #7A7A7A;
 }
