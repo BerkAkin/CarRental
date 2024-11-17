@@ -27,13 +27,13 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
             <div className={`${styles.cardBg} border rounded`}>
                 <div className={`container overflow-hidden rounded`} >
                     <div className={`${styles.imgHover} row `}>
-                        <ListElement isHref={true} href={`Models/${id}`} text={<Image URL={image} Width='310px'></Image>} />
+                        <ListElement href={`Models/${id}`} text={<Image URL={image} Width='310px'></Image>} />
                     </div>
                 </div>
                 <div className='container'>
                     <p className={`${styles.brandColor}`}>
                         <span className={`${styles.typeFontColor} h-100 d-flex align-items-center'`}>{type}</span>
-                        <ListElement href={`Models/${id}`} isHref={true} text={brandName} /> </p>
+                        <ListElement href={`Models/${id}`} text={brandName} /> </p>
                 </div>
 
                 <div className='container mt-4 text-center' >

@@ -25,13 +25,13 @@ function SliderModelCard({ id, image, type, brandName, personCount, gear, luggag
             <div className={`border rounded ${styles.cardBg}`}>
                 <div className={`container overflow-hidden rounded-top`} >
                     <div className={`${styles.imgHover} row`}>
-                        <ListElement isHref={true} href={`Models/${id}`} text={<Image URL={image} Width='310px' Height='200px'></Image>} />
+                        <ListElement href={`Models/${id}`} text={<Image URL={image} Width='310px' Height='200px'></Image>} />
                     </div>
                 </div>
                 <div className='container mt-1 ps-4 pt-3'>
                     <p className={`${styles.brandColor}`}>
                         <span className={`${styles.typeFontColor}`}>{type}</span>
-                        <ListElement href={`Models/${id}`} isHref={true} text={brandName} />
+                        <ListElement href={`Models/${id}`} text={brandName} />
                     </p>
 
                 </div>

@@ -14,21 +14,21 @@ function BotNav() {
               <Image URL={flexperLogo} Width="160" Height="40" />
             </div>
             <div className='col-10 d-flex align-items-center justify-content-evenly  text-center'>
-              <ListElement color="#1A2B48" text='ANASAYFA' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
-              <ListElement color="#1A2B48" text='MODELLER' href='Models' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
-              <ListElement color="#1A2B48" text='FLEXBLOG' href='Flexblog' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
-              <ListElement color="#1A2B48" text='SIK SORULAN SORULAR' href='FAQ' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
-              <ListElement color="#1A2B48" text='BİZ KİMİZ?' href='About' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
-              <ListElement color="#1A2B48" text='İLETİŞİM' href='Contact' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} />
+              <ListElement color="#1A2B48" text='ANASAYFA' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
+              <ListElement color="#1A2B48" text='MODELLER' href='Models' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
+              <ListElement color="#1A2B48" text='FLEXBLOG' href='Blog' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
+              <ListElement color="#1A2B48" text='SIK SORULAN SORULAR' href='FAQ' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
+              <ListElement color="#1A2B48" text='BİZ KİMİZ?' href='About' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
+              <ListElement color="#1A2B48" text='İLETİŞİM' href='Contact' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
             </div>
           </div>
         </div>
         <div className='col-5'>
           <div className='container h-100 d-flex justify-content-end'>
             <div className='row w-100 justify-content-end  text-center'>
-              <div className='col-2 align-items-center d-flex justify-content-center'> <ListElement color="#1A2B48" text='ÜYE OL' href='login' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} /></div>
-              <div className='col-2 align-items-center d-flex justify-content-center'> <ListElement color="#1A2B48" text='GİRİŞ YAP' href='register' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' isHref={true} /></div>
-            </div>
+              {/* <div className='col-2 align-items-center d-flex justify-content-center'> <ListElement color="#1A2B48" text='ÜYE OL' href='login' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' /></div>
+              <div className='col-2 align-items-center d-flex justify-content-center'> <ListElement color="#1A2B48" text='GİRİŞ YAP' href='register' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' /></div>
+             */}</div>
           </div>
         </div>
       </div >

@@ -8,7 +8,6 @@ import Image from "../Image/Image";
 interface ListObjectProps {
   text: string | React.ReactElement<typeof Image>;
   href: string;
-  isHref: boolean;
   isHover?: boolean;
   hoverColor?: string;
   color?: string;
@@ -16,7 +15,7 @@ interface ListObjectProps {
   boldness?: string;
 }
 
-function ListElement({ text, href, isHref, isHover, hoverColor, color, fs, boldness }: ListObjectProps) {
+function ListElement({ text, href, isHover, hoverColor, color, fs, boldness }: ListObjectProps) {
   const linkStyle = {
     "--hover-color": isHover ? hoverColor : {},
     "--default-color": color,

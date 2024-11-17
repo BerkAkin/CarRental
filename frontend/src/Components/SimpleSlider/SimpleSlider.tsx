@@ -6,7 +6,7 @@ import './styles.css'
 interface SliderProps<T> {
     header: string;
     items: T[];
-    renderItem: (item: T) => React.ReactNode;
+    renderItem: (item: T) => React.ReactElement;
     slidesToShow: number;
 
 }

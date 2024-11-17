@@ -130,7 +130,7 @@ function ContactForm() {
                                         <div className={`row ${styles.permissionTextSize} mt-4`} >
                                             <div className={`${styles.permissionTextColor} row`}>
                                                 <p>
-                                                    6. Gembox Teknoloji Girişimleri Anonim Şirketi Kişisel Verilerin Flexper Süper Abonelik Sistemi Kapsamında İşlenmesine İlişkin Aydınlatma Metni’ne ulaşmak için:<ListElement color='gray' fs='1 em' href='PPInfo' text='Flexper Aydınlatma Metni' isHref={true} />
+                                                    6. Gembox Teknoloji Girişimleri Anonim Şirketi Kişisel Verilerin Flexper Süper Abonelik Sistemi Kapsamında İşlenmesine İlişkin Aydınlatma Metni’ne ulaşmak için:<ListElement color='gray' fs='1 em' href='PPInfo' text='Flexper Aydınlatma Metni' />
                                                 </p>
                                             </div>
                                             <div className={`${styles.permissionTextColor} row`}>

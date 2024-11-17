@@ -3,6 +3,7 @@ import Image from '../../../Image/Image'
 import Button from '../../../Button/Button'
 import styles from './styles.module.css'
 import images from '../../../../assets/images/LandingImages/images';
+import ListElement from '../../../ListElement/ListElement';
 
 function LandingInfo() {
     return (
@@ -21,8 +22,11 @@ function LandingInfo() {
                                 halledelim!
                             </h6>
                         </div>
-                        <div className='row justify-content-center my-5'>
-                            <Button tAlign='center' FW='500' Text='Modeller' BgColor='#E00000' Color='#FFFFFF' Border="none" CrRd='3px' Width='200px' Height='40px' />
+                        <div className={`row justify-content-center my-5`}>
+                            <div className={`w-25 rounded p-2 ${styles.landingBtnBg} text-center`}>
+                                <ListElement href="Models" text={"Modeller"} color='White' hoverColor='White' boldness='500' isHover={true} />
+                            </div>
+
                         </div>
                     </div>
                     <div className='col-8'>
