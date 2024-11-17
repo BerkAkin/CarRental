@@ -20,7 +20,7 @@ function ListComponent({ Title, Items }: ListCompProps) {
                 </div>
                 {Items.map((item, index) => (
                     <div className='col my-2' key={index}>
-                        <ListElement text={item.Text} fs="1em" isHref={item.Href !== undefined} href={item.Href} color="#7A7A7A" isHover={true} hoverColor='#E00000' />
+                        <ListElement text={item.Text} fs="1em" href={item.Href} color="#7A7A7A" isHover={true} hoverColor='#E00000' />
                     </div>
                 ))}
             </div>
