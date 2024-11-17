@@ -12,6 +12,7 @@ import ContactContainer from "../Containers/ContactContainer/ContactContainer";
 import BlogContainer from "../Containers/BlogContainer/BlogContainer";
 import DetailContainer from "../Containers/DetailContainer/DetailContainer";
 import PPInfo from "../Containers/ContactContainer/PrivacyPolicyInfo/PPInfo";
+import BlogDetailContainer from "../Containers/BlogDetailContainer/BlogDetailContainer";
 
 function MainContainer() {
   return (
@@ -27,6 +28,7 @@ function MainContainer() {
           <Route path="/FAQ" element={<FAQContainer />}></Route>
           <Route path="/Contact" element={<ContactContainer />}></Route>
           <Route path="/Blog" element={<BlogContainer />}></Route>
+          <Route path="/Blog/:id" element={<BlogDetailContainer />}></Route>
           <Route path="/PPInfo" element={<PPInfo />}></Route>
         </Routes>
 
