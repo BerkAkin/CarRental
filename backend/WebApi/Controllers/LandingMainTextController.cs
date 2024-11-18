@@ -5,6 +5,7 @@ using WebApi.DTOs;
 using FluentValidation;
 using WebApi.Validators;
 using WebApi.Repository;
+using AutoMapper;
 
 namespace WebApi.Controllers
 {
@@ -12,9 +13,9 @@ namespace WebApi.Controllers
     [Route("[controller]s")]
     public class LandingMainTextController : ControllerBase
     {
-        private readonly IService<LandingMainText> _service;
+        private readonly IService<LandingMainTextViewModel> _service;
 
-        public LandingMainTextController(IService<LandingMainText> service)
+        public LandingMainTextController(IService<LandingMainTextViewModel> service)
         {
             _service = service;
         }

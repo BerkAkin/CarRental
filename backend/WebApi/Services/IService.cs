@@ -8,7 +8,7 @@ namespace WebApi.Services
             Task UpdateAsync(T entity);
             Task DeleteAsync(int id); 
         */
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync();
     }
 
 }

@@ -6,7 +6,7 @@ using WebApi.Services;
 
 namespace WebApi.Repository
 {
-    public class LandingMainTextService : IService<LandingMainText>
+    public class LandingMainTextService : IService<LandingMainTextViewModel>
     {
         private readonly IRepository<LandingMainText> _repository;
         private readonly IMapper _mapper;
@@ -17,17 +17,14 @@ namespace WebApi.Repository
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<LandingMainText>> GetAllAsync()
+
+        public async Task<List<LandingMainTextViewModel>> GetAllAsync()
         {
-            return await _repository.GetAllAsync();
+            var landingMainTexts = await _repository.GetAllAsync();
+            var landingMainTextDtos = _mapper.Map<List<LandingMainTextViewModel>>(landingMainTexts);
+            return landingMainTextDtos;
         }
 
-        /*         public async Task<IEnumerable<LandingMainTextViewModel>> GetAllAsync()
-                {
-                    var landingPageMainTexts = await _repository.GetAllAsync();
-                    var result = _mapper.Map<IEnumerable<LandingMainTextViewModel>>(landingPageMainTexts);
-                    return result;
-                } */
 
     }
 }

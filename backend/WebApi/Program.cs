@@ -11,8 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<CRDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IService<LandingMainText>, LandingMainTextService>();
 builder.Services.AddScoped<IRepository<LandingMainText>, LandingMainTextRepository>();
+builder.Services.AddScoped<IService<LandingMainTextViewModel>, LandingMainTextService>();
 builder.Services.AddTransient<DbSeeder>();
 
 
