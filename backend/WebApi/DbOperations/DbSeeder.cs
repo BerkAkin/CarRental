@@ -21,7 +21,15 @@ namespace WebApi.DbOperations
                     new LandingMainText { Text = "Ana Sayfa Başlık 1"},
                 };
 
+                var landingPageReasonTexts = new List<LandingReasonText>
+                {
+                    new LandingReasonText { Title  = "Ana Sayfa Başlık 1", Content = "deneme içerik"},
+                };
+
+
                 _context.LandingPageMainTexts.AddRange(landingPageTexts);
+                _context.LandingReasonTexts.AddRange(landingPageReasonTexts);
+
                 await _context.SaveChangesAsync();
             }
         }
