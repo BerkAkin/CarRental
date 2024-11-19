@@ -7,5 +7,6 @@ namespace WebApi.DbOperations
     {
         public CRDbContext(DbContextOptions<CRDbContext> options) : base(options) { }
         public DbSet<LandingMainText> LandingPageMainTexts { get; set; }
+        public DbSet<LandingReasonText> LandingReasonTexts { get; set; }
     }
 }
