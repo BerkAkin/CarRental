@@ -9,6 +9,7 @@ namespace WebApi.Mappings
         public MappingProfile()
         {
             CreateMap<LandingMainText, LandingMainTextViewModel>();
+            CreateMap<LandingMainText, LandingMainTextIdViewModel>();
         }
     }
 }
