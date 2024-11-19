@@ -32,7 +32,6 @@ namespace WebApi.Controllers
 
 
 
-
         [HttpGet("{id}")]
         public async Task<ActionResult<LandingMainTextIdViewModel>> GetById(int id)
         {
@@ -44,6 +43,21 @@ namespace WebApi.Controllers
             catch (Exception ex)
             {
                 return NotFound(new { message = ex.Message });
+            }
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateText(int id, [FromBody] LandingMainTextUpdateModel model)
+        {
+            try
+            {
+                await _service.UpdateTextAsync(id, model);
+                return Ok("Güncelleme Başarılı");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
             }
         }
 
