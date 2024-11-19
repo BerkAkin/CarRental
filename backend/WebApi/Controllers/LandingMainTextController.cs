@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Entities;
-using WebApi.Services;
 using WebApi.DTOs;
-using FluentValidation;
-using WebApi.Validators;
 using WebApi.Repository;
-using AutoMapper;
 
 namespace WebApi.Controllers
 {
@@ -13,15 +8,18 @@ namespace WebApi.Controllers
     [Route("[controller]s")]
     public class LandingMainTextController : ControllerBase
     {
-        private readonly IService<LandingMainTextViewModel> _service;
 
-        public LandingMainTextController(IService<LandingMainTextViewModel> service)
+        public LandingMainTextService _service { get; set; }
+
+        public LandingMainTextController(LandingMainTextService service)
         {
             _service = service;
         }
 
+
+
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<List<LandingMainTextIdViewModel>>> GetAll()
         {
             var data = await _service.GetAllAsync();
             if (data is not null)
@@ -30,6 +28,23 @@ namespace WebApi.Controllers
             }
             return NotFound("Bulunamadı");
 
+        }
+
+
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LandingMainTextIdViewModel>> GetById(int id)
+        {
+            try
+            {
+                var result = await _service.GetByIdAsync(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
         }
 
     }
