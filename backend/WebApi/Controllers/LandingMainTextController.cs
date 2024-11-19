@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApi.DTOs;
+using WebApi.DTOs.LandingPage.MainText;
 using WebApi.Repository;
 
 namespace WebApi.Controllers

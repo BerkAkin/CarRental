@@ -1,5 +1,5 @@
 using AutoMapper;
-using WebApi.DTOs;
+using WebApi.DTOs.LandingPage.MainText;
 using WebApi.Entities;
 
 namespace WebApi.Mappings

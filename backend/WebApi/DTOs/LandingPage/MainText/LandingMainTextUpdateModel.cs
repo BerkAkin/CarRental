@@ -1,4 +1,4 @@
-namespace WebApi.DTOs
+namespace WebApi.DTOs.LandingPage.MainText
 {
     public class LandingMainTextUpdateModel
     {

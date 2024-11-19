@@ -1,5 +1,5 @@
 using FluentValidation;
-using WebApi.DTOs;
+using WebApi.DTOs.LandingPage.MainText;
 
 namespace WebApi.Validators
 {
