@@ -23,6 +23,12 @@ namespace WebApi.Repository
             return await _context.LandingPageMainTexts.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task UpdateAsync(LandingMainText entity)
+        {
+            _context.LandingPageMainTexts.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
 
     }
 }
