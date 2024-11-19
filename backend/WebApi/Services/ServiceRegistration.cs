@@ -1,6 +1,8 @@
 using WebApi.DbOperations;
 using WebApi.Entities;
+using WebApi.Repositories.LandingRepositories;
 using WebApi.Repository;
+using WebApi.Services.LandingServices;
 
 public static class ServiceRegistration
 {
@@ -10,10 +12,12 @@ public static class ServiceRegistration
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         //REPOSITORIES
-        services.AddScoped<IRepository<LandingMainText>, LandingMainTextRepository>();
+        services.AddScoped<IRepository<LandingMainText>, MainTextRepository>();
+        services.AddScoped<IRepository<LandingReasonText>, ReasonTextRepository>();
 
         //SERVICES
-        services.AddScoped<LandingMainTextService>();
+        services.AddScoped<MainTextService>();
+        services.AddScoped<ReasonTextService>();
 
         //SEEDER
         services.AddTransient<DbSeeder>();
