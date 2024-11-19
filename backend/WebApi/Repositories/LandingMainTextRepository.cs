@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.DbOperations;
-using WebApi.DTOs;
 using WebApi.Entities;
 
 namespace WebApi.Repository
@@ -17,6 +16,11 @@ namespace WebApi.Repository
         public async Task<IEnumerable<LandingMainText>> GetAllAsync()
         {
             return await _context.LandingPageMainTexts.ToListAsync();
+        }
+
+        public async Task<LandingMainText> GetByIdAsync(int id)
+        {
+            return await _context.LandingPageMainTexts.FirstOrDefaultAsync(x => x.Id == id);
         }
 
 
