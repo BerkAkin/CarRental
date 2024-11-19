@@ -1,9 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.DbOperations;
-using WebApi.DTOs;
-using WebApi.Entities;
-using WebApi.Repository;
-using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<CRDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IRepository<LandingMainText>, LandingMainTextRepository>();
-builder.Services.AddScoped<IService<LandingMainTextViewModel>, LandingMainTextService>();
-builder.Services.AddTransient<DbSeeder>();
 
-
+builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
