@@ -1,12 +1,10 @@
 using AutoMapper;
-using FluentValidation;
 using WebApi.DTOs;
 using WebApi.Entities;
-using WebApi.Services;
 
 namespace WebApi.Repository
 {
-    public class LandingMainTextService : IService<LandingMainTextViewModel>
+    public class LandingMainTextService
     {
         private readonly IRepository<LandingMainText> _repository;
         private readonly IMapper _mapper;
@@ -23,6 +21,13 @@ namespace WebApi.Repository
             var landingMainTexts = await _repository.GetAllAsync();
             var landingMainTextDtos = _mapper.Map<List<LandingMainTextViewModel>>(landingMainTexts);
             return landingMainTextDtos;
+        }
+
+        public async Task<LandingMainTextIdViewModel> GetByIdAsync(int id)
+        {
+            var landingMainText = await _repository.GetByIdAsync(id);
+            if (landingMainText == null) throw new Exception("LandingMainText bulunamadı");
+            return _mapper.Map<LandingMainTextIdViewModel>(landingMainText);
         }
 
 
