@@ -30,6 +30,18 @@ namespace WebApi.Repository
             return _mapper.Map<LandingMainTextIdViewModel>(landingMainText);
         }
 
+        public async Task UpdateTextAsync(int id, LandingMainTextUpdateModel model)
+        {
+            var landingMainText = await _repository.GetByIdAsync(id);
+            if (landingMainText is null)
+            {
+                throw new Exception("Güncellenecek Metin Bulunamadı");
+            }
+            landingMainText.Text = model.Text;
+
+            await _repository.UpdateAsync(landingMainText);
+        }
+
 
     }
 }
