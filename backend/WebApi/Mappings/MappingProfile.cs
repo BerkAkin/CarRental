@@ -1,6 +1,7 @@
 using AutoMapper;
 using WebApi.DTOs.LandingPage.MainText;
 using WebApi.DTOs.LandingPage.ReasonTexts;
+using WebApi.DTOs.LandingPage.ServiceTexts;
 using WebApi.Entities;
 
 namespace WebApi.Mappings
@@ -9,14 +10,19 @@ namespace WebApi.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<LandingMainText, LandingMainTextViewModel>();
-            CreateMap<LandingMainText, LandingMainTextIdViewModel>();
-            CreateMap<LandingMainTextUpdateModel, LandingMainText>();
+            CreateMap<LandingMainText, LandingMainViewModel>();
+            CreateMap<LandingMainText, LandingMainViewIdModel>();
+            CreateMap<LandingMainUpdateModel, LandingMainText>();
 
             CreateMap<LandingReasonText, LandingReasonViewModel>();
             CreateMap<LandingReasonText, LandingReasonViewIdModel>();
             CreateMap<LandingReasonUpdateModel, LandingReasonText>();
             CreateMap<LandingReasonAddModel, LandingReasonText>();
+
+            CreateMap<LandingServiceText, LandingServiceViewModel>();
+            CreateMap<LandingServiceText, LandingServiceViewIdModel>();
+            CreateMap<LandingServiceUpdateModel, LandingServiceText>();
+            CreateMap<LandingServiceAddModel, LandingServiceText>();
         }
     }
 }
