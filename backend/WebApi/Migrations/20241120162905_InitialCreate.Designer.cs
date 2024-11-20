@@ -12,7 +12,7 @@ using WebApi.DbOperations;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(CRDbContext))]
-    [Migration("20241119215534_InitialCreate")]
+    [Migration("20241120162905_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("LandingPageMainTexts");
+                    b.ToTable("LandingMainTexts");
                 });
 
             modelBuilder.Entity("WebApi.Entities.LandingReasonText", b =>
@@ -73,6 +73,37 @@ namespace WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LandingReasonTexts");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.LandingServiceText", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LandingServiceTexts");
                 });
 #pragma warning restore 612, 618
         }
