@@ -14,9 +14,9 @@ namespace WebApi.DbOperations
 
         public async Task SeedAsync()
         {
-            if (!_context.LandingPageMainTexts.Any())
+            if (!_context.LandingMainTexts.Any())
             {
-                var landingPageTexts = new List<LandingMainText>
+                var landingPageMainTexts = new List<LandingMainText>
                 {
                     new LandingMainText { Text = "Ana Sayfa Başlık 1"},
                 };
@@ -26,9 +26,15 @@ namespace WebApi.DbOperations
                     new LandingReasonText { Title  = "Ana Sayfa Başlık 1", Content = "deneme içerik"},
                 };
 
+                var landingPageService = new List<LandingServiceText>
+                {
+                    new LandingServiceText { Title  = "Ana Sayfa Başlık 1", Content = "deneme içerik", Icon ="fa fa-car"},
+                };
 
-                _context.LandingPageMainTexts.AddRange(landingPageTexts);
+
+                _context.LandingMainTexts.AddRange(landingPageMainTexts);
                 _context.LandingReasonTexts.AddRange(landingPageReasonTexts);
+                _context.LandingServiceTexts.AddRange(landingPageService);
 
                 await _context.SaveChangesAsync();
             }
