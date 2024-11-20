@@ -1,6 +1,6 @@
 namespace WebApi.DTOs.LandingPage.MainText
 {
-    public class LandingMainTextUpdateModel
+    public class LandingMainUpdateModel
     {
         public string Text { get; set; }
     }

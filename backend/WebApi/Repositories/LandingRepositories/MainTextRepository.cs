@@ -26,17 +26,17 @@ namespace WebApi.Repositories.LandingRepositories
 
         public async Task<IEnumerable<LandingMainText>> GetAllAsync()
         {
-            return await _context.LandingPageMainTexts.ToListAsync();
+            return await _context.LandingMainTexts.ToListAsync();
         }
 
         public async Task<LandingMainText> GetByIdAsync(int id)
         {
-            return await _context.LandingPageMainTexts.FindAsync(id);
+            return await _context.LandingMainTexts.FindAsync(id);
         }
 
         public async Task UpdateAsync(LandingMainText entity)
         {
-            _context.LandingPageMainTexts.Update(entity);
+            _context.LandingMainTexts.Update(entity);
             await _context.SaveChangesAsync();
         }
 

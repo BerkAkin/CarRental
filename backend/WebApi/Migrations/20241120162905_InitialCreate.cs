@@ -12,7 +12,7 @@ namespace WebApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "LandingPageMainTexts",
+                name: "LandingMainTexts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -23,7 +23,7 @@ namespace WebApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LandingPageMainTexts", x => x.Id);
+                    table.PrimaryKey("PK_LandingMainTexts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,16 +41,36 @@ namespace WebApi.Migrations
                 {
                     table.PrimaryKey("PK_LandingReasonTexts", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "LandingServiceTexts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LandingServiceTexts", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "LandingPageMainTexts");
+                name: "LandingMainTexts");
 
             migrationBuilder.DropTable(
                 name: "LandingReasonTexts");
+
+            migrationBuilder.DropTable(
+                name: "LandingServiceTexts");
         }
     }
 }

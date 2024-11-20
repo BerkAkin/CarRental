@@ -1,9 +1,9 @@
 using FluentValidation;
 using WebApi.DTOs.LandingPage.MainText;
 
-namespace WebApi.Validators
+namespace WebApi.Validators.LandingPage.MainText
 {
-    public class LandingMainTextValidator : AbstractValidator<LandingMainTextViewModel>
+    public class LandingMainTextValidator : AbstractValidator<LandingMainViewModel>
     {
         public LandingMainTextValidator()
         {
