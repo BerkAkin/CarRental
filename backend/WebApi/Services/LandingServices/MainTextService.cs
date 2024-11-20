@@ -17,21 +17,21 @@ namespace WebApi.Services.LandingServices
         }
 
 
-        public async Task<List<LandingMainTextViewModel>> GetAllAsync()
+        public async Task<List<LandingMainViewModel>> GetAllAsync()
         {
             var landingMainTexts = await _repository.GetAllAsync();
-            var landingMainTextDtos = _mapper.Map<List<LandingMainTextViewModel>>(landingMainTexts);
+            var landingMainTextDtos = _mapper.Map<List<LandingMainViewModel>>(landingMainTexts);
             return landingMainTextDtos;
         }
 
-        public async Task<LandingMainTextIdViewModel> GetByIdAsync(int id)
+        public async Task<LandingMainViewIdModel> GetByIdAsync(int id)
         {
             var landingMainText = await _repository.GetByIdAsync(id);
             if (landingMainText == null) throw new Exception("LandingMainText bulunamadı");
-            return _mapper.Map<LandingMainTextIdViewModel>(landingMainText);
+            return _mapper.Map<LandingMainViewIdModel>(landingMainText);
         }
 
-        public async Task UpdateTextAsync(int id, LandingMainTextUpdateModel model)
+        public async Task UpdateTextAsync(int id, LandingMainUpdateModel model)
         {
             var landingMainText = await _repository.GetByIdAsync(id);
             if (landingMainText is null)
