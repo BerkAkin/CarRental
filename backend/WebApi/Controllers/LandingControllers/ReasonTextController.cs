@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.LandingPage.ReasonTexts;
@@ -50,7 +52,7 @@ namespace WebApi.Controllers.LandingControllers
         {
             try
             {
-                await _service.UpdateTextAsync(id, model);
+                await _service.UpdateAsync(id, model);
                 return Ok("Güncelleme İşlemi başarılı.");
             }
             catch (Exception ex)
