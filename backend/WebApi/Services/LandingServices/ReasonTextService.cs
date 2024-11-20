@@ -1,7 +1,8 @@
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.Results;
 using WebApi.DTOs.LandingPage.ReasonTexts;
 using WebApi.Entities;
-using WebApi.Repositories.LandingRepositories;
 using WebApi.Repository;
 
 namespace WebApi.Services.LandingServices
@@ -10,11 +11,14 @@ namespace WebApi.Services.LandingServices
     {
         private readonly IRepository<LandingReasonText> _repository;
         private readonly IMapper _mapper;
+        private readonly IValidator<LandingReasonAddModel> _addValidator;
 
-        public ReasonTextService(IRepository<LandingReasonText> repository, IMapper mapper)
+
+        public ReasonTextService(IRepository<LandingReasonText> repository, IMapper mapper, IValidator<LandingReasonAddModel> addValidator)
         {
             _repository = repository;
             _mapper = mapper;
+            _addValidator = addValidator;
         }
 
         public async Task<List<LandingReasonViewModel>> GetAllAsync()
@@ -40,7 +44,7 @@ namespace WebApi.Services.LandingServices
             return landingReasonSingleDTO;
         }
 
-        public async Task UpdateTextAsync(int id, LandingReasonUpdateModel model)
+        public async Task UpdateAsync(int id, LandingReasonUpdateModel model)
         {
             var landingReasonText = await _repository.GetByIdAsync(id);
             if (landingReasonText is null)
@@ -57,6 +61,7 @@ namespace WebApi.Services.LandingServices
             {
                 throw new ArgumentNullException("Eklencek Veri Boş Olamaz");
             }
+            await _addValidator.ValidateAndThrowAsync(model);
             var entity = _mapper.Map<LandingReasonText>(model);
             await _repository.AddAsync(entity);
         }
