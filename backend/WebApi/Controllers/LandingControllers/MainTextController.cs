@@ -9,7 +9,7 @@ namespace WebApi.Controllers.LandingControllers
     public class MainTextController : ControllerBase
     {
 
-        public MainTextService _service { get; set; }
+        private readonly MainTextService _service;
         public MainTextController(MainTextService service)
         {
             _service = service;
@@ -18,7 +18,7 @@ namespace WebApi.Controllers.LandingControllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<LandingMainTextViewModel>>> GetAll()
+        public async Task<ActionResult<List<LandingMainViewModel>>> GetAll()
         {
             var data = await _service.GetAllAsync();
             if (data is not null)
@@ -32,7 +32,7 @@ namespace WebApi.Controllers.LandingControllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<LandingMainTextIdViewModel>> GetById(int id)
+        public async Task<ActionResult<LandingMainViewIdModel>> GetById(int id)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace WebApi.Controllers.LandingControllers
 
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateText(int id, [FromBody] LandingMainTextUpdateModel model)
+        public async Task<ActionResult> UpdateText(int id, [FromBody] LandingMainUpdateModel model)
         {
             try
             {
