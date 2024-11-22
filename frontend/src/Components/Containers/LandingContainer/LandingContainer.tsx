@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './styles.module.css'
 import LandingInfo from './LandingInfo/LandingInfo'
 import WhyInfo from './WhyInfo/WhyInfo'
@@ -7,24 +7,61 @@ import ServicesInfo from './ServicesInfo/ServicesInfo';
 import Slider from '../../SimpleSlider/SimpleSlider';
 import SliderCommentCard from '../../SliderCommentCard/SliderCommentCard';
 import items from '../../../common/sliderComment'
+import apiService from '../../../api/apiService';
+import { endpoints } from '../../../api/apiConfig';
 
 
 function LandingContainer() {
+
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await apiService(endpoints.homepage, "GET");
+        setData(data);
+        console.log(data);
+      }
+      catch (err) {
+
+        setError(`${err}`);
+      }
+      finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+
+  if (loading) return <p>Yükleniyor</p>
+  if (error) return <p>{error}</p>
+
+  const mainText = data?.mainText?.map((item: any) => item.text) || [];
+  const reasons = data?.reasons || [];
+  const services = data?.services || [];
+
+  const groupInThrees = (data: any) => {
+    const grouped = [];
+    for (let i = 0; i < data.length; i += 3) {
+      grouped.push(data.slice(i, i + 3));
+    }
+    return grouped;
+  }
+
+  const groupedData = groupInThrees(reasons);
+  const groupedService = groupInThrees(services);
+
+
   return (
     <div className={`${style.innerContainerSizing} pt-5`}>
-      <LandingInfo />
-      <WhyInfo ImgURL={images.img1} Header='Neden Flexper ?' InfoBars={[
-        { HTitle: "Esnek Paketler", PTitle: "6 ve 9 aylık esnek abonelik paketlerimiz ile dilediğiniz zaman aracınızı ve abonelik paketinizi değiştirebilirsiniz. 2 yıllık bağlayıcı sözleşmelere veda edin!" },
-        { HTitle: "Müşteri Memnuniyeti", PTitle: "Müşteri merkezli hizmet politikamız ile %100 müşteri memnuniyeti sunuyoruz. Her müşterimize özel birebir hizmet!" },
-        { HTitle: "Sürpriz Masraf Yok", PTitle: "İhtiyacınız olabilecek her hizmet için sabit aylık bir ücret ödersiniz. Herhangi bir ek ücrete yada sürprize son!" }
-      ]} Align={false} />
 
-      <WhyInfo ImgURL={images.img2} InfoBars={[
-        { HTitle: "Özgürlük ve Rahatlık", PTitle: "Karmaşık prosedürlerle uğraşmadan araç sahibi olmanın keyfini çıkarın." },
-        { HTitle: "Araç Seçeneği", PTitle: "İstediğiniz araç modelini seçme özgürlüğüne sahip olun." },
-        { HTitle: "Her Şey Dahil Paketler", PTitle: "Kapsamlı paket seçeneklerimiz arasından isteğinize uygun olanı seçin." }
-      ]} Align={true} />
-      <ServicesInfo />
+      <LandingInfo Text={mainText} />
+      <WhyInfo ImgURL="image1.jpg" Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
+      <WhyInfo ImgURL="image2.jpg" InfoBars={groupedData[1] || []} Align={true} />
+      <ServicesInfo ServicesLeft={groupedService[0] || []} ServicesRight={groupedService[1] || []} />
       <Slider slidesToShow={3} header='Flexper için neler dediler?' items={items} renderItem={(item) => (
         <SliderCommentCard Comment={item.Comment} Person={item.Person} StarCount={item.StarCount} Type={item.Type} />
       )} />
