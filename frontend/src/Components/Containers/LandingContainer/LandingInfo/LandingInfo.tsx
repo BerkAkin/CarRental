@@ -5,7 +5,11 @@ import styles from './styles.module.css'
 import images from '../../../../assets/images/LandingImages/images';
 import ListElement from '../../../ListElement/ListElement';
 
-function LandingInfo() {
+interface landingInfoProps {
+    Text: string[];
+}
+
+function LandingInfo({ Text }: landingInfoProps) {
     return (
         <div>
             <div className='container-fluid mt-3'>
@@ -16,10 +20,7 @@ function LandingInfo() {
                         </div>
                         <div className='row ps-5 mt-2 mb-4'>
                             <h6 className={styles.textContent}>
-                                Araç abonelik sistemi, sizi karmaşık prosedürlerle boğulmaktan kurtararak özgürlüğün tadını çıkarmanızı
-                                sağlar. Sadece istediğiniz araç modelini seçin ve her şey dahil paketlerimizden birini tercih edin. Aracınız kapınıza kadar teslim edilsin,
-                                anahtarları alın ve sadece sürmeye başlayın. Geri kalan tüm detaylar ve işlemler bizim sorumluluğumuzda. Siz sadece sürün, gerisini biz
-                                halledelim!
+                                {Text}
                             </h6>
                         </div>
                         <div className={`row justify-content-center my-5`}>

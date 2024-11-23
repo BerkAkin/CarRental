@@ -9,5 +9,6 @@ namespace WebApi.DbOperations
         public DbSet<LandingMainText> LandingMainTexts { get; set; }
         public DbSet<LandingReasonText> LandingReasonTexts { get; set; }
         public DbSet<LandingServiceText> LandingServiceTexts { get; set; }
+        public DbSet<FAQText> FAQTexts { get; set; }
     }
 }

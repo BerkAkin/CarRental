@@ -51,7 +51,7 @@ namespace WebApi.Controllers.LandingControllers
         {
             try
             {
-                await _service.UpdateTextAsync(id, model);
+                await _service.UpdateAsync(id, model);
                 return Ok("Güncelleme Başarılı");
             }
             catch (Exception ex)

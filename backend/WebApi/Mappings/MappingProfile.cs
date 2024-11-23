@@ -1,4 +1,5 @@
 using AutoMapper;
+using WebApi.DTOs.FAQPage;
 using WebApi.DTOs.LandingPage.MainText;
 using WebApi.DTOs.LandingPage.ReasonTexts;
 using WebApi.DTOs.LandingPage.ServiceTexts;
@@ -23,6 +24,11 @@ namespace WebApi.Mappings
             CreateMap<LandingServiceText, LandingServiceViewIdModel>();
             CreateMap<LandingServiceUpdateModel, LandingServiceText>();
             CreateMap<LandingServiceAddModel, LandingServiceText>();
+
+            CreateMap<FAQText, FAQViewModel>();
+            CreateMap<FAQText, FAQViewIdModel>();
+            CreateMap<FAQUpdateModel, FAQText>();
+            CreateMap<FAQAddModel, FAQText>();
         }
     }
 }

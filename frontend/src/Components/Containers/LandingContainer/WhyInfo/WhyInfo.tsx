@@ -4,7 +4,7 @@ import InfoBar from './InfoBar/InfoBar'
 
 interface WhyInfoProp {
     Align: true | false;
-    InfoBars: { HTitle: string, PTitle: string }[];
+    InfoBars: { title: string, content: string }[];
     ImgURL: string;
     Header?: string;
 }
@@ -23,7 +23,7 @@ function WhyInfo({ Align, InfoBars, ImgURL, Header }: WhyInfoProp) {
                             </div>
                         </div>
                         {InfoBars.map((info, index) => (
-                            <InfoBar key={index} Alignment={Align} HTitle={info.HTitle} PTitle={info.PTitle} />
+                            <InfoBar key={index} Alignment={Align} HTitle={info.title} PTitle={info.content} />
                         ))}
                     </div>
                     <div className={`col-6  ${Align === true ? 'order-2' : ''}`}>
