@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.FAQPage;
-using WebApi.DTOs.LandingPage.MainText;
 using WebApi.Services.FAQService;
-using WebApi.Services.LandingServices;
 
 namespace WebApi.Controllers.FAQController
 {
