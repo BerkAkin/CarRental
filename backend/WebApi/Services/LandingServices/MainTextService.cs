@@ -5,42 +5,22 @@ using WebApi.Repository;
 
 namespace WebApi.Services.LandingServices
 {
-    public class MainTextService
+    public class MainTextService : BaseService<LandingMainText, object, LandingMainUpdateModel, LandingMainViewModel, LandingMainViewIdModel>
     {
-        private readonly IRepository<LandingMainText> _repository;
-        private readonly IMapper _mapper;
 
-        public MainTextService(IRepository<LandingMainText> repository, IMapper mapper)
+        public MainTextService(IRepository<LandingMainText> repository, IMapper mapper) : base(repository, mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
         }
 
-
-        public async Task<List<LandingMainViewModel>> GetAllAsync()
+        public override async Task AddAsync(object model)
         {
-            var landingMainTexts = await _repository.GetAllAsync();
-            var landingMainTextDtos = _mapper.Map<List<LandingMainViewModel>>(landingMainTexts);
-            return landingMainTextDtos;
+            throw new NotSupportedException("Desteklenmeyen Özellik");
+
         }
 
-        public async Task<LandingMainViewIdModel> GetByIdAsync(int id)
+        public override async Task DeleteAsync(int id)
         {
-            var landingMainText = await _repository.GetByIdAsync(id);
-            if (landingMainText == null) throw new Exception("LandingMainText bulunamadı");
-            return _mapper.Map<LandingMainViewIdModel>(landingMainText);
-        }
-
-        public async Task UpdateTextAsync(int id, LandingMainUpdateModel model)
-        {
-            var landingMainText = await _repository.GetByIdAsync(id);
-            if (landingMainText is null)
-            {
-                throw new Exception("Güncellenecek Bilgi Metni Bulunamadı");
-            }
-            _mapper.Map(model, landingMainText);
-
-            await _repository.UpdateAsync(landingMainText);
+            throw new NotSupportedException("Desteklenmeyen Özellik");
         }
 
 
