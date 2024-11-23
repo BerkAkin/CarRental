@@ -1,5 +1,4 @@
 using AutoMapper;
-using FluentValidation;
 using WebApi.Repository;
 
 namespace WebApi.Services
@@ -20,7 +19,7 @@ namespace WebApi.Services
             var entities = await _repository.GetAllAsync();
             if (entities == null)
             {
-                throw new InvalidOperationException($"{typeof(TEntity).Name} Verileri Bulunamadı");
+                throw new InvalidOperationException("Veriler Bulunamadı");
             }
             return _mapper.Map<List<TViewModel>>(entities);
         }
@@ -30,7 +29,7 @@ namespace WebApi.Services
             var entity = await _repository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException($"{typeof(TEntity).Name} Verisi Bulunamadı");
+                throw new InvalidOperationException("Veri Bulunamadı");
             }
             return _mapper.Map<TViewIdModel>(entity);
         }
@@ -39,7 +38,7 @@ namespace WebApi.Services
         {
             if (model == null)
             {
-                throw new ArgumentNullException($"{typeof(TAddModel).Name} Boş Olamaz");
+                throw new ArgumentNullException("Veri Boş Olamaz");
             }
 
             var entity = _mapper.Map<TEntity>(model);
@@ -51,7 +50,7 @@ namespace WebApi.Services
             var entity = await _repository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new ArgumentNullException($"Güncellencek {typeof(TEntity).Name} Bulunamadı");
+                throw new ArgumentNullException($"Güncellencek Veri Bulunamadı");
             }
             _mapper.Map(model, entity);
             await _repository.UpdateAsync(entity);
@@ -62,7 +61,7 @@ namespace WebApi.Services
             var entity = await _repository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new KeyNotFoundException($"Silinecek {typeof(TEntity).Name} Bulunamadı");
+                throw new KeyNotFoundException("Silinecek Veri Bulunamadı");
             }
             await _repository.DeleteAsync(entity);
         }
