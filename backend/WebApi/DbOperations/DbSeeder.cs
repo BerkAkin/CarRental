@@ -54,11 +54,36 @@ namespace WebApi.DbOperations
 
                 };
 
+                var Roles = new List<Role>{
+                    new Role {Name= "Admin", Description="Yönetici Rolü Bilgisi"},
+                    new Role {Name= "Flexper Abonesi", Description="Abone Rolü Bilgisi"},
+                    new Role {Name= "SuperUser", Description="Süper Kullanıcı Rolü Bilgisi"},
+                };
+
+                var Users = new List<User>{
+                    new User{Name = "John", Surname = "Doe", Email = "john.doe@example.com", PasswordHash = "123", PasswordSalt = "123", IsActive = true, RoleId = 1, LastOnline = DateTime.UtcNow, CreatedAt = DateTime.UtcNow},
+                    new User{Name = "Jane", Surname = "Smith", Email = "jane.smith@example.com", PasswordHash = "123", PasswordSalt = "123", IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-1)}
+                };
+
+                var Comments = new List<UserComment>{
+                    new UserComment{Content="Gerçekten Çok İyi", UserId=1,  StarCount=5},
+                    new UserComment{Content="Gerçekten Çok Kötü", UserId=2, StarCount=2}
+                };
+
 
                 _context.LandingMainTexts.AddRange(landingPageMainTexts);
                 _context.LandingReasonTexts.AddRange(landingPageReasonTexts);
                 _context.LandingServiceTexts.AddRange(landingPageService);
                 _context.FAQTexts.AddRange(FAQ);
+                await _context.SaveChangesAsync();
+
+                _context.Roles.AddRange(Roles);
+                await _context.SaveChangesAsync();
+
+                _context.Users.AddRange(Users);
+                await _context.SaveChangesAsync();
+
+                _context.UserComments.AddRange(Comments);
 
                 await _context.SaveChangesAsync();
             }
