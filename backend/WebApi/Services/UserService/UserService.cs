@@ -2,14 +2,19 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DTOs.User;
 using WebApi.Entities;
+using WebApi.Helpers;
+using WebApi.Repositories.UserRepository;
 using WebApi.Repository;
 
 namespace WebApi.Services.UserService
 {
     public class UserService : BaseService<User, UserAddModel, UserUpdateModel, UserViewModel, UserViewIdModel>
     {
-        public UserService(IRepository<User> repository, IMapper mapper) : base(repository, mapper)
+
+        private readonly PasswordHasher _passwordHasher;
+        public UserService(UserRepository repository, IMapper mapper, PasswordHasher passwordHasher) : base(repository, mapper)
         {
+            _passwordHasher = passwordHasher;
         }
 
         public override async Task<List<UserViewModel>> GetAllAsync()
@@ -32,7 +37,35 @@ namespace WebApi.Services.UserService
             return _mapper.Map<UserViewIdModel>(data);
         }
 
+        public override async Task AddAsync(UserAddModel model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException("Veri Boş Olamaz");
+            }
+            if (model.Password.Length < 8)
+            {
+                throw new InvalidOperationException("Parola 8 karakterden küçük olamaz");
+            }
+            //şifrelenmiş parola
+            model.Password = _passwordHasher.HashPassword(model.Password);
+            var entity = _mapper.Map<User>(model);
+            await _repository.AddAsync(entity);
 
+        }
+
+        public override async Task UpdateAsync(int id, UserUpdateModel model)
+        {
+            var user = await _repository.GetByIdAsync(id);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("Güncellenecek kullanıcı bulunamadı");
+            }
+            user.LastOnline = DateTime.Now;
+            _mapper.Map(model, user);
+            await _repository.UpdateAsync(user);
+
+        }
 
         public override async Task DeleteAsync(int id)
         {
@@ -42,6 +75,17 @@ namespace WebApi.Services.UserService
                 throw new KeyNotFoundException("Silinecek kullanıcı bulunamadı");
             }
             user.IsActive = false;
+            await _repository.SaveAsync();
+        }
+
+        public async Task ActivateUserAsync(int id)
+        {
+            var user = await _repository.GetByIdAsync(id);
+            if (user is null)
+            {
+                throw new KeyNotFoundException("Aktive edilecek kullanıcı bulunamadı");
+            }
+            user.IsActive = true;
             await _repository.SaveAsync();
         }
     }
