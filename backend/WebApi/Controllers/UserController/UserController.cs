@@ -31,7 +31,6 @@ namespace WebApi.Controllers.FAQController
             return Ok(data);
         }
 
-
         [HttpPost]
         public async Task<ActionResult> AddAsync([FromBody] UserAddModel model)
         {
@@ -59,11 +58,19 @@ namespace WebApi.Controllers.FAQController
                 return StatusCode(500, $"Sunucu hatası: {ex.Message}");
             }
         }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
             await _service.DeleteAsync(id);
             return Ok("Silme İşlemi Başarılı");
+        }
+
+        [HttpPut("{id}/is-active")]
+        public async Task<ActionResult> ActivateUser(int id)
+        {
+            await _service.ActivateUserAsync(id);
+            return Ok("Kullanıcı Aktifleştirildi");
         }
 
     }
