@@ -34,7 +34,7 @@ namespace WebApi.Mappings
             CreateMap<User, UserViewModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name));
             CreateMap<User, UserViewIdModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name)); ;
             CreateMap<UserUpdateModel, User>();
-            CreateMap<UserAddModel, User>();
+            CreateMap<UserAddModel, User>().ForMember(dest => dest.PasswordHashed, opt => opt.MapFrom(src => src.Password));
         }
     }
 }
