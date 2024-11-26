@@ -1,6 +1,7 @@
 using FluentValidation;
 using WebApi.DbOperations;
 using WebApi.Entities;
+using WebApi.Helpers;
 using WebApi.Repositories.FAQRepository;
 using WebApi.Repositories.LandingRepositories;
 using WebApi.Repositories.UserRepository;
@@ -33,6 +34,8 @@ public static class ServiceRegistration
         services.AddScoped<ServicesTextService>();
         services.AddScoped<FAQService>();
         services.AddScoped<UserService>();
+        services.AddScoped<PasswordHasher>();
+
 
         //SEEDER
         services.AddTransient<DbSeeder>();
