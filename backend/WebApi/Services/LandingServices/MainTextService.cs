@@ -1,6 +1,7 @@
 using AutoMapper;
 using WebApi.DTOs.LandingPage.MainText;
 using WebApi.Entities;
+using WebApi.Repositories.LandingRepositories;
 using WebApi.Repository;
 
 namespace WebApi.Services.LandingServices
@@ -8,7 +9,7 @@ namespace WebApi.Services.LandingServices
     public class MainTextService : BaseService<LandingMainText, object, LandingMainUpdateModel, LandingMainViewModel, LandingMainViewIdModel>
     {
 
-        public MainTextService(IRepository<LandingMainText> repository, IMapper mapper) : base(repository, mapper)
+        public MainTextService(MainTextRepository repository, IMapper mapper) : base(repository, mapper)
         {
         }
 
