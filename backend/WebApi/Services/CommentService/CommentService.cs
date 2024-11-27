@@ -28,7 +28,7 @@ namespace WebApi.Services.CommentService
 
         public async Task<List<CommentViewModel>> GetLatestAsync()
         {
-            var data = await _repository.GetLatest(query => query.Include(u => u.User));
+            var data = await _repository.GetLatest(query => query.Include(u => u.User).Include(u => u.User.Role));
             if (data is null)
             {
                 throw new InvalidOperationException("Veriler Bulunamadı");
