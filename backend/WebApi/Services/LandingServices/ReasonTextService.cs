@@ -9,7 +9,7 @@ using WebApi.Repository;
 
 namespace WebApi.Services.LandingServices
 {
-    public class ReasonTextService : BaseService<LandingReasonText, LandingReasonAddModel, LandingReasonUpdateModel, LandingReasonViewModel, LandingMainViewIdModel>
+    public class ReasonTextService : BaseService<LandingReasonText, LandingReasonAddModel, LandingReasonUpdateModel, LandingReasonViewModel, LandingMainViewIdModel, ReasonTextRepository>
     {
 
         public ReasonTextService(ReasonTextRepository repository, IMapper mapper) : base(repository, mapper)
