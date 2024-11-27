@@ -37,7 +37,9 @@ namespace WebApi.Mappings
             CreateMap<UserUpdateModel, User>();
             CreateMap<UserAddModel, User>().ForMember(dest => dest.PasswordHashed, opt => opt.MapFrom(src => src.Password));
 
-            CreateMap<UserComment, CommentViewModel>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
+            CreateMap<UserComment, CommentViewModel>()
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
+            .ForMember(dest => dest.UserType, opt => opt.MapFrom(src => src.User.Role.Name));
             CreateMap<UserComment, CommentViewIdModel>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
             CreateMap<CommentAddModel, UserComment>();
             CreateMap<CommentUpdateModel, UserComment>();
