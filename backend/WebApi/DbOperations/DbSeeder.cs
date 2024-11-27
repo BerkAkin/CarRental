@@ -61,8 +61,8 @@ namespace WebApi.DbOperations
                 };
 
                 var Users = new List<User>{
-                    new User{Name = "John", Surname = "Doe", Email = "john.doe@example.com", PasswordHashed = "123", IsActive = true, RoleId = 1, LastOnline = DateTime.UtcNow, CreatedAt = DateTime.UtcNow},
-                    new User{Name = "Jane", Surname = "Smith", Email = "jane.smith@example.com", PasswordHashed = "123",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-1)}
+                    new User{Name = "John", Surname = "Doe", Email = "john.doe@example.com", PasswordHashed = "123", PhoneNum="1234215", IsActive = true, RoleId = 1, LastOnline = DateTime.UtcNow, CreatedAt = DateTime.UtcNow},
+                    new User{Name = "Jane", Surname = "Smith", Email = "jane.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-1)}
                 };
 
                 var Comments = new List<UserComment>{
@@ -84,7 +84,6 @@ namespace WebApi.DbOperations
                 await _context.SaveChangesAsync();
 
                 _context.UserComments.AddRange(Comments);
-
                 await _context.SaveChangesAsync();
             }
         }
