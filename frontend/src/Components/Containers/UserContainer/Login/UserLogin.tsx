@@ -82,15 +82,6 @@ function UserLogin() {
                                             <ListElement href='ParolaSifirla' text={"Şifremi Unuttum"} color='#7a7a7a' fs='0.95rem' isHover={true} hoverColor='#294474' />
                                         </div>
                                     </div>
-                                    <div className='row mt-4'>
-                                        <div className='col-12 d-flex justify-content-center'>
-                                            <p style={{ color: "#7A7A7A", fontWeight: "500" }}>Hesabınız Yok Mu?</p>
-                                            <p className='ms-2'>
-                                                <ListElement href='ParolaSifirla' text={"Üye Olun"} boldness='600' color='#1A2B48' isHover={true} hoverColor='#294474' />
-                                            </p>
-
-                                        </div>
-                                    </div>
 
                                 </div>
 
