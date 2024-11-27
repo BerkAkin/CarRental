@@ -120,21 +120,12 @@ function UserRegister() {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className='row mt-1'>
-                                        <div className='col-12 d-flex justify-content-center'>
-                                            <p style={{ color: "#7A7A7A", fontWeight: "500" }}>Hesabınız Var Mı?</p>
-                                            <p className='ms-2'>
-                                                <ListElement href='' text={"Giriş Yapın"} boldness='600' color='#1A2B48' isHover={true} hoverColor='#294474' />
-                                            </p>
 
-                                        </div>
-                                    </div>
 
                                 </div>
 
                             </div>
                         </div>
-
                     </Form>
 
                 )}
