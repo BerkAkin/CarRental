@@ -6,5 +6,6 @@ namespace WebApi.DTOs.Comment
         public string Content { get; set; }
         public int StarCount { get; set; }
         public string UserName { get; set; }
+        public string UserType { get; set; }
     }
 }
