@@ -225,6 +225,11 @@ namespace WebApi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("PhoneNum")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")

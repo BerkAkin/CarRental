@@ -12,7 +12,7 @@ using WebApi.DbOperations;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(CRDbContext))]
-    [Migration("20241125163315_InitialCreate")]
+    [Migration("20241126191137_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -227,6 +227,11 @@ namespace WebApi.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PhoneNum")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
