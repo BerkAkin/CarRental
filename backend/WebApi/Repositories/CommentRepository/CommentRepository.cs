@@ -15,7 +15,7 @@ namespace WebApi.Repositories.CommentRepository
             {
                 query = func(query);
             }
-            query = query.OrderByDescending(uc => uc.CreatedAt).Take(1);
+            query = query.OrderByDescending(uc => uc.CreatedAt).Take(5);
 
             return await query.ToListAsync();
         }
