@@ -30,7 +30,7 @@ namespace WebApi.Controllers.CommentController
 
         }
 
-        [HttpGet("/Latest")]
+        [HttpGet("/Comments/Latest")]
         public async Task<ActionResult<List<CommentViewModel>>> GetAllLatest()
         {
             var data = await _service.GetLatestAsync();
