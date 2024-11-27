@@ -12,10 +12,6 @@ namespace WebApi.Repositories
             _context = context;
         }
 
-
-        //Lambda fonksiyonu (Func<IQueryable<T>, IQueryable<T>> include) 
-        //diğer tarafta (query => query.Include(u=>u.X))'a denk gelir param1=query param2=query.Include(u=>u.X)'dir
-
         public virtual async Task<IEnumerable<T>> GetAllAsync(Func<IQueryable<T>, IQueryable<T>> include = null)
         {
             IQueryable<T> query = _context.Set<T>();
