@@ -12,14 +12,29 @@ namespace WebApi.Repositories
             _context = context;
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync(Func<IQueryable<T>, IQueryable<T>> include = null)
         {
-            return await _context.Set<T>().ToListAsync();
+            IQueryable<T> query = _context.Set<T>();
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            return await query.ToListAsync();
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+
+        public virtual async Task<T> GetByIdAsync(int id, Func<IQueryable<T>, IQueryable<T>> include = null)
         {
-            return await _context.Set<T>().FindAsync(id);
+            IQueryable<T> query = _context.Set<T>().Where(e => EF.Property<int>(e, "Id") == id);
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            return await query.FirstOrDefaultAsync();
+
         }
 
         public virtual async Task AddAsync(T entity)
@@ -40,6 +55,10 @@ namespace WebApi.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

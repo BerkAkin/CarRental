@@ -1,10 +1,14 @@
-import React from 'react'
 import styles from './styles.module.css'
 import ListElement from '../../ListElement/ListElement'
 import Image from '../../Image/Image';
 import flexperLogo from '../../../assets/logos/logo-flexper.png';
 
-function BotNav() {
+interface BotNavProps {
+  openModal: (content: 'login' | 'register') => void;
+}
+
+function BotNav({ openModal }: BotNavProps) {
+
   return (
     <>
       <div className={`${styles.botNav} ps-2 d-flex justify-content-between container-fluid`}>
@@ -26,9 +30,9 @@ function BotNav() {
         <div className='col-5'>
           <div className='container h-100 d-flex justify-content-end'>
             <div className='row w-100 justify-content-end  text-center'>
-              {/* <div className='col-2 align-items-center d-flex justify-content-center'> <ListElement color="#1A2B48" text='ÜYE OL' href='login' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' /></div>
-              <div className='col-2 align-items-center d-flex justify-content-center'> <ListElement color="#1A2B48" text='GİRİŞ YAP' href='register' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' /></div>
-             */}</div>
+              <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={() => openModal('register')}> ÜYE OL</button></div>
+              <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={() => openModal('login')}> GİRİŞ YAP</button></div>
+            </div>
           </div>
         </div>
       </div >

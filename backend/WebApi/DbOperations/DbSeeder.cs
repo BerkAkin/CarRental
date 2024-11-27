@@ -54,12 +54,44 @@ namespace WebApi.DbOperations
 
                 };
 
+                var Roles = new List<Role>{
+                    new Role {Name= "Admin", Description="Yönetici Rolü Bilgisi"},
+                    new Role {Name= "Flexper Abonesi", Description="Abone Rolü Bilgisi"},
+                    new Role {Name= "SuperUser", Description="Süper Kullanıcı Rolü Bilgisi"},
+                };
+
+                var Users = new List<User>{
+                    new User{Name = "John", Surname = "Doe", Email = "john.doe@example.com", PasswordHashed = "123", PhoneNum="1234215", IsActive = true, RoleId = 1, LastOnline = DateTime.UtcNow, CreatedAt = DateTime.UtcNow},
+                    new User{Name = "Oak", Surname = "Anthony", Email = "oak.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-2)},
+                    new User{Name = "Jill", Surname = "Denver", Email = "jill.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-4)},
+                    new User{Name = "Dean", Surname = "Stark", Email = "dean.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-1)},
+                    new User{Name = "Dallas", Surname = "Flynn", Email = "dallas.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-10)},
+                    new User{Name = "David", Surname = "Scott", Email = "david.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow}
+                };
+
+                var Comments = new List<UserComment>{
+                    new UserComment{Content="Gerçekten Çok İyi", UserId=1,  StarCount=5},
+                    new UserComment{Content="Dönemsel olarak ekonomik koşullarda araç kiralayabilme imkanı sağlamaları bu projeyi tercih etmemi sağladı", UserId=2, StarCount=3},
+                    new UserComment{Content="Hiçbir şeyi düşünmüyorum benim için düşünenler var, her zaman arayabileceğim kişiler var.", UserId=3, StarCount=5},
+                    new UserComment{Content="Muhteşem bir hizmet", UserId=4, StarCount=1},
+                    new UserComment{Content="Flexper projesini ilk defa duyduğumda heyecanlanmıştım. Gayet ekonomik bir çözüm olduğunu söyleyebilirim", UserId=5, StarCount=3},
+                    new UserComment{Content="Araç abonelik rahatlığını ben de yaşamak istedim.", UserId=6, StarCount=6}
+                };
+
 
                 _context.LandingMainTexts.AddRange(landingPageMainTexts);
                 _context.LandingReasonTexts.AddRange(landingPageReasonTexts);
                 _context.LandingServiceTexts.AddRange(landingPageService);
                 _context.FAQTexts.AddRange(FAQ);
+                await _context.SaveChangesAsync();
 
+                _context.Roles.AddRange(Roles);
+                await _context.SaveChangesAsync();
+
+                _context.Users.AddRange(Users);
+                await _context.SaveChangesAsync();
+
+                _context.UserComments.AddRange(Comments);
                 await _context.SaveChangesAsync();
             }
         }

@@ -2,3 +2,16 @@
     height: 91px;
     border-bottom: 1px solid rgba(165, 165, 165, 0.233);
 }
+
+.btns {
+    outline: none;
+    border: none;
+    background-color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #1A2B48;
+}
+
+.btns:hover {
+    color: #E00000
+}

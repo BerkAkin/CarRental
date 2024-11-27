@@ -1,8 +1,10 @@
 using AutoMapper;
+using WebApi.DTOs.Comment;
 using WebApi.DTOs.FAQPage;
 using WebApi.DTOs.LandingPage.MainText;
 using WebApi.DTOs.LandingPage.ReasonTexts;
 using WebApi.DTOs.LandingPage.ServiceTexts;
+using WebApi.DTOs.User;
 using WebApi.Entities;
 
 namespace WebApi.Mappings
@@ -29,6 +31,18 @@ namespace WebApi.Mappings
             CreateMap<FAQText, FAQViewIdModel>();
             CreateMap<FAQUpdateModel, FAQText>();
             CreateMap<FAQAddModel, FAQText>();
+
+            CreateMap<User, UserViewModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name));
+            CreateMap<User, UserViewIdModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name)); ;
+            CreateMap<UserUpdateModel, User>();
+            CreateMap<UserAddModel, User>().ForMember(dest => dest.PasswordHashed, opt => opt.MapFrom(src => src.Password));
+
+            CreateMap<UserComment, CommentViewModel>()
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
+            .ForMember(dest => dest.UserType, opt => opt.MapFrom(src => src.User.Role.Name));
+            CreateMap<UserComment, CommentViewIdModel>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
+            CreateMap<CommentAddModel, UserComment>();
+            CreateMap<CommentUpdateModel, UserComment>();
         }
     }
 }

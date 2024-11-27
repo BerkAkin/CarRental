@@ -4,9 +4,12 @@ import img from '../../../assets/images/AboutUsImages/img';
 import styles from './styles.module.css';
 import SimpleSlider from '../../SimpleSlider/SimpleSlider';
 import SliderCommentCard from '../../SliderCommentCard/SliderCommentCard';
-import items from '../../../common/sliderComment'
+import { useSliderContext } from '../../../Contexts/SliderContext';
 
 function AboutContainer() {
+
+    const { textData } = useSliderContext();
+
     return (
         <>
             <div className='container mt-4 pt-3'>
@@ -50,11 +53,11 @@ function AboutContainer() {
 
 
             </div>
-            <div className='my-3 pt-5'>
-                <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={items} renderItem={(item) => (
-                    <SliderCommentCard Comment={item.Comment} Person={item.Person} StarCount={item.StarCount} Type={item.Type} />
-                )} />
 
+            <div className='my-3 pt-5'>
+                <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={textData || []} renderItem={(item) => (
+                    <SliderCommentCard Content={item.content} Username={item.userName} StarCount={item.starCount} UserType={item.userType} />
+                )} />
             </div>
         </>
     )

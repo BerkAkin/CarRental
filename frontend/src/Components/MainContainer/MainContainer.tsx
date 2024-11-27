@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../app.css";
 import TopNav from "../Navbar/TopNav/TopNav";
 import BotNav from "../Navbar/BotNav/BotNav";
@@ -13,13 +13,34 @@ import BlogContainer from "../Containers/BlogContainer/BlogContainer";
 import DetailContainer from "../Containers/DetailContainer/DetailContainer";
 import PPInfo from "../Containers/ContactContainer/PrivacyPolicyInfo/PPInfo";
 import BlogDetailContainer from "../Containers/BlogDetailContainer/BlogDetailContainer";
+import UserLogin from "../Containers/UserContainer/Login/UserLogin";
+import Modal from "../Modal/Modal";
+import UserRegister from "../Containers/UserContainer/Register/UserRegister";
 
 function MainContainer() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState<'login' | 'register'>();
+
+  const openModal = (content: 'login' | 'register') => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  }
+
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <>
       <Router>
         <TopNav />
-        <BotNav />
+        <BotNav openModal={openModal} />
+
+        {
+          isModalOpen ?
+            <Modal closeModal={closeModal} >
+              {modalContent == 'login' ? <UserLogin /> : <UserRegister />}
+            </Modal> : ""
+        }
         <Routes>
           <Route path="/" element={<LandingContainer />}></Route>
           <Route path="/Models" element={<ModelsContainer />}></Route>
@@ -31,6 +52,7 @@ function MainContainer() {
           <Route path="/Blog/:id" element={<BlogDetailContainer />}></Route>
           <Route path="/PPInfo" element={<PPInfo />}></Route>
         </Routes>
+
 
         <Footer />
       </Router>
