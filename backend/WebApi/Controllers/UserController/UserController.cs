@@ -3,7 +3,7 @@ using WebApi.DTOs.FAQPage;
 using WebApi.DTOs.User;
 using WebApi.Services.UserService;
 
-namespace WebApi.Controllers.FAQController
+namespace WebApi.Controllers.UserController
 {
     [ApiController]
     [Route("[controller]s")]
