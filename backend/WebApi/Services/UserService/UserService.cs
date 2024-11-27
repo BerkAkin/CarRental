@@ -8,7 +8,7 @@ using WebApi.Repository;
 
 namespace WebApi.Services.UserService
 {
-    public class UserService : BaseService<User, UserAddModel, UserUpdateModel, UserViewModel, UserViewIdModel>
+    public class UserService : BaseService<User, UserAddModel, UserUpdateModel, UserViewModel, UserViewIdModel, UserRepository>
     {
 
         private readonly PasswordHasher _passwordHasher;
