@@ -6,7 +6,7 @@ using WebApi.Repository;
 
 namespace WebApi.Services.LandingServices
 {
-    public class MainTextService : BaseService<LandingMainText, object, LandingMainUpdateModel, LandingMainViewModel, LandingMainViewIdModel>
+    public class MainTextService : BaseService<LandingMainText, object, LandingMainUpdateModel, LandingMainViewModel, LandingMainViewIdModel, MainTextRepository>
     {
 
         public MainTextService(MainTextRepository repository, IMapper mapper) : base(repository, mapper)
