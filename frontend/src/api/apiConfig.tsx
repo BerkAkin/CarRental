@@ -6,4 +6,6 @@ export const endpoints = {
     modelDetail: "/Models/id",
     blog: "/Blog",
     faq: "/FAQs",
+    comments: "/Comments",
+    commentsLatest: "/Comments/Latest"
 }
