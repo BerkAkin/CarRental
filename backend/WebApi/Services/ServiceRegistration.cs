@@ -2,10 +2,12 @@ using FluentValidation;
 using WebApi.DbOperations;
 using WebApi.Entities;
 using WebApi.Helpers;
+using WebApi.Repositories.CommentRepository;
 using WebApi.Repositories.FAQRepository;
 using WebApi.Repositories.LandingRepositories;
 using WebApi.Repositories.UserRepository;
 using WebApi.Repository;
+using WebApi.Services.CommentService;
 using WebApi.Services.FAQService;
 using WebApi.Services.LandingServices;
 using WebApi.Services.UserService;
@@ -22,11 +24,12 @@ public static class ServiceRegistration
         services.AddValidatorsFromAssemblyContaining<ReasonAddValidator>();
 
         //REPOSITORIES
-        services.AddScoped<IRepository<LandingMainText>, MainTextRepository>();
-        services.AddScoped<IRepository<LandingReasonText>, ReasonTextRepository>();
-        services.AddScoped<IRepository<LandingServiceText>, ServiceTextRepository>();
-        services.AddScoped<IRepository<FAQText>, FAQRepository>();
-        services.AddScoped<IRepository<User>, UserRepository>();
+        services.AddScoped<MainTextRepository>();
+        services.AddScoped<ReasonTextRepository>();
+        services.AddScoped<ServiceTextRepository>();
+        services.AddScoped<FAQRepository>();
+        services.AddScoped<UserRepository>();
+        services.AddScoped<CommentRepository>();
 
         //SERVICES
         services.AddScoped<MainTextService>();
@@ -35,6 +38,7 @@ public static class ServiceRegistration
         services.AddScoped<FAQService>();
         services.AddScoped<UserService>();
         services.AddScoped<PasswordHasher>();
+        services.AddScoped<CommentService>();
 
 
         //SEEDER
