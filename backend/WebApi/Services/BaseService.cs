@@ -1,14 +1,18 @@
 using AutoMapper;
+using WebApi.Repositories;
 using WebApi.Repository;
 
 namespace WebApi.Services
 {
-    public abstract class BaseService<TEntity, TAddModel, TUpdateModel, TViewModel, TViewIdModel> where TEntity : class
+    public abstract class BaseService<TEntity, TAddModel, TUpdateModel, TViewModel, TViewIdModel, TRepository>
+    where TEntity : class
+    where TRepository : BaseRepository<TEntity>
+
     {
-        protected readonly IRepository<TEntity> _repository;
+        protected readonly TRepository _repository;
         protected readonly IMapper _mapper;
 
-        protected BaseService(IRepository<TEntity> repository, IMapper mapper)
+        protected BaseService(TRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
