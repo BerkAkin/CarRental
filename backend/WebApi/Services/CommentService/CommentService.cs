@@ -18,7 +18,7 @@ namespace WebApi.Services.CommentService
 
         public override async Task<List<CommentViewModel>> GetAllAsync()
         {
-            var data = await _repository.GetAllAsync(query => query.Include(u => u.User));
+            var data = await _repository.GetAllAsync(query => query.Include(u => u.User).Include(u => u.User.Role));
             if (data is null)
             {
                 throw new InvalidOperationException("Veriler Bulunamadı");
