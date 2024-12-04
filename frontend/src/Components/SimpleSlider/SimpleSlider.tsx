@@ -3,10 +3,10 @@ import Slider from "react-slick";
 import './styles.css'
 
 
-interface SliderProps<T> {
+interface SimpleSliderProps<T> {
     header: string;
     items: T[];
-    renderItem: (item: T) => React.ReactElement;
+    renderFunction: (item: T) => React.ReactElement;
     slidesToShow: number;
 
 }
@@ -26,7 +26,7 @@ function SampleArrow(props: any) {
 
 
 
-export default function SimpleSlider<T>({ header, items, renderItem, slidesToShow }: SliderProps<T>) {
+export default function SimpleSlider<T>({ header, items, renderFunction, slidesToShow }: SimpleSliderProps<T>) {
     var settings = {
         dots: true,
         infinite: true,
@@ -48,7 +48,7 @@ export default function SimpleSlider<T>({ header, items, renderItem, slidesToSho
                     <Slider {...settings}>
                         {items.map((item, index) => (
                             <div key={index} className={`my-5 px-2 `}>
-                                {renderItem(item)}
+                                {renderFunction(item)}
                             </div>
                         ))}
                     </Slider>
