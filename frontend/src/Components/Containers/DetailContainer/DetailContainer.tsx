@@ -194,7 +194,7 @@ function DetailContainer() {
             </div >
             <div className='mt-5 pt-5'>
                 <div className='mt-5'>
-                    <SimpleSlider slidesToShow={4} header='Diğer Modeller' items={sliderModels} renderItem={(item) => (
+                    <SimpleSlider slidesToShow={4} header='Diğer Modeller' items={sliderModels} renderFunction={(item) => (
 
                         <SliderModelCard type={item.Type} id={item.id} brandName={item.Brand} doorCount={item.DoorCount} gear={item.Gear} image={item.imgURL} luggageCount={item.LuggageCount} personCount={item.PeopleCount} price={item.Price} />
                     )} />
