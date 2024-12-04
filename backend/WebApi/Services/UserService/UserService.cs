@@ -8,7 +8,7 @@ using WebApi.Repository;
 
 namespace WebApi.Services.UserService
 {
-    public class UserService : BaseService<User, UserAddModel, UserUpdateModel, UserViewModel, UserViewIdModel, UserRepository>
+    public class UserService : BaseService<User, object, UserUpdateModel, UserViewModel, UserViewIdModel, UserRepository>
     {
 
         private readonly PasswordHasher _passwordHasher;
@@ -35,23 +35,6 @@ namespace WebApi.Services.UserService
                 throw new InvalidOperationException("Veri Bulunamadı");
             }
             return _mapper.Map<UserViewIdModel>(data);
-        }
-
-        public override async Task AddAsync(UserAddModel model)
-        {
-            if (model is null)
-            {
-                throw new ArgumentNullException("Veri Boş Olamaz");
-            }
-            if (model.Password.Length < 8)
-            {
-                throw new InvalidOperationException("Parola 8 karakterden küçük olamaz");
-            }
-            //şifrelenmiş parola
-            model.Password = _passwordHasher.HashPassword(model.Password);
-            var entity = _mapper.Map<User>(model);
-            await _repository.AddAsync(entity);
-
         }
 
         public override async Task UpdateAsync(int id, UserUpdateModel model)
@@ -87,6 +70,11 @@ namespace WebApi.Services.UserService
             }
             user.IsActive = true;
             await _repository.SaveAsync();
+        }
+
+        public override async Task AddAsync(object obj)
+        {
+            throw new NotImplementedException("Yöntem Geçersiz");
         }
     }
 }
