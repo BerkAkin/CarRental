@@ -1,8 +1,6 @@
-using WebApi.Entities;
-
-namespace WebApi.DTOs.User
+namespace WebApi.DTOs.Auth
 {
-    public class UserAddModel
+    public class RegisterModel
     {
         public string Name { get; set; }
         public string Surname { get; set; }

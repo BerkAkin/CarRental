@@ -31,19 +31,6 @@ namespace WebApi.Controllers.UserController
             return Ok(data);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> AddAsync([FromBody] UserAddModel model)
-        {
-            try
-            {
-                await _service.AddAsync(model);
-                return Ok("Ekleme İşlemi başarılı.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Sunucu hatası: {ex.Message}");
-            }
-        }
 
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAsync(int id, [FromBody] UserUpdateModel model)

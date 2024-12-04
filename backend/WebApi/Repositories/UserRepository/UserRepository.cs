@@ -7,5 +7,9 @@ namespace WebApi.Repositories.UserRepository
     {
         public UserRepository(CRDbContext context) : base(context) { }
 
+        public override async Task AddAsync(User entity)
+        {
+            throw new NotImplementedException("Yöntem Geçersiz");
+        }
     }
 }

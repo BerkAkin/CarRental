@@ -11,11 +11,14 @@ interface ServiceCardProps {
     Icon: string;
 }
 
+
 function ServiceCard({ HeaderTxt, ParagraphTxt, Icon }: ServiceCardProps) {
+    const newIcon = Icon.toLowerCase() as IconProp;
+    console.log(newIcon)
     return (
         <>
             <div className='my-4'>
-                <div className='h-25 justify-content-center row'>{/* <FontAwesomeIcon fontSize={50} icon={Icon} /> */} {Icon}</div>
+                <div className='h-25 justify-content-center row'>{<FontAwesomeIcon fontSize={50} icon={newIcon} />}</div>
                 <div className='h-25 my-2 row'><Header Align="center" Text={HeaderTxt} /></div>
                 <div className='h-50 row'><Paragraph Align="center" Text={ParagraphTxt} /></div>
             </div>

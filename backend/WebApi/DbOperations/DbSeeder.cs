@@ -61,12 +61,12 @@ namespace WebApi.DbOperations
                 };
 
                 var Users = new List<User>{
-                    new User{Name = "John", Surname = "Doe", Email = "john.doe@example.com", PasswordHashed = "123", PhoneNum="1234215", IsActive = true, RoleId = 1, LastOnline = DateTime.UtcNow, CreatedAt = DateTime.UtcNow},
-                    new User{Name = "Oak", Surname = "Anthony", Email = "oak.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-2)},
-                    new User{Name = "Jill", Surname = "Denver", Email = "jill.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-4)},
-                    new User{Name = "Dean", Surname = "Stark", Email = "dean.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-1)},
-                    new User{Name = "Dallas", Surname = "Flynn", Email = "dallas.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-10)},
-                    new User{Name = "David", Surname = "Scott", Email = "david.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow}
+                    new User{Name = "John", Surname = "Doe", Email = "john.doe@example.com", PasswordHashed = "123", PhoneNum="1234215", IsActive = true, RoleId = 1, LastOnline = DateTime.UtcNow, CreatedAt = DateTime.UtcNow, RefreshToken="saknfdsugı2.şlasoıbasfıo.oı1238924n"},
+                    new User{Name = "Oak", Surname = "Anthony", Email = "oak.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-2), RefreshToken="saknfdsugı2.şlasoıbasfıo.oı1238924n"},
+                    new User{Name = "Jill", Surname = "Denver", Email = "jill.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-4), RefreshToken="saknfdsugı2.şlasoıbasfıo.oı1238924n"},
+                    new User{Name = "Dean", Surname = "Stark", Email = "dean.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-1), RefreshToken="saknfdsugı2.şlasoıbasfıo.oı1238924n"},
+                    new User{Name = "Dallas", Surname = "Flynn", Email = "dallas.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow.AddMonths(-10), RefreshToken="saknfdsugı2.şlasoıbasfıo.oı1238924n"},
+                    new User{Name = "David", Surname = "Scott", Email = "david.smith@example.com", PasswordHashed = "123", PhoneNum="1234215",  IsActive = true, RoleId = 2, LastOnline = DateTime.UtcNow.AddDays(-1), CreatedAt = DateTime.UtcNow, RefreshToken="saknfdsugı2.şlasoıbasfıo.oı1238924n"}
                 };
 
                 var Comments = new List<UserComment>{

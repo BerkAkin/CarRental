@@ -1,9 +1,11 @@
 using AutoMapper;
+using WebApi.DTOs.Auth;
 using WebApi.DTOs.Comment;
 using WebApi.DTOs.FAQPage;
 using WebApi.DTOs.LandingPage.MainText;
 using WebApi.DTOs.LandingPage.ReasonTexts;
 using WebApi.DTOs.LandingPage.ServiceTexts;
+using WebApi.DTOs.Token;
 using WebApi.DTOs.User;
 using WebApi.Entities;
 
@@ -35,7 +37,7 @@ namespace WebApi.Mappings
             CreateMap<User, UserViewModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name));
             CreateMap<User, UserViewIdModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name)); ;
             CreateMap<UserUpdateModel, User>();
-            CreateMap<UserAddModel, User>().ForMember(dest => dest.PasswordHashed, opt => opt.MapFrom(src => src.Password));
+
 
             CreateMap<UserComment, CommentViewModel>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
@@ -43,6 +45,12 @@ namespace WebApi.Mappings
             CreateMap<UserComment, CommentViewIdModel>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
             CreateMap<CommentAddModel, UserComment>();
             CreateMap<CommentUpdateModel, UserComment>();
+
+
+            CreateMap<RegisterModel, User>().ForMember(dest => dest.PasswordHashed, opt => opt.MapFrom(src => src.Password))
+            .ForMember(dest => dest.RefreshToken, opt => opt.Ignore())
+            .ForMember(dest => dest.RefreshTokenExpiryTime, opt => opt.Ignore());
+
         }
     }
 }

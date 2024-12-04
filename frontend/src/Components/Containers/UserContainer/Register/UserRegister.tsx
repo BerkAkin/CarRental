@@ -5,6 +5,8 @@ import registerValidationSchema from './RegisterValidationSchema';
 import ListElement from '../../../ListElement/ListElement';
 import Image from '../../../Image/Image';
 import logo from '../../../../assets/logos/logo-flexper.png';
+import apiService from '../../../../api/apiService';
+import { endpoints } from '../../../../api/apiConfig';
 
 
 interface RegisterProps {
@@ -24,14 +26,18 @@ const initialValues = {
 }
 
 const onSubmit = async (values: RegisterProps, { setSubmitting }: any) => {
-    //BURADA İSTEK ATILIP GİRİŞ YAPILMA OLAYLARI BAŞLATILACAK
     try {
+        const response = await apiService(endpoints.user, "POST", values)
         setSubmitting(true);
         setTimeout(() => {
             setSubmitting(false);
         }, 2000);
+        console.log("Kayıt başarılı:", response.data);
+        alert("Kullanıcı başarıyla kaydedildi!");
     } catch (error) {
-        console.error(error);
+        console.error("Bir hata oluştu:", error);
+        alert("Bir hata oluştu, lütfen tekrar deneyiniz.");
+
     }
     finally {
         setSubmitting(false);

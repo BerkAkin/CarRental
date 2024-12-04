@@ -10,17 +10,31 @@ namespace WebApi.Helpers
         {
             using (var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password)))
             {
-                argon2.Salt = GenerateSalt();
+                byte[] salt = GenerateSalt();
+                argon2.Salt = salt;
                 argon2.DegreeOfParallelism = 2;
                 argon2.MemorySize = 65536;
                 argon2.Iterations = 4;
-                return Convert.ToBase64String(argon2.GetBytes(32));
+                var hash = Convert.ToBase64String(argon2.GetBytes(32));
+                return Convert.ToBase64String(salt) + ":" + hash;
             }
         }
 
-        public bool VerifyPassword(string password, string hashedPassword)
+        public bool VerifyPassword(string password, string storedHash)
         {
-            throw new NotImplementedException("Hash doğrulama işlemi burada yapılacak.");
+            var parts = storedHash.Split(':');
+            var storedSalt = Convert.FromBase64String(parts[0]);
+            var storedHashBytes = Convert.FromBase64String(parts[1]);
+            using (var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password)))
+            {
+                argon2.Salt = storedSalt;
+                argon2.DegreeOfParallelism = 2;
+                argon2.MemorySize = 65536;
+                argon2.Iterations = 4;
+
+                var hashBytes = argon2.GetBytes(32);
+                return hashBytes.SequenceEqual(storedHashBytes);
+            }
         }
 
         private byte[] GenerateSalt()

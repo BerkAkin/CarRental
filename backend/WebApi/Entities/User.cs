@@ -8,7 +8,9 @@ namespace WebApi.Entities
         public string Email { get; set; }
         public string PhoneNum { get; set; }
         public string PasswordHashed { get; set; }
-        public bool IsActive { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
+        public bool IsActive { get; set; } = true;
         public int RoleId { get; set; }
         public Role Role { get; set; }
         public DateTime LastOnline { get; set; }

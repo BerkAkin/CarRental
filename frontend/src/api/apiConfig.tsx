@@ -7,5 +7,6 @@ export const endpoints = {
     blog: "/Blog",
     faq: "/FAQs",
     comments: "/Comments",
-    commentsLatest: "/Comments/Latest"
+    commentsLatest: "/Comments/Latest",
+    user: "/Users"
 }
