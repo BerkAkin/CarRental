@@ -55,7 +55,7 @@ function AboutContainer() {
             </div>
 
             <div className='my-3 pt-5'>
-                <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={textData || []} renderItem={(item) => (
+                <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={textData || []} renderFunction={(item) => (
                     <SliderCommentCard Content={item.content} Username={item.userName} StarCount={item.starCount} UserType={item.userType} />
                 )} />
             </div>
