@@ -102,6 +102,8 @@ namespace WebApi.Migrations
                     Email = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
                     PhoneNum = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     PasswordHashed = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     RoleId = table.Column<int>(type: "int", nullable: false, defaultValue: 2),
                     LastOnline = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
