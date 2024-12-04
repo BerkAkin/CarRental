@@ -2,14 +2,18 @@ using FluentValidation;
 using WebApi.DbOperations;
 using WebApi.Entities;
 using WebApi.Helpers;
+using WebApi.Repositories.AuthRepository;
 using WebApi.Repositories.CommentRepository;
 using WebApi.Repositories.FAQRepository;
 using WebApi.Repositories.LandingRepositories;
+using WebApi.Repositories.TokenRepository;
 using WebApi.Repositories.UserRepository;
 using WebApi.Repository;
+using WebApi.Services.AuthService;
 using WebApi.Services.CommentService;
 using WebApi.Services.FAQService;
 using WebApi.Services.LandingServices;
+using WebApi.Services.TokenService;
 using WebApi.Services.UserService;
 using WebApi.Validators.LandingPage.ReasonText;
 
@@ -30,6 +34,8 @@ public static class ServiceRegistration
         services.AddScoped<FAQRepository>();
         services.AddScoped<UserRepository>();
         services.AddScoped<CommentRepository>();
+        services.AddScoped<AuthRepository>();
+        services.AddScoped<TokenRepository>();
 
         //SERVICES
         services.AddScoped<MainTextService>();
@@ -39,6 +45,8 @@ public static class ServiceRegistration
         services.AddScoped<UserService>();
         services.AddScoped<PasswordHasher>();
         services.AddScoped<CommentService>();
+        services.AddScoped<AuthService>();
+        services.AddScoped<JwtTokenService>();
 
 
         //SEEDER
