@@ -5,6 +5,8 @@ import loginValidationSchema from './LoginValidationSchema';
 import ListElement from '../../../ListElement/ListElement';
 import logo from '../../../../assets/logos/logo-flexper.png';
 import Image from '../../../Image/Image';
+import apiService from '../../../../api/apiService';
+import { endpoints } from '../../../../api/apiConfig';
 
 
 interface LoginProps {
@@ -18,12 +20,13 @@ const initialValues = {
 }
 
 const onSubmit = async (values: LoginProps, { setSubmitting }: any) => {
-    //BURADA İSTEK ATILIP GİRİŞ YAPILMA OLAYLARI BAŞLATILACAK
     try {
+        const response = await apiService(endpoints.login, "POST", values)
         setSubmitting(true);
         setTimeout(() => {
             setSubmitting(false);
         }, 2000);
+        alert("Giriş Yapıldı");
     } catch (error) {
         console.error(error);
     }
