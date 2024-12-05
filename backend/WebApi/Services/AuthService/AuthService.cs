@@ -64,13 +64,12 @@ namespace WebApi.Services.AuthService
                 throw new InvalidOperationException("Parola Yanlış");
             }
 
-            if (user.RefreshToken == null || user.RefreshTokenExpiryTime < DateTime.Now)
-            {
-                var refreshToken = _tokenService.GenerateRefreshToken();
-                user.RefreshToken = refreshToken;
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(3);
-                await _repository.SaveUserRefreshToken(user);
-            }
+
+            var refreshToken = _tokenService.GenerateRefreshToken();
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(3);
+            await _repository.UpdateUser(user);
+
             var accessToken = _tokenService.GenerateAccessToken(user);
 
             var response = new TokenResponseModel
@@ -79,7 +78,7 @@ namespace WebApi.Services.AuthService
                 RefreshToken = user.RefreshToken
             };
 
-            return (response);
+            return response;
         }
 
 
@@ -87,16 +86,22 @@ namespace WebApi.Services.AuthService
         {
             var user = await _repository.GetUserByRefreshToken(refreshToken);
 
-            if (user.RefreshToken == null || user.RefreshTokenExpiryTime < DateTime.Now)
+            if (user == null)
             {
-                var refreshedToken = _tokenService.GenerateRefreshToken();
-                user.RefreshToken = refreshedToken;
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(3);
-                await _repository.SaveUserRefreshToken(user);
+                throw new UnauthorizedAccessException("Kullanıcı bulunamadı veya refresh token geçersiz.");
             }
-            var newAccessToken = _tokenService.GenerateAccessToken(user);
-            return newAccessToken;
+
+            if (user.RefreshTokenExpiryTime < DateTime.Now)
+            {
+                throw new UnauthorizedAccessException("Refresh token süresi dolmuş. Yeniden Giriş Yapılmalı");
+            }
+
+            string accessToken = _tokenService.GenerateAccessToken(user);
+
+            return accessToken;
+
         }
+
 
     }
 }
