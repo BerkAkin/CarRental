@@ -17,7 +17,7 @@ namespace WebApi.Controllers.AuthController
         }
 
         [HttpPost("/Register")]
-        public async Task<ActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             try
             {
@@ -31,16 +31,29 @@ namespace WebApi.Controllers.AuthController
         }
 
         [HttpPost("/Login")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var tokens = await _authService.Login(email, password);
-            return Ok(tokens);
+            var tokens = await _authService.Login(model.Email, model.Password);
+
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.Now.AddDays(3),
+            };
+            Response.Cookies.Append("refreshToken", tokens.RefreshToken, cookieOptions);
+
+            return Ok(tokens.AccessToken);
         }
 
-        [HttpPost("/RefreshAccessToken")]
-        public async Task RefreshAccessToken(string refreshToken)
-        {
 
+        [HttpPost("/RefreshAccessToken")]
+        public async Task<IActionResult> RefreshTokens()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+            var newAccessToken = await _authService.RefreshAccessToken(refreshToken);
+            return Ok(newAccessToken);
         }
 
 

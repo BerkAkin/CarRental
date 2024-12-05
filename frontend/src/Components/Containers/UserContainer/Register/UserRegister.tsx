@@ -27,12 +27,11 @@ const initialValues = {
 
 const onSubmit = async (values: RegisterProps, { setSubmitting }: any) => {
     try {
-        const response = await apiService(endpoints.user, "POST", values)
+        const response = await apiService(endpoints.register, "POST", values)
         setSubmitting(true);
         setTimeout(() => {
             setSubmitting(false);
         }, 2000);
-        console.log("Kayıt başarılı:", response.data);
         alert("Kullanıcı başarıyla kaydedildi!");
     } catch (error) {
         console.error("Bir hata oluştu:", error);

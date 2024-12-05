@@ -24,11 +24,12 @@ namespace WebApi.Repositories.AuthRepository
             return user;
         }
 
-        public async Task SaveUserRefreshToken(User user)
+        public async Task UpdateUser(User user)
         {
             _context.Set<User>().Update(user);
             await _context.SaveChangesAsync();
         }
+
         public async Task<User> GetUserByRefreshToken(string refreshToken)
         {
             return _context.Users.SingleOrDefault(u => u.RefreshToken == refreshToken);

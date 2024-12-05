@@ -8,5 +8,6 @@ export const endpoints = {
     faq: "/FAQs",
     comments: "/Comments",
     commentsLatest: "/Comments/Latest",
-    user: "/Users"
+    register: "/Register",
+    login: "/Login"
 }
