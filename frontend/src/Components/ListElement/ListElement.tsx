@@ -1,32 +1,38 @@
 import React from "react";
 import styles from "./style.module.css";
+import { Link } from "react-router-dom";
+import Image from "../Image/Image";
+
+
 
 interface ListObjectProps {
-  text: string;
+  text: string | React.ReactElement<typeof Image>;
   href: string;
-  isHref: boolean;
-  isBold: boolean;
-  isHover: boolean;
+  isHover?: boolean;
   hoverColor?: string;
-  color: string;
-  fs: string;
-  boldness: string;
+  color?: string;
+  fs?: string;
+  boldness?: string;
 }
 
-function ListElement({ text, href, isHref, isBold, isHover ,hoverColor, color, fs, boldness}: ListObjectProps) {
+function ListElement({ text, href, isHover, hoverColor, color, fs, boldness }: ListObjectProps) {
   const linkStyle = {
-    fontWeight: isBold ? "bolder" : "normal",
-    "--hover-color": isHover ?  hoverColor : {}, 
-    "--default-color" : color,
+    "--hover-color": isHover ? hoverColor : {},
+    "--default-color": color,
     "--default-ft-size": fs,
     "--default-boldness": boldness
-  };
+  } as React.CSSProperties;
+
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
 
   return (
-    <li className={`list-group-item ${styles.listItem}`}>
-        <a className={`${styles.textSmall} ${styles.linkBg}`} href={href} style={linkStyle}>
-          {text}
-        </a>
+    <li onClick={scrollTop} className={`list-group-item ${styles.listItem}`}>
+      <Link style={linkStyle} className={` ${styles.linkBg}`} to={`/` + href}>{text}</Link>
     </li>
   );
 }

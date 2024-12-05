@@ -1,0 +1,4 @@
+.headerOpt {
+    text-align: var(--why-header-align) !important;
+    margin-top: 25px;
+}

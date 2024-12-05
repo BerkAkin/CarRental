@@ -1,0 +1,4 @@
+.roundedImage {
+    border-radius: var(--img-roundness) !important;
+    object-fit: cover;
+}
