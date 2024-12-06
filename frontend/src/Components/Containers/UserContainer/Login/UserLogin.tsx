@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import loginValidationSchema from './LoginValidationSchema';
@@ -27,6 +27,8 @@ const onSubmit = async (values: LoginProps, { setSubmitting }: any) => {
             setSubmitting(false);
         }, 2000);
         alert("Giriş Yapıldı");
+        localStorage.setItem("accessToken", response);
+        window.location.reload();
     } catch (error) {
         console.error(error);
     }
@@ -36,6 +38,8 @@ const onSubmit = async (values: LoginProps, { setSubmitting }: any) => {
 };
 
 function UserLogin() {
+
+
     return (
         <>
             <Formik initialValues={initialValues} validationSchema={loginValidationSchema} onSubmit={onSubmit}>
