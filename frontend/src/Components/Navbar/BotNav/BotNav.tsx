@@ -2,12 +2,38 @@ import styles from './styles.module.css'
 import ListElement from '../../ListElement/ListElement'
 import Image from '../../Image/Image';
 import flexperLogo from '../../../assets/logos/logo-flexper.png';
+import { useEffect, useState } from 'react';
+import apiService from '../../../api/apiService';
+import { endpoints } from '../../../api/apiConfig';
 
 interface BotNavProps {
   openModal: (content: 'login' | 'register') => void;
 }
 
 function BotNav({ openModal }: BotNavProps) {
+
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("accessToken");
+    setIsLoggedIn(!!loggedIn);
+  }, [])
+
+
+  const logout = async () => {
+    try {
+      await apiService(endpoints.logout, "GET");
+      localStorage.removeItem("accessToken");
+      alert("Çıkış Yapıldı");
+      window.location.reload();
+    }
+    catch (error) {
+      console.error("Çıkış işlemi sırasında hata:", error);
+    }
+
+
+  }
+
 
   return (
     <>
@@ -30,8 +56,22 @@ function BotNav({ openModal }: BotNavProps) {
         <div className='col-5'>
           <div className='container h-100 d-flex justify-content-end'>
             <div className='row w-100 justify-content-end  text-center'>
-              <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={() => openModal('register')}> ÜYE OL</button></div>
-              <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={() => openModal('login')}> GİRİŞ YAP</button></div>
+              {isLoggedIn ? (
+                <>
+                  <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`}>
+                    <ListElement color="#1A2B48" text='PROFİLİM' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
+                  </button></div>
+                  <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={logout}> ÇIKIŞ YAP</button></div>
+
+                </>
+              ) : (
+                <>
+                  <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={() => openModal('register')}> ÜYE OL</button></div>
+                  <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={() => openModal('login')}> GİRİŞ YAP</button></div>
+
+                </>
+              )}
+
             </div>
           </div>
         </div>
