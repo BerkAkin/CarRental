@@ -1,0 +1,489 @@
+2024-11-08 02:55:48.995 +03:00 [INF] User profile is available. Using 'C:\Users\onura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-08 02:55:49.384 +03:00 [INF] Now listening on: https://localhost:7161
+2024-11-08 02:55:49.385 +03:00 [INF] Now listening on: http://localhost:5129
+2024-11-08 02:55:49.388 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-08 02:55:49.390 +03:00 [INF] Hosting environment: Development
+2024-11-08 02:55:49.390 +03:00 [INF] Content root path: C:\Users\onura\OneDrive\Belgeler\GitHub\CarRental\Backend\carRental\carRental.API
+2024-11-08 02:55:50.449 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 02:55:50.954 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 517.2251ms
+2024-11-08 02:55:51.096 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 02:55:51.105 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 9.0028ms
+2024-11-08 02:55:53.782 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 02:55:53.846 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.9179ms
+2024-11-08 02:55:54.998 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 02:55:55.141 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 143.4513ms
+2024-11-08 02:56:08.985 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/login - application/json 64
+2024-11-08 02:56:09.087 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.LoginV1 (carRental.API)'
+2024-11-08 02:56:09.120 +03:00 [INF] Route matched with {action = "LoginV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] LoginV1(carRental.API.Models.DTO.auth.LoginDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 02:56:11.077 +03:00 [INF] Executed DbCommand (84ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-11-08 02:56:11.300 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-11-08 02:56:11.341 +03:00 [INF] Executing OkObjectResult, writing value of type 'carRental.API.Models.DTO.auth.LoginResponseDTO'.
+2024-11-08 02:56:11.351 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.LoginV1 (carRental.API) in 2225.0273ms
+2024-11-08 02:56:11.354 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.LoginV1 (carRental.API)'
+2024-11-08 02:56:11.362 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/login - 200 null application/json; charset=utf-8 2377.4359ms
+2024-11-08 02:57:13.457 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 90
+2024-11-08 02:57:13.463 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 02:57:13.472 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 02:57:13.639 +03:00 [INF] Executed DbCommand (17ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 02:57:13.737 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2024-11-08 02:57:13.760 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 02:57:13.803 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2024-11-08 02:57:13.810 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 02:57:13.824 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 02:57:13.869 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p16='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p17='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [LockoutEnabled] = @p6, [LockoutEnd] = @p7, [NormalizedEmail] = @p8, [NormalizedUserName] = @p9, [PasswordHash] = @p10, [PhoneNumber] = @p11, [PhoneNumberConfirmed] = @p12, [SecurityStamp] = @p13, [TwoFactorEnabled] = @p14, [UserName] = @p15
+OUTPUT 1
+WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
+2024-11-08 02:57:13.882 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2024-11-08 02:57:13.886 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 410.5443ms
+2024-11-08 02:57:13.887 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 02:57:13.888 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 200 null text/plain; charset=utf-8 431.4691ms
+2024-11-08 02:57:26.793 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/login - application/json 64
+2024-11-08 02:57:26.798 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.LoginV1 (carRental.API)'
+2024-11-08 02:57:26.800 +03:00 [INF] Route matched with {action = "LoginV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] LoginV1(carRental.API.Models.DTO.auth.LoginDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 02:57:26.821 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-11-08 02:57:26.898 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-11-08 02:57:26.902 +03:00 [INF] Executing OkObjectResult, writing value of type 'carRental.API.Models.DTO.auth.LoginResponseDTO'.
+2024-11-08 02:57:26.903 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.LoginV1 (carRental.API) in 101.0623ms
+2024-11-08 02:57:26.904 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.LoginV1 (carRental.API)'
+2024-11-08 02:57:26.905 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/login - 200 null application/json; charset=utf-8 112.9654ms
+2024-11-08 03:17:42.393 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-11-08 03:17:42.443 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-11-08 03:17:42.445 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-11-08 03:17:42.446 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-11-08 03:17:42.464 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-11-08 03:17:42.475 +03:00 [INF] Applying migration '20241108001724_user details'.
+2024-11-08 03:17:42.539 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [IdentityUser] (
+    [Id] nvarchar(450) NOT NULL,
+    [UserName] nvarchar(max) NULL,
+    [NormalizedUserName] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    [NormalizedEmail] nvarchar(max) NULL,
+    [EmailConfirmed] bit NOT NULL,
+    [PasswordHash] nvarchar(max) NULL,
+    [SecurityStamp] nvarchar(max) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    [PhoneNumber] nvarchar(max) NULL,
+    [PhoneNumberConfirmed] bit NOT NULL,
+    [TwoFactorEnabled] bit NOT NULL,
+    [LockoutEnd] datetimeoffset NULL,
+    [LockoutEnabled] bit NOT NULL,
+    [AccessFailedCount] int NOT NULL,
+    CONSTRAINT [PK_IdentityUser] PRIMARY KEY ([Id])
+);
+2024-11-08 03:17:42.544 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] uniqueidentifier NOT NULL,
+    [UserId] uniqueidentifier NOT NULL,
+    [FullName] nvarchar(max) NOT NULL,
+    [ContactNumber] nvarchar(max) NOT NULL,
+    [BirthDate] datetime2 NULL,
+    [IdentityUserId] nvarchar(450) NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Users_IdentityUser_IdentityUserId] FOREIGN KEY ([IdentityUserId]) REFERENCES [IdentityUser] ([Id])
+);
+2024-11-08 03:17:42.550 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Users_IdentityUserId] ON [Users] ([IdentityUserId]);
+2024-11-08 03:17:42.559 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20241108001724_user details', N'8.0.10');
+2024-11-08 03:33:27.034 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-11-08 03:33:27.103 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-11-08 03:33:27.105 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-11-08 03:33:27.105 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-11-08 03:33:27.118 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-11-08 03:33:27.130 +03:00 [INF] Applying migration '20241108003314_modifyJWTDB'.
+2024-11-08 03:33:27.170 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD [BirthDate] datetime2 NULL;
+2024-11-08 03:33:27.186 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD [ContactNumber] nvarchar(max) NOT NULL DEFAULT N'';
+2024-11-08 03:33:27.189 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [AspNetUsers] ADD [FullName] nvarchar(100) NOT NULL DEFAULT N'';
+2024-11-08 03:33:27.190 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20241108003314_modifyJWTDB', N'8.0.10');
+2024-11-08 03:44:05.110 +03:00 [INF] User profile is available. Using 'C:\Users\onura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-08 03:44:05.425 +03:00 [INF] Now listening on: https://localhost:7161
+2024-11-08 03:44:05.427 +03:00 [INF] Now listening on: http://localhost:5129
+2024-11-08 03:44:05.430 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-08 03:44:05.431 +03:00 [INF] Hosting environment: Development
+2024-11-08 03:44:05.432 +03:00 [INF] Content root path: C:\Users\onura\OneDrive\Belgeler\GitHub\CarRental\Backend\carRental\carRental.API
+2024-11-08 03:44:06.232 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 03:44:06.493 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 271.1076ms
+2024-11-08 03:44:06.684 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 03:44:06.684 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 03:44:06.696 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 12.0421ms
+2024-11-08 03:44:06.736 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 52.1682ms
+2024-11-08 03:44:10.233 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 03:44:10.362 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 128.9713ms
+2024-11-08 03:45:01.002 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 192
+2024-11-08 03:45:01.083 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 03:45:01.106 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 03:45:01.278 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-08 03:45:01.293 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 181.506ms
+2024-11-08 03:45:01.295 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 03:45:01.297 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 400 null application/problem+json; charset=utf-8 295.6452ms
+2024-11-08 03:56:45.664 +03:00 [INF] User profile is available. Using 'C:\Users\onura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-08 03:56:45.903 +03:00 [INF] Now listening on: https://localhost:7161
+2024-11-08 03:56:45.904 +03:00 [INF] Now listening on: http://localhost:5129
+2024-11-08 03:56:45.907 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-08 03:56:45.908 +03:00 [INF] Hosting environment: Development
+2024-11-08 03:56:45.910 +03:00 [INF] Content root path: C:\Users\onura\OneDrive\Belgeler\GitHub\CarRental\Backend\carRental\carRental.API
+2024-11-08 03:56:46.903 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 03:56:47.260 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 364.6505ms
+2024-11-08 03:56:47.432 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 03:56:47.432 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 03:56:47.439 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 8.4305ms
+2024-11-08 03:56:47.490 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 59.4714ms
+2024-11-08 03:56:47.592 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 03:56:47.743 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 151.1374ms
+2024-11-08 03:57:09.437 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 173
+2024-11-08 03:57:09.509 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 03:57:09.532 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 03:57:10.817 +03:00 [INF] Executed DbCommand (55ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 03:57:10.972 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2024-11-08 03:57:10.996 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 03:57:11.038 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2024-11-08 03:57:11.045 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 03:57:11.059 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 03:57:11.096 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p16='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p17='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [ConcurrencyStamp] = @p3, [Email] = @p4, [EmailConfirmed] = @p5, [LockoutEnabled] = @p6, [LockoutEnd] = @p7, [NormalizedEmail] = @p8, [NormalizedUserName] = @p9, [PasswordHash] = @p10, [PhoneNumber] = @p11, [PhoneNumberConfirmed] = @p12, [SecurityStamp] = @p13, [TwoFactorEnabled] = @p14, [UserName] = @p15
+OUTPUT 1
+WHERE [Id] = @p16 AND [ConcurrencyStamp] = @p17;
+2024-11-08 03:57:11.117 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2024-11-08 03:57:11.124 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 1585.801ms
+2024-11-08 03:57:11.126 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 03:57:11.133 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 200 null text/plain; charset=utf-8 1696.1285ms
+2024-11-08 04:03:16.767 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-11-08 04:03:16.828 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-11-08 04:03:16.830 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-11-08 04:03:16.831 +03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-11-08 04:03:16.847 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-11-08 04:03:16.859 +03:00 [INF] Applying migration '20241108010308_modifyJWTDB'.
+2024-11-08 04:03:16.961 +03:00 [ERR] Failed executing DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[AspNetUsers]') AND [c].[name] = N'ContactNumber');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [AspNetUsers] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [AspNetUsers] DROP COLUMN [ContactNumber];
+2024-11-08 04:05:15.207 +03:00 [INF] User profile is available. Using 'C:\Users\onura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-08 04:05:15.448 +03:00 [INF] Now listening on: https://localhost:7161
+2024-11-08 04:05:15.450 +03:00 [INF] Now listening on: http://localhost:5129
+2024-11-08 04:05:15.453 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-08 04:05:15.454 +03:00 [INF] Hosting environment: Development
+2024-11-08 04:05:15.454 +03:00 [INF] Content root path: C:\Users\onura\OneDrive\Belgeler\GitHub\CarRental\Backend\carRental\carRental.API
+2024-11-08 04:05:16.307 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 04:05:16.569 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 273.2467ms
+2024-11-08 04:05:16.769 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 04:05:16.769 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 04:05:16.785 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 16.1162ms
+2024-11-08 04:05:16.820 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 51.5123ms
+2024-11-08 04:05:16.937 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 04:05:17.091 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 153.417ms
+2024-11-08 04:06:35.411 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 203
+2024-11-08 04:06:35.486 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:06:35.510 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:06:35.520 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 5.205ms
+2024-11-08 04:06:35.524 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:06:35.528 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'Microsoft.AspNetCore.Identity.UserManager`1[Microsoft.AspNetCore.Identity.IdentityUser]' while attempting to activate 'carRental.API.Controllers.AuthController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method9(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-11-08 04:06:35.569 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 500 null text/plain; charset=utf-8 158.7743ms
+2024-11-08 04:11:42.302 +03:00 [INF] User profile is available. Using 'C:\Users\onura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-08 04:11:42.557 +03:00 [INF] Now listening on: https://localhost:7161
+2024-11-08 04:11:42.559 +03:00 [INF] Now listening on: http://localhost:5129
+2024-11-08 04:11:42.562 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-08 04:11:42.564 +03:00 [INF] Hosting environment: Development
+2024-11-08 04:11:42.565 +03:00 [INF] Content root path: C:\Users\onura\OneDrive\Belgeler\GitHub\CarRental\Backend\carRental\carRental.API
+2024-11-08 04:11:43.106 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 04:11:43.339 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 237.0119ms
+2024-11-08 04:11:43.504 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 04:11:43.511 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 6.4009ms
+2024-11-08 04:11:45.983 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 04:11:46.023 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 39.9548ms
+2024-11-08 04:11:47.005 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 04:11:47.138 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 133.3585ms
+2024-11-08 04:13:00.795 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 209
+2024-11-08 04:13:00.866 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:13:00.890 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:13:01.148 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2024-11-08 04:13:01.155 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 259.4795ms
+2024-11-08 04:13:01.157 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:13:01.159 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 400 null text/plain; charset=utf-8 363.9157ms
+2024-11-08 04:13:29.970 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 207
+2024-11-08 04:13:29.981 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:13:29.989 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:13:30.070 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2024-11-08 04:13:30.072 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 80.3202ms
+2024-11-08 04:13:30.074 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:13:30.075 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 400 null text/plain; charset=utf-8 105.3958ms
+2024-11-08 04:13:36.524 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 206
+2024-11-08 04:13:36.529 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:13:36.530 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:13:37.711 +03:00 [INF] Executed DbCommand (58ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[BirthDate], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 04:13:37.871 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [BirthDate], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2024-11-08 04:13:37.894 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 04:13:37.937 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2024-11-08 04:13:37.946 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 04:13:37.959 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[BirthDate], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 04:13:37.994 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p17='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p18='?' (Size = 4000), @p5='?' (Size = 256), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTimeOffset), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [BirthDate] = @p3, [ConcurrencyStamp] = @p4, [Email] = @p5, [EmailConfirmed] = @p6, [LockoutEnabled] = @p7, [LockoutEnd] = @p8, [NormalizedEmail] = @p9, [NormalizedUserName] = @p10, [PasswordHash] = @p11, [PhoneNumber] = @p12, [PhoneNumberConfirmed] = @p13, [SecurityStamp] = @p14, [TwoFactorEnabled] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [Id] = @p17 AND [ConcurrencyStamp] = @p18;
+2024-11-08 04:13:38.008 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2024-11-08 04:13:38.011 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 1478.4072ms
+2024-11-08 04:13:38.013 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:13:38.020 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 200 null text/plain; charset=utf-8 1495.7855ms
+2024-11-08 04:15:42.586 +03:00 [INF] User profile is available. Using 'C:\Users\onura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-08 04:15:42.841 +03:00 [INF] Now listening on: https://localhost:7161
+2024-11-08 04:15:42.842 +03:00 [INF] Now listening on: http://localhost:5129
+2024-11-08 04:15:42.845 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-08 04:15:42.846 +03:00 [INF] Hosting environment: Development
+2024-11-08 04:15:42.847 +03:00 [INF] Content root path: C:\Users\onura\OneDrive\Belgeler\GitHub\CarRental\Backend\carRental\carRental.API
+2024-11-08 04:15:43.697 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 04:15:43.966 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 278.5739ms
+2024-11-08 04:15:44.192 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 04:15:44.192 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 04:15:44.204 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 13.43ms
+2024-11-08 04:15:44.235 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 44.7401ms
+2024-11-08 04:15:44.339 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 04:15:44.485 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 146.498ms
+2024-11-08 04:16:55.508 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 206
+2024-11-08 04:16:55.583 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:16:55.608 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:16:55.766 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-08 04:16:55.780 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 166.8846ms
+2024-11-08 04:16:55.782 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:16:55.784 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 400 null application/problem+json; charset=utf-8 275.6383ms
+2024-11-08 04:19:08.015 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 206
+2024-11-08 04:19:08.024 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:19:08.033 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:19:08.044 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-08 04:19:08.046 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 10.4117ms
+2024-11-08 04:19:08.048 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:19:08.049 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 400 null application/problem+json; charset=utf-8 34.3092ms
+2024-11-08 04:19:12.369 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 04:19:12.380 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 11.6749ms
+2024-11-08 04:19:12.410 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 04:19:12.415 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 4.7333ms
+2024-11-08 04:19:12.429 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 04:19:12.453 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 24.0297ms
+2024-11-08 04:19:12.591 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 04:19:12.610 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 19.1048ms
+2024-11-08 04:20:10.823 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 208
+2024-11-08 04:20:10.836 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:20:10.839 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:20:10.949 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2024-11-08 04:20:10.952 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 111.0415ms
+2024-11-08 04:20:10.954 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:20:10.955 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 400 null text/plain; charset=utf-8 134.9443ms
+2024-11-08 04:22:17.528 +03:00 [INF] User profile is available. Using 'C:\Users\onura\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-08 04:22:17.790 +03:00 [INF] Now listening on: https://localhost:7161
+2024-11-08 04:22:17.793 +03:00 [INF] Now listening on: http://localhost:5129
+2024-11-08 04:22:17.796 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-08 04:22:17.799 +03:00 [INF] Hosting environment: Development
+2024-11-08 04:22:17.800 +03:00 [INF] Content root path: C:\Users\onura\OneDrive\Belgeler\GitHub\CarRental\Backend\carRental\carRental.API
+2024-11-08 04:22:18.425 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/index.html - null null
+2024-11-08 04:22:18.688 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/index.html - 200 null text/html;charset=utf-8 273.2977ms
+2024-11-08 04:22:18.884 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-08 04:22:18.891 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_framework/aspnetcore-browser-refresh.js - 200 13762 application/javascript; charset=utf-8 7ms
+2024-11-08 04:22:21.428 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/_vs/browserLink - null null
+2024-11-08 04:22:21.468 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/_vs/browserLink - 200 null text/javascript; charset=UTF-8 40.2817ms
+2024-11-08 04:22:22.546 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - null null
+2024-11-08 04:22:22.678 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 132.1254ms
+2024-11-08 04:23:15.283 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/register - application/json 208
+2024-11-08 04:23:15.356 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:23:15.380 +03:00 [INF] Route matched with {action = "RegisterV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RegisterV1(carRental.API.Models.DTO.auth.RegisterDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:23:16.677 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[BirthDate], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 04:23:16.833 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 256), @p5='?' (DbType = Boolean), @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTimeOffset), @p8='?' (Size = 256), @p9='?' (Size = 256), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Boolean), @p13='?' (Size = 4000), @p14='?' (DbType = Boolean), @p15='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [BirthDate], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15);
+2024-11-08 04:23:16.857 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 04:23:16.901 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (Size = 450), @__p_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[UserId], [a].[RoleId]
+FROM [AspNetUserRoles] AS [a]
+WHERE [a].[UserId] = @__p_0 AND [a].[RoleId] = @__p_1
+2024-11-08 04:23:16.909 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[ConcurrencyStamp], [a].[Name], [a].[NormalizedName]
+FROM [AspNetRoles] AS [a]
+WHERE [a].[NormalizedName] = @__normalizedRoleName_0
+2024-11-08 04:23:16.923 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[BirthDate], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2024-11-08 04:23:16.959 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (Size = 450), @p17='?' (Size = 450), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p18='?' (Size = 4000), @p5='?' (Size = 256), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTimeOffset), @p9='?' (Size = 256), @p10='?' (Size = 256), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 4000), @p15='?' (DbType = Boolean), @p16='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUserRoles] ([RoleId], [UserId])
+VALUES (@p0, @p1);
+UPDATE [AspNetUsers] SET [AccessFailedCount] = @p2, [BirthDate] = @p3, [ConcurrencyStamp] = @p4, [Email] = @p5, [EmailConfirmed] = @p6, [LockoutEnabled] = @p7, [LockoutEnd] = @p8, [NormalizedEmail] = @p9, [NormalizedUserName] = @p10, [PasswordHash] = @p11, [PhoneNumber] = @p12, [PhoneNumberConfirmed] = @p13, [SecurityStamp] = @p14, [TwoFactorEnabled] = @p15, [UserName] = @p16
+OUTPUT 1
+WHERE [Id] = @p17 AND [ConcurrencyStamp] = @p18;
+2024-11-08 04:23:16.979 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2024-11-08 04:23:16.986 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.RegisterV1 (carRental.API) in 1598.8417ms
+2024-11-08 04:23:16.988 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.RegisterV1 (carRental.API)'
+2024-11-08 04:23:16.994 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/register - 200 null text/plain; charset=utf-8 1713.4216ms
+2024-11-08 04:23:56.960 +03:00 [INF] Request starting HTTP/2 POST https://localhost:7161/api/v1/Auth/login - application/json 82
+2024-11-08 04:23:56.968 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.AuthController.LoginV1 (carRental.API)'
+2024-11-08 04:23:56.973 +03:00 [INF] Route matched with {action = "LoginV1", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] LoginV1(carRental.API.Models.DTO.auth.LoginDTO) on controller carRental.API.Controllers.AuthController (carRental.API).
+2024-11-08 04:23:57.039 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[BirthDate], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2024-11-08 04:23:57.164 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@__userId_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [a0].[Name]
+FROM [AspNetUserRoles] AS [a]
+INNER JOIN [AspNetRoles] AS [a0] ON [a].[RoleId] = [a0].[Id]
+WHERE [a].[UserId] = @__userId_0
+2024-11-08 04:23:57.189 +03:00 [INF] Executing OkObjectResult, writing value of type 'carRental.API.Models.DTO.auth.LoginResponseDTO'.
+2024-11-08 04:23:57.193 +03:00 [INF] Executed action carRental.API.Controllers.AuthController.LoginV1 (carRental.API) in 216.3026ms
+2024-11-08 04:23:57.194 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.AuthController.LoginV1 (carRental.API)'
+2024-11-08 04:23:57.195 +03:00 [INF] Request finished HTTP/2 POST https://localhost:7161/api/v1/Auth/login - 200 null application/json; charset=utf-8 236.2013ms
+2024-11-08 04:24:25.216 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/api/v1/Blogs/get-all - null null
+2024-11-08 04:24:25.269 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.BlogsController.GetAllV1 (carRental.API)'
+2024-11-08 04:24:25.274 +03:00 [INF] Route matched with {action = "GetAllV1", controller = "Blogs"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllV1() on controller carRental.API.Controllers.BlogsController (carRental.API).
+2024-11-08 04:24:25.525 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [b].[Id], [b].[Answer], [b].[BlogCategory], [b].[ImageId], [b].[Question], [b].[Slug], [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSize]
+FROM [Blogs] AS [b]
+INNER JOIN [Images] AS [i] ON [b].[ImageId] = [i].[Id]
+2024-11-08 04:24:25.577 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[carRental.API.Models.DTO.blog.BlogDTO, carRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-08 04:24:25.599 +03:00 [INF] Executed action carRental.API.Controllers.BlogsController.GetAllV1 (carRental.API) in 323.1843ms
+2024-11-08 04:24:25.600 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.BlogsController.GetAllV1 (carRental.API)'
+2024-11-08 04:24:25.601 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/api/v1/Blogs/get-all - 200 null application/json; charset=utf-8 385.851ms
+2024-11-08 04:24:54.047 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7161/api/v1/Categories/get-all - null null
+2024-11-08 04:24:54.057 +03:00 [INF] Executing endpoint 'carRental.API.Controllers.CategoriesController.GetAllV1 (carRental.API)'
+2024-11-08 04:24:54.060 +03:00 [INF] Route matched with {action = "GetAllV1", controller = "Categories"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllV1() on controller carRental.API.Controllers.CategoriesController (carRental.API).
+2024-11-08 04:24:54.077 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[CateVisit], [c].[Description], [c].[ImageId], [c].[MetaDescription], [c].[MetaKeyword], [c].[MetaTitle], [c].[Name], [c].[Popular], [c].[Slug], [c].[Status], [i].[Id], [i].[FileDescription], [i].[FileExtension], [i].[FileName], [i].[FilePath], [i].[FileSize]
+FROM [Categories] AS [c]
+INNER JOIN [Images] AS [i] ON [c].[ImageId] = [i].[Id]
+WHERE [c].[Status] = CAST(1 AS bit)
+2024-11-08 04:24:54.101 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[carRental.API.Models.DTO.category.CategoryDTO, carRental.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-08 04:24:54.106 +03:00 [INF] Executed action carRental.API.Controllers.CategoriesController.GetAllV1 (carRental.API) in 43.5622ms
+2024-11-08 04:24:54.108 +03:00 [INF] Executed endpoint 'carRental.API.Controllers.CategoriesController.GetAllV1 (carRental.API)'
+2024-11-08 04:24:54.108 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7161/api/v1/Categories/get-all - 200 null application/json; charset=utf-8 61.73ms
