@@ -67,7 +67,7 @@ namespace WebApi.Services.AuthService
 
             var refreshToken = _tokenService.GenerateRefreshToken();
             user.RefreshToken = refreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(3);
+            user.RefreshTokenExpiryTime = DateTime.Now.AddHours(30);
             await _repository.UpdateUser(user);
 
             var accessToken = _tokenService.GenerateAccessToken(user);
@@ -102,6 +102,18 @@ namespace WebApi.Services.AuthService
 
         }
 
+        public async Task Logout(string refreshToken)
+        {
+            var user = await _repository.GetUserByRefreshToken(refreshToken);
+            if (user is null)
+            {
+                throw new InvalidOperationException("Kullanıcı bulunamadı");
+            }
+            user.RefreshToken = null;
+            user.RefreshTokenExpiryTime = DateTime.Now;
+            await _repository.UpdateUser(user);
+
+        }
 
     }
 }

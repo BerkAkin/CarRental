@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import AboutUs from './AboutUs';
@@ -38,10 +37,10 @@ function Tabs() {
     const [tabVisible, setTabVisible] = useState(true);
 
     return (
-        <NavigationContainer>
+        <>
             <tabs.Navigator
                 initialRouteName="Home"
-                screenOptions={({ route }) => ({
+                screenOptions={() => ({
                     tabBarShowLabel: false,
                     headerShown: false,
                     tabBarStyle: {
@@ -103,7 +102,7 @@ function Tabs() {
                     }}>{() => <Settings />}
                 </tabs.Screen>
             </tabs.Navigator>
-        </NavigationContainer>
+        </>
     );
 }
 

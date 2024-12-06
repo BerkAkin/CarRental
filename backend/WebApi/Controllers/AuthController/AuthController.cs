@@ -40,7 +40,7 @@ namespace WebApi.Controllers.AuthController
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.Strict,
-                Expires = DateTime.Now.AddDays(3),
+                Expires = DateTime.Now.AddHours(30),
             };
             Response.Cookies.Append("refreshToken", tokens.RefreshToken, cookieOptions);
 
@@ -54,6 +54,15 @@ namespace WebApi.Controllers.AuthController
             var refreshToken = Request.Cookies["refreshToken"];
             var newAccessToken = await _authService.RefreshAccessToken(refreshToken);
             return Ok(newAccessToken);
+        }
+
+        [HttpGet("/Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+            await _authService.Logout(refreshToken);
+            Response.Cookies.Delete("refreshToken");
+            return Ok("Çıkış Yapıldı");
         }
 
 

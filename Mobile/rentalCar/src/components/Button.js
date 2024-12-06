@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 15,
     marginVertical: 5,
-    backgroundColor: GlobalStyles.colours.gray700,
+    backgroundColor: GlobalStyles.colours.red600,
     elevation: 2,
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 1 },
