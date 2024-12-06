@@ -5,7 +5,7 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
     const url = `${BASE_URL}${endpoint}`;
 
     try {
-        const response = await axios({ method, url, data });
+        const response = await axios({ method, url, data, withCredentials: true });
         return response.data;
     } catch (e) {
         throw new Error(`${e}`);
