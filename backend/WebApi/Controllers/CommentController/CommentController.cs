@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.Comment;
 using WebApi.DTOs.LandingPage.MainText;
@@ -30,6 +31,7 @@ namespace WebApi.Controllers.CommentController
 
         }
 
+
         [HttpGet("/Comments/Latest")]
         public async Task<ActionResult<List<CommentViewModel>>> GetAllLatest()
         {
@@ -43,7 +45,7 @@ namespace WebApi.Controllers.CommentController
         }
 
 
-
+        [Authorize(Roles = "1")]
         [HttpGet("{id}")]
         public async Task<ActionResult<CommentViewIdModel>> GetById(int id)
         {
@@ -58,7 +60,7 @@ namespace WebApi.Controllers.CommentController
             }
         }
 
-
+        [Authorize(Roles = "2")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateText(int id, [FromBody] CommentUpdateModel model)
         {
@@ -73,6 +75,7 @@ namespace WebApi.Controllers.CommentController
             }
         }
 
+        [Authorize(Roles = "2")]
         [HttpPost]
         public async Task<ActionResult> AddAsync([FromBody] CommentAddModel model)
         {
@@ -87,7 +90,7 @@ namespace WebApi.Controllers.CommentController
             }
         }
 
-
+        [Authorize(Roles = "1|2")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
