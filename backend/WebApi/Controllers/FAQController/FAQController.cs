@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.FAQPage;
 using WebApi.Services.FAQService;
@@ -23,6 +24,7 @@ namespace WebApi.Controllers.FAQController
             return Ok(data);
         }
 
+        [Authorize(Roles = "1")]
         [HttpGet("{id}")]
         public async Task<ActionResult<FAQViewIdModel>> GetById(int id)
         {
@@ -30,7 +32,7 @@ namespace WebApi.Controllers.FAQController
             return Ok(data);
         }
 
-
+        [Authorize(Roles = "1")]
         [HttpPost]
         public async Task<ActionResult> AddAsync([FromBody] FAQAddModel model)
         {
@@ -44,7 +46,7 @@ namespace WebApi.Controllers.FAQController
                 return StatusCode(500, $"Sunucu hatası: {ex.Message}");
             }
         }
-
+        [Authorize(Roles = "1")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAsync(int id, [FromBody] FAQUpdateModel model)
         {
@@ -58,6 +60,7 @@ namespace WebApi.Controllers.FAQController
                 return StatusCode(500, $"Sunucu hatası: {ex.Message}");
             }
         }
+        [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
