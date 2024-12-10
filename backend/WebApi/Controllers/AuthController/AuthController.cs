@@ -40,7 +40,7 @@ namespace WebApi.Controllers.AuthController
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.Strict,
-                Expires = DateTime.Now.AddHours(30),
+                Expires = DateTime.Now.AddDays(7),
             };
             Response.Cookies.Append("refreshToken", tokens.RefreshToken, cookieOptions);
 
