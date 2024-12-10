@@ -2,42 +2,43 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DTOs.User;
 using WebApi.Entities;
-using WebApi.Helpers;
 using WebApi.Repositories.UserRepository;
-using WebApi.Repository;
 
 namespace WebApi.Services.UserService
 {
-    public class UserService : BaseService<User, object, UserUpdateModel, UserViewModel, UserViewIdModel, UserRepository>
+    public class UserService : BaseService<User, object, AdminUserUpdateModel, AdminUserViewModel, AdminUserViewIdModel, UserRepository>
     {
 
-        private readonly PasswordHasher _passwordHasher;
-        public UserService(UserRepository repository, IMapper mapper, PasswordHasher passwordHasher) : base(repository, mapper)
+        public UserService(UserRepository repository, IMapper mapper) : base(repository, mapper)
         {
-            _passwordHasher = passwordHasher;
+
         }
 
-        public override async Task<List<UserViewModel>> GetAllAsync()
+
+        //Admin Kullanıcıları Getirme
+        public override async Task<List<AdminUserViewModel>> GetAllAsync()
         {
             var data = await _repository.GetAllAsync(query => query.Include(u => u.Role));
             if (data is null)
             {
                 throw new InvalidOperationException("Veriler Bulunamadı");
             }
-            return _mapper.Map<List<UserViewModel>>(data);
+            return _mapper.Map<List<AdminUserViewModel>>(data);
         }
 
-        public override async Task<UserViewIdModel> GetByIdAsync(int id)
+        //Admin Kullanıcıyı Id ile Getirme
+        public override async Task<AdminUserViewIdModel> GetByIdAsync(int id)
         {
             var data = await _repository.GetByIdAsync(id, query => query.Include(u => u.Role));
             if (data is null)
             {
                 throw new InvalidOperationException("Veri Bulunamadı");
             }
-            return _mapper.Map<UserViewIdModel>(data);
+            return _mapper.Map<AdminUserViewIdModel>(data);
         }
 
-        public override async Task UpdateAsync(int id, UserUpdateModel model)
+        //Admin Kullanıcıyı Güncelleme
+        public override async Task UpdateAsync(int id, AdminUserUpdateModel model)
         {
             var user = await _repository.GetByIdAsync(id);
             if (user == null)
@@ -50,6 +51,7 @@ namespace WebApi.Services.UserService
 
         }
 
+        //Admin Kullanıcıyı Silme
         public override async Task DeleteAsync(int id)
         {
             var user = await _repository.GetByIdAsync(id);
@@ -61,6 +63,7 @@ namespace WebApi.Services.UserService
             await _repository.SaveAsync();
         }
 
+        //Admin Kullanıcıyı Aktifleştirme
         public async Task ActivateUserAsync(int id)
         {
             var user = await _repository.GetByIdAsync(id);
@@ -72,9 +75,28 @@ namespace WebApi.Services.UserService
             await _repository.SaveAsync();
         }
 
-        public override async Task AddAsync(object obj)
+        //Kullanıcı Kendi Bilgilerini Görme
+        public async Task<UserViewIdModel> GetOwnInfo(int id)
         {
-            throw new NotImplementedException("Yöntem Geçersiz");
+            var user = await _repository.GetByIdAsync(id);
+            if (user is null)
+            {
+                throw new KeyNotFoundException("Kullanıcı Bulunamadı");
+            }
+            return _mapper.Map<UserViewIdModel>(user);
         }
+
+        //Kullanıcı Kendi Bilgilerini Güncelleme
+        public async Task UpdateOwnInfo(int id, UserUpdateModel model)
+        {
+            var user = await _repository.GetByIdAsync(id);
+            if (user is null)
+            {
+                throw new KeyNotFoundException("Kullanıcı Bulunamadı");
+            }
+            _mapper.Map(model, user);
+            await _repository.UpdateAsync(user);
+        }
+
     }
 }
