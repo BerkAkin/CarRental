@@ -59,7 +59,7 @@ function BotNav({ openModal }: BotNavProps) {
               {isLoggedIn ? (
                 <>
                   <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`}>
-                    <ListElement color="#1A2B48" text='PROFİLİM' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
+                    <ListElement color="#1A2B48" text='PROFİLİM' href='Profile' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
                   </button></div>
                   <div className='col-2 align-items-center d-flex justify-content-center'> <button className={`${styles.btns}`} onClick={logout}> ÇIKIŞ YAP</button></div>
 
