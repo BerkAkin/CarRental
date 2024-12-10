@@ -1,0 +1,28 @@
+.headerColor {
+    color: #7A7A7A;
+}
+
+.mainContainer {
+    height: 650px;
+}
+
+.subContainer {
+    height: 530px;
+}
+
+.infos {
+    border: none;
+    outline: none;
+    color: #3f3f3f;
+    width: 90%;
+    height: 35px;
+}
+
+.infos:focus {
+    border-bottom: 1px solid #7A7A7A;
+    outline: none;
+}
+
+.infos:hover {
+    cursor: pointer;
+}
