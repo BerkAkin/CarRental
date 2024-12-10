@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.LandingPage.HomePage;
-using WebApi.Services.LandingServices;
+using WebApi.Services.GeneralServices.LandingServices;
+
 
 namespace WebApi.Controllers.CompositControllers
 {
