@@ -49,7 +49,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
-// Middleware Ayarları
 
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
