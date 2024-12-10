@@ -34,15 +34,15 @@ namespace WebApi.Mappings
             CreateMap<FAQUpdateModel, FAQText>();
             CreateMap<FAQAddModel, FAQText>();
 
-            CreateMap<User, UserViewModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name));
-            CreateMap<User, UserViewIdModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name)); ;
-            CreateMap<UserUpdateModel, User>();
+            CreateMap<User, AdminUserViewModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name));
+            CreateMap<User, AdminUserViewIdModel>().ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role.Name)); ;
+            CreateMap<AdminUserUpdateModel, User>();
 
 
             CreateMap<UserComment, CommentViewModel>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
             .ForMember(dest => dest.UserType, opt => opt.MapFrom(src => src.User.Role.Name));
-            CreateMap<UserComment, CommentViewIdModel>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
+            CreateMap<UserComment, CommentViewIdModel>();
             CreateMap<CommentAddModel, UserComment>();
             CreateMap<CommentUpdateModel, UserComment>();
 
@@ -50,6 +50,9 @@ namespace WebApi.Mappings
             CreateMap<RegisterModel, User>().ForMember(dest => dest.PasswordHashed, opt => opt.MapFrom(src => src.Password))
             .ForMember(dest => dest.RefreshToken, opt => opt.Ignore())
             .ForMember(dest => dest.RefreshTokenExpiryTime, opt => opt.Ignore());
+
+            CreateMap<User, UserViewIdModel>();
+            CreateMap<UserUpdateModel, User>();
 
         }
     }
