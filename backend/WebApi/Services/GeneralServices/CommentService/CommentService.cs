@@ -2,10 +2,10 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApi.DTOs.Comment;
 using WebApi.Entities;
-using WebApi.Repositories.CommentRepository;
+using WebApi.Repositories.GeneralRepositories.CommentRepository;
 using WebApi.Repository;
 
-namespace WebApi.Services.CommentService
+namespace WebApi.Services.GeneralServices.CommentService
 {
     public class CommentService : BaseService<UserComment, CommentAddModel, CommentUpdateModel, CommentViewModel, CommentViewIdModel, CommentRepository>
 
@@ -46,6 +46,27 @@ namespace WebApi.Services.CommentService
             return _mapper.Map<CommentViewIdModel>(data);
         }
 
+        public async Task UpdateOwnComment(int userId, CommentUpdateModel model)
+        {
+            var comment = await _repository.FindCommentByUserId(userId);
+            if (comment == null)
+            {
+                throw new ArgumentNullException($"Güncellencek Veri Bulunamadı");
+            }
+            _mapper.Map(model, comment);
+            await _repository.UpdateAsync(comment);
+        }
+
+        public async Task<CommentViewIdModel> GetOwnComment(int userId)
+        {
+            var comment = await _repository.FindCommentByUserId(userId);
+            if (comment is null)
+            {
+                throw new KeyNotFoundException("Yorum Bulunamadı");
+
+            }
+            return _mapper.Map<CommentViewIdModel>(comment);
+        }
     }
 
 }

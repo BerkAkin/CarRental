@@ -1,13 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.Comment;
-using WebApi.DTOs.LandingPage.MainText;
-using WebApi.Services.CommentService;
+using WebApi.Services.GeneralServices.CommentService;
 
-namespace WebApi.Controllers.CommentController
+namespace WebApi.Controllers.GeneralControllers.CommentController
 {
     [ApiController]
     [Route("[controller]s")]
-    public class CommentController : ControllerBase
+    public class CommentController : BaseController
     {
 
         private readonly CommentService _service;
@@ -18,6 +18,7 @@ namespace WebApi.Controllers.CommentController
 
 
 
+        [Authorize(Roles = "1")]
         [HttpGet]
         public async Task<ActionResult<List<CommentViewModel>>> GetAll()
         {
@@ -29,6 +30,7 @@ namespace WebApi.Controllers.CommentController
             return NotFound("Bulunamadı");
 
         }
+
 
         [HttpGet("/Comments/Latest")]
         public async Task<ActionResult<List<CommentViewModel>>> GetAllLatest()
@@ -43,7 +45,7 @@ namespace WebApi.Controllers.CommentController
         }
 
 
-
+        [Authorize(Roles = "1")]
         [HttpGet("{id}")]
         public async Task<ActionResult<CommentViewIdModel>> GetById(int id)
         {
@@ -59,20 +61,7 @@ namespace WebApi.Controllers.CommentController
         }
 
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateText(int id, [FromBody] CommentUpdateModel model)
-        {
-            try
-            {
-                await _service.UpdateAsync(id, model);
-                return Ok("Güncelleme Başarılı");
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
-
+        [Authorize(Roles = "2")]
         [HttpPost]
         public async Task<ActionResult> AddAsync([FromBody] CommentAddModel model)
         {
@@ -87,12 +76,35 @@ namespace WebApi.Controllers.CommentController
             }
         }
 
-
+        [Authorize(Roles = "1|2")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
             await _service.DeleteAsync(id);
             return Ok("Silme İşlemi Başarılı");
+        }
+
+        [Authorize(Roles = "2")]
+        [HttpGet("OwnComment")]
+        public async Task<ActionResult<CommentViewIdModel>> GetOwnComment()
+        {
+            var comment = await _service.GetOwnComment(Convert.ToInt32(UserId));
+            return Ok(comment);
+        }
+
+        [Authorize(Roles = "2")]
+        [HttpPut("OwnComment")]
+        public async Task<ActionResult> UpdateOwnComment([FromBody] CommentUpdateModel model)
+        {
+            try
+            {
+                await _service.UpdateOwnComment(Convert.ToInt32(UserId), model);
+                return Ok("Güncelleme Başarılı");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
     }

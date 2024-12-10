@@ -16,6 +16,7 @@ import BlogDetailContainer from "../Containers/BlogDetailContainer/BlogDetailCon
 import UserLogin from "../Containers/UserContainer/Login/UserLogin";
 import Modal from "../Modal/Modal";
 import UserRegister from "../Containers/UserContainer/Register/UserRegister";
+import UserProfile from "../Containers/UserProfileContainer/UserProfile";
 
 function MainContainer() {
 
@@ -51,6 +52,7 @@ function MainContainer() {
           <Route path="/Blog" element={<BlogContainer />}></Route>
           <Route path="/Blog/:id" element={<BlogDetailContainer />}></Route>
           <Route path="/PPInfo" element={<PPInfo />}></Route>
+          <Route path="/Profile" element={<UserProfile />}></Route>
         </Routes>
 
 

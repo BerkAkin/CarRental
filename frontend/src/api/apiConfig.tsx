@@ -8,7 +8,11 @@ export const endpoints = {
     faq: "/FAQs",
     comments: "/Comments",
     commentsLatest: "/Comments/Latest",
+    ownComment: "/Comments/OwnComment",
     register: "/Register",
     login: "/Login",
-    logout: "/Logout"
+    logout: "/Logout",
+    users: "/Users",
+    ownInfo: "/Users/OwnInfo",
+
 }

@@ -1,43 +1,77 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.DTOs.FAQPage;
 using WebApi.DTOs.User;
 using WebApi.Services.UserService;
 
-namespace WebApi.Controllers.UserController
+namespace WebApi.Controllers.UserController.UserController
 {
     [ApiController]
     [Route("[controller]s")]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
-
-        private readonly UserService _service;
-        public UserController(UserService service)
+        private readonly UserService _userService;
+        public UserController(UserService userService)
         {
-            _service = service;
+            _userService = userService;
         }
 
-
-        [HttpGet]
-        public async Task<ActionResult<List<UserViewModel>>> GetAll()
+        [Authorize(Roles = "2")]
+        [HttpGet("OwnInfo")]
+        public async Task<ActionResult<UserViewIdModel>> GetOwnInfo()
         {
-            var data = await _service.GetAllAsync();
-            return Ok(data);
+
+            try
+            {
+                var data = await _userService.GetOwnInfo(Convert.ToInt32(UserId));
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+
+                return NotFound(new { message = ex.Message });
+            }
+
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserViewIdModel>> GetById(int id)
-        {
-            var data = await _service.GetByIdAsync(id);
-            return Ok(data);
-        }
-
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateAsync(int id, [FromBody] UserUpdateModel model)
+        [Authorize(Roles = "2")]
+        [HttpPut("OwnInfo")]
+        public async Task<ActionResult> UpdateOwnInfo([FromBody] UserUpdateModel model)
         {
             try
             {
-                await _service.UpdateAsync(id, model);
+                await _userService.UpdateOwnInfo(Convert.ToInt32(UserId), model);
+                return Ok("Güncelleme Başarılı");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+
+        }
+
+        [Authorize(Roles = "1")]
+        [HttpGet]
+        public async Task<ActionResult<List<AdminUserViewModel>>> GetAllUsers()
+        {
+            var data = await _userService.GetAllAsync();
+            return Ok(data);
+        }
+
+        [Authorize(Roles = "1")]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AdminUserViewIdModel>> GetUserById(int id)
+        {
+            var data = await _userService.GetByIdAsync(id);
+            return Ok(data);
+        }
+
+        [Authorize(Roles = "1")]
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateUserAsync(int id, [FromBody] AdminUserUpdateModel model)
+        {
+            try
+            {
+                await _userService.UpdateAsync(id, model);
                 return Ok("Güncelleme İşlemi başarılı.");
             }
             catch (Exception ex)
@@ -46,19 +80,22 @@ namespace WebApi.Controllers.UserController
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync(int id)
+        public async Task<ActionResult> DeleteUserAsync(int id)
         {
-            await _service.DeleteAsync(id);
+            await _userService.DeleteAsync(id);
             return Ok("Silme İşlemi Başarılı");
         }
 
+        [Authorize(Roles = "1")]
         [HttpPut("{id}/is-active")]
         public async Task<ActionResult> ActivateUser(int id)
         {
-            await _service.ActivateUserAsync(id);
+            await _userService.ActivateUserAsync(id);
             return Ok("Kullanıcı Aktifleştirildi");
         }
+
 
     }
 }

@@ -1,7 +1,7 @@
 using WebApi.DbOperations;
 using WebApi.Entities;
 
-namespace WebApi.Repositories.LandingRepositories
+namespace WebApi.Repositories.GeneralRepositories.LandingRepositories
 {
     public class ServiceTextRepository : BaseRepository<LandingServiceText>
     {

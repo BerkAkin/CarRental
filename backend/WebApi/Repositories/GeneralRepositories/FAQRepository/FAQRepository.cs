@@ -1,7 +1,7 @@
 using WebApi.DbOperations;
 using WebApi.Entities;
 
-namespace WebApi.Repositories.FAQRepository
+namespace WebApi.Repositories.GeneralRepositories.FAQRepository
 {
     public class FAQRepository : BaseRepository<FAQText>
     {

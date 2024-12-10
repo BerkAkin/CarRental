@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApi.DbOperations;
 using WebApi.Entities;
 
-namespace WebApi.Repositories.CommentRepository
+namespace WebApi.Repositories.GeneralRepositories.CommentRepository
 {
     public class CommentRepository : BaseRepository<UserComment>
     {
@@ -20,6 +20,11 @@ namespace WebApi.Repositories.CommentRepository
             return await query.ToListAsync();
         }
 
+        public async Task<UserComment> FindCommentByUserId(int userId)
+        {
+            var comment = _context.UserComments.FirstOrDefault(uc => uc.UserId == userId);
+            return comment;
+        }
 
     }
 }

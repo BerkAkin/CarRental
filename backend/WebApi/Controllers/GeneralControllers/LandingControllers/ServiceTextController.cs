@@ -1,40 +1,40 @@
-using FluentValidation;
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.DTOs.LandingPage.ReasonTexts;
-using WebApi.Services.LandingServices;
+using WebApi.DTOs.LandingPage.ServiceTexts;
+using WebApi.Services.GeneralServices.LandingServices;
 
-namespace WebApi.Controllers.LandingControllers
+
+namespace WebApi.Controllers.GeneralControllers.LandingControllers
 {
     [ApiController]
     [Route("[controller]s")]
-    public class ReasonTextController : ControllerBase
+    public class ServiceTextController : ControllerBase
     {
-        private readonly ReasonTextService _service;
-        public ReasonTextController(ReasonTextService service)
+        private readonly ServicesTextService _service;
+        public ServiceTextController(ServicesTextService service)
         {
             _service = service;
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<List<LandingReasonViewModel>>> GetAll()
+        public async Task<ActionResult<List<LandingServiceViewModel>>> GetAll()
         {
             var data = await _service.GetAllAsync();
             return Ok(data);
         }
 
+        [Authorize(Roles = "1")]
         [HttpGet("{id}")]
-        public async Task<ActionResult<LandingReasonViewIdModel>> GetById(int id)
+        public async Task<ActionResult<LandingServiceViewIdModel>> GetById(int id)
         {
             var data = await _service.GetByIdAsync(id);
             return Ok(data);
         }
 
-
+        [Authorize(Roles = "1")]
         [HttpPost]
-        public async Task<ActionResult> AddAsync([FromBody] LandingReasonAddModel model)
+        public async Task<ActionResult> AddAsync([FromBody] LandingServiceAddModel model)
         {
             try
             {
@@ -47,8 +47,9 @@ namespace WebApi.Controllers.LandingControllers
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateAsync(int id, [FromBody] LandingReasonUpdateModel model)
+        public async Task<ActionResult> UpdateAsync(int id, [FromBody] LandingServiceUpdateModel model)
         {
             try
             {
@@ -60,6 +61,8 @@ namespace WebApi.Controllers.LandingControllers
                 return StatusCode(500, $"Sunucu hatası: {ex.Message}");
             }
         }
+
+        [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {

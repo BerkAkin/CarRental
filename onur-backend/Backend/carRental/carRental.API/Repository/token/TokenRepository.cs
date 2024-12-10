@@ -43,11 +43,11 @@ namespace carRental.API.Repository.token
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-           /*
-        public async Task<User?> GetUserInfoByIdAsync(Guid Id)
-        {
-            return await dbContext.Users.FirstOrDefaultAsync(x => x.Id == Id);
-        }      
-           */
+        /*
+     public async Task<User?> GetUserInfoByIdAsync(Guid Id)
+     {
+         return await dbContext.Users.FirstOrDefaultAsync(x => x.Id == Id);
+     }      
+        */
     }
 }

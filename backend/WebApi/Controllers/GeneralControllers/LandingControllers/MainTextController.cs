@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.LandingPage.MainText;
-using WebApi.Services.LandingServices;
+using WebApi.Services.GeneralServices.LandingServices;
 
-namespace WebApi.Controllers.LandingControllers
+
+namespace WebApi.Controllers.GeneralControllers.LandingControllers
 {
     [ApiController]
     [Route("[controller]s")]
@@ -30,7 +32,7 @@ namespace WebApi.Controllers.LandingControllers
         }
 
 
-
+        [Authorize(Roles = "1")]
         [HttpGet("{id}")]
         public async Task<ActionResult<LandingMainViewIdModel>> GetById(int id)
         {
@@ -45,7 +47,7 @@ namespace WebApi.Controllers.LandingControllers
             }
         }
 
-
+        [Authorize(Roles = "1")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateText(int id, [FromBody] LandingMainUpdateModel model)
         {
