@@ -39,7 +39,6 @@ export const SliderDataProvider = ({ children }: { children: ReactNode }) => {
         const fetchData = async () => {
             const data = await apiService(endpoints.commentsLatest, "GET");
             setTextData(data);
-            console.log(data);
         }
         fetchData();
     }, []);
