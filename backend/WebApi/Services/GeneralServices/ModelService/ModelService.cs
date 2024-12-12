@@ -14,15 +14,38 @@ namespace WebApi.Services.GeneralServices.ModelService
 
         }
 
-
-        public override async Task<List<ModelViewModel>> GetAllAsync()
+        public async Task<(IEnumerable<ModelViewModel> Models, int TotalRecords)> GetAllPaginatedAsync(int pageNumber, int pageSize)
         {
-            var data = await _repository.GetAllAsync(query => query.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
+            var (data, totalRecords) = await _repository.GetAllPaginatedAsync(pageNumber, pageSize, query => query.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
             if (data is null)
             {
-                throw new InvalidOperationException("Veriler Bulunamadı");
+                throw new KeyNotFoundException("Veriler Bulunamadı");
             }
-            return _mapper.Map<List<ModelViewModel>>(data);
+            var DTOData = _mapper.Map<List<ModelViewModel>>(data);
+            return (DTOData, totalRecords);
         }
+
+        public override async Task<ModelViewIdModel> GetByIdAsync(int id)
+        {
+            var data = await _repository.GetByIdAsync(id, query => query.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
+            if (data is null)
+            {
+                throw new KeyNotFoundException("Veri Bulunamadı");
+            }
+            return _mapper.Map<ModelViewIdModel>(data);
+        }
+
+        public async Task<(IEnumerable<ModelSummaryViewModel> Models, int TotalRecords)> GetPaginatedSummaryModels(int pageNumber, int pageSize)
+        {
+            var (data, totalRecords) = await _repository.GetAllSummaryPaginatedAsync(pageNumber, pageSize, query => query.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
+            if (data is null)
+            {
+                throw new KeyNotFoundException("Veriler Bulunamadı");
+            }
+            var DTOData = _mapper.Map<List<ModelSummaryViewModel>>(data);
+            return (DTOData, totalRecords);
+        }
+
+
     }
 }
