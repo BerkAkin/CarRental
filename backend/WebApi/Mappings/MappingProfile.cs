@@ -5,6 +5,7 @@ using WebApi.DTOs.FAQPage;
 using WebApi.DTOs.LandingPage.MainText;
 using WebApi.DTOs.LandingPage.ReasonTexts;
 using WebApi.DTOs.LandingPage.ServiceTexts;
+using WebApi.DTOs.Models;
 using WebApi.DTOs.Token;
 using WebApi.DTOs.User;
 using WebApi.Entities;
@@ -53,6 +54,21 @@ namespace WebApi.Mappings
 
             CreateMap<User, UserViewIdModel>();
             CreateMap<UserUpdateModel, User>();
+
+
+            CreateMap<Model, ModelViewModel>().ForMember(dest => dest.CarType, opt => opt.MapFrom(src => src.CarType))
+            .ForMember(dest => dest.FuelType, opt => opt.MapFrom(src => src.FuelType))
+            .ForMember(dest => dest.GearType, opt => opt.MapFrom(src => src.GearType));
+
+            CreateMap<Model, ModelViewIdModel>().ForMember(dest => dest.CarType, opt => opt.MapFrom(src => src.CarType))
+            .ForMember(dest => dest.FuelType, opt => opt.MapFrom(src => src.FuelType))
+            .ForMember(dest => dest.GearType, opt => opt.MapFrom(src => src.GearType));
+
+            CreateMap<Model, ModelSummaryViewModel>().ForMember(dest => dest.CarType, opt => opt.MapFrom(src => src.CarType))
+            .ForMember(dest => dest.GearType, opt => opt.MapFrom(src => src.GearType));
+
+            CreateMap<ModelAddModel, Model>();
+            CreateMap<ModelUpdateModel, Model>();
 
         }
     }
