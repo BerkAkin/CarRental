@@ -22,6 +22,23 @@ namespace WebApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("WebApi.Entities.CarType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Car")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarTypes");
+                });
+
             modelBuilder.Entity("WebApi.Entities.FAQText", b =>
                 {
                     b.Property<int>("Id")
@@ -53,6 +70,40 @@ namespace WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FAQTexts");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.FuelType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Fuel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FuelTypes");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.GearType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Gear")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GearTypes");
                 });
 
             modelBuilder.Entity("WebApi.Entities.LandingMainText", b =>
@@ -152,6 +203,84 @@ namespace WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LandingServiceTexts");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.Model", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("CarTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("DoorCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FuelTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GearTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageDirectory")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("LuggageCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModelName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("OtherFeatures")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtherServices")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PersonCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarTypeId");
+
+                    b.HasIndex("FuelTypeId");
+
+                    b.HasIndex("GearTypeId");
+
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("WebApi.Entities.Role", b =>
@@ -291,6 +420,33 @@ namespace WebApi.Migrations
                         .IsUnique();
 
                     b.ToTable("UserComments");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.Model", b =>
+                {
+                    b.HasOne("WebApi.Entities.CarType", "CarType")
+                        .WithMany()
+                        .HasForeignKey("CarTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebApi.Entities.FuelType", "FuelType")
+                        .WithMany()
+                        .HasForeignKey("FuelTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("WebApi.Entities.GearType", "GearType")
+                        .WithMany()
+                        .HasForeignKey("GearTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CarType");
+
+                    b.Navigation("FuelType");
+
+                    b.Navigation("GearType");
                 });
 
             modelBuilder.Entity("WebApi.Entities.User", b =>

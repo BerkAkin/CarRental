@@ -19,7 +19,6 @@ interface ModelCardProps {
 
 }
 
-/* componentte onclick olan yerlerde detay sayfasına gidilecek id bilgisi yollanacak ve orda da id üzerinde tekrar sorgu atılacak ve detaylar getirilecek */
 
 function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount, doorCount, price }: ModelCardProps) {
     return (

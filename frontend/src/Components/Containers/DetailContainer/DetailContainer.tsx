@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Image from '../../Image/Image';
-import dummy from '../../../assets/dummyImg/dummyCarImage.jpg'
 import { ReactComponent as GreenCheck } from '../../../assets/icons/greenCheck.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faTag } from '@fortawesome/free-solid-svg-icons'
@@ -10,23 +9,68 @@ import Icons from '../../../assets/icons/icons';
 import sliderModels from '../../../common/sliderModels';
 import SimpleSlider from '../../SimpleSlider/SimpleSlider';
 import SliderModelCard from '../../SliderModelCard/SliderModelCard';
+import apiService from '../../../api/apiService';
+import { endpoints } from '../../../api/apiConfig';
+import ListElement from '../../ListElement/ListElement';
+
+interface ModelDetailsProps {
+    id: number,
+    carType: {
+        id: number,
+        car: string
+    },
+    fuelType: {
+        id: number,
+        fuel: string
+    },
+    gearType: {
+        id: number,
+        gear: string
+    },
+    brandName: string,
+    modelName: string,
+    description: string,
+    personCount: number,
+    luggageCount: number,
+    doorCount: number,
+    price: number,
+    otherServices: [
+    ],
+    otherFeatures: [
+    ],
+    imageDirectory: string
+}
+
 
 function DetailContainer() {
 
     const { id } = useParams();
 
-    //apiya burada detay bilgisi isteği yapılacak
-    //sayfada dinamik olacak kısmılar = isim, fotoğraf, hizmetler olacak ve foreach ile dönülecek, araç özellikleri, marka, statik bilgi de ayarlanabilir olmalı
-    //
+    const [modelDetail, setModelDetail] = useState<ModelDetailsProps>();
+
+    useEffect(() => {
+        const getDetail = async () => {
+            try {
+                const response = await apiService(endpoints.models + id, "GET");
+                setModelDetail(response);
+            } catch (error) {
+                console.log("Model detayları alınırken hata:", error);
+            }
+        }
+        getDetail();
+    }, [])
+
+
 
     return (
         <>
-            <div className='container my-5 py-5'>
+            <div className='container my-5 py-5 '>
                 <div className='row'>
                     <div className='col-12'>
-                        <h2>Dizel – Manuel Ford Tourneo Courier</h2> {/* Dinamik */}
-                        <p style={{ color: "#7A7A7A" }} className='mt-3 '> Aylık <span className='fw-bold'>32.900 TL + kdv </span> ‘den başlayan fiyatlar ile sizlerle!
-                            Üstelik aylık sadece 699 TL +kdv ile Aile Paketine üye olabilir ve aile bireylerinizi ek kullanıcı olarak ekleyebilirsiniz!</p>
+                        <h2>{modelDetail?.fuelType.fuel} – {modelDetail?.gearType.gear} {modelDetail?.brandName} {modelDetail?.modelName}</h2>
+                        <p style={{ color: "#7A7A7A" }} className='mt-3 '>{modelDetail?.description} Aylık <span className='fw-bold'>  {modelDetail?.price} + kdv </span> ‘den başlayan fiyatlar ile sizlerle!
+                            Üstelik aylık sadece 699 TL +kdv ile Aile Paketine üye olabilir ve aile bireylerinizi ek kullanıcı olarak ekleyebilirsiniz!
+                        </p>
                     </div>
 
                 </div>
@@ -34,14 +78,14 @@ function DetailContainer() {
 
                 <div className='row mt-4'>
                     <div className='col-6 d-flex align-items-center'>
-                        <Image URL={dummy} Width='600' />{/* Dinamik */}
+                        <Image URL={`${modelDetail?.imageDirectory}`} Width='600' />
                     </div>
 
                     <div className='col-6 '>
-                        <div className='row h-25'>
+                        <div className='row h-50'>
                             <div className='col-6'>
                                 <div className='row'>
-                                    <h3>Marka</h3>
+                                    <h3>Araç Bilgisi</h3>
                                 </div>
                                 <div className='row'>
                                     <div className='container mt-1'>
@@ -50,9 +94,34 @@ function DetailContainer() {
                                                 <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
                                             </div>
                                             <div className='col-11 ps-2 '>
-                                                <p className={styles.feats}>Ford</p> {/* Dinamik */}
+                                                <p className={styles.feats}>{modelDetail?.brandName} - {modelDetail?.modelName} </p>
                                             </div>
                                         </div>
+                                        <div className='row'>
+                                            <div className='col-1'>
+                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
+                                            </div>
+                                            <div className='col-11 ps-2 '>
+                                                <p className={styles.feats}>{modelDetail?.carType.car}</p>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-1'>
+                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
+                                            </div>
+                                            <div className='col-11 ps-2 '>
+                                                <p className={styles.feats}>{modelDetail?.gearType.gear}</p>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-1'>
+                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
+                                            </div>
+                                            <div className='col-11 ps-2 '>
+                                                <p className={styles.feats}>{modelDetail?.fuelType.fuel}</p>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -75,13 +144,13 @@ function DetailContainer() {
                                         </div>
                                         <div className='row'>
                                             <div className='col-2 d-flex justify-content-center '>
-                                                {/* Dinamik */} <p>4</p>
+                                                <p>{modelDetail?.personCount}</p>
                                             </div>
                                             <div className='col-2 d-flex justify-content-center'>
-                                                {/* Dinamik */}<p>4</p>
+                                                <p>{modelDetail?.luggageCount}</p>
                                             </div>
                                             <div className='col-2 d-flex justify-content-center'>
-                                                {/* Dinamik */} <p>4</p>
+                                                <p>{modelDetail?.doorCount}</p>
                                             </div>
 
                                         </div>
@@ -91,57 +160,23 @@ function DetailContainer() {
                                 </div>
                             </div>
                         </div>
-                        <div className='row h-75 pt-3'>
+                        <div className='row h-50 pt-3 mt-4'>
                             <div className='col-6 '>
                                 <div className='row'>
                                     <h3>Araç Özellikleri</h3>
                                 </div>
                                 <div className='row'>
                                     <div className='container mt-1'>
-                                        {/* foreach ile dönülecek ksıım burası */}
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
+                                        {modelDetail?.otherFeatures.map((item, key) => (
+                                            <div className='row' key={key}>
+                                                <div className='col-1'>
+                                                    <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
+                                                </div>
+                                                <div className='col-11 ps-2'>
+                                                    <p className={`${styles.feats}`}>{item}</p>
+                                                </div>
                                             </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={`${styles.feats}`}>1499 cm³ Motor Hacmi</p>
-                                            </div>
-                                        </div>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={`${styles.feats}`}>1499 cm³ Motor Hacmi</p>
-                                            </div>
-                                        </div>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={`${styles.feats}`}>1499 cm³ Motor Hacmi</p>
-                                            </div>
-                                        </div>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={`${styles.feats}`}>1499 cm³ Motor Hacmi</p>
-                                            </div>
-                                        </div>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={`${styles.feats}`}>1499 cm³ Motor Hacmi</p>
-                                            </div>
-                                        </div>
-
-                                        <p>
-                                        </p>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -152,43 +187,26 @@ function DetailContainer() {
                                 <div className='row'>
                                     <div className='container mt-1'>
                                         <div className='row'>
-                                            {/* foreach ile dönülecek */}
-                                            <div className='col-1'>
-                                                <GreenCheck width="15" height="15" />
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={styles.feats}>Otopark Hizmeti</p>
-                                            </div>
-                                            <div className='col-1'>
-                                                <GreenCheck width="15" height="15" />
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={styles.feats}>Otopark Hizmeti</p>
-                                            </div>
-                                            <div className='col-1'>
-                                                <GreenCheck width="15" height="15" />
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={styles.feats}>Otopark Hizmeti</p>
-                                            </div>
-                                            <div className='col-1'>
-                                                <GreenCheck width="15" height="15" />
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={styles.feats}>Otopark Hizmeti</p>
-                                            </div>
-                                            <div className='col-1'>
-                                                <GreenCheck width="15" height="15" />
-                                            </div>
-                                            <div className='col-11 ps-2'>
-                                                <p className={styles.feats}>Otopark Hizmeti</p>
-                                            </div>
-
+                                            {modelDetail?.otherServices.map((item, key) => (
+                                                <div className='row' key={key}>
+                                                    <div className='col-1'>
+                                                        <GreenCheck width="15" height="15" />
+                                                    </div>
+                                                    <div className='col-11 ps-2'>
+                                                        <p className={styles.feats}>{item}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className='mt-4 d-flex justify-content-end'>
+                    <div className={` rounded p-2 ${styles.BtnBg} text-center`}>
+                        <ListElement href="Contact" text={"Bize Ulaşın"} color='White' hoverColor='White' boldness='500' isHover={true} />
                     </div>
                 </div>
             </div >

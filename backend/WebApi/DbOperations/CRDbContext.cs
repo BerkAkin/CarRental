@@ -88,9 +88,41 @@ namespace WebApi.DbOperations
 
             });
 
+            modelBuilder.Entity<FuelType>(fueltype =>
+            {
+                fueltype.Property(ft => ft.Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<GearType>(geartype =>
+            {
+                geartype.Property(gt => gt.Id).ValueGeneratedOnAdd();
+            });
+
+            modelBuilder.Entity<Model>(model =>
+            {
+                model.Property(m => m.Id).ValueGeneratedOnAdd();
+                model.Property(m => m.FuelTypeId).IsRequired();
+                model.Property(m => m.GearTypeId).IsRequired();
+                model.Property(m => m.CarTypeId).IsRequired();
+                model.Property(m => m.BrandName).IsRequired().HasMaxLength(100);
+                model.Property(m => m.ModelName).IsRequired().HasMaxLength(100);
+                model.Property(m => m.Description).IsRequired().HasMaxLength(500);
+                model.Property(m => m.PersonCount).IsRequired();
+                model.Property(m => m.LuggageCount).IsRequired();
+                model.Property(m => m.DoorCount).IsRequired();
+                model.Property(m => m.OtherServices).IsRequired().HasConversion(v => string.Join(",", v), v => v.Split(",", StringSplitOptions.RemoveEmptyEntries));
+                model.Property(m => m.OtherFeatures).IsRequired().HasConversion(v => string.Join(",", v), v => v.Split(",", StringSplitOptions.RemoveEmptyEntries));
+                model.Property(m => m.ImageDirectory).IsRequired().HasMaxLength(500);
+                model.Property(uc => uc.CreatedAt).HasDefaultValueSql("GETDATE()");
+                model.Property(uc => uc.UpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();
+
+                model.HasOne(m => m.FuelType).WithMany().HasForeignKey(m => m.FuelTypeId).OnDelete(DeleteBehavior.Restrict);
+                model.HasOne(m => m.GearType).WithMany().HasForeignKey(m => m.GearTypeId).OnDelete(DeleteBehavior.Restrict);
+                model.HasOne(m => m.CarType).WithMany().HasForeignKey(m => m.CarTypeId).OnDelete(DeleteBehavior.Restrict);
+
+            });
+
             modelBuilder.Entity<User>().HasOne(u => u.Role).WithMany();
-
-
         }
 
 
@@ -101,5 +133,9 @@ namespace WebApi.DbOperations
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserComment> UserComments { get; set; }
+        public DbSet<FuelType> FuelTypes { get; set; }
+        public DbSet<GearType> GearTypes { get; set; }
+        public DbSet<CarType> CarTypes { get; set; }
+        public DbSet<Model> Models { get; set; }
     }
 }

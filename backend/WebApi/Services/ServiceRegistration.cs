@@ -5,12 +5,14 @@ using WebApi.Repositories.AuthRepository;
 using WebApi.Repositories.GeneralRepositories.CommentRepository;
 using WebApi.Repositories.GeneralRepositories.FAQRepository;
 using WebApi.Repositories.GeneralRepositories.LandingRepositories;
+using WebApi.Repositories.GeneralRepositories.ModelRepository;
 using WebApi.Repositories.TokenRepository;
 using WebApi.Repositories.UserRepository;
 using WebApi.Services.AuthService;
 using WebApi.Services.GeneralServices.CommentService;
 using WebApi.Services.GeneralServices.FAQService;
 using WebApi.Services.GeneralServices.LandingServices;
+using WebApi.Services.GeneralServices.ModelService;
 using WebApi.Services.TokenService;
 using WebApi.Services.UserService;
 using WebApi.Validators.LandingPage.ReasonText;
@@ -34,6 +36,7 @@ public static class ServiceRegistration
         services.AddScoped<CommentRepository>();
         services.AddScoped<AuthRepository>();
         services.AddScoped<TokenRepository>();
+        services.AddScoped<ModelRepository>();
 
 
         //SERVICES
@@ -46,6 +49,7 @@ public static class ServiceRegistration
         services.AddScoped<CommentService>();
         services.AddScoped<AuthService>();
         services.AddScoped<JwtTokenService>();
+        services.AddScoped<ModelService>();
 
         //SEEDER
         services.AddTransient<DbSeeder>();

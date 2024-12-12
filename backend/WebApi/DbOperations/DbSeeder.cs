@@ -78,6 +78,39 @@ namespace WebApi.DbOperations
                     new UserComment{Content="Araç abonelik rahatlığını ben de yaşamak istedim.", UserId=6, StarCount=6}
                 };
 
+                var Fuels = new List<FuelType>{
+                    new FuelType{Fuel="Benzin"},
+                    new FuelType{Fuel="Dizel"},
+                    new FuelType{Fuel="Elektrikli"},
+                    new FuelType{Fuel="Hibrit"},
+                };
+
+                var Gears = new List<GearType>{
+                    new GearType{Gear="Otomatik"},
+                    new GearType{Gear="Manuel"},
+                    new GearType{Gear="Yarı Otomatik"},
+                };
+
+                var Cars = new List<CarType>{
+                    new CarType{Car="Sedan"},
+                    new CarType{Car="SUV"},
+                    new CarType{Car="Hatchback"},
+                    new CarType{Car="Coupe"},
+                    new CarType{Car="Station"},
+                    new CarType{Car="Cabriolet"},
+                    new CarType{Car="Pick-up"},
+                    new CarType{Car="MPV"},
+                    new CarType{Car="Van"},
+                    new CarType{Car="Roadster"},
+                    new CarType{Car="Crossover"},
+                    new CarType{Car="MicroCar"},
+                };
+
+                var Models = new List<Model>{
+                    new Model{BrandName = "Toyota",ModelName = "Corolla",Description = "Reliable and fuel-efficient compact car.",PersonCount = 5,LuggageCount = 3,DoorCount = 4,Price = 20000,FuelTypeId = 1, GearTypeId = 1,CarTypeId = 1, OtherServices = new[] { "Roadside Assistance", "Free Delivery" },OtherFeatures = new[] { "Air Conditioning", "Bluetooth" },ImageDirectory = "images/toyota_corolla.jpg",CreatedAt = DateTime.Now,UpdatedAt = DateTime.Now},
+                };
+
+
 
                 _context.LandingMainTexts.AddRange(landingPageMainTexts);
                 _context.LandingReasonTexts.AddRange(landingPageReasonTexts);
@@ -93,6 +126,15 @@ namespace WebApi.DbOperations
 
                 _context.UserComments.AddRange(Comments);
                 await _context.SaveChangesAsync();
+
+                _context.FuelTypes.AddRange(Fuels);
+                _context.GearTypes.AddRange(Gears);
+                _context.CarTypes.AddRange(Cars);
+                await _context.SaveChangesAsync();
+
+                _context.Models.AddRange(Models);
+                await _context.SaveChangesAsync();
+
             }
         }
     }

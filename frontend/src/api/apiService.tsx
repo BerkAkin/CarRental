@@ -1,9 +1,9 @@
 import axios from "axios";
 import { BASE_URL, endpoints } from "./apiConfig";
 
-async function apiService(endpoint: string, method: string = "GET", data: any = null) {
+async function apiService(endpoint: string, method: string = "GET", data: any = null, params: string = "") {
 
-    const url = `${BASE_URL}${endpoint}`;
+    const url = `${BASE_URL}${endpoint}${params}`;
     const token = localStorage.getItem("accessToken") || "";
 
     const headers: Record<string, string> = {

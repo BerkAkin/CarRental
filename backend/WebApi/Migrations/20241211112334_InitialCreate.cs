@@ -12,6 +12,19 @@ namespace WebApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CarTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Car = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FAQTexts",
                 columns: table => new
                 {
@@ -25,6 +38,32 @@ namespace WebApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FAQTexts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FuelTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fuel = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FuelTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GearTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Gear = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GearTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,6 +131,51 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Models",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FuelTypeId = table.Column<int>(type: "int", nullable: false),
+                    GearTypeId = table.Column<int>(type: "int", nullable: false),
+                    CarTypeId = table.Column<int>(type: "int", nullable: false),
+                    BrandName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ModelName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    PersonCount = table.Column<int>(type: "int", nullable: false),
+                    LuggageCount = table.Column<int>(type: "int", nullable: false),
+                    DoorCount = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    OtherServices = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OtherFeatures = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageDirectory = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Models", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Models_CarTypes_CarTypeId",
+                        column: x => x.CarTypeId,
+                        principalTable: "CarTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Models_FuelTypes_FuelTypeId",
+                        column: x => x.FuelTypeId,
+                        principalTable: "FuelTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Models_GearTypes_GearTypeId",
+                        column: x => x.GearTypeId,
+                        principalTable: "GearTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -144,6 +228,21 @@ namespace WebApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Models_CarTypeId",
+                table: "Models",
+                column: "CarTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Models_FuelTypeId",
+                table: "Models",
+                column: "FuelTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Models_GearTypeId",
+                table: "Models",
+                column: "GearTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserComments_UserId",
                 table: "UserComments",
                 column: "UserId",
@@ -177,7 +276,19 @@ namespace WebApi.Migrations
                 name: "LandingServiceTexts");
 
             migrationBuilder.DropTable(
+                name: "Models");
+
+            migrationBuilder.DropTable(
                 name: "UserComments");
+
+            migrationBuilder.DropTable(
+                name: "CarTypes");
+
+            migrationBuilder.DropTable(
+                name: "FuelTypes");
+
+            migrationBuilder.DropTable(
+                name: "GearTypes");
 
             migrationBuilder.DropTable(
                 name: "Users");
