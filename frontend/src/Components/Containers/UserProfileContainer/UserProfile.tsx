@@ -65,7 +65,7 @@ function UserProfile() {
     }
 
     return (
-        <>*--
+        <>
             {isError ? (
                 <div style={{ color: "red" }}>{isError}</div>
             ) : (
