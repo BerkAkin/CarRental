@@ -16,6 +16,17 @@ namespace WebApi.Repositories.AuthRepository
         {
             await _context.Set<User>().AddAsync(entity);
             await _context.SaveChangesAsync();
+
+            var user = await FindUser(entity.Email);
+            await _context.UserComments.AddAsync(new UserComment
+            {
+                Content = "",
+                UserId = user.Id,
+                StarCount = 1,
+
+            });
+            await _context.SaveChangesAsync();
+
         }
 
         public async Task<User> FindUser(string email)
