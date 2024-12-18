@@ -12,8 +12,6 @@ namespace WebApi.DbOperations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
-
             modelBuilder.Entity<User>(user =>
             {
                 user.Property(u => u.Id).ValueGeneratedOnAdd();
@@ -28,6 +26,7 @@ namespace WebApi.DbOperations
                 user.Property(u => u.LastOnline).HasDefaultValueSql("GETDATE()");
 
                 user.HasIndex(u => u.Email).IsUnique();
+                user.HasOne(u => u.Role).WithMany();
             });
             modelBuilder.Entity<Role>(role =>
             {
@@ -87,17 +86,14 @@ namespace WebApi.DbOperations
                 userComment.HasIndex(uc => uc.UserId).IsUnique();
 
             });
-
             modelBuilder.Entity<FuelType>(fueltype =>
             {
                 fueltype.Property(ft => ft.Id).ValueGeneratedOnAdd();
             });
-
             modelBuilder.Entity<GearType>(geartype =>
             {
                 geartype.Property(gt => gt.Id).ValueGeneratedOnAdd();
             });
-
             modelBuilder.Entity<Model>(model =>
             {
                 model.Property(m => m.Id).ValueGeneratedOnAdd();
@@ -121,8 +117,17 @@ namespace WebApi.DbOperations
                 model.HasOne(m => m.CarType).WithMany().HasForeignKey(m => m.CarTypeId).OnDelete(DeleteBehavior.Restrict);
 
             });
+            modelBuilder.Entity<UserFavorite>(ufc =>
+            {
+                ufc.Property(m => m.Id).ValueGeneratedOnAdd();
+                ufc.Property(uc => uc.CreatedAt).HasDefaultValueSql("GETDATE()");
+                ufc.Property(uc => uc.UpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();
+                ufc.HasKey(ufc => new { ufc.UserId, ufc.ModelId });
+                ufc.HasOne(ufc => ufc.User).WithMany(u => u.FavoriteCars).HasForeignKey(ufc => ufc.UserId);
+                ufc.HasOne(ufc => ufc.Model).WithMany(c => c.UserFavorites).HasForeignKey(ufc => ufc.ModelId);
+            });
 
-            modelBuilder.Entity<User>().HasOne(u => u.Role).WithMany();
+
         }
 
 
@@ -133,6 +138,7 @@ namespace WebApi.DbOperations
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserComment> UserComments { get; set; }
+        public DbSet<UserFavorite> UserFavorites { get; set; }
         public DbSet<FuelType> FuelTypes { get; set; }
         public DbSet<GearType> GearTypes { get; set; }
         public DbSet<CarType> CarTypes { get; set; }
