@@ -5,6 +5,7 @@ import Icons from '../../../../assets/icons/icons';
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListElement from '../../../ListElement/ListElement';
+import dummyImg from "../../../../assets/images/AboutUsImages/img";
 
 interface ModelCardProps {
     id: number;
@@ -25,9 +26,15 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
         <>
             <div className={`${styles.cardBg} border rounded`}>
                 <div className={`container overflow-hidden rounded`} >
-                    <div className={`${styles.imgHover} row `}>
-                        <ListElement href={`Models/${id}`} text={<Image URL={image} Width='310px'></Image>} />
+                    <div className={styles.favButtonContainer}>
+                        <button className={styles.favButton}>☆</button>
                     </div>
+
+
+                    <div className={`${styles.imgHover} row `}>
+                        <ListElement href={`Models/${id}`} text={<Image URL={dummyImg.img} Width='310px'></Image>} />
+                    </div>
+
                 </div>
                 <div className='container'>
                     <p className={`${styles.brandColor}`}>
@@ -58,6 +65,7 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                             <span className={`${styles.priceStyling} ms-2`}>
                                 {price} TL + KDV <span style={{ color: "#7A7A7A" }}>/ay</span>
                             </span>
+
                         </div>
                     </div>
 
