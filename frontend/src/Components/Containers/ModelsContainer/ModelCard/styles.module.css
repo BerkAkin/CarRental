@@ -44,3 +44,20 @@
 .cardBg {
     box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.1);
 }
+
+.favButton {
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    width: 30px;
+    font-size: 1.25rem;
+    z-index: 2;
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+.favButtonContainer {
+
+    position: relative;
+}
