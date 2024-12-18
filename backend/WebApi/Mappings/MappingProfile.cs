@@ -2,6 +2,7 @@ using AutoMapper;
 using WebApi.DTOs.Auth;
 using WebApi.DTOs.Comment;
 using WebApi.DTOs.FAQPage;
+using WebApi.DTOs.Favorites;
 using WebApi.DTOs.LandingPage.MainText;
 using WebApi.DTOs.LandingPage.ReasonTexts;
 using WebApi.DTOs.LandingPage.ServiceTexts;
@@ -69,6 +70,16 @@ namespace WebApi.Mappings
 
             CreateMap<ModelAddModel, Model>();
             CreateMap<ModelUpdateModel, Model>();
+
+            CreateMap<UserFavorite, FavoriteViewModel>().ForMember(dest => dest.CarType, opt => opt.MapFrom(src => src.Model.CarType.Car))
+            .ForMember(dest => dest.GearType, opt => opt.MapFrom(src => src.Model.GearType.Gear))
+            .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Model.BrandName))
+            .ForMember(dest => dest.ModelName, opt => opt.MapFrom(src => src.Model.ModelName))
+            .ForMember(dest => dest.PersonCount, opt => opt.MapFrom(src => src.Model.PersonCount))
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Model.Price))
+            .ForMember(dest => dest.ImageDirectory, opt => opt.MapFrom(src => src.Model.ImageDirectory));
+
+            CreateMap<FavoriteAddModel, UserFavorite>();
 
         }
     }
