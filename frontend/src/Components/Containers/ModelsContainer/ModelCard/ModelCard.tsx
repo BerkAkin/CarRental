@@ -6,6 +6,8 @@ import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListElement from '../../../ListElement/ListElement';
 import dummyImg from "../../../../assets/images/AboutUsImages/img";
+import apiService from '../../../../api/apiService';
+import { endpoints } from '../../../../api/apiConfig';
 
 interface ModelCardProps {
     id: number;
@@ -20,17 +22,24 @@ interface ModelCardProps {
 
 }
 
+const addFavorite = async (id: number) => {
+    try {
+        const data = await apiService(endpoints.favorites, "POST", id);
+        alert("Favorilere ekleme başarılı")
+    } catch (error) {
+        console.log(error);
+        alert(error);
+    }
+}
 
 function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount, doorCount, price }: ModelCardProps) {
     return (
         <>
             <div className={`${styles.cardBg} border rounded`}>
-                <div className={`container overflow-hidden rounded`} >
+                <div className={`container overflow-hidden rounded-top`} >
                     <div className={styles.favButtonContainer}>
-                        <button className={styles.favButton}>☆</button>
+                        <button onClick={() => addFavorite(id)} className={styles.favButton}>☆</button>
                     </div>
-
-
                     <div className={`${styles.imgHover} row `}>
                         <ListElement href={`Models/${id}`} text={<Image URL={dummyImg.img} Width='310px'></Image>} />
                     </div>
