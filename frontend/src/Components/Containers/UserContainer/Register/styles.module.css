@@ -4,6 +4,7 @@
     height: 650px;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.521);
+    z-index: 9999;
 }
 
 .headerArea {
