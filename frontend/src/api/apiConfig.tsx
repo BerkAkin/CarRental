@@ -18,6 +18,8 @@ export const endpoints = {
     ownInfo: "/Users/OwnInfo",
 
     models: "/Models/",
-    modelSummaries: "/Models/Summary"
+    modelSummaries: "/Models/Summary",
+
+    favorites: "/Favorites"
 
 }

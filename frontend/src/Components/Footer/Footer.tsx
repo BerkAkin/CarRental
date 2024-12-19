@@ -7,8 +7,8 @@ import ListComponent from './List/ListComponent';
 function Footer() {
 
   const contactItems = [
-    { Text: "info@flexper.com.tr", Href: "mailto:info@flexper.com.tr" },
-    { Text: "+90 543 353 97 37", Href: "" },
+    { Text: "empty", Href: "mailto:empty" },
+    { Text: "emptyPhoneNumber", Href: "" },
     { Text: "WhatsApp", Href: "" },
     { Text: "Aydınlatma Metni", Href: "PPInfo" }
   ];

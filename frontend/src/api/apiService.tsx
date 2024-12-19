@@ -20,8 +20,9 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
     } catch (e) {
         if (axios.isAxiosError(e)) {
             console.error('Axios error: ', e.response?.data || e.message);
+            throw new Error(e.response?.data.message);
         }
-        throw new Error("API request failed");
+
     }
 }
 

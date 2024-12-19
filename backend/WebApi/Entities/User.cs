@@ -16,5 +16,7 @@ namespace WebApi.Entities
         public DateTime LastOnline { get; set; }
         public DateTime CreatedAt { get; set; }
         public UserComment UserComment { get; set; }
+        public ICollection<UserFavorite> FavoriteCars { get; set; }
+
     }
 }

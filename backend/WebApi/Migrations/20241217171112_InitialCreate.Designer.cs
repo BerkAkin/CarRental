@@ -12,7 +12,7 @@ using WebApi.DbOperations;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(CRDbContext))]
-    [Migration("20241211112334_InitialCreate")]
+    [Migration("20241217171112_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -425,6 +425,37 @@ namespace WebApi.Migrations
                     b.ToTable("UserComments");
                 });
 
+            modelBuilder.Entity("WebApi.Entities.UserFavorite", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.HasKey("UserId", "ModelId");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("UserFavorites");
+                });
+
             modelBuilder.Entity("WebApi.Entities.Model", b =>
                 {
                     b.HasOne("WebApi.Entities.CarType", "CarType")
@@ -474,8 +505,34 @@ namespace WebApi.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("WebApi.Entities.UserFavorite", b =>
+                {
+                    b.HasOne("WebApi.Entities.Model", "Model")
+                        .WithMany("UserFavorites")
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApi.Entities.User", "User")
+                        .WithMany("FavoriteCars")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Model");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.Model", b =>
+                {
+                    b.Navigation("UserFavorites");
+                });
+
             modelBuilder.Entity("WebApi.Entities.User", b =>
                 {
+                    b.Navigation("FavoriteCars");
+
                     b.Navigation("UserComment")
                         .IsRequired();
                 });

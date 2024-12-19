@@ -3,6 +3,9 @@ import styles from './styles.module.css';
 import { Formik, Field, Form } from 'formik';
 import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
+import ModelCard from '../ModelsContainer/ModelCard/ModelCard';
+import { faV } from '@fortawesome/free-solid-svg-icons';
+import UserFavoriteCard from './UserFavoriteCard/UserFavoriteCard';
 
 
 interface InfoFormProps {
@@ -17,9 +20,22 @@ interface CommentFormProps {
     starCount: number;
 }
 
+interface FavoriteModels {
+    modelId: number,
+    carType: string,
+    gearType: string,
+    brandName: string,
+    modelName: string,
+    personCount: number,
+    price: string,
+    imageDirectory: string
+}
+
 function UserProfile() {
     const [initialInfoValues, setInitialInfoValues] = useState<InfoFormProps>();
     const [initialCommentValues, setInitialCommentValues] = useState<CommentFormProps>();
+    const [initialFavorites, setinitialFavorites] = useState<FavoriteModels[]>([]);
+
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [isError, setIsError] = useState("");
@@ -29,8 +45,10 @@ function UserProfile() {
             try {
                 const InfoResponse = await apiService(endpoints.ownInfo, "GET")
                 const CommentResponse = await apiService(endpoints.ownComment, "GET")
+                const Favorites = await apiService(endpoints.favorites, "GET")
                 setInitialInfoValues(InfoResponse);
                 setInitialCommentValues(CommentResponse);
+                setinitialFavorites(Favorites);
                 setRating(CommentResponse.starCount);
             } catch (error) {
 
@@ -62,6 +80,16 @@ function UserProfile() {
         }
 
 
+    }
+
+    const removeFavorite = async (id: number) => {
+        try {
+            console.log(id);
+            await apiService(endpoints.favorites, "DELETE", id);
+            alert("Favorilerden Kaldırıldı");
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -115,10 +143,33 @@ function UserProfile() {
 
 
                                 <div className='col-10'>
-                                    <div className='container h-50'>
+                                    <div className='container h-75'>
                                         <h4 className={styles.headerColor}>Favorilerim</h4>
+                                        <div className='row'>{
+                                            (
+                                                initialFavorites?.map((favorite: FavoriteModels) => {
+
+                                                    return (
+                                                        <div className='col-3'>
+
+                                                            <UserFavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
+                                                                brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
+                                                                imageDirectory={favorite.imageDirectory} modelName={favorite.modelName} personCount={favorite.personCount}
+                                                                price={favorite.price}
+
+                                                            />
+
+                                                        </div>
+                                                    )
+                                                })
+                                            )
+                                        }
+
+                                        </div>
                                     </div>
-                                    <div className='container border-top h-50'>
+
+
+                                    <div className='container border-top h-25'>
                                         <h4 className={styles.headerColor}>Yorumum</h4>
                                         <div className='row'>
                                             <div className=''>

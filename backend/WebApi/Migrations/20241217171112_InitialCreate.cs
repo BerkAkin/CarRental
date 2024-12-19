@@ -227,6 +227,34 @@ namespace WebApi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserFavorites",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ModelId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFavorites", x => new { x.UserId, x.ModelId });
+                    table.ForeignKey(
+                        name: "FK_UserFavorites_Models_ModelId",
+                        column: x => x.ModelId,
+                        principalTable: "Models",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserFavorites_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Models_CarTypeId",
                 table: "Models",
@@ -247,6 +275,11 @@ namespace WebApi.Migrations
                 table: "UserComments",
                 column: "UserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserFavorites_ModelId",
+                table: "UserFavorites",
+                column: "ModelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -276,10 +309,16 @@ namespace WebApi.Migrations
                 name: "LandingServiceTexts");
 
             migrationBuilder.DropTable(
+                name: "UserComments");
+
+            migrationBuilder.DropTable(
+                name: "UserFavorites");
+
+            migrationBuilder.DropTable(
                 name: "Models");
 
             migrationBuilder.DropTable(
-                name: "UserComments");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "CarTypes");
@@ -289,9 +328,6 @@ namespace WebApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "GearTypes");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Roles");

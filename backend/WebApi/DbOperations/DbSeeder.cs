@@ -49,7 +49,7 @@ namespace WebApi.DbOperations
                     new FAQText { Title= "Abonelik için gerekli ön şartlar nelerdir?", Content= "25 yaş ve üzerinde olmak 3 yıl ve üzeri T.C., AB veya uluslararası geçerliliği olan B tipi (veya üzeri) bir ehliyete sahip olmak" },
                     new FAQText { Title= "Aylık abonelik bedelini nasıl ödeyeceğim?", Content= "Projemiz kapsamında anlaşmalı olduğumuz banka güvencesiyle ödemelerinizi gerçekleştirebilirsiniz. Ayrıntılı bilgi için bizimle irtibata geçebilirsiniz." },
                     new FAQText { Title= "Aile Paketi Nedir?", Content= "Flexper’da artık seçmiş olduğunuz aracı ailenizle birlikte kullanabilirsiniz! Aylık sadece 699 TL+KDV/Birey ödeyerek dilediğiniz aile bireyini araca ek kullanıcı olarak tanımlayabilir ve sizin aracı kullanmadığınız zamanlarda aile bireylerinizin mobilite ihtiyacını karşılayabilirsiniz. Ek Kullanıcı olarak sadece siz ile aynı adreste ikamet eden birinci derece yakınlarınızı(anne-baba-kardeş-eş-çocuk) tanımlayabilirsiniz. Ayrıntılı bilgi için bizimle iletişime geçin!" },
-                    new FAQText { Title= "Size nasıl ulaşırım?", Content= " sayfamız üzerinden bilgi ve talep formumuzu doldurmanız yeterli. Ekip arkadaşlarımız en kısa sürede tarafınıza ulaşıp ayrıntılı bilgi veriyor olacaklar. Whatsapp ve  İletişim hattımız: +90 543 353 97 37 E-Posta adresimiz: info@flexper.com.tr" },
+                    new FAQText { Title= "Size nasıl ulaşırım?", Content= " sayfamız üzerinden bilgi ve talep formumuzu doldurmanız yeterli. Ekip arkadaşlarımız en kısa sürede tarafınıza ulaşıp ayrıntılı bilgi veriyor olacaklar. Whatsapp ve  İletişim hattımız: emptyPhoneNumber E-Posta adresimiz: emptyMail" },
                     new FAQText { Title= "Aradığım sorunun yanıtını bulamadım. Bana yardımcı olur musunuz?", Content= " sayfamız üzerinden ulaşabilirsiniz. Eğer aradığım sorunun yanıtı buralarda yok diyorsanız sayfamız üzerinden bilgi ve talep formunu doldurabilirsiniz. Arkadaşlarımız kısa süre içersinde size ulaşıp sorularınıza yanıt vereceklerdir. " },
 
                 };
@@ -110,6 +110,10 @@ namespace WebApi.DbOperations
                     new Model{BrandName = "Toyota",ModelName = "Corolla",Description = "Reliable and fuel-efficient compact car.",PersonCount = 5,LuggageCount = 3,DoorCount = 4,Price = 20000,FuelTypeId = 1, GearTypeId = 1,CarTypeId = 1, OtherServices = new[] { "Roadside Assistance", "Free Delivery" },OtherFeatures = new[] { "Air Conditioning", "Bluetooth" },ImageDirectory = "images/toyota_corolla.jpg",CreatedAt = DateTime.Now,UpdatedAt = DateTime.Now},
                 };
 
+                var Favorites = new List<UserFavorite>{
+                    new UserFavorite{ ModelId=1, UserId=1, }
+                };
+
 
 
                 _context.LandingMainTexts.AddRange(landingPageMainTexts);
@@ -133,6 +137,9 @@ namespace WebApi.DbOperations
                 await _context.SaveChangesAsync();
 
                 _context.Models.AddRange(Models);
+                await _context.SaveChangesAsync();
+
+                _context.UserFavorites.AddRange(Favorites);
                 await _context.SaveChangesAsync();
 
             }
