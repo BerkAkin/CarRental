@@ -72,6 +72,7 @@ namespace WebApi.Mappings
             CreateMap<ModelUpdateModel, Model>();
 
             CreateMap<UserFavorite, FavoriteViewModel>().ForMember(dest => dest.CarType, opt => opt.MapFrom(src => src.Model.CarType.Car))
+            .ForMember(dest => dest.ModelId, opt => opt.MapFrom(src => src.ModelId))
             .ForMember(dest => dest.GearType, opt => opt.MapFrom(src => src.Model.GearType.Gear))
             .ForMember(dest => dest.BrandName, opt => opt.MapFrom(src => src.Model.BrandName))
             .ForMember(dest => dest.ModelName, opt => opt.MapFrom(src => src.Model.ModelName))
@@ -79,7 +80,6 @@ namespace WebApi.Mappings
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Model.Price))
             .ForMember(dest => dest.ImageDirectory, opt => opt.MapFrom(src => src.Model.ImageDirectory));
 
-            CreateMap<FavoriteAddModel, UserFavorite>();
 
         }
     }
