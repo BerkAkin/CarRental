@@ -6,7 +6,7 @@ import Image from "../Image/Image";
 
 
 interface ListObjectProps {
-  text: string | React.ReactElement<typeof Image>;
+  text: string | React.ReactElement<typeof Image> | string[];
   href: string;
   isHover?: boolean;
   hoverColor?: string;
