@@ -81,10 +81,10 @@ function ContactForm() {
                                                 Mevcut araçlarımızı kontrol etmek ve detaylı bilgi almak için yandaki soruları yanıtlayın. <br />Biz size ulaşalım!
                                             </p>
                                             <p>
-                                                WhatsApp ve İletişim Hattı: +90 (543) 353 97 37
+                                                WhatsApp ve İletişim Hattı:  emptyPhoneNumber
                                             </p>
                                             <p>
-                                                E-Posta Adresi: info@flexper.com.tr
+                                                E-Posta Adresi: empty
                                             </p>
                                         </div>
                                     </div>
