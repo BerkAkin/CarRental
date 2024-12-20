@@ -39,7 +39,7 @@ function Footer() {
     <>
       <div className='mt-5 pt-5'></div>
       <div className={`${styles.footerBg} mt-5 pt-5 container-fluid`}>
-        <footer className="container py-5 bg-light rounded-top">
+        <footer className="container py-5 bg-light">
           <div className='row mb-5'>
             <div className='col-3 justify-content-center d-flex '>
               <Image URL={logo} Width="200" Height="50" />
