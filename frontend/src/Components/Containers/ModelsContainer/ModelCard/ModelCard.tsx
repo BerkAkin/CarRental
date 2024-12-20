@@ -35,10 +35,10 @@ const addFavorite = async (id: number) => {
 function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount, doorCount, price }: ModelCardProps) {
     return (
         <>
-            <div className={`${styles.cardBg} border rounded`}>
-                <div className={`container overflow-hidden rounded-top`} >
+            <div className={`${styles.cardBg} border `}>
+                <div className={`container overflow-hidden`} >
                     <div className={styles.favButtonContainer}>
-                        <button onClick={() => addFavorite(id)} className={styles.favButton}>☆</button>
+                        <button onClick={() => addFavorite(id)} className={`${styles.favButton} `}>★</button>
                     </div>
                     <div className={`${styles.imgHover} row `}>
                         <ListElement href={`Models/${id}`} text={<Image URL={dummyImg.img} Width='310px'></Image>} />
@@ -54,10 +54,10 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                 <div className='container mt-4 text-center' >
                     <hr className={`${styles.hrColor}`} />
                     <div className='row'>
-                        <div className='col-3'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
-                        <div className='col-3'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></div>
-                        <div className='col-3'> <img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.LuggageIcon}></img></div>
-                        <div className='col-3'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.CarDoorIcon}></img></div>
+                        <div className='col-3'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
+                        <div className='col-3'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></div>
+                        <div className='col-3'> <img className={`border  p-1 ${styles.IconSize}`} src={Icons.LuggageIcon}></img></div>
+                        <div className='col-3'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.CarDoorIcon}></img></div>
                     </div>
                     <div className='row'>
                         <div className={`${styles.iconFont} col-3`}>{personCount}</div>
