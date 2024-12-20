@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.User;
 using WebApi.Services.UserService;
 
@@ -47,6 +48,15 @@ namespace WebApi.Controllers.UserController.UserController
                 return NotFound(new { message = ex.Message });
             }
 
+        }
+
+
+        [Authorize(Roles = "2")]
+        [HttpDelete("OwnAccountDelete")]
+        public async Task<ActionResult> DeleteUserAsync()
+        {
+            await _userService.DeleteAsync(Convert.ToInt32(UserId));
+            return Ok("Silme İşlemi Başarılı");
         }
 
         [Authorize(Roles = "1")]

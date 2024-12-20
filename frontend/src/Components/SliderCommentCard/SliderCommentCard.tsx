@@ -11,7 +11,7 @@ function SliderCommentCard({ Content, StarCount, Username, UserType }: CommentCa
     return (
         <>
             <div className='col'>
-                <div className={`${styles.cardBg} d-flex justify-content-between flex-column rounded`}>
+                <div className={`${styles.cardBg} d-flex justify-content-between flex-column`}>
                     <div className='text-start p-4'>
                         <p>{Content}</p>
                     </div>

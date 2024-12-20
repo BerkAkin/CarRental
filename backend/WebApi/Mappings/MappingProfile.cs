@@ -1,4 +1,5 @@
 using AutoMapper;
+using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.Auth;
 using WebApi.DTOs.Comment;
 using WebApi.DTOs.FAQPage;
@@ -79,6 +80,10 @@ namespace WebApi.Mappings
             .ForMember(dest => dest.PersonCount, opt => opt.MapFrom(src => src.Model.PersonCount))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Model.Price))
             .ForMember(dest => dest.ImageDirectory, opt => opt.MapFrom(src => src.Model.ImageDirectory));
+
+            CreateMap<UserComment, AdminCommentViewModel>()
+            .ForMember(ac => ac.UserType, opt => opt.MapFrom(src => src.User.Role.Name))
+            .ForMember(ac => ac.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
 
 
         }

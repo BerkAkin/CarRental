@@ -1,4 +1,4 @@
-namespace WebApi.DTOs.User
+namespace WebApi.DTOs.AdminDTOs
 {
     public class AdminUserViewIdModel
     {

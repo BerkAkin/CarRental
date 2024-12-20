@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.Comment;
 using WebApi.Services.GeneralServices.CommentService;
 
@@ -20,7 +21,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
 
         [Authorize(Roles = "1")]
         [HttpGet]
-        public async Task<ActionResult<List<CommentViewModel>>> GetAll()
+        public async Task<ActionResult<List<AdminCommentViewModel>>> GetAll()
         {
             var data = await _service.GetAllAsync();
             if (data is not null)
@@ -44,6 +45,20 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
 
         }
 
+
+        [HttpPut("/Comments/AcceptComment")]
+        public async Task<ActionResult> AcceptComment([FromBody] int id)
+        {
+            await _service.AcceptComment(id);
+            return Ok("Yorum Doğrulandı");
+        }
+
+        [HttpPut("/Comments/RefuseComment")]
+        public async Task<ActionResult> RefuseComment([FromBody] int id)
+        {
+            await _service.RefuseComment(id);
+            return Ok("Yorum Kaldırıldı");
+        }
 
         [Authorize(Roles = "1")]
         [HttpGet("{id}")]
