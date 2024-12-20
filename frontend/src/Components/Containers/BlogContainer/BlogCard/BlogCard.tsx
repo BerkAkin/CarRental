@@ -18,7 +18,7 @@ interface BlogCardProps {
 function BlogCard({ Id, ImageUrl, Title, Description, Date }: BlogCardProps) {
     return (
         <>
-            <div className={`${styles.cardBg} container border rounded `}>
+            <div className={`${styles.cardBg} container border`}>
                 <div className={`${styles.cardInner} row`}>
                     <div className='col-4 border-end overflow-hidden'>
                         <Image URL={img} Width='380' />
