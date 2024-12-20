@@ -21,8 +21,8 @@ interface favoriteCardProps {
 function UserFavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, modelName, personCount, price, imageDirectory }: favoriteCardProps) {
     return (
         <div>
-            <div className={`${styles.cardBg} border rounded`}>
-                <div className={`container overflow-hidden rounded-top`} >
+            <div className={`${styles.cardBg} border`}>
+                <div className={`container overflow-hidden`} >
                     <div className={styles.favButtonContainer}>
                         <button className={styles.favButton} onClick={() => removeFavorites(modelId)}>X</button>
                     </div>
@@ -40,8 +40,8 @@ function UserFavoriteCard({ removeFavorites, modelId, carType, gearType, brandNa
                 <div className='container mt-1 text-center' >
                     <hr className={`${styles.hrColor}`} />
                     <div className='row'>
-                        <div className='col-6'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
-                        <div className='col-6'><img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></div>
+                        <div className='col-6'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
+                        <div className='col-6'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></div>
                     </div>
                     <div className='row'>
                         <div className={`${styles.iconFont} col-6`}>{personCount}</div>
