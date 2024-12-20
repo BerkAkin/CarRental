@@ -22,8 +22,8 @@ interface ModelCardProps {
 function SliderModelCard({ id, image, type, brandName, personCount, gear, luggageCount, doorCount, price }: ModelCardProps) {
     return (
         <>
-            <div className={`border rounded ${styles.cardBg}`}>
-                <div className={`container overflow-hidden rounded-top`} >
+            <div className={`border ${styles.cardBg}`}>
+                <div className={`container overflow-hidden`} >
                     <div className={`${styles.imgHover} row`}>
                         <ListElement href={`Models/${id}`} text={<Image URL={image} Width='310px' Height='200px'></Image>} />
                     </div>
@@ -41,16 +41,16 @@ function SliderModelCard({ id, image, type, brandName, personCount, gear, luggag
                     <hr className={`${styles.hrColor}`} />
                     <div className='row'>
                         <div className='col-3 d-flex justify-content-center'>
-                            <img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img>
+                            <img className={`border p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img>
                         </div>
                         <div className='col-3 d-flex justify-content-center'>
-                            <img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img>
+                            <img className={`border p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img>
                         </div>
                         <div className='col-3 d-flex justify-content-center'>
-                            <img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.LuggageIcon}></img>
+                            <img className={`border p-1 ${styles.IconSize}`} src={Icons.LuggageIcon}></img>
                         </div>
                         <div className='col-3 d-flex justify-content-center'>
-                            <img className={`border rounded p-1 ${styles.IconSize}`} src={Icons.CarDoorIcon}></img>
+                            <img className={`border p-1 ${styles.IconSize}`} src={Icons.CarDoorIcon}></img>
                         </div>
                     </div>
                     <div className='row'>
