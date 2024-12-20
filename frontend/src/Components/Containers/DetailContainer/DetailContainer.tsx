@@ -205,7 +205,7 @@ function DetailContainer() {
                     </div>
                 </div>
                 <div className='mt-4 d-flex justify-content-end'>
-                    <div className={` rounded p-2 ${styles.BtnBg} text-center`}>
+                    <div className={`p-2 ${styles.BtnBg} text-center`}>
                         <ListElement href="Contact" text={"Bize Ulaşın"} color='White' hoverColor='White' boldness='500' isHover={true} />
                     </div>
                 </div>
