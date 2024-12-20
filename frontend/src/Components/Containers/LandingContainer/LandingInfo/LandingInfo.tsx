@@ -24,7 +24,7 @@ function LandingInfo({ Text }: landingInfoProps) {
                             </h6>
                         </div>
                         <div className={`row justify-content-center my-5`}>
-                            <div className={`w-25 rounded p-2 ${styles.landingBtnBg} text-center`}>
+                            <div className={`w-25 p-2 ${styles.landingBtnBg} text-center`}>
                                 <ListElement href="Models" text={"Modeller"} color='White' hoverColor='White' boldness='500' isHover={true} />
                             </div>
 
