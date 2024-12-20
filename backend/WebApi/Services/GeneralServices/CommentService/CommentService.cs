@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.Comment;
 using WebApi.Entities;
 using WebApi.Repositories.GeneralRepositories.CommentRepository;
@@ -16,19 +17,40 @@ namespace WebApi.Services.GeneralServices.CommentService
         }
 
 
-        public override async Task<List<CommentViewModel>> GetAllAsync()
+        public async Task<List<AdminCommentViewModel>> GetAllAsync()
         {
-            var data = await _repository.GetAllAsync(query => query.Include(u => u.User).Include(u => u.User.Role));
+            var data = await _repository.GetAllAsync(query => query.Include(u => u.User).ThenInclude(u => u.Role));
             if (data is null)
             {
                 throw new InvalidOperationException("Veriler Bulunamadı");
             }
-            return _mapper.Map<List<CommentViewModel>>(data);
+            return _mapper.Map<List<AdminCommentViewModel>>(data);
         }
 
+        public async Task AcceptComment(int id)
+        {
+            var comment = await _repository.GetByIdAsync(id, query => query.Where(com => com.IsActive == false));
+            if (comment is null)
+            {
+                throw new KeyNotFoundException("Yorum Bulunamadı Veya Zaten Aktif");
+            }
+            comment.IsActive = true;
+            await _repository.UpdateAsync(comment);
+        }
+
+        public async Task RefuseComment(int id)
+        {
+            var comment = await _repository.GetByIdAsync(id, query => query.Where(com => com.IsActive == true));
+            if (comment is null)
+            {
+                throw new KeyNotFoundException("Yorum Bulunamadı veya Zaten Aktif Değil");
+            }
+            comment.IsActive = false;
+            await _repository.UpdateAsync(comment);
+        }
         public async Task<List<CommentViewModel>> GetLatestAsync()
         {
-            var data = await _repository.GetLatest(query => query.Include(u => u.User).Include(u => u.User.Role));
+            var data = await _repository.GetLatest(query => query.Include(u => u.User).ThenInclude(u => u.Role).Where(cm => cm.IsActive == true));
             if (data is null)
             {
                 throw new InvalidOperationException("Veriler Bulunamadı");
