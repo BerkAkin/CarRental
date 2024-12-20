@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.User;
 using WebApi.Entities;
 using WebApi.Repositories.UserRepository;
@@ -97,6 +98,8 @@ namespace WebApi.Services.UserService
             _mapper.Map(model, user);
             await _repository.UpdateAsync(user);
         }
+
+        //Kullanıcı Kendi Hesabını Silme
 
     }
 }
