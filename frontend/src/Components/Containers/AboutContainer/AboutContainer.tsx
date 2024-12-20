@@ -18,7 +18,7 @@ function AboutContainer() {
                 </div>
                 <div className='row mt-4'>
                     <div className='col-12 d-flex justify-content-center'>
-                        <Image Height='420' Width='1300' URL={img.img} Round={true} Alt='banner'></Image>
+                        <Image Height='420' Width='1300' URL={img.img} Alt='banner'></Image>
                     </div>
                 </div>
                 <div className='row my-5 pt-1'>
