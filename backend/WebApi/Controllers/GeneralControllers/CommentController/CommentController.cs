@@ -46,6 +46,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         }
 
 
+        [Authorize(Roles = "1")]
         [HttpPut("/Comments/AcceptComment")]
         public async Task<ActionResult> AcceptComment([FromBody] int id)
         {
@@ -53,6 +54,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
             return Ok("Yorum Doğrulandı");
         }
 
+        [Authorize(Roles = "1")]
         [HttpPut("/Comments/RefuseComment")]
         public async Task<ActionResult> RefuseComment([FromBody] int id)
         {
@@ -91,7 +93,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
             }
         }
 
-        [Authorize(Roles = "1|2")]
+        [Authorize(Roles = "1,2")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
@@ -99,7 +101,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
             return Ok("Silme İşlemi Başarılı");
         }
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
         [HttpGet("OwnComment")]
         public async Task<ActionResult<CommentViewIdModel>> GetOwnComment()
         {
@@ -107,7 +109,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
             return Ok(comment);
         }
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
         [HttpPut("OwnComment")]
         public async Task<ActionResult> UpdateOwnComment([FromBody] CommentUpdateModel model)
         {
