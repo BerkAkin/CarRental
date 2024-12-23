@@ -17,7 +17,7 @@ namespace WebApi.Controllers.GeneralControllers.FavoriteController
             _service = service;
         }
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
         [HttpGet]
         public async Task<ActionResult<List<FavoriteViewModel>>> GetOwnFavoritesAsync()
         {
@@ -25,7 +25,7 @@ namespace WebApi.Controllers.GeneralControllers.FavoriteController
             return Ok(data);
         }
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
         [HttpPost]
         public async Task<ActionResult> AddFavorites([FromBody] int modelId)
         {
@@ -34,7 +34,7 @@ namespace WebApi.Controllers.GeneralControllers.FavoriteController
         }
 
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
         [HttpDelete]
         public async Task<ActionResult> DeleteFavorite([FromBody] int modelId)
         {
