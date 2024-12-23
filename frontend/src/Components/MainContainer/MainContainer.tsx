@@ -13,10 +13,11 @@ import BlogContainer from "../Containers/BlogContainer/BlogContainer";
 import DetailContainer from "../Containers/DetailContainer/DetailContainer";
 import PPInfo from "../Containers/ContactContainer/PrivacyPolicyInfo/PPInfo";
 import BlogDetailContainer from "../Containers/BlogDetailContainer/BlogDetailContainer";
-import UserLogin from "../Containers/UserContainer/Login/UserLogin";
+import UserLogin from "../Containers/AuthContainer/Login/UserLogin";
 import Modal from "../Modal/Modal";
-import UserRegister from "../Containers/UserContainer/Register/UserRegister";
-import UserProfile from "../Containers/UserProfileContainer/UserProfile";
+import UserRegister from "../Containers/AuthContainer/Register/UserRegister";
+import UserProfile from "../Containers/ProfileContainer/User/UserProfile";
+import Profile from "../Containers/ProfileContainer/Profile";
 
 function MainContainer() {
 
@@ -52,7 +53,7 @@ function MainContainer() {
           <Route path="/Blog" element={<BlogContainer />}></Route>
           <Route path="/Blog/:id" element={<BlogDetailContainer />}></Route>
           <Route path="/PPInfo" element={<PPInfo />}></Route>
-          <Route path="/Profile" element={<UserProfile />}></Route>
+          <Route path="/Profile" element={<Profile />}></Route>
         </Routes>
 
 

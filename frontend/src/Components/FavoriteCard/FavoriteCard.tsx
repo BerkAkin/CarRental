@@ -1,11 +1,13 @@
 import React from 'react'
 import styles from './styles.module.css';
-import Image from '../../../Image/Image';
-import Icons from '../../../../assets/icons/icons';
+import Image from '../Image/Image';
+import Icons from '../../assets/icons/icons';
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ListElement from '../../../ListElement/ListElement';
-import dummyImg from "../../../../assets/images/AboutUsImages/img";
+import ListElement from '../ListElement/ListElement';
+import dummyImg from "../../assets/images/AboutUsImages/img";
+
+
 interface favoriteCardProps {
     removeFavorites: (id: number) => {},
     modelId: number,
@@ -18,7 +20,7 @@ interface favoriteCardProps {
     imageDirectory: string
 }
 
-function UserFavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, modelName, personCount, price, imageDirectory }: favoriteCardProps) {
+function FavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, modelName, personCount, price, imageDirectory }: favoriteCardProps) {
     return (
         <div>
             <div className={`${styles.cardBg} border`}>
@@ -69,4 +71,4 @@ function UserFavoriteCard({ removeFavorites, modelId, carType, gearType, brandNa
     )
 }
 
-export default UserFavoriteCard
+export default FavoriteCard

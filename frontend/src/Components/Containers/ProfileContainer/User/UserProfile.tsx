@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css';
 import { Formik, Field, Form } from 'formik';
-import apiService from '../../../api/apiService';
-import { endpoints } from '../../../api/apiConfig';
-import UserFavoriteCard from './UserFavoriteCard/UserFavoriteCard';
+import apiService from '../../../../api/apiService';
+import { endpoints } from '../../../../api/apiConfig';
+import FavoriteCard from '../../../FavoriteCard/FavoriteCard';
 
 
 interface InfoFormProps {
@@ -174,7 +174,7 @@ function UserProfile() {
                                             return (
                                                 <div className='col-3 mt-3'>
 
-                                                    <UserFavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
+                                                    <FavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
                                                         brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
                                                         imageDirectory={favorite.imageDirectory} modelName={favorite.modelName} personCount={favorite.personCount}
                                                         price={favorite.price}

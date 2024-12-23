@@ -7,6 +7,8 @@ import logo from '../../../../assets/logos/logo-flexper.png';
 import Image from '../../../Image/Image';
 import apiService from '../../../../api/apiService';
 import { endpoints } from '../../../../api/apiConfig';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../../../Contexts/AuthContext';
 
 
 interface LoginProps {
@@ -19,25 +21,32 @@ const initialValues = {
     password: ''
 }
 
-const onSubmit = async (values: LoginProps, { setSubmitting }: any) => {
-    try {
-        const response = await apiService(endpoints.login, "POST", values)
-        setSubmitting(true);
-        setTimeout(() => {
-            setSubmitting(false);
-        }, 2000);
-        alert("Giriş Yapıldı");
-        localStorage.setItem("accessToken", response);
-        window.location.reload();
-    } catch (error) {
-        console.error(error);
-    }
-    finally {
-        setSubmitting(false);
-    }
-};
 
 function UserLogin() {
+
+    const { fetchUserType } = useAuthContext();
+    const navigate = useNavigate();
+
+
+
+    const onSubmit = async (values: LoginProps, { setSubmitting }: any) => {
+        try {
+            const response = await apiService(endpoints.login, "POST", values)
+            setSubmitting(true);
+            setTimeout(() => {
+                setSubmitting(false);
+            }, 2000);
+            localStorage.setItem("accessToken", response);
+            await fetchUserType();
+            alert("Giriş Yapıldı");
+
+        } catch (error) {
+            console.error(error);
+        }
+        finally {
+            setSubmitting(false);
+        }
+    };
 
 
     return (
