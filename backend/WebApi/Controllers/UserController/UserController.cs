@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.User;
+using WebApi.Services;
 using WebApi.Services.UserService;
 
 namespace WebApi.Controllers.UserController.UserController
@@ -16,13 +17,21 @@ namespace WebApi.Controllers.UserController.UserController
             _userService = userService;
         }
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
+        [HttpGet("Me")]
+        public async Task<ActionResult> GetCurrentUserType()
+        {
+            return Ok(new { userTypeId = UserTypeId });
+        }
+
+        [Authorize(Roles = "1,2")]
         [HttpGet("OwnInfo")]
         public async Task<ActionResult<UserViewIdModel>> GetOwnInfo()
         {
 
             try
             {
+
                 var data = await _userService.GetOwnInfo(Convert.ToInt32(UserId));
                 return Ok(data);
             }
@@ -34,7 +43,7 @@ namespace WebApi.Controllers.UserController.UserController
 
         }
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
         [HttpPut("OwnInfo")]
         public async Task<ActionResult> UpdateOwnInfo([FromBody] UserUpdateModel model)
         {
@@ -51,7 +60,7 @@ namespace WebApi.Controllers.UserController.UserController
         }
 
 
-        [Authorize(Roles = "2")]
+        [Authorize(Roles = "1,2")]
         [HttpDelete("OwnAccountDelete")]
         public async Task<ActionResult> DeleteUserAsync()
         {
