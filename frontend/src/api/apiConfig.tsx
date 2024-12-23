@@ -21,6 +21,8 @@ export const endpoints = {
     models: "/Models/",
     modelSummaries: "/Models/Summary",
 
-    favorites: "/Favorites"
+    favorites: "/Favorites",
+
+    userType: "/Users/Me"
 
 }
