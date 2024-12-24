@@ -13,7 +13,7 @@ function Profile() {
     else if (userTypeId == "2") {
         return <> <UserProfile /></>
     }
-    return <>userTypeid:{userTypeId}</>
+    return <></>
 
 }
 
