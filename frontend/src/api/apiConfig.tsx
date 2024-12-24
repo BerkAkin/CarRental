@@ -23,6 +23,13 @@ export const endpoints = {
 
     favorites: "/Favorites",
 
-    userType: "/Users/Me"
+    userType: "/Users/Me",
+
+    mainText: "/MainTexts/",
+    serviceText: "/ServiceTexts/",
+    reasonText: "/ReasonTexts/",
+
+
+
 
 }
