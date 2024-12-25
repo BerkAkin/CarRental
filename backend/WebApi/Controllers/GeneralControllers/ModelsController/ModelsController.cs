@@ -25,8 +25,8 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
             {
                 return BadRequest("Sayfa numarası 1 veya daha büyük olmalıdır.");
             }
-            var (data, totalRecords) = await _service.GetAllPaginatedAsync(pageNumber, 10);
-            var totalPages = (int)Math.Ceiling(totalRecords / (double)10);
+            var (data, totalRecords) = await _service.GetAllPaginatedAsync(pageNumber, 8);
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)8);
             var response = new
             {
                 TotalRecords = totalRecords,
