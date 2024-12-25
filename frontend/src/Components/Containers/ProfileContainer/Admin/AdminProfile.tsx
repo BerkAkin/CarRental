@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 import apiService from '../../../../api/apiService';
 import { endpoints } from '../../../../api/apiConfig';
 import { Field, Formik, Form } from 'formik';
+import ModelEditCard from './ModelEditCard/ModelEditCard';
 
 
 
@@ -12,7 +13,6 @@ interface InfoFormProps {
     phoneNum: string;
     createdAt: string;
 }
-
 
 interface SettingsMainTextProps {
     id: number;
@@ -29,12 +29,58 @@ interface SettingsServicesTextProps {
     content: string;
     icon: string;
 }
+
+interface Gears {
+    id: number;
+    gear: string;
+}
+interface Fuels {
+    id: number;
+    fuel: string;
+}
+interface Cars {
+    id: number;
+    car: string;
+}
 interface SiteSettings {
     mainText: SettingsMainTextProps[];
     services: SettingsServicesTextProps[];
     reasons: SettingsReasonTextProps[];
 }
-
+interface Model {
+    currentPage: number;
+    data: [
+        {
+            id: number,
+            carType: {
+                id: number,
+                car: string
+            },
+            fuelType: {
+                id: number,
+                fuel: string
+            },
+            gearType: {
+                id: number,
+                gear: string
+            },
+            brandName: string,
+            modelName: string,
+            description: string,
+            personCount: number,
+            luggageCount: number,
+            doorCount: number,
+            price: number,
+            otherServices: [
+            ],
+            otherFeatures: [
+            ],
+            imageDirectory: string,
+        }
+    ];
+    totalPages: number;
+    totalRecords: number;
+}
 
 
 
@@ -44,11 +90,15 @@ function AdminProfile() {
 
     //BİLGİLERİN TUTULDUĞU STATELER
     const [userInfo, setUserInfo] = useState<InfoFormProps>();
-    const [models, setModels] = useState();
+    const [models, setModels] = useState<Model>();
+    const [gears, setGears] = useState<Gears[]>();
+    const [carTypes, setCarTypes] = useState<Cars[]>();
+    const [fuels, setFuels] = useState<Fuels[]>();
     const [users, setUsers] = useState();
     const [messages, setMessages] = useState();
     const [comments, setComments] = useState();
     const [settings, setSettings] = useState<SiteSettings>();
+    const [currentPage, setCurrentPage] = useState(1);
 
 
     //BİLGİLERİN ALINDIĞI EFFECT VE APİ ÇAĞRIIM
@@ -57,15 +107,33 @@ function AdminProfile() {
             try {
                 const infoResponse = await apiService(endpoints.ownInfo, "GET");
                 const siteSettings = await apiService(endpoints.homepage, "GET");
-
+                const fuels = await apiService(endpoints.fuels, "GET");
+                const gears = await apiService(endpoints.gears, "GET");
+                const carTypes = await apiService(endpoints.carTypes, "GET");
                 setUserInfo(infoResponse);
                 setSettings(siteSettings);
+                setFuels(fuels);
+                setGears(gears);
+                setCarTypes(carTypes);
             } catch (error) {
 
             }
         }
         fetchAllData();
     }, [])
+
+    useEffect(() => {
+        const getModels = async () => {
+            try {
+                setModels(undefined);
+                const models = await apiService(endpoints.models, "GET", null, `?pageNumber=${currentPage}`)
+                setModels(models);
+            } catch (error) {
+                console.log("Modeller alınırken hata:", error);
+            }
+        }
+        getModels();
+    }, [currentPage])
 
 
     //FORM İŞLEMLERİ SUBMİT VB
@@ -106,6 +174,25 @@ function AdminProfile() {
             alert("Sebep Metni Güncellendi")
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    const HandleNextPage = () => {
+        if (currentPage < (models?.totalPages || 1)) {
+            setCurrentPage(prev => prev + 1);
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    }
+    const HandlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prev => prev - 1);
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
     }
 
@@ -310,8 +397,33 @@ function AdminProfile() {
                     <div className="tab-pane" id="disabled-tabpanel-2" role="tabpanel" aria-labelledby="disabled-tab-2">
                         <div className='container-fluid'>
                             <div className='row'>
-                                <div>
-                                    Modeller
+                                <div className='d-flex justify-content-end'>
+                                    <button className={`${styles.btn}`} style={{ width: "150px" }}>Yeni Model Ekle</button>
+                                </div>
+
+                                <div className='container-fluid'>
+                                    <div className='row d-flex flex-row '>
+                                        {
+                                            models && gears && carTypes && fuels ?
+                                                (
+                                                    <>
+                                                        {models?.data.map((item) => (
+                                                            <ModelEditCard Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
+                                                        ))}
+                                                    </>
+                                                )
+
+                                                :
+                                                (
+                                                    <>Modeller Yüklenemedi</>
+                                                )
+                                        }
+                                    </div>
+
+                                </div>
+                                <div className=' d-flex justify-content-end mt-5'>
+                                    <button onClick={HandlePreviousPage} className={`${styles.btn} mx-3`} style={{ width: "150px" }}>Önceki Sayfa</button>
+                                    <button onClick={HandleNextPage} className={`${styles.btn}`} style={{ width: "150px" }}>Sonraki Sayfa</button>
                                 </div>
                             </div>
                         </div>
