@@ -3,7 +3,6 @@ namespace WebApi.DTOs.Models
     public class ModelUpdateModel
     {
 
-        public int Id { get; set; }
         public int FuelTypeId { get; set; }
         public int GearTypeId { get; set; }
         public int CarTypeId { get; set; }

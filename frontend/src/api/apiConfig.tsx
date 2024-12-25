@@ -29,6 +29,11 @@ export const endpoints = {
     serviceText: "/ServiceTexts/",
     reasonText: "/ReasonTexts/",
 
+    gears: "/Gears",
+    fuels: "/Fuels",
+    carTypes: "/CarTypes"
+
+
 
 
 
