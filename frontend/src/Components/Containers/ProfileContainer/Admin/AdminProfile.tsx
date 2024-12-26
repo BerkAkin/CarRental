@@ -4,6 +4,8 @@ import apiService from '../../../../api/apiService';
 import { endpoints } from '../../../../api/apiConfig';
 import { Field, Formik, Form } from 'formik';
 import ModelEditCard from './ModelEditCard/ModelEditCard';
+import Image from '../../../Image/Image';
+import dummyImage from '../../../../assets/images/LandingImages/Mach-e.1920x1080-1920x1080.jpg'
 
 
 
@@ -83,6 +85,37 @@ interface Model {
 }
 
 
+interface AddNewCarProps {
+    fuelTypeId: number,
+    gearTypeId: number,
+    carTypeId: number,
+    brandName: string,
+    modelName: string,
+    description: string,
+    personCount: number,
+    luggageCount: number,
+    doorCount: number,
+    price: number,
+    otherServices: string,
+    otherFeatures: string,
+    imageDirectory: string
+}
+
+const initialValuesOfAddCar: AddNewCarProps = {
+    fuelTypeId: 0,
+    gearTypeId: 0,
+    carTypeId: 0,
+    brandName: "",
+    modelName: "",
+    description: "",
+    personCount: 0,
+    luggageCount: 0,
+    doorCount: 0,
+    price: 0,
+    otherServices: "",
+    otherFeatures: "",
+    imageDirectory: ""
+}
 
 
 function AdminProfile() {
@@ -98,7 +131,8 @@ function AdminProfile() {
     const [messages, setMessages] = useState();
     const [comments, setComments] = useState();
     const [settings, setSettings] = useState<SiteSettings>();
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [isAddingStatus, setIsAddingStatus] = useState<boolean>(false);
 
 
     //BİLGİLERİN ALINDIĞI EFFECT VE APİ ÇAĞRIIM
@@ -135,6 +169,7 @@ function AdminProfile() {
         getModels();
     }, [currentPage])
 
+    useEffect(() => { }, [isAddingStatus])
 
     //FORM İŞLEMLERİ SUBMİT VB
     const updateUserInfo = async (values: InfoFormProps) => {
@@ -195,6 +230,35 @@ function AdminProfile() {
             });
         }
     }
+    const updateIsAddingStatus = () => {
+        setIsAddingStatus(!isAddingStatus);
+    }
+    const addNewCarSubmitHandler = async (values: AddNewCarProps) => {
+        try {
+            const dataToSend = {
+                fuelTypeId: Number(values.fuelTypeId),
+                gearTypeId: Number(values.gearTypeId),
+                carTypeId: Number(values.carTypeId),
+                brandName: values.brandName,
+                modelName: values.modelName,
+                description: values.description,
+                personCount: Number(values.personCount),
+                luggageCount: Number(values.luggageCount),
+                doorCount: Number(values.doorCount),
+                price: Number(values.price),
+                otherServices: values.otherServices.split(",") || [],
+                otherFeatures: values.otherFeatures.split(",") || [],
+                imageDirectory: values.imageDirectory,
+            };
+            console.log(dataToSend)
+            await apiService(endpoints.models, "POST", dataToSend);
+            alert("ok");
+            setIsAddingStatus(!isAddingStatus);
+        } catch (error) {
+            console.error(error);
+            alert("err");
+        }
+    }
 
 
 
@@ -204,7 +268,7 @@ function AdminProfile() {
 
             <div className={`container-fluid mt-4 pt-3 `}>
 
-                <ul className="nav nav-tabs mt-2" role="tablist">
+                <ul className="nav nav-tabs" role="tablist">
                     <li className="nav-item " >
                         <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
                     </li>
@@ -225,7 +289,7 @@ function AdminProfile() {
                     </li>
                 </ul>
 
-                <div className="tab-content pt-3" id="tab-content">
+                <div className="tab-content" id="tab-content">
                     <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">
                         <div className='container'>
                             <div className='row'>
@@ -397,33 +461,162 @@ function AdminProfile() {
                     <div className="tab-pane" id="disabled-tabpanel-2" role="tabpanel" aria-labelledby="disabled-tab-2">
                         <div className='container-fluid'>
                             <div className='row'>
-                                <div className='d-flex justify-content-end'>
-                                    <button className={`${styles.btn}`} style={{ width: "150px" }}>Yeni Model Ekle</button>
-                                </div>
-
                                 <div className='container-fluid'>
-                                    <div className='row d-flex flex-row '>
-                                        {
-                                            models && gears && carTypes && fuels ?
-                                                (
-                                                    <>
-                                                        {models?.data.map((item) => (
-                                                            <ModelEditCard Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
-                                                        ))}
-                                                    </>
-                                                )
+                                    {isAddingStatus === true ?
+                                        (
+                                            <>
+                                                <div className='d-flex justify-content-end mt-4'>
+                                                    <button onClick={updateIsAddingStatus} className={`${isAddingStatus ? styles.addBtnCancel : styles.addBtn}`} style={{ width: "150px" }}>{isAddingStatus ? "İptal Et" : "Yeni Model Ekle"}</button>
+                                                </div>
+                                                <Formik initialValues={initialValuesOfAddCar} onSubmit={addNewCarSubmitHandler}>
+                                                    <Form>
+                                                        <div className='container-fluid border my-4 p-0'>
+                                                            <div className='row m-0 p-0'>
+                                                                <div className='col-4 '>
+                                                                    <Image URL={dummyImage} Width='600px'></Image>
+                                                                </div>
+                                                                <div className='col-8  p-0'>
+                                                                    <div className='container-fluid h-100'>
+                                                                        <div className='row'>
 
-                                                :
-                                                (
-                                                    <>Modeller Yüklenemedi</>
-                                                )
-                                        }
-                                    </div>
+                                                                            <div className={`col-6 border`}>
+                                                                                <div className='row text-center'><label htmlFor='brandName'>Marka</label></div>
+                                                                                <div className='row'><Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
+                                                                            </div>
+                                                                            <div className={`col-6 border`}>
+                                                                                <div className='row text-center'><label htmlFor='modelName'>Model</label></div>
+                                                                                <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
+                                                                            </div>
+                                                                        </div>
 
-                                </div>
-                                <div className=' d-flex justify-content-end mt-5'>
-                                    <button onClick={HandlePreviousPage} className={`${styles.btn} mx-3`} style={{ width: "150px" }}>Önceki Sayfa</button>
-                                    <button onClick={HandleNextPage} className={`${styles.btn}`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+                                                                        <div className='row'>
+                                                                        </div>
+                                                                        <div className='row'>
+                                                                            <div className={`col-4 border `}>
+                                                                                <div className='row text-center'><label htmlFor='fuelType.fuel'>Yakıt</label></div>
+                                                                                <div className='row'>
+                                                                                    <Field as="select" className={`${styles.inputs}`} name="fuelTypeId" id="fuelTypeId" >
+                                                                                        {fuels?.map((fuel) => (
+                                                                                            <option key={fuel.id} value={fuel.id}>
+                                                                                                {fuel.fuel}
+                                                                                            </option>
+                                                                                        ))}
+                                                                                    </Field>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className={`col-4 border `}>
+                                                                                <div className='row text-center'><label htmlFor='gearType.gear'>Şanzıman</label></div>
+                                                                                <div className='row '>
+                                                                                    <Field as="select" className={`${styles.inputs} `} name="gearTypeId" id="gearTypeId" >
+                                                                                        {gears?.map((gear) => (
+                                                                                            <option key={gear.id} value={gear.id}>
+                                                                                                {gear.gear}
+                                                                                            </option>
+                                                                                        ))}
+                                                                                    </Field>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className={`col-4  border`}>
+                                                                                <div className='row text-center'><label htmlFor='carType.car'>Tip</label></div>
+                                                                                <div className='row '>
+                                                                                    <Field as="select" className={`${styles.inputs}`} name="carTypeId" id="carTypeId" >
+                                                                                        {carTypes?.map((cartype) => (
+                                                                                            <option key={cartype.id} value={cartype.id}>
+                                                                                                {cartype.car}
+                                                                                            </option>
+                                                                                        ))}
+                                                                                    </Field>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='row'>
+                                                                            <div className={`col-12 border justify-content-center`}>
+                                                                                <div className='row text-center'><label htmlFor='description'>Açıklama</label></div>
+                                                                                <div className='row'><Field className={`${styles.inputs} text-center`} name="description" id="description" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='row'>
+                                                                            <div className={`border col-4 justify-content-center`}>
+                                                                                <div className='row text-center'><label htmlFor='personCount'>Kişi Sayısı</label></div>
+                                                                                <div className='row'><Field className={`${styles.inputs} text-center`} name="personCount" id="personCount" /></div>
+                                                                            </div>
+                                                                            <div className={`border col-4 justify-content-center`}>
+                                                                                <div className='row text-center'><label htmlFor='luggageCount'>Bagaj Sayısı</label></div>
+                                                                                <div className='row'><Field className={`${styles.inputs} text-center`} name="luggageCount" id="luggageCount" /></div>
+                                                                            </div>
+                                                                            <div className={`border col-4 justify-content-center`}>
+                                                                                <div className='row text-center'><label htmlFor='doorCount'>Kapı Sayısı</label></div>
+                                                                                <div className='row'><Field className={`${styles.inputs} text-center`} name="doorCount" id="doorCount" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='row'>
+                                                                            <div className={`col-12 border justify-content-center`}>
+                                                                                <div className='row text-center'><label htmlFor='price'>Aylık Kiralama Bedeli</label></div>
+                                                                                <div className='row'> <Field className={`${styles.inputs} text-center`} name="price" id="price" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='row'>
+                                                                            <div className={`col-12 border justify-content-center`}>
+                                                                                <div className='row text-center'><label htmlFor='otherServices'>Sunulan Diğer Hizmetler</label></div>
+                                                                                <div className='row'>  <Field className={`${styles.inputs}`} name="otherServices" id="otherServices" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='row '>
+                                                                            <div className={`col-12 border justify-content-center`}>
+                                                                                <div className='row text-center'><label htmlFor='otherFeatures'>Diğer Araç Özellikleri</label></div>
+                                                                                <div className='row'> <Field className={`${styles.inputs}`} name="otherFeatures" id="otherFeatures" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='row border'>
+                                                                            <div className={`col-12 justify-content-center`}>
+                                                                                <div className='row text-center'>
+                                                                                    <button type='submit' className={styles.btn}>Ekle</button>
+
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Form>
+                                                </Formik>
+                                            </>
+                                        ) :
+                                        (
+                                            <>
+                                                <div className='d-flex justify-content-end mt-4'>
+                                                    <button onClick={updateIsAddingStatus} className={`${isAddingStatus ? styles.addBtnCancel : styles.addBtn}`} style={{ width: "150px" }}>{isAddingStatus ? "İptal Et" : "Yeni Model Ekle"}</button>
+                                                </div>
+                                                <div className='d-flex justify-content-end mt-4'>
+                                                    <button onClick={HandlePreviousPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
+                                                    <button onClick={HandleNextPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+                                                </div>
+                                                <div className='row d-flex flex-row '>
+                                                    {
+                                                        models && gears && carTypes && fuels ?
+                                                            (
+                                                                <>
+                                                                    {models?.data.map((item) => (
+                                                                        <ModelEditCard Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
+                                                                    ))}
+                                                                </>
+                                                            )
+
+                                                            :
+                                                            (
+                                                                <>Modeller Yüklenemedi</>
+                                                            )
+                                                    }
+                                                </div>
+                                                <div className=' d-flex justify-content-end mt-5'>
+                                                    <button onClick={HandlePreviousPage} className={`${styles.btn} mx-3`} style={{ width: "150px" }}>Önceki Sayfa</button>
+                                                    <button onClick={HandleNextPage} className={`${styles.btn}`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+                                                </div>
+                                            </>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>
