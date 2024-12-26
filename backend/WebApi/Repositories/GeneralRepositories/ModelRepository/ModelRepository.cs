@@ -19,7 +19,7 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
                 data = func(data);
             }
             int totalCounts = await data.CountAsync();
-            var paginatedData = await data.OrderBy(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+            var paginatedData = await data.OrderByDescending(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return (paginatedData, totalCounts);
 
@@ -38,7 +38,7 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
             }
 
             var totalRecords = await query.CountAsync();
-            var paginatedData = await query.OrderBy(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+            var paginatedData = await query.OrderByDescending(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return (paginatedData, totalRecords);
         }
