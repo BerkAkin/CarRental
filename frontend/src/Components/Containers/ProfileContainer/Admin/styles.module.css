@@ -102,3 +102,58 @@
     border-bottom: 1px solid red;
     outline: none;
 }
+
+
+
+.addBtn {
+    outline: none;
+    border: none;
+    background-color: #1e481a;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.addBtn:hover {
+    background-color: #3f7c2c;
+}
+
+.addBtnCancel {
+    outline: none;
+    border: none;
+    background-color: #b30000;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.addBtnCancel:hover {
+    background-color: #d63200;
+}
+
+.inputs {
+    border: none;
+    border-bottom: 1px solid #b3b3b3;
+    font-size: 0.9rem;
+    outline: none;
+    color: #7A7A7A;
+    height: 35px;
+}
+
+.inputs:hover {
+    border-bottom: 1px solid red;
+    outline: none;
+    cursor: pointer;
+}
+
+.inputs:focus {
+    border-bottom: 1px solid red;
+    outline: none;
+    color: black;
+}
