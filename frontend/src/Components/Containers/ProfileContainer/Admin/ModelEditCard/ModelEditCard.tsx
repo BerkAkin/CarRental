@@ -75,9 +75,16 @@ const onSubmitHandler = async (values: any) => {
         console.log("Veri Güncellenirken Hata: ", error)
         alert("error")
     }
-
 }
 
+const onDeleteHandler = async (id: number) => {
+    try {
+        await apiService(endpoints.models + id, "DELETE");
+        alert("silindi");
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 function ModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
@@ -85,10 +92,10 @@ function ModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
         <>
 
             <div className='col-3 my-4'>
-                <Formik initialValues={Item} onSubmit={onSubmitHandler} enableReinitialize>
-                    <Form>
-                        <div className='container'>
 
+                <div className='container'>
+                    <Formik initialValues={Item} onSubmit={onSubmitHandler} enableReinitialize>
+                        <Form>
                             <div className='row border'>
                                 <Image URL={dummyImage} Width='200px' />
                             </div>
@@ -96,10 +103,21 @@ function ModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
                             <div className='row'>
                                 <div className='container-fluid'>
                                     <div className='row'>
-                                        <div className={`col border justify-content-center d-flex flex-column align-items-center`}>
-                                            <div className='row'><label htmlFor='fuelType.fuel'>Yakıt</label></div>
+
+                                        <div className={`col-6 border`}>
+                                            <div className='row text-center'><label htmlFor='brandName'>Marka</label></div>
+                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
+                                        </div>
+                                        <div className={`col-6 border`}>
+                                            <div className='row text-center'><label htmlFor='modelName'>Model</label></div>
+                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
+                                        </div>
+                                    </div>
+                                    <div className='row'>
+                                        <div className={`col-4 border `}>
+                                            <div className='row text-center'><label htmlFor='fuelType.fuel'>Yakıt</label></div>
                                             <div className='row'>
-                                                <Field as="select" className={`${styles.inputs} text-center`} name="fuelType.id" id="fuelType.id" >
+                                                <Field as="select" className={`${styles.inputs}`} name="fuelType.id" id="fuelType.id" >
                                                     {Fuels.map((fuel) => (
                                                         <option key={fuel.id} value={fuel.id}>
                                                             {fuel.fuel}
@@ -108,10 +126,10 @@ function ModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
                                                 </Field>
                                             </div>
                                         </div>
-                                        <div className={`col border justify-content-center d-flex flex-column align-items-center`}>
-                                            <div className='row'><label htmlFor='gearType.gear'>Şanzıman</label></div>
-                                            <div className='row'>
-                                                <Field as="select" className={`${styles.inputs} text-center`} name="gearType.id" id="gearType.id" >
+                                        <div className={`col-4 border `}>
+                                            <div className='row text-center'><label htmlFor='gearType.gear'>Şanzıman</label></div>
+                                            <div className='row '>
+                                                <Field as="select" className={`${styles.inputs} `} name="gearType.id" id="gearType.id" >
                                                     {Gears.map((gear) => (
                                                         <option key={gear.id} value={gear.id}>
                                                             {gear.gear}
@@ -120,10 +138,10 @@ function ModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
                                                 </Field>
                                             </div>
                                         </div>
-                                        <div className={`col border justify-content-center d-flex flex-column align-items-center`}>
-                                            <div className='row'><label htmlFor='carType.car'>Tip</label></div>
-                                            <div className='row'>
-                                                <Field as="select" className={`${styles.inputs} text-center`} name="carType.id" id="carType.id" >
+                                        <div className={`col-4  border`}>
+                                            <div className='row text-center'><label htmlFor='carType.car'>Tip</label></div>
+                                            <div className='row '>
+                                                <Field as="select" className={`${styles.inputs}`} name="carType.id" id="carType.id" >
                                                     {CarTypes.map((cartype) => (
                                                         <option key={cartype.id} value={cartype.id}>
                                                             {cartype.car}
@@ -131,14 +149,6 @@ function ModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
                                                     ))}
                                                 </Field>
                                             </div>
-                                        </div>
-                                        <div className={`col border justify-content-center d-flex flex-column align-items-center`}>
-                                            <div className='row'><label htmlFor='brandName'>Marka</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
-                                        </div>
-                                        <div className={`col border justify-content-center d-flex flex-column align-items-center`}>
-                                            <div className='row'><label htmlFor='modelName'>Model</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
                                         </div>
                                     </div>
                                     <div className='row'>
@@ -185,16 +195,19 @@ function ModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
                                                 <button type='submit' className={styles.btn}>Güncelle</button>
 
                                             </div>
-                                            <div className='row mt-2'>
-                                                <button className={styles.deleteBtn}>Sil</button>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </Form>
-                </Formik>
+                        </Form>
+                    </Formik>
+                    <div className='row mt-2'>
+                        <button onClick={() => onDeleteHandler(Item.id)} className={styles.deleteBtn}>Sil</button>
+                    </div>
+                </div>
+
+
             </div>
 
 
