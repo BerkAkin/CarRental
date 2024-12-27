@@ -21,13 +21,28 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
 
         [Authorize(Roles = "1")]
         [HttpGet]
-        public async Task<ActionResult<List<AdminCommentViewModel>>> GetAll()
+        public async Task<ActionResult<List<AdminCommentViewModel>>> GetAll([FromQuery] int pageNumber = 1)
         {
-            var data = await _service.GetAllAsync();
-            if (data is not null)
+            if (pageNumber < 1)
             {
-                return Ok(data);
+                return BadRequest("Sayfa numarası 1 veya daha büyük olmalıdır.");
             }
+
+            var (data, totalRecords) = await _service.GetAllPaginatedAsync(pageNumber, 10);
+            var totalPages = (int)Math.Ceiling(totalRecords / (double)10);
+            var response = new
+            {
+                TotalRecords = totalRecords,
+                TotalPages = totalPages,
+                CurrentPage = pageNumber,
+                Data = data
+            };
+
+            if (response is not null)
+            {
+                return Ok(response);
+            }
+
             return NotFound("Bulunamadı");
 
         }
@@ -46,7 +61,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         }
 
 
-        [Authorize(Roles = "1")]
+
         [HttpPut("/Comments/AcceptComment")]
         public async Task<ActionResult> AcceptComment([FromBody] int id)
         {
