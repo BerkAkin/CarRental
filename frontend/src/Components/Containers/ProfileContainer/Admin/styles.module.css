@@ -157,3 +157,33 @@
     outline: none;
     color: black;
 }
+
+.actionOkBtn {
+    outline: none;
+    border: none;
+    background-color: #1e481a;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    margin: 0;
+}
+
+.actionOkBtn:hover {
+    background-color: #3f7c2c;
+}
+
+.actionNoBtn {
+    outline: none;
+    border: none;
+    background-color: #b30000;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    margin: 0;
+}
+
+.actionNoBtn:hover {
+    background-color: #d63200;
+}

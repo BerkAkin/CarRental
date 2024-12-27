@@ -84,6 +84,22 @@ interface Model {
     totalRecords: number;
 }
 
+interface SingleComment {
+    id: number;
+    content: string;
+    starCount: number;
+    isActive: boolean;
+    userName: string;
+    userType: string;
+}
+interface Comments {
+    currentPage: number;
+    totalPages: number;
+    totalRecords: number;
+    data: SingleComment[]
+}
+
+
 
 interface AddNewCarProps {
     fuelTypeId: number,
@@ -127,11 +143,10 @@ function AdminProfile() {
     const [gears, setGears] = useState<Gears[]>();
     const [carTypes, setCarTypes] = useState<Cars[]>();
     const [fuels, setFuels] = useState<Fuels[]>();
-    const [users, setUsers] = useState();
-    const [messages, setMessages] = useState();
-    const [comments, setComments] = useState();
+    const [comments, setComments] = useState<Comments>();
     const [settings, setSettings] = useState<SiteSettings>();
-    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [modelCurrentPage, setModelCurrentPage] = useState<number>(1);
+    const [commentsCurrentPage, setCommentsCurrentPage] = useState<number>(1);
     const [isAddingStatus, setIsAddingStatus] = useState<boolean>(false);
 
 
@@ -160,14 +175,28 @@ function AdminProfile() {
         const getModels = async () => {
             try {
                 setModels(undefined);
-                const models = await apiService(endpoints.models, "GET", null, `?pageNumber=${currentPage}`)
+                const models = await apiService(endpoints.models, "GET", null, `?pageNumber=${modelCurrentPage}`)
                 setModels(models);
             } catch (error) {
                 console.log("Modeller alınırken hata:", error);
             }
         }
         getModels();
-    }, [currentPage])
+    }, [modelCurrentPage])
+
+    useEffect(() => {
+        const getComments = async () => {
+            try {
+                setModels(undefined);
+                const adminComments = await apiService(endpoints.comments, "GET", null, `?pageNumber=${commentsCurrentPage}`)
+                setComments(adminComments);
+
+            } catch (error) {
+                console.log("Yorumlar alınırken hata:", error);
+            }
+        }
+        getComments();
+    }, [commentsCurrentPage])
 
     useEffect(() => { }, [isAddingStatus])
 
@@ -212,24 +241,44 @@ function AdminProfile() {
         }
     }
 
-    const HandleNextPage = () => {
-        if (currentPage < (models?.totalPages || 1)) {
-            setCurrentPage(prev => prev + 1);
+    const HandleNextModelPage = () => {
+        if (modelCurrentPage < (models?.totalPages || 1)) {
+            setModelCurrentPage(prev => prev + 1);
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             });
         }
     }
-    const HandlePreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(prev => prev - 1);
+    const HandlePreviousModelPage = () => {
+        if (modelCurrentPage > 1) {
+            setModelCurrentPage(prev => prev - 1);
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             });
         }
     }
+
+    const HandleNextCommentPage = () => {
+        if (commentsCurrentPage < (comments?.totalPages || 1)) {
+            setCommentsCurrentPage(prev => prev + 1);
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    }
+    const HandlePreviousCommentPage = () => {
+        if (commentsCurrentPage > 1) {
+            setCommentsCurrentPage(prev => prev - 1);
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    }
+
     const updateIsAddingStatus = () => {
         setIsAddingStatus(!isAddingStatus);
     }
@@ -250,7 +299,6 @@ function AdminProfile() {
                 otherFeatures: values.otherFeatures.split(",") || [],
                 imageDirectory: values.imageDirectory,
             };
-            console.log(dataToSend)
             await apiService(endpoints.models, "POST", dataToSend);
             alert("ok");
             setIsAddingStatus(!isAddingStatus);
@@ -260,6 +308,25 @@ function AdminProfile() {
         }
     }
 
+    const commentOperation = async (id: number, type: string) => {
+        console.log(id, type)
+        try {
+            if (type === "ok") {
+                await apiService(endpoints.acceptComment, "PUT", id);
+                alert("ok");
+                const comments = await apiService(endpoints.comments, "GET");
+                setComments(comments);
+                return;
+            }
+            await apiService(endpoints.refuseComment, "PUT", id);
+            const comments = await apiService(endpoints.comments, "GET");
+            setComments(comments);
+            alert("ok");
+        } catch (error) {
+            alert("hata");
+            console.log(error);
+        }
+    }
 
 
     return (
@@ -267,7 +334,6 @@ function AdminProfile() {
 
 
             <div className={`container-fluid mt-4 pt-3 `}>
-
                 <ul className="nav nav-tabs" role="tablist">
                     <li className="nav-item " >
                         <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
@@ -278,12 +344,7 @@ function AdminProfile() {
                     <li className="nav-item">
                         <a className={`${styles.navBtn} nav-link`} id="disabled-tab-2" data-bs-toggle="tab" href="#disabled-tabpanel-2">Modeller</a>
                     </li>
-                    <li className="nav-item">
-                        <a className={`${styles.navBtn} nav-link`} id="disabled-tab-3" data-bs-toggle="tab" href="#disabled-tabpanel-3">Kullanıcılar</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className={`${styles.navBtn} nav-link`} id="disabled-tab-4" data-bs-toggle="tab" href="#disabled-tabpanel-4">İletişim Mesajları</a>
-                    </li>
+
                     <li className="nav-item">
                         <a className={`${styles.navBtn} nav-link`} id="disabled-tab-5" data-bs-toggle="tab" href="#disabled-tabpanel-5">Yorumlar</a>
                     </li>
@@ -590,8 +651,8 @@ function AdminProfile() {
                                                     <button onClick={updateIsAddingStatus} className={`${isAddingStatus ? styles.addBtnCancel : styles.addBtn}`} style={{ width: "150px" }}>{isAddingStatus ? "İptal Et" : "Yeni Model Ekle"}</button>
                                                 </div>
                                                 <div className='d-flex justify-content-end mt-4'>
-                                                    <button onClick={HandlePreviousPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
-                                                    <button onClick={HandleNextPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+                                                    <button onClick={HandlePreviousModelPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
+                                                    <button onClick={HandleNextModelPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
                                                 </div>
                                                 <div className='row d-flex flex-row '>
                                                     {
@@ -611,8 +672,8 @@ function AdminProfile() {
                                                     }
                                                 </div>
                                                 <div className=' d-flex justify-content-end mt-5'>
-                                                    <button onClick={HandlePreviousPage} className={`${styles.btn} mx-3`} style={{ width: "150px" }}>Önceki Sayfa</button>
-                                                    <button onClick={HandleNextPage} className={`${styles.btn}`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+                                                    <button onClick={HandlePreviousModelPage} className={`${styles.btn} mx-3`} style={{ width: "150px" }}>Önceki Sayfa</button>
+                                                    <button onClick={HandleNextModelPage} className={`${styles.btn}`} style={{ width: "150px" }}>Sonraki Sayfa</button>
                                                 </div>
                                             </>
                                         )
@@ -621,29 +682,63 @@ function AdminProfile() {
                             </div>
                         </div>
                     </div>
-                    <div className="tab-pane" id="disabled-tabpanel-3" role="tabpanel" aria-labelledby="disabled-tab-3">
-                        <div className='container-fluid'>
-                            <div className='row'>
-                                <div>
-                                    Kullanıcılar
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="tab-pane" id="disabled-tabpanel-4" role="tabpanel" aria-labelledby="disabled-tab-4">
-                        <div className='container-fluid'>
-                            <div className='row'>
-                                <div>
-                                    İletişim Mesajları
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div className="tab-pane" id="disabled-tabpanel-5" role="tabpanel" aria-labelledby="disabled-tab-5">
                         <div className='container-fluid'>
                             <div className='row'>
                                 <div>
-                                    Yorumlar
+                                    <table className="table-striped table-hover table m-0 mt-4">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Ad Soyad</th>
+                                                <th scope="col">E-Posta</th>
+                                                <th scope="col">Kullanıcı Türü</th>
+                                                <th scope="col">Aktif Mi</th>
+                                                <th scope="col">Puan</th>
+                                                <th scope="col">Yorum</th>
+                                                <th scope="col">İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {comments?.data ?
+                                                (comments.data.map((item) => (
+                                                    <>
+                                                        <tr>
+                                                            <td scope="row">{item.userName}</td>
+                                                            <td>{item.userName}</td>
+                                                            <td>{item.userType}</td>
+                                                            <td>{item.isActive === true ? "Evet" : "Hayır"}</td>
+                                                            <td>{item.starCount}</td>
+                                                            <td>{item.content}</td>
+                                                            <td>
+                                                                {item.isActive === true ?
+                                                                    (
+                                                                        <>
+                                                                            <button onClick={() => commentOperation(item.id, "")} className={`${styles.actionNoBtn} mx-2`}>Reddet</button>
+                                                                        </>
+                                                                    )
+                                                                    :
+                                                                    (
+                                                                        <>
+                                                                            <button onClick={() => commentOperation(item.id, "ok")} className={`${styles.actionOkBtn}`}>Onayla</button>
+                                                                        </>
+                                                                    )
+                                                                }
+                                                            </td>
+                                                        </tr >
+                                                    </>
+                                                ))
+
+                                                )
+                                                :
+                                                (<></>)}
+
+
+                                        </tbody>
+                                    </table>
+                                    <div className='d-flex justify-content-end mt-4'>
+                                        <button onClick={HandlePreviousCommentPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
+                                        <button onClick={HandleNextCommentPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
