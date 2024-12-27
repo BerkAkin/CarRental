@@ -17,14 +17,15 @@ namespace WebApi.Services.GeneralServices.CommentService
         }
 
 
-        public async Task<List<AdminCommentViewModel>> GetAllAsync()
+        public async Task<(List<AdminCommentViewModel>, int)> GetAllPaginatedAsync(int pageNumber, int pageSize)
         {
-            var data = await _repository.GetAllAsync(query => query.Include(u => u.User).ThenInclude(u => u.Role));
+            var (data, totalRecords) = await _repository.GetAllPaginatedAsync(pageNumber, pageSize, query => query.Include(u => u.User).ThenInclude(u => u.Role));
             if (data is null)
             {
                 throw new InvalidOperationException("Veriler Bulunamadı");
             }
-            return _mapper.Map<List<AdminCommentViewModel>>(data);
+            var DTOData = _mapper.Map<List<AdminCommentViewModel>>(data);
+            return (DTOData, totalRecords);
         }
 
         public async Task AcceptComment(int id)
