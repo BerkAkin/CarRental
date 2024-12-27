@@ -68,6 +68,7 @@ namespace WebApi.Services.AuthService
             var refreshToken = _tokenService.GenerateRefreshToken();
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+            user.IsActive = true;
             await _repository.UpdateUser(user);
 
             var accessToken = _tokenService.GenerateAccessToken(user);
