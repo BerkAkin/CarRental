@@ -17,7 +17,7 @@ interface RegisterProps {
     password: string;
 }
 
-const initialValues = {
+const initialValues: RegisterProps = {
     email: '',
     password: '',
     name: '',
