@@ -31,7 +31,9 @@ export const endpoints = {
 
     gears: "/Gears",
     fuels: "/Fuels",
-    carTypes: "/CarTypes"
+    carTypes: "/CarTypes",
+    acceptComment: "/Comments/AcceptComment",
+    refuseComment: "/Comments/RefuseComment"
 
 
 
