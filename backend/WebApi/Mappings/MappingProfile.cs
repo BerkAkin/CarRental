@@ -45,6 +45,7 @@ namespace WebApi.Mappings
             CreateMap<UserComment, CommentViewModel>()
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
             .ForMember(dest => dest.UserType, opt => opt.MapFrom(src => src.User.Role.Name));
+
             CreateMap<UserComment, CommentViewIdModel>();
             CreateMap<CommentAddModel, UserComment>();
             CreateMap<CommentUpdateModel, UserComment>();
@@ -83,7 +84,8 @@ namespace WebApi.Mappings
 
             CreateMap<UserComment, AdminCommentViewModel>()
             .ForMember(ac => ac.UserType, opt => opt.MapFrom(src => src.User.Role.Name))
-            .ForMember(ac => ac.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
+            .ForMember(ac => ac.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
+            .ForMember(dest => dest.UserMail, opt => opt.MapFrom(src => src.User.Email));
 
 
         }
