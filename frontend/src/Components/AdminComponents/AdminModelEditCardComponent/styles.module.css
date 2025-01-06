@@ -1,0 +1,52 @@
+.inputs {
+    border: none;
+    border-bottom: 1px solid #b3b3b3;
+    font-size: 0.9rem;
+    outline: none;
+    color: #7A7A7A;
+    height: 35px;
+}
+
+.inputs:hover {
+    border-bottom: 1px solid red;
+    outline: none;
+    cursor: pointer;
+}
+
+.inputs:focus {
+    border-bottom: 1px solid red;
+    outline: none;
+    color: black;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    background-color: #1A2B48;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.btn:hover {
+    background-color: #2c497c;
+}
+
+.deleteBtn {
+    outline: none;
+    border: none;
+    background-color: #E00000;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.deleteBtn:hover {
+    background-color: #f32b2b;
+}
