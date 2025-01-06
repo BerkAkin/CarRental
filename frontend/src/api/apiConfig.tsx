@@ -14,12 +14,10 @@ export const endpoints = {
     login: "/Login",
     logout: "/Logout",
 
-    users: "/Users",
     ownInfo: "/Users/OwnInfo",
     ownAccountDelete: "/Users/OwnAccountDelete",
 
     models: "/Models/",
-    modelSummaries: "/Models/Summary",
 
     favorites: "/Favorites",
 
