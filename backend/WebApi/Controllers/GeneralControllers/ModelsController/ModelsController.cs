@@ -17,7 +17,7 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         }
 
 
-        [Authorize(Roles = "1")]
+
         [HttpGet]
         public async Task<ActionResult<List<ModelViewModel>>> GetAll([FromQuery] int pageNumber = 1)
         {
