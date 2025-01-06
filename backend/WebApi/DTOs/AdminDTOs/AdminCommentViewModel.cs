@@ -7,6 +7,7 @@ namespace WebApi.DTOs.AdminDTOs
         public int StarCount { get; set; }
         public bool isActive { get; set; }
         public string UserName { get; set; }
+        public string UserMail { get; set; }
         public string UserType { get; set; }
     }
 }
