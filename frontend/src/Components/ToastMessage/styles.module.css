@@ -1,0 +1,14 @@
+.toastContainer {
+    position: fixed;
+    top: 90%;
+    z-index: 10000;
+    justify-content: center;
+    display: flex;
+}
+
+.toastBtn {
+    border: none;
+    outline: none;
+    background-color: var(--TMBgColor) !important;
+    color: var(--TMColor) !important;
+}
