@@ -1,0 +1,41 @@
+.navBtn {
+    color: #1A2B48 !important;
+    text-decoration: none !important;
+    font-size: 0.9em !important;
+    font-weight: 700 !important;
+    border-radius: 0 !important;
+}
+
+
+
+.addBtn {
+    outline: none;
+    border: none;
+    background-color: #1e481a;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.addBtn:hover {
+    background-color: #3f7c2c;
+}
+
+.addBtnCancel {
+    outline: none;
+    border: none;
+    background-color: #b30000;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.addBtnCancel:hover {
+    background-color: #d63200;
+}

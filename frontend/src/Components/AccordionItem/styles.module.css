@@ -1,0 +1,29 @@
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    opacity: 0;
+}
+
+.accordionContentActive {
+    max-height: 150px;
+    font-size: 0.9em;
+    color: #7a7a7a;
+    opacity: 1;
+}
+
+.btn {
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #E7F1FF;
+    color: #0C63E4;
+}
+
+.btnActive {
+    height: 50px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    color: black;
+}

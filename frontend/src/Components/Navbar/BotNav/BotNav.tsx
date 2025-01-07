@@ -5,12 +5,14 @@ import flexperLogo from '../../../assets/logos/logo-flexper.png';
 import { useEffect, useState } from 'react';
 import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
+import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
 
 interface BotNavProps {
   openModal: (content: 'login' | 'register') => void;
 }
 
 function BotNav({ openModal }: BotNavProps) {
+  const { showToast } = useToastManagerContext();
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
 
@@ -24,16 +26,16 @@ function BotNav({ openModal }: BotNavProps) {
     try {
       await apiService(endpoints.logout, "GET");
       localStorage.removeItem("accessToken");
-      alert("Çıkış Yapıldı");
+      showToast("Çıkış Yapıldı", "s");
       window.location.reload();
     }
     catch (error) {
       console.error("Çıkış işlemi sırasında hata:", error);
+      showToast("Çıkış Yapılamadı", "d");
     }
 
 
   }
-
 
   return (
     <>

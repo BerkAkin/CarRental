@@ -1,0 +1,40 @@
+.infos {
+    border: 1px solid #b3b3b3;
+    outline: none;
+    color: #3f3f3f;
+    width: 100%;
+    height: 35px;
+}
+
+.infos:hover {
+    border-bottom: 1px solid red;
+    outline: none;
+    cursor: pointer;
+}
+
+.infos:focus {
+    border-bottom: 1px solid red;
+    outline: none;
+}
+
+.label {
+    font-size: 1.15rem;
+}
+
+
+
+.btn {
+    outline: none;
+    border: none;
+    background-color: #1A2B48;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.btn:hover {
+    background-color: #2c497c;
+}

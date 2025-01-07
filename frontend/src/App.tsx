@@ -1,8 +1,9 @@
-import MainContainer from "./Components/MainContainer/MainContainer";
+import MainRoutingComponent from "./Components/MainRoutingComponent/MainRoutingComponent";
 import { AuthContextProvider } from "./Contexts/AuthContext";
 import { SliderDataProvider } from "./Contexts/SliderContext";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCar, faParking, faGasPump, faRoad, faKey, faHandSparkles } from '@fortawesome/free-solid-svg-icons';
+import { ToastManagerContextProvider } from "./Contexts/ToastManagerContext";
 library.add(faCar, faParking, faGasPump, faRoad, faKey, faHandSparkles)
 
 function App() {
@@ -10,13 +11,13 @@ function App() {
   document.body.appendChild(signatureOfDev);
   return (
     <div className="App">
-      <AuthContextProvider>
-        <SliderDataProvider>
-          <MainContainer />
-        </SliderDataProvider>
-      </AuthContextProvider>
-
-
+      <ToastManagerContextProvider>
+        <AuthContextProvider>
+          <SliderDataProvider>
+            <MainRoutingComponent />
+          </SliderDataProvider>
+        </AuthContextProvider>
+      </ToastManagerContextProvider>
     </div>
   );
 }
