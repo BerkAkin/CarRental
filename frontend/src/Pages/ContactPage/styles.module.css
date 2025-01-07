@@ -1,0 +1,72 @@
+.headerColoring {
+    background-color: #ffffff27;
+    min-height: 700px;
+}
+
+.bodyColoring {
+    background-color: white;
+}
+
+.inputAreas {
+    border: 1px solid rgb(184, 184, 184);
+    height: 40px;
+    outline: none;
+}
+
+.inputAreas:focus {
+    border-bottom: red 3px solid;
+}
+
+.inputAreas:hover {
+    border-bottom: red 3px solid;
+}
+
+.permissionTextSize {
+    font-size: 14px;
+
+}
+
+.permissionTextColor {
+    color: rgb(109, 109, 109);
+}
+
+.btn {
+    background-color: #1A2B48;
+    color: white;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    height: 35px;
+    font-size: 1.2rem;
+}
+
+.btn:hover {
+    background-color: #2c497c;
+}
+
+.otherInputArea {
+    border: 1px solid rgb(184, 184, 184);
+
+    outline: none;
+}
+
+.otherInputArea:hover {
+    border-bottom: red 3px solid;
+}
+
+.otherInputArea:focus {
+    border-bottom: red 3px solid;
+}
+
+.radioBtn {
+    background-color: #4caf50;
+    border-color: #4caf50;
+}
+
+.otherDiv {
+    height: 40px;
+}
+
+.error {
+    color: red;
+}
