@@ -17,12 +17,17 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
     try {
         const response = await axios({ method, url, data, headers, withCredentials: true });
         return response.data;
-    } catch (e) {
-        if (axios.isAxiosError(e)) {
-            console.error('Axios error: ', e.response?.data || e.message);
-            throw new Error(e.response?.data.message);
+    }
+    catch (error: any) {
+        if (axios.isAxiosError(error)) {
+            if (error.response) {
+                const { status, data } = error.response;
+                throw { status, message: data.message };
+            }
+            else {
+                throw new Error("Ağ hatası veya bağlantı hatası.");
+            }
         }
-
     }
 }
 
