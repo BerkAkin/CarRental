@@ -13,7 +13,7 @@ namespace WebApi.Services.GeneralServices.FavoriteService
 
         public async Task<List<FavoriteViewModel>> GetOwnFavoritesAsync(int UserId)
         {
-            var favoritesList = await _repository.GetOwnFavoritesAsync(query => query.Include(src => src.Model.CarType).Include(src => src.Model.GearType).Where(src => src.UserId == UserId));
+            var favoritesList = await _repository.GetOwnFavoritesAsync(query => query.Include(src => src.Model).ThenInclude(src => src.CarType).Include(src => src.Model.GearType).Where(src => src.UserId == UserId));
             if (favoritesList is null)
             {
                 throw new KeyNotFoundException("Favoriler Bulunamadı");
