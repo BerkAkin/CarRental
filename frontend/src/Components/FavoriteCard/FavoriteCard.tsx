@@ -6,6 +6,7 @@ import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListElement from '../ListElement/ListElement';
 import dummyImg from "../../assets/images/AboutUsImages/img";
+import Icon from '../Icon/Icon';
 
 
 interface favoriteCardProps {
@@ -42,8 +43,12 @@ function FavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, 
                 <div className='container mt-1 text-center' >
                     <hr className={`${styles.hrColor}`} />
                     <div className='row'>
-                        <div className='col-6'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
-                        <div className='col-6'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></div>
+                        <div className='col-6'>
+                            <Icon TooltipText='Kişi Sayısı'> <img className={`border  p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></Icon>
+                        </div>
+                        <div className='col-6'>
+                            <Icon TooltipText='Şanzıman'> <img className={`border  p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></Icon>
+                        </div>
                     </div>
                     <div className='row'>
                         <div className={`${styles.iconFont} col-6`}>{personCount}</div>
