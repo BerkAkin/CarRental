@@ -9,6 +9,8 @@ import dummyImg from "../../assets/images/AboutUsImages/img";
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
+import Tooltip from '../Tooltip/Tooltip';
+import Icon from '../Icon/Icon';
 
 interface ModelCardProps {
     id: number;
@@ -29,13 +31,30 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
 
     const addFavorite = async (id: number) => {
         try {
-            const data = await apiService(endpoints.favorites, "POST", id);
+            await apiService(endpoints.favorites, "POST", id);
             showToast("Araç Favorilere eklendi", "s")
-        } catch (error) {
-            console.log(error);
-            showToast("Araç Favorilere eklenemedi", "d")
+        } catch (error: any) {
+            const errorMessage = error.status;
+            switch (errorMessage) {
+                case 401:
+                    showToast("Yetkisiz işlem. Lütfen giriş yapın !", "d");
+                    break;
+                case "403":
+                    showToast("Bu işlemi gerçekleştiremezsiniz", "d");
+                    break;
+                case "404":
+                    showToast("Kaynak bulunamadı.", "d");
+                    break;
+                case "500":
+                    showToast("Sunucu hatası oluştu. Lütfen tekrar deneyin.", "d");
+                    break;
+                default:
+                    showToast("Bir hata oluştu. Lütfen tekrar deneyin.", "d");
+                    break;
+            }
         }
     }
+
     return (
         <>
             <div className={`${styles.cardBg} border `}>
@@ -57,10 +76,21 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                 <div className='container mt-4 text-center' >
                     <hr className={`${styles.hrColor}`} />
                     <div className='row'>
-                        <div className='col-3'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.PersonIcon}></img></div>
-                        <div className='col-3'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></div>
-                        <div className='col-3'> <img className={`border  p-1 ${styles.IconSize}`} src={Icons.LuggageIcon}></img></div>
-                        <div className='col-3'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.CarDoorIcon}></img></div>
+                        <div className='col-3'>
+                            <Icon TooltipText='Kişi Kapasitesi'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.PersonIcon} /></Icon>
+                        </div>
+                        <div className='col-3'>
+                            <Icon TooltipText='Şanzıman'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.GearIcon}></img></Icon>
+
+                        </div>
+                        <div className='col-3'>
+                            <Icon TooltipText='Bagaj'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.LuggageIcon}></img></Icon>
+
+                        </div>
+                        <div className='col-3'>
+                            <Icon TooltipText='Kapı Sayısı'><img className={`border  p-1 ${styles.IconSize}`} src={Icons.CarDoorIcon}></img></Icon>
+
+                        </div>
                     </div>
                     <div className='row'>
                         <div className={`${styles.iconFont} col-3`}>{personCount}</div>

@@ -12,6 +12,7 @@ import SliderModelCard from '../../Components/SliderModelCard/SliderModelCard';
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import ListElement from '../../Components/ListElement/ListElement';
+import Icon from '../../Components/Icon/Icon';
 
 interface ModelDetailsProps {
     id: number,
@@ -132,13 +133,13 @@ function ModelDetailPage() {
                                     <div className='container mt-1'>
                                         <div className='row'>
                                             <div className='col-2 d-flex justify-content-center'>
-                                                <img className={`${styles.IconSize}`} src={Icons.PersonIcon}></img>
+                                                <Icon TooltipText='Kişi Kapasitesi'><img className={`${styles.IconSize}`} src={Icons.PersonIcon}></img></Icon>
                                             </div>
                                             <div className='col-2 d-flex justify-content-center'>
-                                                <img className={`${styles.IconSize}`} src={Icons.LuggageIcon}></img>
+                                                <Icon TooltipText='Bagaj'> <img className={`${styles.IconSize}`} src={Icons.LuggageIcon}></img></Icon>
                                             </div>
                                             <div className='col-2 d-flex justify-content-center '>
-                                                <img className={`${styles.IconSize}`} src={Icons.CarDoorIcon}></img>
+                                                <Icon TooltipText='Kapı Sayısı'> <img className={`${styles.IconSize}`} src={Icons.CarDoorIcon}></img></Icon>
                                             </div>
                                         </div>
                                         <div className='row'>

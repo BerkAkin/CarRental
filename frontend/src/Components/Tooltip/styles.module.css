@@ -1,0 +1,23 @@
+.tooltipContainer {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    padding: 2px;
+    background-color: white;
+    color: #7A7A7A;
+    border-radius: 5px;
+    border: 1px solid #969696;
+    font-size: 0.75rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 100;
+    text-align: center;
+}
+
+.tooltipContainer.visible {
+    visibility: visible;
+    opacity: 1;
+}
