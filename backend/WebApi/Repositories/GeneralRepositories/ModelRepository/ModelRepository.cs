@@ -13,6 +13,7 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
 
         public async Task<(IEnumerable<Model>, int TotalCounts)> GetAllPaginatedAsync(int pageNumber, int pageSize, Func<IQueryable<Model>, IQueryable<Model>> func = null)
         {
+
             IQueryable<Model> data = _context.Set<Model>();
             if (func is not null)
             {
@@ -20,10 +21,10 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
             }
             int totalCounts = await data.CountAsync();
             var paginatedData = await data.OrderByDescending(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
-
             return (paginatedData, totalCounts);
-
         }
+
+
 
 
         public async Task<(IEnumerable<Model>, int TotalRecords)> GetAllSummaryPaginatedAsync(int pageNumber, int pageSize, Func<IQueryable<Model>, IQueryable<Model>> func = null)
@@ -41,6 +42,7 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
             var paginatedData = await query.OrderByDescending(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return (paginatedData, totalRecords);
+
         }
 
     }
