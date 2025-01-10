@@ -1,7 +1,8 @@
+using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.Favorites;
-using WebApi.DTOs.Models;
+using WebApi.Exceptions;
 using WebApi.Services.GeneralServices.FavoriteService;
 
 namespace WebApi.Controllers.GeneralControllers.FavoriteController
@@ -21,8 +22,12 @@ namespace WebApi.Controllers.GeneralControllers.FavoriteController
         [HttpGet]
         public async Task<ActionResult<List<FavoriteViewModel>>> GetOwnFavoritesAsync()
         {
+
             var data = await _service.GetOwnFavoritesAsync(Convert.ToInt32(UserId));
             return Ok(data);
+
+
+
         }
 
         [Authorize(Roles = "1,2")]
@@ -38,8 +43,11 @@ namespace WebApi.Controllers.GeneralControllers.FavoriteController
         [HttpDelete]
         public async Task<ActionResult> DeleteFavorite([FromBody] int modelId)
         {
+
             await _service.RemoveFavorite(Convert.ToInt32(UserId), modelId);
             return Ok("Favorilerden Kaldırıldı");
+
+
         }
     }
 }
