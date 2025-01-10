@@ -7,6 +7,7 @@ namespace WebApi.Common
         public const string FAVORITE_NOT_FOUND = "Favori bulunamadı";
         public const string FAVORITES_NOT_FOUND = "Favoriler bulunamadı";
         public const string FAVORITE_ALREADY_EXISTS = "Araç zaten favorilere eklenmiş";
+        public const string FAVORITE_DELETE_FAIL = "Araç favorilerden kaldırılamadı";
         public const string NO_LOGGED_IN_USER = "Giriş yapmış bir kullanıcı yok";
 
         public const string NO_USER_OR_REFRESH_TOKEN = "Kullanıcı bulunamadı veya refresh token geçersiz";
