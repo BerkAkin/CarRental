@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.DbOperations;
+using WebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
