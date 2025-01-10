@@ -31,18 +31,18 @@ namespace WebApi.Middlewares
             {
                 DatabaseException => 500,
                 KeyNotFoundException => 404,
-                ArgumentNullException => 400,
                 InvalidOperationException => 400,
                 DuplicateNameException => 409,
+                _ => 500
             };
 
             var message = exception switch
             {
                 DatabaseException => "Sunucu tarafında hata oluştu, lütfen yöneticiyle iletişime geçin: ",
                 KeyNotFoundException => "Veri bulunamadı: ",
-                ArgumentNullException => "Girdi hatası: ",
                 InvalidOperationException => "Geçersiz işlem: ",
                 DuplicateNameException => "Çoklu veri hatası: ",
+                _ => "Bilinmeyen bir hata oluştu."
 
             };
 
