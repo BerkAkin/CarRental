@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.User;
+using WebApi.Exceptions;
 using WebApi.Services;
 using WebApi.Services.UserService;
 
@@ -29,17 +30,9 @@ namespace WebApi.Controllers.UserController.UserController
         public async Task<ActionResult<UserViewIdModel>> GetOwnInfo()
         {
 
-            try
-            {
+            var data = await _userService.GetOwnInfo(Convert.ToInt32(UserId));
+            return Ok(data);
 
-                var data = await _userService.GetOwnInfo(Convert.ToInt32(UserId));
-                return Ok(data);
-            }
-            catch (Exception ex)
-            {
-
-                return NotFound(new { message = ex.Message });
-            }
 
         }
 
@@ -47,15 +40,11 @@ namespace WebApi.Controllers.UserController.UserController
         [HttpPut("OwnInfo")]
         public async Task<ActionResult> UpdateOwnInfo([FromBody] UserUpdateModel model)
         {
-            try
-            {
-                await _userService.UpdateOwnInfo(Convert.ToInt32(UserId), model);
-                return Ok("Güncelleme Başarılı");
-            }
-            catch (Exception ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
+
+            await _userService.UpdateOwnInfo(Convert.ToInt32(UserId), model);
+            return Ok("Güncelleme Başarılı");
+
+
 
         }
 
@@ -88,15 +77,10 @@ namespace WebApi.Controllers.UserController.UserController
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateUserAsync(int id, [FromBody] AdminUserUpdateModel model)
         {
-            try
-            {
-                await _userService.UpdateAsync(id, model);
-                return Ok("Güncelleme İşlemi başarılı.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Sunucu hatası: {ex.Message}");
-            }
+
+            await _userService.UpdateAsync(id, model);
+            return Ok("Güncelleme İşlemi başarılı.");
+
         }
 
         [Authorize(Roles = "1")]

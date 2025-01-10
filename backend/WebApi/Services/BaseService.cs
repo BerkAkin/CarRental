@@ -1,4 +1,6 @@
 using AutoMapper;
+using WebApi.Common;
+using WebApi.Exceptions;
 using WebApi.Repositories;
 using WebApi.Repository;
 
@@ -20,54 +22,87 @@ namespace WebApi.Services
 
         public virtual async Task<List<TViewModel>> GetAllAsync()
         {
+
             var entities = await _repository.GetAllAsync();
             if (entities == null)
             {
-                throw new InvalidOperationException("Veriler Bulunamadı");
+                throw new KeyNotFoundException(ErrorMessages.GENERALS_NOT_FOUND);
             }
             return _mapper.Map<List<TViewModel>>(entities);
+
+
         }
 
         public virtual async Task<TViewIdModel> GetByIdAsync(int id)
         {
+
             var entity = await _repository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new InvalidOperationException("Veri Bulunamadı");
+                throw new KeyNotFoundException(ErrorMessages.GENERAL_NOT_FOUND);
             }
             return _mapper.Map<TViewIdModel>(entity);
+
+
         }
 
         public virtual async Task AddAsync(TAddModel model)
         {
-            if (model == null)
-            {
-                throw new ArgumentNullException("Veri Boş Olamaz");
-            }
 
             var entity = _mapper.Map<TEntity>(model);
-            await _repository.AddAsync(entity);
+            try
+            {
+                await _repository.AddAsync(entity);
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
         }
 
         public virtual async Task UpdateAsync(int id, TUpdateModel model)
         {
+
             var entity = await _repository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new ArgumentNullException($"Güncellencek Veri Bulunamadı");
+                throw new KeyNotFoundException(ErrorMessages.GENERAL_UPDATE_FAIL);
             }
             _mapper.Map(model, entity);
-            await _repository.UpdateAsync(entity);
+            try
+            {
+                await _repository.UpdateAsync(entity);
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
+
         }
 
         public virtual async Task DeleteAsync(int id)
         {
+
             var entity = await _repository.GetByIdAsync(id);
             if (entity == null)
             {
-                throw new KeyNotFoundException("Silinecek Veri Bulunamadı");
+                throw new KeyNotFoundException(ErrorMessages.GENERAL_DELETE_FAIL);
             }
-            await _repository.DeleteAsync(entity);
+            try
+            {
+                await _repository.DeleteAsync(entity);
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
+
         }
 
 

@@ -1,5 +1,6 @@
 using WebApi.DbOperations;
 using WebApi.Entities;
+using WebApi.Exceptions;
 
 namespace WebApi.Repositories.TokenRepository
 {
@@ -13,8 +14,10 @@ namespace WebApi.Repositories.TokenRepository
 
         public async Task UpdateAsync(User entity)
         {
+
             _context.Set<User>().Update(entity);
             await _context.SaveChangesAsync();
+
         }
 
 

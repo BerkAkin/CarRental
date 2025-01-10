@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using WebApi.DTOs.Models;
+using WebApi.Exceptions;
 using WebApi.Services.GeneralServices.ModelService;
 
 namespace WebApi.Controllers.GeneralControllers.ModelsController
@@ -21,6 +22,7 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         [HttpGet]
         public async Task<ActionResult<List<ModelViewModel>>> GetAll([FromQuery] int pageNumber = 1)
         {
+
             if (pageNumber < 1)
             {
                 return BadRequest("Sayfa numarası 1 veya daha büyük olmalıdır.");
@@ -35,6 +37,8 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
                 Data = data
             };
             return Ok(response);
+
+
         }
 
         [HttpGet("Summary")]
@@ -58,13 +62,18 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
             };
 
             return Ok(response);
+
+
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ModelViewIdModel>> GetById(int id)
         {
+
             var data = await _service.GetByIdAsync(id);
             return Ok(data);
+
+
         }
 
 
@@ -73,38 +82,31 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         [HttpPost]
         public async Task<ActionResult> AddAsync(ModelAddModel model)
         {
-            try
-            {
-                await _service.AddAsync(model);
-                return Ok("Ekleme İşlemi başarılı.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Sunucu hatası: {ex.Message}");
-            }
+
+            await _service.AddAsync(model);
+            return Ok("Ekleme İşlemi başarılı.");
+
         }
 
         [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
+
             await _service.DeleteAsync(id);
             return Ok("Silme İşlemi Başarılı");
+
+
         }
 
         [Authorize(Roles = "1")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAsync(int id, ModelUpdateModel model)
         {
-            try
-            {
-                await _service.UpdateAsync(id, model);
-                return Ok("Güncelleme İşlemi başarılı.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Sunucu hatası: {ex.Message}");
-            }
+
+            await _service.UpdateAsync(id, model);
+            return Ok("Güncelleme İşlemi başarılı.");
+
         }
 
 

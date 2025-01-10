@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.DbOperations;
 using WebApi.Entities;
+using WebApi.Exceptions;
 
 namespace WebApi.Repositories.AuthRepository
 {
@@ -16,8 +17,8 @@ namespace WebApi.Repositories.AuthRepository
         {
             await _context.Set<User>().AddAsync(entity);
             await _context.SaveChangesAsync();
-
             var user = await FindUser(entity.Email);
+
             await _context.UserComments.AddAsync(new UserComment
             {
                 Content = "",
@@ -43,7 +44,10 @@ namespace WebApi.Repositories.AuthRepository
 
         public async Task<User> GetUserByRefreshToken(string refreshToken)
         {
-            return _context.Users.SingleOrDefault(u => u.RefreshToken == refreshToken);
+
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.RefreshToken == refreshToken);
+            return user;
+
         }
 
 

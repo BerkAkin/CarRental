@@ -2,7 +2,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using WebApi.Common;
 using WebApi.Entities;
+using WebApi.Exceptions;
 using WebApi.Repositories.TokenRepository;
 
 namespace WebApi.Services.TokenService
@@ -20,24 +22,34 @@ namespace WebApi.Services.TokenService
 
         public string GenerateAccessToken(User user)
         {
-            var claims = new[]{
+            try
+            {
+                var claims = new[]{
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Email),
                 new Claim(ClaimTypes.Role, user.RoleId.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(40),
-                signingCredentials: creds
-            );
+                var token = new JwtSecurityToken(
+                    issuer: _config["Jwt:Issuer"],
+                    audience: _config["Jwt:Audience"],
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(40),
+                    signingCredentials: creds
+                );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
+
         }
 
         public string GenerateRefreshToken()
@@ -47,10 +59,22 @@ namespace WebApi.Services.TokenService
 
         public async void RevokeRefreshToken(User user)
         {
-            user.RefreshToken = null;
-            user.RefreshTokenExpiryTime = DateTime.MinValue;
-            await _repository.UpdateAsync(user);
+            try
+            {
+                user.RefreshToken = null;
+                user.RefreshTokenExpiryTime = DateTime.MinValue;
+                await _repository.UpdateAsync(user);
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
         }
+
+
+
 
 
 

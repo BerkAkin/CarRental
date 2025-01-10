@@ -21,7 +21,9 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
     catch (error: any) {
         if (axios.isAxiosError(error)) {
             if (error.response) {
+
                 const { status, data } = error.response;
+
                 throw { status, message: data.message };
             }
             else {
