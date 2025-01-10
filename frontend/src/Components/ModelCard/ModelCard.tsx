@@ -39,14 +39,18 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                 case 401:
                     showToast("Yetkisiz işlem. Lütfen giriş yapın !", "d");
                     break;
-                case "403":
+                case 403:
                     showToast("Bu işlemi gerçekleştiremezsiniz", "d");
                     break;
-                case "404":
+                case 404:
                     showToast("Kaynak bulunamadı.", "d");
                     break;
-                case "500":
+                case 500:
                     showToast("Sunucu hatası oluştu. Lütfen tekrar deneyin.", "d");
+                    console.log(error);
+                    break;
+                case 409:
+                    showToast("Zaten Eklenmiş", "d");
                     break;
                 default:
                     showToast("Bir hata oluştu. Lütfen tekrar deneyin.", "d");
