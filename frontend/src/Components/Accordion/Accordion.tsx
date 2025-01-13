@@ -6,11 +6,11 @@ interface AccordionItemData {
     title: string;
     content: string;
 }
+interface AccordionItems {
+    data: AccordionItemData[];
+}
 
-function Accordion() {
-
-    const { FAQs } = useFAQContext();
-
+function Accordion({ data }: AccordionItems) {
 
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -20,7 +20,7 @@ function Accordion() {
 
     return (
         <div>
-            {FAQs?.map((item: AccordionItemData, index: number) => (
+            {data?.map((item: AccordionItemData, index: number) => (
                 <AccordionItem
                     key={index}
                     title={item.title}
