@@ -31,6 +31,8 @@ export const CommentContextProvider = ({ children }: any) => {
 
     const [comments, setComments] = useState<Comments>();
     const [commentsCurrentPage, setCommentsCurrentPage] = useState<number>(1);
+    const [error, setError] = useState<string>();
+    const [loading, setLoading] = useState<boolean>(true);
 
 
     const HandleNextCommentPage = () => {
@@ -59,6 +61,10 @@ export const CommentContextProvider = ({ children }: any) => {
             setComments(fetchedComments);
         } catch (error) {
             console.log(error)
+            setError("Yorumlar yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
+        }
+        finally {
+            setLoading(false);
         }
     }, []);
 
@@ -89,6 +95,8 @@ export const CommentContextProvider = ({ children }: any) => {
         refuseComment: refuseComment,
         acceptComment: acceptComment,
         comments: comments,
+        loading: loading,
+        error: error,
         nextPage: HandleNextCommentPage,
         previousPage: HandlePreviousCommentPage
     }
