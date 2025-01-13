@@ -35,7 +35,7 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
 
     const [settings, setSettings] = useState<SiteSettings>();
     const [error, setError] = useState<string>();
-    const [loading, setLoading] = useState<boolean>(true);
+
 
     const fetchSettings = useCallback(async () => {
         try {
@@ -45,9 +45,6 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
         catch (error) {
             console.log(error);
             setError("Modeller yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
-        }
-        finally {
-            setLoading(false);
         }
 
     }, []);
@@ -100,7 +97,7 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
             updateReasonTexts,
             settings,
             error: error,
-            loading: loading
+
         }),
         [updateMainText, updateServiceTexts, updateReasonTexts, settings]
     );
