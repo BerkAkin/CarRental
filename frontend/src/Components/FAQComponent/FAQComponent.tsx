@@ -5,9 +5,9 @@ import { useFAQContext } from '../../Contexts/FAQContext';
 
 function FAQComponent() {
 
-    const { loading, error, FAQs } = useFAQContext();
+    const { error, FAQs } = useFAQContext();
 
-    if (loading) return <p>Yükleniyor</p>
+
     if (error) return <p>{error}</p>
 
     return (
