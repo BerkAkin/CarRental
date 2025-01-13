@@ -5,7 +5,9 @@ import { useInfoContext } from '../../Contexts/UserInfoContext'
 
 
 function UserProfileComponent() {
-    const { userInfo, updateUserInfo } = useInfoContext();
+    const { userInfo, updateUserInfo, loading, error } = useInfoContext();
+    if (loading) return <p>Yükleniyor</p>
+    if (error) return <p>{error}</p>
     return (
         <>
             {userInfo ? (
