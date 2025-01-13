@@ -47,6 +47,7 @@ function ModelDetailPage() {
 
     const { id } = useParams();
     const [modelDetail, setModelDetail] = useState<ModelDetailsProps>();
+    const [error, setError] = useState<string>("");
 
     useEffect(() => {
         const getDetail = async () => {
@@ -54,13 +55,15 @@ function ModelDetailPage() {
                 const response = await apiService(endpoints.models + id, "GET");
                 setModelDetail(response);
             } catch (error) {
-                console.log("Model detayları alınırken hata:", error);
+                setError("Model detaylarını görüntülerken bir hata meydana geldi. Lütfen yöneticinize başvurun");
+                console.error(error);
             }
         }
         getDetail();
     }, [])
 
 
+    if (error) return <p>{error}</p>
 
     return (
         <>
