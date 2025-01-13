@@ -34,10 +34,22 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
     const { showToast } = useToastManagerContext();
 
     const [settings, setSettings] = useState<SiteSettings>();
+    const [error, setError] = useState<string>();
+    const [loading, setLoading] = useState<boolean>(true);
 
     const fetchSettings = useCallback(async () => {
-        const fetchedSettings = await apiService(endpoints.homepage, "GET");
-        setSettings(fetchedSettings);
+        try {
+            const fetchedSettings = await apiService(endpoints.homepage, "GET");
+            setSettings(fetchedSettings);
+        }
+        catch (error) {
+            console.log(error);
+            setError("Modeller yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
+        }
+        finally {
+            setLoading(false);
+        }
+
     }, []);
 
     useEffect(() => {
@@ -87,6 +99,8 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
             updateServiceTexts,
             updateReasonTexts,
             settings,
+            error: error,
+            loading: loading
         }),
         [updateMainText, updateServiceTexts, updateReasonTexts, settings]
     );
