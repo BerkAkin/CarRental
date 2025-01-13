@@ -5,7 +5,10 @@ import styles from "./styles.module.css"
 
 function AdminSiteComponent() {
 
-    const { settings, updateMainText, updateServiceTexts, updateReasonTexts } = useSiteSettingsContext();
+    const { loading, error, settings, updateMainText, updateServiceTexts, updateReasonTexts } = useSiteSettingsContext();
+
+    if (loading) return <p>Yükleniyor</p>
+    if (error) return <p>{error}</p>
 
     return (
         <>
