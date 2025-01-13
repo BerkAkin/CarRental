@@ -17,7 +17,7 @@ export const UserInfoContextProvider = ({ children }: any) => {
 
     const [userInfo, setUserInfo] = useState<InfoFormProps>();
     const [error, setError] = useState<string>();
-    const [loading, setLoading] = useState<boolean>(true);
+
 
 
     const fetchInfo = useCallback(async () => {
@@ -27,8 +27,6 @@ export const UserInfoContextProvider = ({ children }: any) => {
         } catch (error) {
             setError("Kullanıcı bilgileri alınırken hata oluştu. Lütfen yöneticinize başvurun")
             console.log(error)
-        } finally {
-            setLoading(false);
         }
     }, [])
 
@@ -50,7 +48,6 @@ export const UserInfoContextProvider = ({ children }: any) => {
     const values = {
         userInfo: userInfo,
         error: error,
-        loading: loading,
         updateUserInfo: updateUserInfo
     }
 
