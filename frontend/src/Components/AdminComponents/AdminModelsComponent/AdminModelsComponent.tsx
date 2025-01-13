@@ -9,9 +9,9 @@ import AdminModelEditCardComponent from "../AdminModelEditCardComponent/AdminMod
 function AdminModelsComponent() {
 
     const { gears, fuels, carTypes } = useTypesContext();
-    const { HandleNextModelPage, HandlePreviousModelPage, models, error, loading } = useModelsContext();
+    const { HandleNextModelPage, HandlePreviousModelPage, models, error } = useModelsContext();
 
-    if (loading) return <p>Yükleniyor</p>
+
     if (error) return <p>{error}</p>
 
     return (
