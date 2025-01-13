@@ -1,7 +1,10 @@
 import axios from "axios";
 import { BASE_URL, endpoints } from "./apiConfig";
+import ToastMessage from "../Components/ToastMessage/ToastMessage";
+import { useToastManagerContext } from "../Contexts/ToastManagerContext";
 
 async function apiService(endpoint: string, method: string = "GET", data: any = null, params: string = "") {
+
 
     const url = `${BASE_URL}${endpoint}${params}`;
     const token = localStorage.getItem("accessToken") || "";
@@ -17,17 +20,19 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
     try {
         const response = await axios({ method, url, data, headers, withCredentials: true });
         return response.data;
+
     }
     catch (error: any) {
         if (axios.isAxiosError(error)) {
             if (error.response) {
 
                 const { status, data } = error.response;
+                console.log(status, data, error, error.response)
 
                 throw { status, message: data.message };
             }
             else {
-                throw new Error("Ağ hatası veya bağlantı hatası.");
+                throw new Error("Sunucuya bağlanılamadı");
             }
         }
     }
