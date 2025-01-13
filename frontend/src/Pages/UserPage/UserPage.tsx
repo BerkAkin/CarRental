@@ -42,7 +42,6 @@ function UserPage() {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -57,8 +56,6 @@ function UserPage() {
             } catch (error) {
                 setError("Kullanıcı yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
 
-            } finally {
-                setLoading(false);
             }
 
         }
@@ -104,7 +101,6 @@ function UserPage() {
         }
     }
 
-    if (loading) return <p>Yükleniyor</p>
     if (error) return <p>{error}</p>
 
     return (
