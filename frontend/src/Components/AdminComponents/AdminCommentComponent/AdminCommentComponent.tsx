@@ -4,8 +4,9 @@ import { useCommentsContext } from '../../../Contexts/CommentContext';
 
 function AdminCommentComponent() {
 
-    const { comments, acceptComment, refuseComment, nextPage, previousPage } = useCommentsContext();
-
+    const { comments, acceptComment, refuseComment, nextPage, previousPage, loading, error } = useCommentsContext();
+    if (loading) return <p>Yükleniyor</p>
+    if (error) return <p>{error}</p>
     return (
         <div>
             <table className="table-striped table-hover table m-0 mt-4">

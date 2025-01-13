@@ -45,6 +45,8 @@ const modelsContext = createContext<any>({})
 export const ModelsContextProvider = ({ children }: any) => {
 
     const [models, setModels] = useState<Model>();
+    const [error, setError] = useState<string>();
+    const [loading, setLoading] = useState<boolean>(true);
     const [modelCurrentPage, setModelCurrentPage] = useState<number>(1);
 
 
@@ -73,6 +75,10 @@ export const ModelsContextProvider = ({ children }: any) => {
             setModels(models);
         } catch (error) {
             console.log(error);
+            setError("Modeller yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
+        }
+        finally {
+            setLoading(false);
         }
 
     }, [])
@@ -92,6 +98,8 @@ export const ModelsContextProvider = ({ children }: any) => {
         HandleNextModelPage: HandleNextModelPage,
         HandlePreviousModelPage: HandlePreviousModelPage,
         models: models,
+        error: error,
+        loading: loading,
     }
 
 

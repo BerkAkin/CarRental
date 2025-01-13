@@ -13,7 +13,7 @@ import groupInThrees from '../../common/GroupSplitter';
 
 
 function LandingPage() {
-  const { textData } = useSliderContext();
+  const { sliderError, sliderLoading, textData } = useSliderContext();
 
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -27,8 +27,8 @@ function LandingPage() {
         console.log(data);
       }
       catch (err) {
-
-        setError(`${err}`);
+        setError("Anasayfada bir hata meydana geldi. Lütfen yöneticinize başvurun");
+        console.error(error);
       }
       finally {
         setLoading(false);
@@ -56,9 +56,20 @@ function LandingPage() {
       <WhyInfo ImgURL="image2.jpg" InfoBars={groupedData[1] || []} Align={true} />
       <ServicesInfo ServicesLeft={groupedService[0] || []} ServicesRight={groupedService[1] || []} />
 
-      <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={textData || []} renderFunction={(item) => (
-        <SliderCommentCard Content={item.content} Username={item.userName} StarCount={item.starCount} UserType={item.userType} />
-      )} />
+      <div className='my-3 pt-5'>
+        {
+          sliderError ?? { sliderError }
+        }
+        {
+          sliderLoading ?? "Yükleniyor"
+        }
+        {
+          <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={textData || []} renderFunction={(item) => (
+            <SliderCommentCard Content={item.content} Username={item.userName} StarCount={item.starCount} UserType={item.userType} />
+          )} />
+        }
+
+      </div>
 
 
     </div>
