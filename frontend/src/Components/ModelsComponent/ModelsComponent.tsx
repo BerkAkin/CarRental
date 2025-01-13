@@ -6,9 +6,8 @@ import { useState } from 'react';
 
 function ModelsComponent() {
 
-    const { loading, error, models, HandleNextModelPage, HandlePreviousModelPage } = useModelsContext();
+    const { error, models, HandleNextModelPage, HandlePreviousModelPage } = useModelsContext();
 
-    if (loading) return <p>Yükleniyor</p>
     if (error) return <p>{error}</p>
 
 
