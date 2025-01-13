@@ -4,8 +4,8 @@ import { useCommentsContext } from '../../../Contexts/CommentContext';
 
 function AdminCommentComponent() {
 
-    const { comments, acceptComment, refuseComment, nextPage, previousPage, loading, error } = useCommentsContext();
-    if (loading) return <p>Yükleniyor</p>
+    const { comments, acceptComment, refuseComment, nextPage, previousPage, error } = useCommentsContext();
+
     if (error) return <p>{error}</p>
     return (
         <div>
