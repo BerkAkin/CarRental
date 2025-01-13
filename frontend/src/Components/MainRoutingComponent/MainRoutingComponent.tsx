@@ -14,7 +14,7 @@ import ContactPage from "../../Pages/ContactPage/ContactPage";
 import ModelsPage from "../../Pages/ModelsPage/ModelsPage";
 import BlogPage from "../../Pages/BlogPage/BlogPage";
 import BlogDetailPage from "../../Pages/BlogDetailPage/BlogDetailPage";
-import LandingPage from "../../Pages/LandingPage/LandingContainer";
+import LandingPage from "../../Pages/LandingPage/LandingPage";
 import LoginComponent from "../LoginComponent/LoginComponent";
 import RegisterComponent from "../RegisterComponent/RegisterComponent";
 import { useToastManagerContext } from "../../Contexts/ToastManagerContext";
@@ -32,6 +32,7 @@ function MainRoutingComponent() {
   }
 
   const closeModal = () => setIsModalOpen(false);
+
 
   return (
     <>
