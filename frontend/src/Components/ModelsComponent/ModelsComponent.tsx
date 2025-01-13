@@ -1,11 +1,16 @@
 import styles from './styles.module.css';
 import { useModelsContext } from '../../Contexts/ModelsContext';
 import ModelCard from '../ModelCard/ModelCard';
+import { useState } from 'react';
 
 
 function ModelsComponent() {
 
-    const { models, HandleNextModelPage, HandlePreviousModelPage } = useModelsContext();
+    const { loading, error, models, HandleNextModelPage, HandlePreviousModelPage } = useModelsContext();
+
+    if (loading) return <p>Yükleniyor</p>
+    if (error) return <p>{error}</p>
+
 
     return (
         <>
