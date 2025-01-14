@@ -41,7 +41,7 @@ namespace WebApi.Middlewares
                 DatabaseException => "Sunucu tarafında hata oluştu, lütfen yöneticiyle iletişime geçin: ",
                 KeyNotFoundException => "Veri bulunamadı: ",
                 InvalidOperationException => "Geçersiz işlem: ",
-                DuplicateNameException => "Çoklu veri hatası: ",
+                DuplicateNameException => "Birden fazla kayıt hatası: ",
                 _ => "Bilinmeyen bir hata oluştu."
 
             };
