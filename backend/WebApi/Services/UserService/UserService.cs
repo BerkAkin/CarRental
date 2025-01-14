@@ -153,5 +153,37 @@ namespace WebApi.Services.UserService
 
         //Kullanıcı Kendi Hesabını Silme
 
+
+        //Kullanıcının kendi bilgilerini almak fronttaki erişim doğrulama için kullanılacak
+        public async Task<UserInfo> GetUserInfoValidation(int id)
+        {
+            var data = await _repository.getUserInfoValidation(id);
+            if (data is null)
+            {
+                throw new KeyNotFoundException(ErrorMessages.NO_LOGGED_IN_USER);
+            }
+
+            try
+            {
+                var dto = _mapper.Map<UserInfo>(data);
+                return dto;
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+        }
+
+
+        public async Task<bool> checkMe(UserInfo data)
+        {
+            var result = await _repository.checkMe(data);
+            if (result is null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
