@@ -27,7 +27,7 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
             {
                 return Ok(data);
             }
-            return NotFound("Veriler Bulunamadı");
+            return NotFound("Veriler bulunamadı");
 
 
 
@@ -46,7 +46,7 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
             {
                 return Ok(data);
             }
-            return NotFound("Veri Bulunamadı");
+            return NotFound("Veri bulunamadı");
 
         }
 
@@ -56,7 +56,7 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
         {
 
             await _service.AddAsync(model);
-            return Ok("Ekleme İşlemi başarılı.");
+            return Ok("Servis metni eklendi");
 
         }
 
@@ -66,7 +66,7 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
         {
 
             await _service.UpdateAsync(id, model);
-            return Ok("Güncelleme İşlemi başarılı.");
+            return Ok("Hzimet metni güncellendi");
 
         }
 
@@ -76,7 +76,7 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
         {
 
             await _service.DeleteAsync(id);
-            return Ok("Silme İşlemi Başarılı");
+            return Ok("Silme başarılı");
 
         }
     }
