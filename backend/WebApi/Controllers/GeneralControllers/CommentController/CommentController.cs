@@ -75,7 +75,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         {
 
             await _service.AcceptComment(id);
-            return Ok("Yorum Doğrulandı");
+            return Ok("Yorum onaylandı");
 
 
         }
@@ -86,7 +86,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         {
 
             await _service.RefuseComment(id);
-            return Ok("Yorum Kaldırıldı");
+            return Ok("Yorum reddedildi");
 
 
         }
@@ -108,7 +108,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         {
 
             await _service.AddAsync(model);
-            return Ok("Ekleme İşlemi başarılı.");
+            return Ok("Yorum eklendi");
 
         }
 
@@ -117,7 +117,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         public async Task<ActionResult> DeleteAsync(int id)
         {
             await _service.DeleteAsync(id);
-            return Ok("Silme İşlemi Başarılı");
+            return Ok("Yorum silindi");
         }
 
         [Authorize(Roles = "1,2")]
@@ -138,7 +138,7 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         {
 
             await _service.UpdateOwnComment(Convert.ToInt32(UserId), model);
-            return Ok("Güncelleme Başarılı");
+            return Ok("Yorum güncellendi");
 
         }
 
