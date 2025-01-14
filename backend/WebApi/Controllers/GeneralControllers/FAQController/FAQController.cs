@@ -45,7 +45,7 @@ namespace WebApi.Controllers.GeneralControllers.FAQController
         {
 
             await _service.AddAsync(model);
-            return Ok("Ekleme İşlemi başarılı.");
+            return Ok("SSS metni eklendi");
 
         }
 
@@ -56,7 +56,7 @@ namespace WebApi.Controllers.GeneralControllers.FAQController
         {
 
             await _service.UpdateAsync(id, model);
-            return Ok("Güncelleme İşlemi başarılı.");
+            return Ok("Sebep metni güncellendi");
 
         }
 
@@ -67,7 +67,7 @@ namespace WebApi.Controllers.GeneralControllers.FAQController
         {
 
             await _service.DeleteAsync(id);
-            return Ok("Silme İşlemi Başarılı");
+            return Ok("Silme başarılı");
 
 
         }
