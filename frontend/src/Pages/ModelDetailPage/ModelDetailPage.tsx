@@ -52,8 +52,8 @@ function ModelDetailPage() {
     useEffect(() => {
         const getDetail = async () => {
             try {
-                const response = await apiService(endpoints.models + id, "GET");
-                setModelDetail(response);
+                const { data, status }: any = await apiService(endpoints.models + id, "GET");
+                setModelDetail(data);
             } catch (error) {
                 setError("Model detaylarını görüntülerken bir hata meydana geldi. Lütfen yöneticinize başvurun");
                 console.error(error);
