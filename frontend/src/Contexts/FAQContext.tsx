@@ -11,8 +11,8 @@ export const FAQContextProvider = ({ children }: any) => {
 
     const fetchData = useCallback(async () => {
         try {
-            const faqs = await apiService(endpoints.faq, "GET");
-            SetFAQs(faqs);
+            const { data, status }: any = await apiService(endpoints.faq, "GET");
+            SetFAQs(data);
         }
         catch (error: any) {
             console.log(error);
