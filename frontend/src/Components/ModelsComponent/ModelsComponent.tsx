@@ -13,11 +13,11 @@ function ModelsComponent() {
 
     return (
         <>
-            <div className='container mt-4 pt-3'>
+            <div className={`${styles.modelsContainer} container mt-4 pt-3`}>
                 <div className='row'>
                     <h2 style={{ color: "#7A7A7A" }}>Modeller</h2>
                 </div>
-                <div className='row'>
+                <div className={`row`}>
 
 
                     {models?.data.map((model: any) => (
@@ -35,17 +35,21 @@ function ModelsComponent() {
                             />
                         </div>
                     ))}
+                    {
+                        models ?
+                            <div className='mt-4 d-flex justify-content-end '>
+                                <div>
+                                    <button className={`${styles.btn}`} onClick={HandlePreviousModelPage}>Önceki Sayfa</button>
+                                </div>
+                                <div className='me-1 ms-3'>
+                                    <button className={`${styles.btn}`} onClick={HandleNextModelPage}>Sonraki Sayfa</button>
+                                </div>
+                            </div>
+                            :
+                            <></>
+                    }
 
-                    <div className='mt-4 d-flex justify-content-end '>
-                        <div>
-                            <button className={`${styles.btn}`} onClick={HandlePreviousModelPage}>Önceki Sayfa</button>
-                        </div>
-                        <div className='me-1 ms-3'>
-                            <button className={`${styles.btn}`} onClick={HandleNextModelPage}>Sonraki Sayfa</button>
-                        </div>
 
-
-                    </div>
 
                 </div>
             </div>
