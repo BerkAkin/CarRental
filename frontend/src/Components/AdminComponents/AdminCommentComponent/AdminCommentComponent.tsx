@@ -23,32 +23,32 @@ function AdminCommentComponent() {
                 </thead>
                 <tbody>
                     {comments ?
-                        (comments?.data.map((item: any) => (
-                            <>
-                                <tr>
-                                    <td scope="row">{item.userName}</td>
-                                    <td>{item.userMail}</td>
-                                    <td>{item.userType}</td>
-                                    <td>{item.isActive === true ? "Evet" : "Hayır"}</td>
-                                    <td>{item.starCount}</td>
-                                    <td>{item.content}</td>
-                                    <td>
-                                        {item.isActive === true ?
-                                            (
-                                                <>
-                                                    <button onClick={() => refuseComment(item.id)} className={`${styles.actionNoBtn} mx-2`}>Reddet</button>
-                                                </>
-                                            )
-                                            :
-                                            (
-                                                <>
-                                                    <button onClick={() => acceptComment(item.id)} className={`${styles.actionOkBtn}`}>Onayla</button>
-                                                </>
-                                            )
-                                        }
-                                    </td>
-                                </tr >
-                            </>
+                        (comments?.data.map((item: any, index: number) => (
+
+                            <tr key={index}>
+                                <td scope="row">{item.userName}</td>
+                                <td>{item.userMail}</td>
+                                <td>{item.userType}</td>
+                                <td>{item.isActive === true ? "Evet" : "Hayır"}</td>
+                                <td>{item.starCount}</td>
+                                <td>{item.content}</td>
+                                <td>
+                                    {item.isActive === true ?
+                                        (
+                                            <>
+                                                <button onClick={() => refuseComment(item.id)} className={`${styles.actionNoBtn} mx-2`}>Reddet</button>
+                                            </>
+                                        )
+                                        :
+                                        (
+                                            <>
+                                                <button onClick={() => acceptComment(item.id)} className={`${styles.actionOkBtn}`}>Onayla</button>
+                                            </>
+                                        )
+                                    }
+                                </td>
+                            </tr >
+
                         ))
 
                         )
