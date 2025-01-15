@@ -19,7 +19,7 @@ function ServicesInfo({ ServicesLeft, ServicesRight }: serviceInfoProps) {
 
                     <div className='col-3 d-flex flex-column justify-content-between'>
                         {ServicesLeft.map((data, index) => (
-                            <div className='row '>
+                            <div key={index} className='row '>
                                 <ServiceCard HeaderTxt={data.title} Icon={data.icon} ParagraphTxt={data.content} />
                             </div>
                         ))}
@@ -31,7 +31,7 @@ function ServicesInfo({ ServicesLeft, ServicesRight }: serviceInfoProps) {
 
                     <div className='col-3'>
                         {ServicesRight.map((data, index) => (
-                            <div className='row '>
+                            <div key={index} className='row '>
                                 <ServiceCard HeaderTxt={data.title} Icon={data.icon} ParagraphTxt={data.content} />
                             </div>
                         ))}
