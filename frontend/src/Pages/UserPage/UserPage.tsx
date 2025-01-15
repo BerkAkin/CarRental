@@ -7,6 +7,7 @@ import FavoriteCard from '../../Components/FavoriteCard/FavoriteCard';
 import { UserInfoContextProvider } from '../../Contexts/UserInfoContext';
 import UserProfileComponent from '../../Components/UserProfileComponent/UserProfileComponent';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
+import { StatusHandler } from '../../common/StatusHandler';
 
 
 interface InfoFormProps {
@@ -47,12 +48,12 @@ function UserPage() {
         const fetchUserData = async () => {
             try {
 
-                const CommentResponse = await apiService(endpoints.ownComment, "GET")
-                const Favorites = await apiService(endpoints.favorites, "GET")
+                const { data: dataC, status: statusC }: any = await apiService(endpoints.ownComment, "GET")
+                const { data: dataF, status: statusF }: any = await apiService(endpoints.favorites, "GET")
 
-                setInitialCommentValues(CommentResponse);
-                setinitialFavorites(Favorites);
-                setRating(CommentResponse.starCount);
+                setInitialCommentValues(dataC);
+                setinitialFavorites(dataF);
+                setRating(dataC.starCount);
             } catch (error) {
                 setError("Kullanıcı yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
 
@@ -67,11 +68,11 @@ function UserPage() {
     const submitCommentForm = async (values: CommentFormProps) => {
         values.starCount = rating;
         try {
-            const response = await apiService(endpoints.ownComment, "PUT", values);
-            showToast("Yorum Güncellendi (Yorumun görünür olması için onaylanmalıdır)", "s")
+            const { data, status }: any = await apiService(endpoints.ownComment, "PUT", values);
+            StatusHandler(status, data, showToast)
         } catch (error) {
-            console.log(error);
-            showToast("Yorum Güncellenemedi", "d")
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
         }
 
 
@@ -79,12 +80,11 @@ function UserPage() {
 
     const removeFavorite = async (id: number) => {
         try {
-            console.log(id);
-            await apiService(endpoints.favorites, "DELETE", id);
-            showToast("Araç Favorilerden Kaldırıldı", "s")
+            const { data, status }: any = await apiService(endpoints.favorites, "DELETE", id);
+            StatusHandler(status, data, showToast)
         } catch (error) {
-            console.log(error);
-            showToast("Araç Favorilerden Kaldırılamadı", "d")
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
         }
     }
 
