@@ -28,7 +28,6 @@ const initialValues: FormProps = {
 }
 
 const onSubmit = async (values: FormProps, { setSubmitting }: any) => {
-    console.log('Form Values:', values.name, values.surname, values.email, values.phone, values.platform, values.otherPlatform, values.permission,);
     try {
         setSubmitting(true);
 
