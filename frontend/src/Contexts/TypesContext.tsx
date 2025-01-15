@@ -28,12 +28,13 @@ export const TypesContextProvider = ({ children }: any) => {
     const [fuels, setFuels] = useState<Fuels[]>();
 
     const fetchTypes = useCallback(async () => {
-        const fuels = await apiService(endpoints.fuels, "GET");
-        const gears = await apiService(endpoints.gears, "GET");
-        const carTypes = await apiService(endpoints.carTypes, "GET");
-        setFuels(fuels);
-        setGears(gears);
-        setCarTypes(carTypes);
+        const { data: dataF, status: statusF }: any = await apiService(endpoints.fuels, "GET");
+        const { data: dataG, status: statusG }: any = await apiService(endpoints.gears, "GET");
+        const { data: dataC, status: statusC }: any = await apiService(endpoints.carTypes, "GET");
+
+        setFuels(dataF);
+        setGears(dataG);
+        setCarTypes(dataC);
     }, []);
 
     useEffect(() => {
@@ -45,7 +46,6 @@ export const TypesContextProvider = ({ children }: any) => {
         gears: gears,
         carTypes: carTypes
     }
-
     return (
         <Types.Provider value={values} >
             {children}
