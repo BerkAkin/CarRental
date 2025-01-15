@@ -42,7 +42,7 @@ export const SliderDataProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await apiService(endpoints.commentsLatest, "GET");
+                const { data, status }: any = await apiService(endpoints.commentsLatest, "GET");
                 setTextData(data);
             }
             catch (error) {
