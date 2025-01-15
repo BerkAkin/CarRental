@@ -21,9 +21,8 @@ function LandingPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await apiService(endpoints.homepage, "GET");
+        const { data, status }: any = await apiService(endpoints.homepage, "GET");
         setData(data);
-        console.log(data);
       }
       catch (err) {
         setError("Anasayfada bir hata meydana geldi. Lütfen yöneticinize başvurun");
