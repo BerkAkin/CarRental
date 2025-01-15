@@ -6,6 +6,7 @@ import { Formik, Form, Field } from 'formik'
 import apiService from '../../../api/apiService'
 import { endpoints } from '../../../api/apiConfig'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
+import { StatusHandler } from '../../../common/StatusHandler'
 
 
 interface ItemProp {
@@ -77,21 +78,21 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
                 otherFeatures: otherFeaturesArray || [],
                 imageDirectory: values.imageDirectory,
             };
-            await apiService(endpoints.models + `${values.id}`, "PUT", dataToSend)
-            showToast("Model Güncellendi", "s")
+            const { data, status }: any = await apiService(endpoints.models + `${values.id}`, "PUT", dataToSend)
+            StatusHandler(status, data, showToast)
         } catch (error) {
-            console.log(error)
-            showToast("Model Güncellenemedi", "d")
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
         }
     }
 
     const onDeleteHandler = async (id: number) => {
         try {
-            await apiService(endpoints.models + id, "DELETE");
-            showToast("Model Silindi", "s")
+            const { data, status }: any = await apiService(endpoints.models + id, "DELETE");
+            StatusHandler(status, data, showToast)
         } catch (error) {
-            console.log(error)
-            showToast("Model Silinemedi", "d")
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
         }
     }
     return (
