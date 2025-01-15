@@ -7,6 +7,7 @@ import apiService from '../../../api/apiService'
 import { endpoints } from '../../../api/apiConfig'
 import dummyImage from '../../../assets/images/LandingImages/Mach-e.1920x1080-1920x1080.jpg'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
+import { StatusHandler } from '../../../common/StatusHandler'
 
 
 
@@ -48,11 +49,11 @@ function AdminModelAddComponent() {
                 otherFeatures: values.otherFeatures.split(",") || [],
                 imageDirectory: values.imageDirectory,
             };
-            await apiService(endpoints.models, "POST", dataToSend);
-            showToast("Model Eklendi", "s")
+            const { data, status }: any = await apiService(endpoints.models, "POST", dataToSend);
+            StatusHandler(status, data, showToast)
         } catch (error) {
-            console.error(error);
-            showToast("Model Eklenemedi", "d")
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
         }
     }
 
