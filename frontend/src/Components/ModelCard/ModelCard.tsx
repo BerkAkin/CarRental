@@ -5,12 +5,12 @@ import Icons from '../../assets/icons/icons';
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListElement from '../ListElement/ListElement';
-import dummyImg from "../../assets/images/AboutUsImages/img";
+import dummyImg from "../../assets/images/LandingImages/Mach-e.1920x1080-1920x1080.jpg";
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
-import Tooltip from '../Tooltip/Tooltip';
 import Icon from '../Icon/Icon';
+import { StatusHandler } from '../../common/StatusHandler';
 
 interface ModelCardProps {
     id: number;
@@ -31,31 +31,12 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
 
     const addFavorite = async (id: number) => {
         try {
-            await apiService(endpoints.favorites, "POST", id);
-            showToast("Araç Favorilere eklendi", "s")
+            const { data, status }: any = await apiService(endpoints.favorites, "POST", id);
+            StatusHandler(status, data, showToast)
         } catch (error: any) {
-            const errorMessage = error.status;
-            switch (errorMessage) {
-                case 401:
-                    showToast("Yetkisiz işlem. Lütfen giriş yapın !", "d");
-                    break;
-                case 403:
-                    showToast("Bu işlemi gerçekleştiremezsiniz", "d");
-                    break;
-                case 404:
-                    showToast("Kaynak bulunamadı.", "d");
-                    break;
-                case 500:
-                    showToast("Sunucu hatası oluştu. Lütfen tekrar deneyin.", "d");
-                    console.log(error);
-                    break;
-                case 409:
-                    showToast("Zaten Eklenmiş", "d");
-                    break;
-                default:
-                    showToast("Bir hata oluştu. Lütfen tekrar deneyin.", "d");
-                    break;
-            }
+            const { status, message } = error;
+            StatusHandler(status, message, showToast)
+
         }
     }
 
@@ -67,7 +48,7 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                         <button onClick={() => addFavorite(id)} className={`${styles.favButton} `}>★</button>
                     </div>
                     <div className={`${styles.imgHover} row `}>
-                        <ListElement href={`Models/${id}`} text={<Image URL={dummyImg.img} Width='310px'></Image>} />
+                        <ListElement href={`Models/${id}`} text={<Image URL={dummyImg} Width='310px'></Image>} />
                     </div>
 
                 </div>
