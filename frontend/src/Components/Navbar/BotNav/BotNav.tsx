@@ -26,6 +26,7 @@ function BotNav({ openModal }: BotNavProps) {
     try {
       await apiService(endpoints.logout, "GET");
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("UserInfo");
       showToast("Çıkış Yapıldı", "s");
       window.location.reload();
     }
