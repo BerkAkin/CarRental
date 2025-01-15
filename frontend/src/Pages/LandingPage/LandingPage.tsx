@@ -13,25 +13,20 @@ import groupInThrees from '../../common/GroupSplitter';
 
 
 function LandingPage() {
-  const { sliderError, sliderLoading, textData } = useSliderContext();
+  const { sliderError, textData } = useSliderContext();
 
   const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await apiService(endpoints.homepage, "GET");
+        const { data, status }: any = await apiService(endpoints.homepage, "GET");
         setData(data);
-        console.log(data);
       }
       catch (err) {
         setError("Anasayfada bir hata meydana geldi. Lütfen yöneticinize başvurun");
         console.error(error);
-      }
-      finally {
-        setLoading(false);
       }
     }
     fetchData();
@@ -45,7 +40,6 @@ function LandingPage() {
   const groupedService = groupInThrees(services);
 
 
-  if (loading) return <p>Yükleniyor</p>
   if (error) return <p>{error}</p>
 
   return (
@@ -60,9 +54,7 @@ function LandingPage() {
         {
           sliderError ?? { sliderError }
         }
-        {
-          sliderLoading ?? "Yükleniyor"
-        }
+
         {
           <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={textData || []} renderFunction={(item) => (
             <SliderCommentCard Content={item.content} Username={item.userName} StarCount={item.starCount} UserType={item.userType} />

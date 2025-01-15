@@ -55,7 +55,7 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
         {
 
             await _service.UpdateAsync(id, model);
-            return Ok("Güncelleme Başarılı");
+            return Ok("Ana metin güncellendi");
 
         }
 

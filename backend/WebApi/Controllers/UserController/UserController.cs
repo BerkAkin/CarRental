@@ -18,16 +18,22 @@ namespace WebApi.Controllers.UserController.UserController
             _userService = userService;
         }
 
-        [Authorize(Roles = "1,2")]
         [HttpGet("Me")]
         public async Task<ActionResult> GetCurrentUserType()
         {
-            return Ok(new { userTypeId = UserTypeId });
+            var data = await _userService.GetUserInfoValidation(Convert.ToInt32(UserId));
+            return Ok(data);
+        }
+
+        [HttpGet("CheckMe")]
+        public async Task<ActionResult<bool>> CheckMe([FromQuery] UserInfo data)
+        {
+            return await _userService.checkMe(data);
         }
 
         [Authorize(Roles = "1,2")]
         [HttpGet("OwnInfo")]
-        public async Task<ActionResult<UserViewIdModel>> GetOwnInfo()
+        public async Task<ActionResult> GetOwnInfo()
         {
 
             var data = await _userService.GetOwnInfo(Convert.ToInt32(UserId));
@@ -40,12 +46,8 @@ namespace WebApi.Controllers.UserController.UserController
         [HttpPut("OwnInfo")]
         public async Task<ActionResult> UpdateOwnInfo([FromBody] UserUpdateModel model)
         {
-
             await _userService.UpdateOwnInfo(Convert.ToInt32(UserId), model);
-            return Ok("Güncelleme Başarılı");
-
-
-
+            return Ok("Bilgiler güncellendi");
         }
 
 
@@ -54,7 +56,7 @@ namespace WebApi.Controllers.UserController.UserController
         public async Task<ActionResult> DeleteUserAsync()
         {
             await _userService.DeleteAsync(Convert.ToInt32(UserId));
-            return Ok("Silme İşlemi Başarılı");
+            return Ok("Silme başarılı");
         }
 
         [Authorize(Roles = "1")]
@@ -79,7 +81,7 @@ namespace WebApi.Controllers.UserController.UserController
         {
 
             await _userService.UpdateAsync(id, model);
-            return Ok("Güncelleme İşlemi başarılı.");
+            return Ok("Kullanıcı güncellendi");
 
         }
 
@@ -88,7 +90,7 @@ namespace WebApi.Controllers.UserController.UserController
         public async Task<ActionResult> DeleteUserAsync(int id)
         {
             await _userService.DeleteAsync(id);
-            return Ok("Silme İşlemi Başarılı");
+            return Ok("Silme başarılı");
         }
 
         [Authorize(Roles = "1")]
@@ -96,7 +98,7 @@ namespace WebApi.Controllers.UserController.UserController
         public async Task<ActionResult> ActivateUser(int id)
         {
             await _userService.ActivateUserAsync(id);
-            return Ok("Kullanıcı Aktifleştirildi");
+            return Ok("Kullanıcı aktifleştirildi");
         }
 
 

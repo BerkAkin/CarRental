@@ -84,7 +84,7 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         {
 
             await _service.AddAsync(model);
-            return Ok("Ekleme İşlemi başarılı.");
+            return Ok("Araç modeli eklendi.");
 
         }
 
@@ -94,7 +94,7 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         {
 
             await _service.DeleteAsync(id);
-            return Ok("Silme İşlemi Başarılı");
+            return Ok("Araç modeli silindi");
 
 
         }
@@ -105,7 +105,7 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         {
 
             await _service.UpdateAsync(id, model);
-            return Ok("Güncelleme İşlemi başarılı.");
+            return Ok("Araç modeli güncellendi");
 
         }
 

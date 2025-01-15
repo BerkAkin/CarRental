@@ -8,7 +8,7 @@ import { useSliderContext } from '../../Contexts/SliderContext';
 
 function AboutPage() {
 
-    const { sliderError, sliderLoading, textData } = useSliderContext();
+    const { sliderError, textData } = useSliderContext();
 
     return (
         <>
@@ -57,9 +57,6 @@ function AboutPage() {
             <div className='my-3 pt-5'>
                 {
                     sliderError ?? { sliderError }
-                }
-                {
-                    sliderLoading ?? "Yükleniyor"
                 }
 
                 <SimpleSlider slidesToShow={3} header='Flexper için neler dediler?' items={textData || []} renderFunction={(item) => (

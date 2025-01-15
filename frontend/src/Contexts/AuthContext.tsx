@@ -1,29 +1,41 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
+import { StatusHandler } from "../common/StatusHandler";
+
 
 interface AuthContextType {
-    userTypeId: string | null;
     fetchUserType: () => void;
+    checkUser: () => boolean;
 }
 
 
-export const authContext = createContext<AuthContextType>({ userTypeId: null, fetchUserType: () => { } });
+export const authContext = createContext<any>({});
 
 
 export const AuthContextProvider = ({ children }: any) => {
 
-    const [userTypeId, setUserTypeId] = useState<string | null>(null);
+
 
     const fetchUserType = async () => {
         try {
-            const response = await apiService(endpoints.userType, "GET");
-            setUserTypeId(response.userTypeId)
-            console.log(response)
+            const { data, status }: any = await apiService(endpoints.userType, "GET");
+            localStorage.setItem("UserInfo", JSON.stringify(data));
         } catch (error) {
-            console.log("AuthContextErr: ", error);
+            console.log("ACxtFtchErr");
         }
     };
+
+    const checkUser = async () => {
+        try {
+            const userInfo = JSON.parse(localStorage.getItem("UserInfo") || " {}");
+            const { data: result, status }: any = await apiService(endpoints.checkMe, "GET", null, `?RoleId=${userInfo?.roleId}&Email=${userInfo?.email}`);
+            return result;
+        } catch (error) {
+            console.log("ACxtChkErr");
+        }
+        return false
+    }
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
@@ -32,8 +44,10 @@ export const AuthContextProvider = ({ children }: any) => {
         }
     }, []);
 
+
+
     return (
-        <authContext.Provider value={{ userTypeId, fetchUserType }}>
+        <authContext.Provider value={{ fetchUserType, checkUser }}>
             {children}
         </authContext.Provider>
     )

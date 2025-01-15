@@ -57,6 +57,7 @@ namespace WebApi.Mappings
 
             CreateMap<User, UserViewIdModel>();
             CreateMap<UserUpdateModel, User>();
+            CreateMap<User, UserInfo>();
 
 
             CreateMap<Model, ModelViewModel>().ForMember(dest => dest.CarType, opt => opt.MapFrom(src => src.CarType))
@@ -86,6 +87,9 @@ namespace WebApi.Mappings
             .ForMember(ac => ac.UserType, opt => opt.MapFrom(src => src.User.Role.Name))
             .ForMember(ac => ac.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
             .ForMember(dest => dest.UserMail, opt => opt.MapFrom(src => src.User.Email));
+
+
+
 
 
         }

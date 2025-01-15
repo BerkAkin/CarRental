@@ -2,12 +2,71 @@ import React from 'react'
 import { useSiteSettingsContext } from '../../../Contexts/SiteSettingsContext'
 import { Field, Form, Formik } from 'formik';
 import styles from "./styles.module.css"
+import apiService from '../../../api/apiService';
+import { endpoints } from '../../../api/apiConfig';
+import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
+import { StatusHandler } from '../../../common/StatusHandler';
+
+
+interface SettingsMainTextProps {
+    id: number;
+    text: string;
+}
+interface SettingsReasonTextProps {
+    id: number;
+    title: string;
+    content: string;
+}
+interface SettingsServicesTextProps {
+    id: number;
+    title: string;
+    content: string;
+    icon: string;
+}
 
 function AdminSiteComponent() {
 
-    const { loading, error, settings, updateMainText, updateServiceTexts, updateReasonTexts } = useSiteSettingsContext();
+    const { error, settings } = useSiteSettingsContext();
+    const { showToast } = useToastManagerContext();
 
-    if (loading) return <p>Yükleniyor</p>
+
+    const updateMainText = async (values: SettingsMainTextProps) => {
+        try {
+            const dataToSend = { Text: values.text };
+            const { data, status }: any = await apiService(endpoints.mainText + `${values.id}`, "PUT", dataToSend);
+            StatusHandler(status, data, showToast)
+        } catch (error) {
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
+
+        }
+
+    }
+
+
+    const updateServiceTexts = async (values: SettingsServicesTextProps) => {
+        try {
+            const dataToSend = { Title: values.title, Content: values.content, Icon: values.icon }
+            const { data, status }: any = await apiService(endpoints.serviceText + `${values.id}`, "PUT", dataToSend);
+            StatusHandler(status, data, showToast)
+        } catch (error) {
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
+        }
+    }
+
+
+    const updateReasonTexts = async (values: SettingsReasonTextProps) => {
+        try {
+            const dataToSend = { Title: values.title, Content: values.content }
+            const { data, status }: any = await apiService(endpoints.reasonText + `${values.id}`, "PUT", dataToSend);
+            StatusHandler(status, data, showToast)
+        } catch (error) {
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
+        }
+    }
+
     if (error) return <p>{error}</p>
 
     return (

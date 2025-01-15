@@ -3,7 +3,7 @@ import "../../app.css";
 import TopNav from "../Navbar/TopNav/TopNav";
 import BotNav from "../Navbar/BotNav/BotNav";
 import Footer from "../Footer/Footer";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import DetailContainer from "../../Pages/ModelDetailPage/ModelDetailPage";
 import Modal from "../Modal/Modal";
 import ProfilePage from "../../Pages/ProfilePage/ProfilePage";
@@ -17,11 +17,10 @@ import BlogDetailPage from "../../Pages/BlogDetailPage/BlogDetailPage";
 import LandingPage from "../../Pages/LandingPage/LandingPage";
 import LoginComponent from "../LoginComponent/LoginComponent";
 import RegisterComponent from "../RegisterComponent/RegisterComponent";
-import { useToastManagerContext } from "../../Contexts/ToastManagerContext";
+import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 
 function MainRoutingComponent() {
 
-  const { showToast } = useToastManagerContext();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState<'login' | 'register'>();
@@ -32,6 +31,9 @@ function MainRoutingComponent() {
   }
 
   const closeModal = () => setIsModalOpen(false);
+
+
+
 
 
   return (
@@ -46,6 +48,7 @@ function MainRoutingComponent() {
               {modalContent == 'login' ? <LoginComponent /> : <RegisterComponent />}
             </Modal> : ""
         }
+
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/Models" element={<ModelsPage />}></Route>
@@ -57,11 +60,11 @@ function MainRoutingComponent() {
           <Route path="/Blog/:id" element={<BlogDetailPage />}></Route>
           <Route path="/PPInfo" element={<PrivacyPolicyPage />}></Route>
           <Route path="/Profile" element={<ProfilePage />}></Route>
+          <Route path="*" element={<ErrorPage ErrorMessage="Gidilmek istenen sayfa mevcut değil" />} />
         </Routes>
 
-
         <Footer />
-      </Router>
+      </Router >
     </>
   );
 }

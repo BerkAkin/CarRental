@@ -17,18 +17,16 @@ export const UserInfoContextProvider = ({ children }: any) => {
 
     const [userInfo, setUserInfo] = useState<InfoFormProps>();
     const [error, setError] = useState<string>();
-    const [loading, setLoading] = useState<boolean>(true);
+
 
 
     const fetchInfo = useCallback(async () => {
         try {
-            const infoResponse = await apiService(endpoints.ownInfo, "GET");
-            setUserInfo(infoResponse);
+            const { data, status }: any = await apiService(endpoints.ownInfo, "GET");
+            setUserInfo(data);
         } catch (error) {
             setError("Kullanıcı bilgileri alınırken hata oluştu. Lütfen yöneticinize başvurun")
             console.log(error)
-        } finally {
-            setLoading(false);
         }
     }, [])
 
@@ -36,22 +34,10 @@ export const UserInfoContextProvider = ({ children }: any) => {
         fetchInfo();
     }, [fetchInfo])
 
-    const updateUserInfo = async (values: InfoFormProps) => {
-        try {
-            await apiService(endpoints.ownInfo, "PUT", values);
-            showToast("Bilgiler Güncellendi", "s")
-        } catch (error) {
-            console.log(error);
-            showToast("Bilgiler Güncellenemedi", "d")
-
-        }
-    }
 
     const values = {
         userInfo: userInfo,
-        error: error,
-        loading: loading,
-        updateUserInfo: updateUserInfo
+        error: error
     }
 
     return (

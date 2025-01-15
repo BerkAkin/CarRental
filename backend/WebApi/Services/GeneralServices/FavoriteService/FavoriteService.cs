@@ -9,7 +9,7 @@ using WebApi.Repositories.GeneralRepositories.FavoriteRepository;
 
 namespace WebApi.Services.GeneralServices.FavoriteService
 {
-    public class FavoriteService : BaseService<UserFavorite, object, object, FavoriteViewModel, ObjectFactory, FavoriteRepository>
+    public class FavoriteService : BaseService<UserFavorite, object, object, FavoriteViewModel, object, FavoriteRepository>
     {
         public FavoriteService(FavoriteRepository repository, IMapper mapper) : base(repository, mapper) { }
 

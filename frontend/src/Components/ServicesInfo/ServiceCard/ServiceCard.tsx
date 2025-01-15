@@ -14,7 +14,6 @@ interface ServiceCardProps {
 
 function ServiceCard({ HeaderTxt, ParagraphTxt, Icon }: ServiceCardProps) {
     const newIcon = Icon.toLowerCase() as IconProp;
-    console.log(newIcon)
     return (
         <>
             <div className='my-4'>

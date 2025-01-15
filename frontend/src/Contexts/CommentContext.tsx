@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
 import { useToastManagerContext } from "./ToastManagerContext";
+import { StatusHandler } from "../common/StatusHandler";
 
 
 
@@ -32,7 +33,6 @@ export const CommentContextProvider = ({ children }: any) => {
     const [comments, setComments] = useState<Comments>();
     const [commentsCurrentPage, setCommentsCurrentPage] = useState<number>(1);
     const [error, setError] = useState<string>();
-    const [loading, setLoading] = useState<boolean>(true);
 
 
     const HandleNextCommentPage = () => {
@@ -57,26 +57,24 @@ export const CommentContextProvider = ({ children }: any) => {
 
     const fetchComments = useCallback(async (page: number) => {
         try {
-            const fetchedComments = await apiService(endpoints.comments + `?pageNumber=${page}`, "GET");
-            setComments(fetchedComments);
+            const { data, status }: any = await apiService(endpoints.comments + `?pageNumber=${page}`, "GET");
+            setComments(data);
         } catch (error) {
             console.log(error)
             setError("Yorumlar yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
         }
-        finally {
-            setLoading(false);
-        }
+
     }, []);
 
     const updateCommentStatus = useCallback(
         async (endpoint: string, id: number) => {
             try {
-                await apiService(endpoint, "PUT", id);
+                const { data, status }: any = await apiService(endpoint, "PUT", id);
                 await fetchComments(commentsCurrentPage);
-                showToast("Yorum Görünürlüğü Değiştirildi", "s");
+                StatusHandler(status, data, showToast)
             } catch (error) {
-                console.log(error);
-                showToast("Yorum Görünürlüğü Değiştirilemedi", "d");
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
             }
         },
         [fetchComments]
@@ -95,7 +93,6 @@ export const CommentContextProvider = ({ children }: any) => {
         refuseComment: refuseComment,
         acceptComment: acceptComment,
         comments: comments,
-        loading: loading,
         error: error,
         nextPage: HandleNextCommentPage,
         previousPage: HandlePreviousCommentPage

@@ -10,6 +10,7 @@ import { endpoints } from '../../api/apiConfig';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../Contexts/AuthContext';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
+import { StatusHandler } from '../../common/StatusHandler';
 
 
 interface LoginProps {
@@ -33,18 +34,17 @@ function LoginComponent() {
 
     const onSubmit = async (values: LoginProps, { setSubmitting }: any) => {
         try {
-            const response = await apiService(endpoints.login, "POST", values)
+            const { data, status }: any = await apiService(endpoints.login, "POST", values)
             setSubmitting(true);
             setTimeout(() => {
                 setSubmitting(false);
             }, 2000);
-            localStorage.setItem("accessToken", response);
+            localStorage.setItem("accessToken", data);
             await fetchUserType();
-            showToast("Giriş Başarılı", "s");
 
         } catch (error) {
-            console.error(error);
-            showToast(`Başarısız: + ${error}`, "s");
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
 
         }
         finally {

@@ -6,6 +6,7 @@ import logo from '../../assets/logos/logo-flexper.png';
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
+import { StatusHandler } from '../../common/StatusHandler';
 
 
 interface RegisterProps {
@@ -31,15 +32,15 @@ function RegisterComponent() {
 
     const onSubmit = async (values: RegisterProps, { setSubmitting }: any) => {
         try {
-            const response = await apiService(endpoints.register, "POST", values)
+            const { data, status }: any = await apiService(endpoints.register, "POST", values)
             setSubmitting(true);
             setTimeout(() => {
                 setSubmitting(false);
             }, 2000);
-            showToast("Üye Olundu!", "s");
+
         } catch (error) {
-            console.error("Bir hata oluştu:", error);
-            showToast("Üye Olunamadı!", "d");
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
         }
         finally {
             setSubmitting(false);
