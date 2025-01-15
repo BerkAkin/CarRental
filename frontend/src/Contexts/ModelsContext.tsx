@@ -70,8 +70,8 @@ export const ModelsContextProvider = ({ children }: any) => {
 
     const fetchModels = useCallback(async (page: number) => {
         try {
-            const models = await apiService(endpoints.models + `?pageNumber=${page}`, "GET",)
-            setModels(models);
+            const { data, status }: any = await apiService(endpoints.models + `?pageNumber=${page}`, "GET",)
+            setModels(data);
         } catch (error) {
             console.log(error);
             setError("Modeller yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
