@@ -1,11 +1,33 @@
 import styles from "./styles.module.css"
 import { Field, Form, Formik } from 'formik'
 import { useInfoContext } from '../../Contexts/UserInfoContext'
+import { endpoints } from "../../api/apiConfig";
+import apiService from "../../api/apiService";
+import { StatusHandler } from "../../common/StatusHandler";
+import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 
 
+interface InfoFormProps {
+    email: string;
+    phoneNum: string;
+    createdAt: string;
+}
 
 function UserProfileComponent() {
-    const { userInfo, updateUserInfo, loading, error } = useInfoContext();
+    const { userInfo, loading, error } = useInfoContext();
+    const { showToast } = useToastManagerContext();
+
+    const updateUserInfo = async (values: InfoFormProps) => {
+        try {
+            const { data, status }: any = await apiService(endpoints.ownInfo, "PUT", values);
+            StatusHandler(status, data, showToast)
+
+        } catch (error) {
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
+        }
+    }
+
     if (loading) return <p>Yükleniyor</p>
     if (error) return <p>{error}</p>
     return (
