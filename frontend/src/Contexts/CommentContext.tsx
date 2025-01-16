@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
 import { useToastManagerContext } from "./ToastManagerContext";
@@ -66,17 +66,16 @@ export const CommentContextProvider = ({ children }: any) => {
 
     }, []);
 
-    const updateCommentStatus = useCallback(
-        async (endpoint: string, id: number) => {
-            try {
-                const { data, status }: any = await apiService(endpoint, "PUT", id);
-                await fetchComments(commentsCurrentPage);
-                StatusHandler(status, data, showToast)
-            } catch (error) {
-                const { status, message }: any = error;
-                StatusHandler(status, message, showToast)
-            }
-        },
+    const updateCommentStatus = useCallback(async (endpoint: string, id: number) => {
+        try {
+            const { data, status }: any = await apiService(endpoint, "PUT", id);
+            await fetchComments(commentsCurrentPage);
+            StatusHandler(status, data, showToast)
+        } catch (error) {
+            const { status, message }: any = error;
+            StatusHandler(status, message, showToast)
+        }
+    },
         [fetchComments]
     );
 
@@ -85,18 +84,18 @@ export const CommentContextProvider = ({ children }: any) => {
     }, [commentsCurrentPage, fetchComments]);
 
 
-    const refuseComment = (id: number) => updateCommentStatus(endpoints.refuseComment, id);
-    const acceptComment = (id: number) => updateCommentStatus(endpoints.acceptComment, id);
+    const refuseComment = useCallback((id: number) => { updateCommentStatus(endpoints.refuseComment, id) }, []);
+    const acceptComment = useCallback((id: number) => { updateCommentStatus(endpoints.acceptComment, id) }, []);
 
 
-    const values = {
-        refuseComment: refuseComment,
-        acceptComment: acceptComment,
-        comments: comments,
-        error: error,
+    const values = useMemo(() => ({
+        refuseComment,
+        acceptComment,
+        comments,
+        error,
         nextPage: HandleNextCommentPage,
         previousPage: HandlePreviousCommentPage
-    }
+    }), [comments, error, refuseComment, acceptComment, HandleNextCommentPage, HandlePreviousCommentPage])
 
     return <>
 
