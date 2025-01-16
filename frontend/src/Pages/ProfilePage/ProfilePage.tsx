@@ -4,6 +4,8 @@ import AdminPage from '../AdminPage/AdminPage';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import UserPage from '../UserPage/UserPage';
 
+
+
 function ProfilePage() {
 
     const { checkUser } = useAuthContext();
@@ -24,10 +26,20 @@ function ProfilePage() {
 
     if (isUserValid) {
         if (roleId === 1) {
-            return <AdminPage />;
+
+            return (
+                <>
+                    <AdminPage />
+                </>
+            )
+
         }
         else if (roleId === 2) {
-            return <UserPage />;
+            return (
+                <>
+                    <UserPage />
+                </>
+            )
         }
     }
     return <ErrorPage ErrorMessage='Sayfayı görüntülemek için yetkiniz olduğundan emin olun veya giriş yapın' />;
