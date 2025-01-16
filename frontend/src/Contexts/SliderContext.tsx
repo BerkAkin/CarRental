@@ -24,7 +24,6 @@ interface ModelData {
 interface SliderContextType {
     textData: TextData[] | null,
     modelData: ModelData[] | null
-
     sliderError: string
 }
 
@@ -39,26 +38,26 @@ export const SliderDataProvider = ({ children }: { children: ReactNode }) => {
     const [error, setError] = useState<string>("");
 
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data, status }: any = await apiService(endpoints.commentsLatest, "GET");
-                setTextData(data);
-            }
-            catch (error) {
-                console.log(error)
-                setError("Yorumlar yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
-            }
-
-
+    const fetchData = async () => {
+        try {
+            const { data, status }: any = await apiService(endpoints.commentsLatest, "GET");
+            setTextData(data);
         }
+        catch (error) {
+            console.log(error)
+            setError("Yorumlar yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
+        }
+
+
+    }
+
+    useEffect(() => {
         fetchData();
     }, []);
 
     const values: SliderContextType = {
         textData,
         modelData,
-
         sliderError: error,
     };
 
