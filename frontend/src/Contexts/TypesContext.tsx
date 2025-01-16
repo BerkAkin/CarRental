@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
 
@@ -41,11 +41,14 @@ export const TypesContextProvider = ({ children }: any) => {
         fetchTypes();
     }, [fetchTypes]);
 
-    const values = {
-        fuels: fuels,
-        gears: gears,
-        carTypes: carTypes
-    }
+    const values = useMemo(() => ({
+        fuels,
+        gears,
+        carTypes
+    }), [fuels, gears, carTypes])
+
+
+
     return (
         <Types.Provider value={values} >
             {children}
