@@ -5,6 +5,7 @@ import { endpoints } from "../../api/apiConfig";
 import apiService from "../../api/apiService";
 import { StatusHandler } from "../../common/StatusHandler";
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
+import { useConfirmContext } from "../../Contexts/ConfirmationContext";
 
 
 interface InfoFormProps {
@@ -14,19 +15,24 @@ interface InfoFormProps {
 }
 
 function UserProfileComponent() {
+
     const { userInfo, loading, error } = useInfoContext();
+    const { showConfirmation } = useConfirmContext();
     const { showToast } = useToastManagerContext();
 
-    const updateUserInfo = async (values: InfoFormProps) => {
-        try {
-            const { data, status }: any = await apiService(endpoints.ownInfo, "PUT", values);
-            StatusHandler(status, data, showToast)
 
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
-        }
+    const updateUserInfo = async (values: InfoFormProps) => {
+        showConfirmation("Bilgiler Güncellensin Mi ?", async () => {
+            try {
+                const { data, status }: any = await apiService(endpoints.ownInfo, "PUT", values);
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
+        })
     }
+
 
     if (loading) return <p>Yükleniyor</p>
     if (error) return <p>{error}</p>
