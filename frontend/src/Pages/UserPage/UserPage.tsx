@@ -8,6 +8,7 @@ import { UserInfoContextProvider } from '../../Contexts/UserInfoContext';
 import UserProfileComponent from '../../Components/UserProfileComponent/UserProfileComponent';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
+import ConfirmationPopup from '../../Components/ConfirmationPopup/ConfirmationPopup';
 
 
 interface InfoFormProps {
@@ -106,6 +107,7 @@ function UserPage() {
     return (
 
         <>
+            <ConfirmationPopup />
             <div className={`container-fluid mt-4 pt-3 `}>
 
                 <ul className="nav nav-tabs mt-2" role="tablist">

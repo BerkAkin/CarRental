@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
 import { useToastManagerContext } from "./ToastManagerContext";
@@ -13,11 +13,9 @@ interface InfoFormProps {
 const infoContext = createContext<any>({})
 
 export const UserInfoContextProvider = ({ children }: any) => {
-    const { showToast } = useToastManagerContext();
 
     const [userInfo, setUserInfo] = useState<InfoFormProps>();
     const [error, setError] = useState<string>();
-
 
 
     const fetchInfo = useCallback(async () => {
@@ -35,10 +33,10 @@ export const UserInfoContextProvider = ({ children }: any) => {
     }, [fetchInfo])
 
 
-    const values = {
-        userInfo: userInfo,
-        error: error
-    }
+    const values = useMemo(() => ({
+        userInfo,
+        error,
+    }), [userInfo, error])
 
     return (
         <infoContext.Provider value={values}>

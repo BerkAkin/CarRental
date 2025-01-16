@@ -10,6 +10,7 @@ import { TypesContextProvider } from '../../Contexts/TypesContext';
 import { ModelsContextProvider } from '../../Contexts/ModelsContext';
 import { UserInfoContextProvider } from '../../Contexts/UserInfoContext';
 import UserProfileComponent from '../../Components/UserProfileComponent/UserProfileComponent';
+import ConfirmationPopup from '../../Components/ConfirmationPopup/ConfirmationPopup';
 
 
 
@@ -23,6 +24,7 @@ function AdminPage() {
 
     return (
         <>
+            <ConfirmationPopup />
             <div className={`container-fluid mt-4 pt-3 `}>
                 <ul className="nav nav-tabs" role="tablist">
                     <li className="nav-item " >

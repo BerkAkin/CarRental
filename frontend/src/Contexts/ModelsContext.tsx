@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
 
@@ -45,7 +45,7 @@ const modelsContext = createContext<any>({})
 export const ModelsContextProvider = ({ children }: any) => {
 
     const [models, setModels] = useState<Model>();
-    const [error, setError] = useState<string>();
+    const [error, setError] = useState<string | null>(null);
     const [modelCurrentPage, setModelCurrentPage] = useState<number>(1);
 
 
@@ -81,21 +81,16 @@ export const ModelsContextProvider = ({ children }: any) => {
 
 
     useEffect(() => {
-        try {
-            fetchModels(modelCurrentPage);
-        } catch (error) {
-            console.log(error)
-        }
-
+        fetchModels(modelCurrentPage);
     }, [modelCurrentPage, fetchModels]);
 
 
-    const values = {
-        HandleNextModelPage: HandleNextModelPage,
-        HandlePreviousModelPage: HandlePreviousModelPage,
-        models: models,
-        error: error,
-    }
+    const values = useMemo(() => ({
+        HandleNextModelPage,
+        HandlePreviousModelPage,
+        models,
+        error
+    }), [models, error]);
 
 
     return (

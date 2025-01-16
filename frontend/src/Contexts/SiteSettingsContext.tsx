@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
-import { useToastManagerContext } from "./ToastManagerContext";
 
 
 interface SettingsMainTextProps {
@@ -31,10 +30,9 @@ const SiteSettingsContext = createContext<any>({});
 
 export const SiteSettingsContextProvider = ({ children }: any) => {
 
-    const { showToast } = useToastManagerContext();
 
     const [settings, setSettings] = useState<SiteSettings>();
-    const [error, setError] = useState<string>();
+    const [error, setError] = useState<string | null>(null);
 
 
     const fetchSettings = useCallback(async () => {
@@ -58,14 +56,10 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
 
 
     // `values` objesi `useMemo` ile optimize ediliyor
-    const values = useMemo(
-        () => ({
-            settings,
-            error: error,
-
-        }),
-        [settings]
-    );
+    const values = useMemo(() => ({
+        settings,
+        error,
+    }), [settings, error]);
 
     return (
         <SiteSettingsContext.Provider value={values}>

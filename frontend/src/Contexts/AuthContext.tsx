@@ -1,32 +1,23 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
-import { StatusHandler } from "../common/StatusHandler";
-
-
-interface AuthContextType {
-    fetchUserType: () => void;
-    checkUser: () => boolean;
-}
 
 
 export const authContext = createContext<any>({});
 
-
 export const AuthContextProvider = ({ children }: any) => {
 
-
-
-    const fetchUserType = async () => {
+    const fetchUserType = useCallback(async () => {
         try {
             const { data, status }: any = await apiService(endpoints.userType, "GET");
             localStorage.setItem("UserInfo", JSON.stringify(data));
         } catch (error) {
             console.log("ACxtFtchErr");
         }
-    };
+    }, [])
 
-    const checkUser = async () => {
+
+    const checkUser = useCallback(async () => {
         try {
             const userInfo = JSON.parse(localStorage.getItem("UserInfo") || " {}");
             const { data: result, status }: any = await apiService(endpoints.checkMe, "GET", null, `?RoleId=${userInfo?.roleId}&Email=${userInfo?.email}`);
@@ -35,7 +26,8 @@ export const AuthContextProvider = ({ children }: any) => {
             console.log("ACxtChkErr");
         }
         return false
-    }
+    }, [])
+
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
@@ -43,7 +35,6 @@ export const AuthContextProvider = ({ children }: any) => {
             fetchUserType();
         }
     }, []);
-
 
 
     return (

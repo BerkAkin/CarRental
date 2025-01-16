@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
 import { endpoints } from "../api/apiConfig";
 
@@ -7,7 +7,7 @@ const FAQContext = createContext<any>({});
 
 export const FAQContextProvider = ({ children }: any) => {
     const [FAQs, SetFAQs] = useState<any>();
-    const [error, setError] = useState<string>();
+    const [error, setError] = useState<string | null>(null);
 
     const fetchData = useCallback(async () => {
         try {
@@ -27,11 +27,10 @@ export const FAQContextProvider = ({ children }: any) => {
     }, [fetchData])
 
 
-    const values = {
-        FAQs: FAQs,
-        error: error,
-
-    }
+    const values = useMemo(() => ({
+        FAQs,
+        error,
+    }), [FAQs, error])
 
     return (
         <FAQContext.Provider value={values}>
