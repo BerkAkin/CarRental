@@ -43,3 +43,11 @@
 .btn:hover {
     background-color: #2c497c;
 }
+
+.newBtn {
+    cursor: pointer
+}
+
+.tableFontSize {
+    font-size: 0.85rem;
+}
