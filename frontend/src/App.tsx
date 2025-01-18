@@ -4,7 +4,6 @@ import { SliderDataProvider } from "./Contexts/SliderContext";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCar, faParking, faGasPump, faRoad, faKey, faHandSparkles } from '@fortawesome/free-solid-svg-icons';
 import { ToastManagerContextProvider } from "./Contexts/ToastManagerContext";
-import ConfirmationPopup from "./Components/ConfirmationPopup/ConfirmationPopup";
 import { ConfirmContextProvider } from "./Contexts/ConfirmationContext";
 library.add(faCar, faParking, faGasPump, faRoad, faKey, faHandSparkles)
 
