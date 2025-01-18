@@ -99,9 +99,6 @@ namespace WebApi.Services.GeneralServices.CommentService
                 throw new KeyNotFoundException(ErrorMessages.COMMENT_NOT_FOUND);
             }
             return _mapper.Map<CommentViewIdModel>(data);
-
-
-
         }
 
         public async Task UpdateOwnComment(int userId, CommentUpdateModel model)
@@ -126,15 +123,24 @@ namespace WebApi.Services.GeneralServices.CommentService
 
         public async Task<CommentViewIdModel> GetOwnComment(int userId)
         {
-
             var comment = await _repository.FindCommentByUserId(userId);
             if (comment is null)
             {
                 throw new KeyNotFoundException(ErrorMessages.COMMENT_NOT_FOUND);
             }
             return _mapper.Map<CommentViewIdModel>(comment);
+        }
 
 
+        public async Task MarkCommentAsRead(int id)
+        {
+            var comment = await _repository.GetByIdAsync(id);
+            if (comment is null)
+            {
+                throw new KeyNotFoundException(ErrorMessages.COMMENT_NOT_FOUND);
+            }
+            comment.IsNew = false;
+            await _repository.UpdateAsync(comment);
 
         }
     }
