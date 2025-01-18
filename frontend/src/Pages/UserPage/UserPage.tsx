@@ -9,6 +9,7 @@ import UserProfileComponent from '../../Components/UserProfileComponent/UserProf
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
 import ConfirmationPopup from '../../Components/ConfirmationPopup/ConfirmationPopup';
+import { useConfirmContext } from '../../Contexts/ConfirmationContext';
 
 
 interface InfoFormProps {
@@ -36,6 +37,7 @@ interface FavoriteModels {
 
 function UserPage() {
     const { showToast } = useToastManagerContext();
+    const { showConfirmation } = useConfirmContext();
 
 
     const [initialCommentValues, setInitialCommentValues] = useState<CommentFormProps>();
@@ -68,15 +70,15 @@ function UserPage() {
 
     const submitCommentForm = async (values: CommentFormProps) => {
         values.starCount = rating;
-        try {
-            const { data, status }: any = await apiService(endpoints.ownComment, "PUT", values);
-            StatusHandler(status, data, showToast)
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
-        }
-
-
+        showConfirmation("Yorum güncellenecektir. Devam edilsin mi?", async () => {
+            try {
+                const { data, status }: any = await apiService(endpoints.ownComment, "PUT", values);
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
+        })
     }
 
     const removeFavorite = async (id: number) => {
