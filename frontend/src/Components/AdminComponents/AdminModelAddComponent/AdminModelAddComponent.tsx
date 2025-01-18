@@ -8,6 +8,7 @@ import { endpoints } from '../../../api/apiConfig'
 import dummyImage from '../../../assets/images/LandingImages/Mach-e.1920x1080-1920x1080.jpg'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
+import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
 
 
 
@@ -31,30 +32,36 @@ interface AddNewCarProps {
 
 function AdminModelAddComponent() {
     const { showToast } = useToastManagerContext();
+    const { showConfirmation } = useConfirmContext();
 
     const addNewCarSubmitHandler = async (values: AddNewCarProps) => {
-        try {
-            const dataToSend = {
-                fuelTypeId: Number(values.fuelTypeId),
-                gearTypeId: Number(values.gearTypeId),
-                carTypeId: Number(values.carTypeId),
-                brandName: values.brandName,
-                modelName: values.modelName,
-                description: values.description,
-                personCount: Number(values.personCount),
-                luggageCount: Number(values.luggageCount),
-                doorCount: Number(values.doorCount),
-                price: Number(values.price),
-                otherServices: values.otherServices.split(",") || [],
-                otherFeatures: values.otherFeatures.split(",") || [],
-                imageDirectory: values.imageDirectory,
-            };
-            const { data, status }: any = await apiService(endpoints.models, "POST", dataToSend);
-            StatusHandler(status, data, showToast)
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
-        }
+
+        const dataToSend = {
+            fuelTypeId: Number(values.fuelTypeId),
+            gearTypeId: Number(values.gearTypeId),
+            carTypeId: Number(values.carTypeId),
+            brandName: values.brandName,
+            modelName: values.modelName,
+            description: values.description,
+            personCount: Number(values.personCount),
+            luggageCount: Number(values.luggageCount),
+            doorCount: Number(values.doorCount),
+            price: Number(values.price),
+            otherServices: values.otherServices.split(",") || [],
+            otherFeatures: values.otherFeatures.split(",") || [],
+            imageDirectory: values.imageDirectory,
+        };
+
+        showConfirmation("Oluşturulan model eklenecektir. Devam edilsin mi?", async () => {
+            try {
+                const { data, status }: any = await apiService(endpoints.models, "POST", dataToSend);
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
+        });
+
     }
 
     const initialValuesOfAddCar: AddNewCarProps = {
