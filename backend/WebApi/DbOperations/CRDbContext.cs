@@ -81,6 +81,7 @@ namespace WebApi.DbOperations
                 userComment.Property(uc => uc.CreatedAt).HasDefaultValueSql("GETDATE()");
                 userComment.Property(uc => uc.UpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();
                 userComment.Property(u => u.IsActive).HasDefaultValue(false);
+                userComment.Property(u => u.IsNew).HasDefaultValue(true);
 
                 userComment.HasOne(uc => uc.User).WithOne(u => u.UserComment).HasForeignKey<UserComment>(uc => uc.UserId);
 
