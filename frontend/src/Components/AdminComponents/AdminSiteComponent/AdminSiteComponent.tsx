@@ -6,6 +6,7 @@ import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../../common/StatusHandler';
+import { useConfirmContext } from '../../../Contexts/ConfirmationContext';
 
 
 interface SettingsMainTextProps {
@@ -28,43 +29,53 @@ function AdminSiteComponent() {
 
     const { error, settings } = useSiteSettingsContext();
     const { showToast } = useToastManagerContext();
+    const { showConfirmation } = useConfirmContext();
 
 
     const updateMainText = async (values: SettingsMainTextProps) => {
-        try {
-            const dataToSend = { Text: values.text };
-            const { data, status }: any = await apiService(endpoints.mainText + `${values.id}`, "PUT", dataToSend);
-            StatusHandler(status, data, showToast)
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
+        showConfirmation("Ana metin güncellenecektir. Devam edilsin mi?", async () => {
+            try {
+                const dataToSend = { Text: values.text };
+                const { data, status }: any = await apiService(endpoints.mainText + `${values.id}`, "PUT", dataToSend);
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
 
-        }
+            }
+        })
+
 
     }
 
 
     const updateServiceTexts = async (values: SettingsServicesTextProps) => {
-        try {
-            const dataToSend = { Title: values.title, Content: values.content, Icon: values.icon }
-            const { data, status }: any = await apiService(endpoints.serviceText + `${values.id}`, "PUT", dataToSend);
-            StatusHandler(status, data, showToast)
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
-        }
+        showConfirmation("Hizmet metni güncellenecektir. Devam edilsin mi?", async () => {
+            try {
+                const dataToSend = { Title: values.title, Content: values.content, Icon: values.icon }
+                const { data, status }: any = await apiService(endpoints.serviceText + `${values.id}`, "PUT", dataToSend);
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
+        })
+
     }
 
 
     const updateReasonTexts = async (values: SettingsReasonTextProps) => {
-        try {
-            const dataToSend = { Title: values.title, Content: values.content }
-            const { data, status }: any = await apiService(endpoints.reasonText + `${values.id}`, "PUT", dataToSend);
-            StatusHandler(status, data, showToast)
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
-        }
+        showConfirmation("Sebep metni güncellenecektir. Devam edilsin mi?", async () => {
+            try {
+                const dataToSend = { Title: values.title, Content: values.content }
+                const { data, status }: any = await apiService(endpoints.reasonText + `${values.id}`, "PUT", dataToSend);
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
+        })
+
     }
 
     if (error) return <p>{error}</p>
