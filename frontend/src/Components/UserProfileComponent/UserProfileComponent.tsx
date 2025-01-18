@@ -22,7 +22,7 @@ function UserProfileComponent() {
 
 
     const updateUserInfo = async (values: InfoFormProps) => {
-        showConfirmation("Bilgiler Güncellensin Mi ?", async () => {
+        showConfirmation("Kullanıcı bilgileri güncellensin mi? ", async () => {
             try {
                 const { data, status }: any = await apiService(endpoints.ownInfo, "PUT", values);
                 StatusHandler(status, data, showToast)
