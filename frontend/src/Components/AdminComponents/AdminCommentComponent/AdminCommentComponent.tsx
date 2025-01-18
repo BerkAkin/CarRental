@@ -1,42 +1,69 @@
 import React from 'react'
 import styles from "./styles.module.css"
 import { useCommentsContext } from '../../../Contexts/CommentContext';
+import apiService from '../../../api/apiService';
+import { endpoints } from '../../../api/apiConfig';
 
 function AdminCommentComponent() {
 
     const { comments, acceptComment, refuseComment, nextPage, previousPage, error } = useCommentsContext();
 
+    const handleMark = async (id: number) => {
+        try {
+            console.log(id)
+            await apiService(endpoints.markAsRead, "PUT", id);
+        }
+        catch (Error) {
+            console.log(Error);
+        }
+    }
+
     if (error) return <p>{error}</p>
     return (
         <div>
-            <table className="table-striped table-hover table m-0 mt-4">
+            <table className={`${styles.tableFontSize} table-striped table-hover table mt-2 `}>
                 <thead>
                     <tr>
-                        <th scope="col">Ad Soyad</th>
-                        <th scope="col">E-Posta</th>
-                        <th scope="col">Kullanıcı Türü</th>
-                        <th scope="col">Aktif Mi</th>
+                        <th scope="col" className='text-center col-1'>Ad Soyad</th>
+                        <th scope="col" className='text-center col-1'>E-Posta</th>
+                        <th scope="col" className='text-center col-1'>Kullanıcı Türü</th>
+                        <th scope="col" className='text-center col-1'>Aktif Mi</th>
                         <th scope="col">Puan</th>
-                        <th scope="col">Yorum</th>
-                        <th scope="col">İşlemler</th>
+                        <th scope="col" className='col-7'>Yorum</th>
+                        <th scope="col" className='text-center col-1'></th>
+                        <th scope="col" >İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
                     {comments ?
                         (comments?.data.map((item: any, index: number) => (
 
-                            <tr key={index}>
-                                <td scope="row">{item.userName}</td>
-                                <td>{item.userMail}</td>
-                                <td>{item.userType}</td>
-                                <td>{item.isActive === true ? "Evet" : "Hayır"}</td>
-                                <td>{item.starCount}</td>
-                                <td>{item.content}</td>
+                            <tr key={item.id}>
+                                <td className='text-center'>{item.userName}</td>
+                                <td className='text-center'>{item.userMail}</td>
+                                <td className='text-center'>{item.userType}</td>
+                                <td className='text-center'>{item.isActive === true ? "Evet" : "Hayır"}</td>
+                                <td className='text-center'>{item.starCount}</td>
+                                <td >{item.content}</td>
+                                <td className='text-center'>
+                                    {
+                                        item.isNew === true ?
+                                            (
+                                                <div className={`${styles.newBtn} rounded-pill text-center p-1 bg-warning`} onMouseEnter={() => handleMark(item.id)}>
+                                                    YENİ
+                                                </div>
+
+                                            ) : (<></>)
+                                    }
+                                </td>
+
                                 <td>
+
+
                                     {item.isActive === true ?
                                         (
                                             <>
-                                                <button onClick={() => refuseComment(item.id)} className={`${styles.actionNoBtn} mx-2`}>Reddet</button>
+                                                <button onClick={() => refuseComment(item.id)} className={`${styles.actionNoBtn}`}>Reddet</button>
                                             </>
                                         )
                                         :
