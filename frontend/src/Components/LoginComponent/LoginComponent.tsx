@@ -28,9 +28,6 @@ function LoginComponent() {
 
     const { fetchUserType } = useAuthContext();
     const { showToast } = useToastManagerContext();
-    const navigate = useNavigate();
-
-
 
     const onSubmit = async (values: LoginProps, { setSubmitting }: any) => {
         try {
@@ -41,6 +38,7 @@ function LoginComponent() {
             }, 2000);
             localStorage.setItem("accessToken", data);
             await fetchUserType();
+            window.location.reload();
 
         } catch (error) {
             const { status, message }: any = error;
