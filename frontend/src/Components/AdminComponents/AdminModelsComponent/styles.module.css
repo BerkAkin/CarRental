@@ -13,3 +13,7 @@
 .btn:hover {
     background-color: #2c497c;
 }
+
+.tableFont {
+    font-size: 0.8rem;
+}
