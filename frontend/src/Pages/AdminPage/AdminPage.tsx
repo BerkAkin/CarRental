@@ -25,7 +25,7 @@ function AdminPage() {
     return (
         <>
             <ConfirmationPopup />
-            <div className={`container-fluid mt-4 pt-3 `}>
+            <div className={`container-fluid mt-4`}>
                 <ul className="nav nav-tabs" role="tablist">
                     <li className="nav-item " >
                         <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
@@ -43,18 +43,16 @@ function AdminPage() {
 
                 <div className="tab-content" id="tab-content">
                     <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">
-                        <div className='container'>
+                        <div className='container mt-4'>
                             <div className='row'>
-                                <div className='container'>
-                                    <UserInfoContextProvider>
-                                        <UserProfileComponent />
-                                    </UserInfoContextProvider>
-                                </div>
+                                <UserInfoContextProvider>
+                                    <UserProfileComponent />
+                                </UserInfoContextProvider>
                             </div>
                         </div>
                     </div>
                     <div className="tab-pane" id="disabled-tabpanel-1" role="tabpanel" aria-labelledby="disabled-tab-1">
-                        <div className='container-fluid'>
+                        <div className='container-fluid mt-4'>
                             <div className='row'>
                                 <SiteSettingsContextProvider>
                                     <AdminSiteComponent />
@@ -63,43 +61,39 @@ function AdminPage() {
                         </div>
                     </div>
                     <div className="tab-pane" id="disabled-tabpanel-2" role="tabpanel" aria-labelledby="disabled-tab-2">
-                        <div className='container-fluid'>
+                        <div className='container-fluid mt-4'>
                             <div className='row'>
-                                <div className='container-fluid mt-4'>
-                                    {
-                                        isAdd ?
-                                            (
-                                                <>
-                                                    <button onClick={handleIsAdd} className={`${styles.addBtnCancel}`}>İptal Et</button>
-                                                    <TypesContextProvider>
-                                                        <AdminModelAddComponent />
-                                                    </TypesContextProvider>
-                                                </>
-                                            )
-                                            :
-                                            (
-                                                <>
-                                                    <button onClick={handleIsAdd} className={`${styles.addBtn}`}>Yeni Model Ekle</button>
-                                                    <TypesContextProvider>
-                                                        <ModelsContextProvider>
-                                                            <AdminModelsComponent />
-                                                        </ModelsContextProvider>
-                                                    </TypesContextProvider>
-                                                </>
-                                            )
-                                    }
-                                </div>
+                                {
+                                    isAdd ?
+                                        (
+                                            <>
+                                                <button onClick={handleIsAdd} className={`${styles.addBtnCancel}`}>İptal Et</button>
+                                                <TypesContextProvider>
+                                                    <AdminModelAddComponent />
+                                                </TypesContextProvider>
+                                            </>
+                                        )
+                                        :
+                                        (
+                                            <>
+                                                <button onClick={handleIsAdd} className={`${styles.addBtn}`}>Yeni Model Ekle</button>
+                                                <TypesContextProvider>
+                                                    <ModelsContextProvider>
+                                                        <AdminModelsComponent />
+                                                    </ModelsContextProvider>
+                                                </TypesContextProvider>
+                                            </>
+                                        )
+                                }
                             </div>
                         </div>
                     </div>
                     <div className="tab-pane" id="disabled-tabpanel-5" role="tabpanel" aria-labelledby="disabled-tab-5">
-                        <div className='container-fluid'>
+                        <div className='container-fluid p-0 mt-4'>
                             <div className='row'>
-                                <div>
-                                    <CommentContextProvider>
-                                        <AdminCommentComponent />
-                                    </CommentContextProvider>
-                                </div>
+                                <CommentContextProvider>
+                                    <AdminCommentComponent />
+                                </CommentContextProvider>
                             </div>
                         </div>
                     </div>
