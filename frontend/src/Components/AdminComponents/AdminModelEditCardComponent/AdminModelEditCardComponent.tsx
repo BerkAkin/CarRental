@@ -7,6 +7,7 @@ import apiService from '../../../api/apiService'
 import { endpoints } from '../../../api/apiConfig'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
+import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
 
 
 interface ItemProp {
@@ -57,169 +58,175 @@ interface ItemProp {
 
 function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp) {
     const { showToast } = useToastManagerContext();
+    const { showConfirmation } = useConfirmContext();
 
 
     const onSubmitHandler = async (values: any) => {
-        try {
-            const otherServicesArray = typeof values.otherServices === 'string' ? values.otherServices.split(',') : values.otherServices;
-            const otherFeaturesArray = typeof values.otherFeatures === 'string' ? values.otherFeatures.split(',') : values.otherServices;
-            const dataToSend = {
-                fuelTypeId: Number(values.fuelType.id),
-                gearTypeId: Number(values.gearType.id),
-                carTypeId: Number(values.carType.id),
-                brandName: values.brandName,
-                modelName: values.modelName,
-                description: values.description,
-                personCount: values.personCount,
-                luggageCount: values.luggageCount,
-                doorCount: values.doorCount,
-                price: values.price,
-                otherServices: otherServicesArray || [],
-                otherFeatures: otherFeaturesArray || [],
-                imageDirectory: values.imageDirectory,
-            };
-            const { data, status }: any = await apiService(endpoints.models + `${values.id}`, "PUT", dataToSend)
-            StatusHandler(status, data, showToast)
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
+        const otherServicesArray = typeof values.otherServices === 'string' ? values.otherServices.split(',') : values.otherServices;
+        const otherFeaturesArray = typeof values.otherFeatures === 'string' ? values.otherFeatures.split(',') : values.otherServices;
+        const dataToSend = {
+            fuelTypeId: Number(values.fuelType.id),
+            gearTypeId: Number(values.gearType.id),
+            carTypeId: Number(values.carType.id),
+            brandName: values.brandName,
+            modelName: values.modelName,
+            description: values.description,
+            personCount: values.personCount,
+            luggageCount: values.luggageCount,
+            doorCount: values.doorCount,
+            price: values.price,
+            otherServices: otherServicesArray || [],
+            otherFeatures: otherFeaturesArray || [],
+            imageDirectory: values.imageDirectory,
+        };
+        showConfirmation("Model güncellenecektir. Devam edilsin mi?", async () => {
+            try {
+                const { data, status }: any = await apiService(endpoints.models + `${values.id}`, "PUT", dataToSend)
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
         }
+        )
+
     }
 
     const onDeleteHandler = async (id: number) => {
-        try {
-            const { data, status }: any = await apiService(endpoints.models + id, "DELETE");
-            StatusHandler(status, data, showToast)
-        } catch (error) {
-            const { status, message }: any = error;
-            StatusHandler(status, message, showToast)
-        }
+        showConfirmation("Seçilen model silinecektir. Devam edilsin mi?", async () => {
+            try {
+                const { data, status }: any = await apiService(endpoints.models + id, "DELETE");
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
+        })
+
     }
     return (
-        <>
+        <div className='col-3 my-4'>
 
-            <div className='col-3 my-4'>
+            <div className='container'>
+                <Formik initialValues={Item} onSubmit={onSubmitHandler} enableReinitialize>
+                    <Form>
+                        <div className='row border'>
+                            <Image URL={dummyImage} Width='200px' />
+                        </div>
 
-                <div className='container'>
-                    <Formik initialValues={Item} onSubmit={onSubmitHandler} enableReinitialize>
-                        <Form>
-                            <div className='row border'>
-                                <Image URL={dummyImage} Width='200px' />
-                            </div>
+                        <div className='row'>
+                            <div className='container-fluid'>
+                                <div className='row'>
 
-                            <div className='row'>
-                                <div className='container-fluid'>
-                                    <div className='row'>
-
-                                        <div className={`col-6 border`}>
-                                            <div className='row text-center'><label htmlFor='brandName'>Marka</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
-                                        </div>
-                                        <div className={`col-6 border`}>
-                                            <div className='row text-center'><label htmlFor='modelName'>Model</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
+                                    <div className={`col-6 border`}>
+                                        <div className='row text-center'><label htmlFor='brandName'>Marka</label></div>
+                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
+                                    </div>
+                                    <div className={`col-6 border`}>
+                                        <div className='row text-center'><label htmlFor='modelName'>Model</label></div>
+                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className={`col-4 border `}>
+                                        <div className='row text-center'><label htmlFor='fuelType.fuel'>Yakıt</label></div>
+                                        <div className='row'>
+                                            <Field as="select" className={`${styles.inputs}`} name="fuelType.id" id="fuelType.id" >
+                                                {Fuels.map((fuel) => (
+                                                    <option key={fuel.id} value={fuel.id}>
+                                                        {fuel.fuel}
+                                                    </option>
+                                                ))}
+                                            </Field>
                                         </div>
                                     </div>
-                                    <div className='row'>
-                                        <div className={`col-4 border `}>
-                                            <div className='row text-center'><label htmlFor='fuelType.fuel'>Yakıt</label></div>
-                                            <div className='row'>
-                                                <Field as="select" className={`${styles.inputs}`} name="fuelType.id" id="fuelType.id" >
-                                                    {Fuels.map((fuel) => (
-                                                        <option key={fuel.id} value={fuel.id}>
-                                                            {fuel.fuel}
-                                                        </option>
-                                                    ))}
-                                                </Field>
-                                            </div>
-                                        </div>
-                                        <div className={`col-4 border `}>
-                                            <div className='row text-center'><label htmlFor='gearType.gear'>Şanzıman</label></div>
-                                            <div className='row '>
-                                                <Field as="select" className={`${styles.inputs} `} name="gearType.id" id="gearType.id" >
-                                                    {Gears.map((gear) => (
-                                                        <option key={gear.id} value={gear.id}>
-                                                            {gear.gear}
-                                                        </option>
-                                                    ))}
-                                                </Field>
-                                            </div>
-                                        </div>
-                                        <div className={`col-4  border`}>
-                                            <div className='row text-center'><label htmlFor='carType.car'>Tip</label></div>
-                                            <div className='row '>
-                                                <Field as="select" className={`${styles.inputs}`} name="carType.id" id="carType.id" >
-                                                    {CarTypes.map((cartype) => (
-                                                        <option key={cartype.id} value={cartype.id}>
-                                                            {cartype.car}
-                                                        </option>
-                                                    ))}
-                                                </Field>
-                                            </div>
+                                    <div className={`col-4 border `}>
+                                        <div className='row text-center'><label htmlFor='gearType.gear'>Şanzıman</label></div>
+                                        <div className='row '>
+                                            <Field as="select" className={`${styles.inputs} `} name="gearType.id" id="gearType.id" >
+                                                {Gears.map((gear) => (
+                                                    <option key={gear.id} value={gear.id}>
+                                                        {gear.gear}
+                                                    </option>
+                                                ))}
+                                            </Field>
                                         </div>
                                     </div>
-                                    <div className='row'>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='description'>Açıklama</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="description" id="description" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`border col-4 justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='personCount'>Kişi Sayısı</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="personCount" id="personCount" /></div>
-                                        </div>
-                                        <div className={`border col-4 justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='luggageCount'>Bagaj Sayısı</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="luggageCount" id="luggageCount" /></div>
-                                        </div>
-                                        <div className={`border col-4 justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='doorCount'>Kapı Sayısı</label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="doorCount" id="doorCount" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='price'>Aylık Kiralama Bedeli</label></div>
-                                            <div className='row'> <Field className={`${styles.inputs} text-center`} name="price" id="price" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='otherServices'>Sunulan Diğer Hizmetler</label></div>
-                                            <div className='row'>  <Field className={`${styles.inputs}`} name="otherServices" id="otherServices" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row '>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='otherFeatures'>Diğer Araç Özellikleri</label></div>
-                                            <div className='row'> <Field className={`${styles.inputs}`} name="otherFeatures" id="otherFeatures" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row border'>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'>
-                                                <button type='submit' className={styles.btn}>Güncelle</button>
-
-                                            </div>
-
+                                    <div className={`col-4  border`}>
+                                        <div className='row text-center'><label htmlFor='carType.car'>Tip</label></div>
+                                        <div className='row '>
+                                            <Field as="select" className={`${styles.inputs}`} name="carType.id" id="carType.id" >
+                                                {CarTypes.map((cartype) => (
+                                                    <option key={cartype.id} value={cartype.id}>
+                                                        {cartype.car}
+                                                    </option>
+                                                ))}
+                                            </Field>
                                         </div>
                                     </div>
                                 </div>
+                                <div className='row'>
+                                    <div className={`col-12 border justify-content-center`}>
+                                        <div className='row text-center'><label htmlFor='description'>Açıklama</label></div>
+                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="description" id="description" /></div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className={`border col-4 justify-content-center`}>
+                                        <div className='row text-center'><label htmlFor='personCount'>Kişi Sayısı</label></div>
+                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="personCount" id="personCount" /></div>
+                                    </div>
+                                    <div className={`border col-4 justify-content-center`}>
+                                        <div className='row text-center'><label htmlFor='luggageCount'>Bagaj Sayısı</label></div>
+                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="luggageCount" id="luggageCount" /></div>
+                                    </div>
+                                    <div className={`border col-4 justify-content-center`}>
+                                        <div className='row text-center'><label htmlFor='doorCount'>Kapı Sayısı</label></div>
+                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="doorCount" id="doorCount" /></div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className={`col-12 border justify-content-center`}>
+                                        <div className='row text-center'><label htmlFor='price'>Aylık Kiralama Bedeli</label></div>
+                                        <div className='row'> <Field className={`${styles.inputs} text-center`} name="price" id="price" /></div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className={`col-12 border justify-content-center`}>
+                                        <div className='row text-center'><label htmlFor='otherServices'>Sunulan Diğer Hizmetler</label></div>
+                                        <div className='row'>  <Field className={`${styles.inputs}`} name="otherServices" id="otherServices" /></div>
+                                    </div>
+                                </div>
+                                <div className='row '>
+                                    <div className={`col-12 border justify-content-center`}>
+                                        <div className='row text-center'><label htmlFor='otherFeatures'>Diğer Araç Özellikleri</label></div>
+                                        <div className='row'> <Field className={`${styles.inputs}`} name="otherFeatures" id="otherFeatures" /></div>
+                                    </div>
+                                </div>
+                                <div className='row border'>
+                                    <div className={`col-12 border justify-content-center`}>
+                                        <div className='row text-center'>
+                                            <button type='submit' className={styles.btn}>Güncelle</button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-                        </Form>
-                    </Formik>
-                    <div className='row mt-2'>
-                        <button onClick={() => onDeleteHandler(Item.id)} className={styles.deleteBtn}>Sil</button>
-                    </div>
+                        </div>
+                    </Form>
+                </Formik>
+                <div className='row mt-2'>
+                    <button onClick={() => onDeleteHandler(Item.id)} className={styles.deleteBtn}>Sil</button>
                 </div>
-
-
             </div>
 
 
+        </div>
 
-        </>
+
+
+
     )
 }
 

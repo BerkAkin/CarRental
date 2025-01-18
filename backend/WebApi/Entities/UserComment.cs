@@ -8,6 +8,7 @@ namespace WebApi.Entities
         public string Content { get; set; }
         public int StarCount { get; set; }
         public bool IsActive { get; set; } = false;
+        public bool IsNew { get; set; } = true;
         public User User { get; set; }
         public int UserId { get; set; }
         public DateTime CreatedAt { get; set; }

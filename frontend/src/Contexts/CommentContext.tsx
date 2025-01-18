@@ -14,6 +14,7 @@ interface SingleComment {
     userName: string;
     userMail: string;
     userType: string;
+    isNew: boolean;
 }
 interface Comments {
     currentPage: number;

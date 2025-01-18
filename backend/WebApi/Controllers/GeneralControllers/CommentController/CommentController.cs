@@ -45,27 +45,18 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
                 return Ok(response);
             }
             return NotFound("");
-
-
-
-
         }
 
 
         [HttpGet("/Comments/Latest")]
         public async Task<ActionResult<List<CommentViewModel>>> GetAllLatest()
         {
-
             var data = await _service.GetLatestAsync();
             if (data is not null)
             {
                 return Ok(data);
             }
             return NotFound("");
-
-
-
-
         }
 
 
@@ -73,32 +64,24 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         [HttpPut("/Comments/AcceptComment")]
         public async Task<ActionResult> AcceptComment([FromBody] int id)
         {
-
             await _service.AcceptComment(id);
             return Ok("Yorum onaylandı");
-
-
         }
 
         [Authorize(Roles = "1")]
         [HttpPut("/Comments/RefuseComment")]
         public async Task<ActionResult> RefuseComment([FromBody] int id)
         {
-
             await _service.RefuseComment(id);
             return Ok("Yorum reddedildi");
-
-
         }
 
         [Authorize(Roles = "1")]
         [HttpGet("{id}")]
         public async Task<ActionResult<CommentViewIdModel>> GetById(int id)
         {
-
             var result = await _service.GetByIdAsync(id);
             return Ok(result);
-
         }
 
 
@@ -106,10 +89,8 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         [HttpPost]
         public async Task<ActionResult> AddAsync([FromBody] CommentAddModel model)
         {
-
             await _service.AddAsync(model);
             return Ok("Yorum eklendi");
-
         }
 
         [Authorize(Roles = "1,2")]
@@ -124,22 +105,24 @@ namespace WebApi.Controllers.GeneralControllers.CommentController
         [HttpGet("OwnComment")]
         public async Task<ActionResult<CommentViewIdModel>> GetOwnComment()
         {
-
             var comment = await _service.GetOwnComment(Convert.ToInt32(UserId));
             return Ok(comment);
-
-
-
         }
 
         [Authorize(Roles = "1,2")]
         [HttpPut("OwnComment")]
         public async Task<ActionResult> UpdateOwnComment([FromBody] CommentUpdateModel model)
         {
-
             await _service.UpdateOwnComment(Convert.ToInt32(UserId), model);
             return Ok("Yorum güncellendi");
+        }
 
+
+        [HttpPut("MarkCommentAsRead")]
+        public async Task<ActionResult> MarkCommentAsRead([FromBody] int id)
+        {
+            await _service.MarkCommentAsRead(id);
+            return Ok();
         }
 
     }
