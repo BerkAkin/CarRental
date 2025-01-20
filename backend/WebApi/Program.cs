@@ -59,10 +59,10 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowAll");
 app.UseRouting();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseCors("AllowAll");
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
