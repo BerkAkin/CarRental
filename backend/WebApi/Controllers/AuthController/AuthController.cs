@@ -1,4 +1,5 @@
 using System.Data;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.Auth;
 using WebApi.Exceptions;
@@ -50,15 +51,22 @@ namespace WebApi.Controllers.AuthController
 
 
         [HttpPost("/RefreshAccessToken")]
-        public async Task<IActionResult> RefreshTokens()
+        public async Task<IActionResult> RefreshAccessToken()
         {
+            var oldRefreshToken = Request.Cookies["refreshToken"];
+            var tokens = await _authService.RefreshAccessToken(oldRefreshToken);
 
-            var refreshToken = Request.Cookies["refreshToken"];
-            var newAccessToken = await _authService.RefreshAccessToken(refreshToken);
-            return Ok(newAccessToken);
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = DateTime.Now.AddDays(7),
+            };
+            Response.Cookies.Delete("refreshToken");
+            Response.Cookies.Append("refreshToken", tokens.RefreshToken, cookieOptions);
 
-
-
+            return Ok(new { accessToken = tokens.AccessToken });
         }
 
         [HttpGet("/Logout")]
