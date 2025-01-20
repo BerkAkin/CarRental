@@ -58,7 +58,7 @@ export const CommentContextProvider = ({ children }: any) => {
 
     const fetchComments = useCallback(async (page: number) => {
         try {
-            const { data, status }: any = await apiService(endpoints.comments + `?pageNumber=${page}`, "GET");
+            const { data, status }: any = await apiService(endpoints.comments + `?pageNumber=${page || 1}`, "GET");
             setComments(data);
         } catch (error) {
             console.log(error)

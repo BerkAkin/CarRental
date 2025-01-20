@@ -34,7 +34,10 @@ export const endpoints = {
     refuseComment: "/Comments/RefuseComment",
 
     checkMe: "/Users/CheckMe",
-    markAsRead: "/Comments/MarkCommentAsRead"
+    markAsRead: "/Comments/MarkCommentAsRead",
+
+
+    refreshAccessToken: "/RefreshAccessToken"
 
 
 

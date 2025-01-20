@@ -94,7 +94,7 @@ namespace WebApi.Services.AuthService
         }
 
 
-        public async Task<string> RefreshAccessToken(string refreshToken)
+        public async Task<TokenResponseModel> RefreshAccessToken(string refreshToken)
         {
 
             var user = await _repository.GetUserByRefreshToken(refreshToken);
@@ -111,12 +111,23 @@ namespace WebApi.Services.AuthService
 
             try
             {
-                string accessToken = _tokenService.GenerateAccessToken(user);
-                return accessToken;
+                string newAccessToken = _tokenService.GenerateAccessToken(user);
+                string newRefreshToken = _tokenService.GenerateRefreshToken();
+                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                user.RefreshToken = newRefreshToken;
+                await _repository.UpdateUser(user);
+
+                var response = new TokenResponseModel
+                {
+                    AccessToken = newAccessToken,
+                    RefreshToken = user.RefreshToken
+                };
+
+                return response;
             }
             catch (Exception ex)
             {
-                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+                throw new DatabaseException(ex.Message);
             }
 
 
