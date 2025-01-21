@@ -9,7 +9,9 @@ namespace WebApi.Entities
         public string PhoneNum { get; set; }
         public string PasswordHashed { get; set; }
         public string? RefreshToken { get; set; }
-        public DateTime RefreshTokenExpiryTime { get; set; }
+        public string? ResetToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
+        public DateTime? ResetTokenExpiryTime { get; set; }
         public bool IsActive { get; set; } = true;
         public int RoleId { get; set; }
         public Role Role { get; set; }
