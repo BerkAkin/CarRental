@@ -1,8 +1,7 @@
-using System.Data;
-using Azure.Core;
+
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs.Auth;
-using WebApi.Exceptions;
+using WebApi.Entities;
 using WebApi.Services.AuthService;
 
 
@@ -45,8 +44,6 @@ namespace WebApi.Controllers.AuthController
 
             return Ok(tokens.AccessToken);
 
-
-
         }
 
 
@@ -69,17 +66,25 @@ namespace WebApi.Controllers.AuthController
             return Ok(new { accessToken = tokens.AccessToken });
         }
 
+
+
         [HttpGet("/Logout")]
         public async Task<IActionResult> Logout()
         {
-
             var refreshToken = Request.Cookies["refreshToken"];
             await _authService.Logout(refreshToken);
             Response.Cookies.Delete("refreshToken");
             return Ok("Çıkış Yapıldı");
 
-
         }
+
+        [HttpPost("/ResetPasswordRequest")]
+        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            await _authService.ResetPassword(request);
+            return Ok("Parolama Sıfırlama Maili Gönderildi");
+        }
+
 
 
     }
