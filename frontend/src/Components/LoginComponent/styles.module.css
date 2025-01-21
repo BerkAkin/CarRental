@@ -53,3 +53,16 @@
 .inputs:hover {
     border-bottom: red 3px solid;
 }
+
+.operationBtn {
+    border: none;
+    outline: none;
+    background-color: white;
+    color: #7A7A7A;
+    text-decoration: underline;
+}
+
+
+.operationBtn:hover {
+    color: #4e4e4e;
+}
