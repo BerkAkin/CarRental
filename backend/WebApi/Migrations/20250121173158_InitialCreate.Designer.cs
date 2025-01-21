@@ -12,7 +12,7 @@ using WebApi.DbOperations;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(CRDbContext))]
-    [Migration("20250116230926_InitialCreate")]
+    [Migration("20250121173158_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -366,6 +366,13 @@ namespace WebApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResetToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ResetTokenExpiryTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("RoleId")
