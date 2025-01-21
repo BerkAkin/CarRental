@@ -37,7 +37,8 @@ export const endpoints = {
     markAsRead: "/Comments/MarkCommentAsRead",
 
 
-    refreshAccessToken: "/RefreshAccessToken"
+    refreshAccessToken: "/RefreshAccessToken",
+    resetPassword: "/ResetPasswordRequest",
 
 
 

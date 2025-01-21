@@ -12,6 +12,7 @@ using WebApi.Repositories.TokenRepository;
 using WebApi.Repositories.UserRepository;
 using WebApi.Services.AuthService;
 using WebApi.Services.GeneralServices.CommentService;
+using WebApi.Services.GeneralServices.EmailService;
 using WebApi.Services.GeneralServices.FAQService;
 using WebApi.Services.GeneralServices.FavoriteService;
 using WebApi.Services.GeneralServices.LandingServices;
@@ -62,6 +63,7 @@ public static class ServiceRegistration
         services.AddScoped<GearService>();
         services.AddScoped<FuelService>();
         services.AddScoped<CarTypeService>();
+        services.AddScoped<EmailService>();
 
         //SEEDER
         services.AddTransient<DbSeeder>();
