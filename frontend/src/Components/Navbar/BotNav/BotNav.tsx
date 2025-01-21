@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
+import { useNavigate } from 'react-router-dom';
 
 interface BotNavProps {
   openModal: (content: 'login' | 'register') => void;
@@ -13,6 +14,7 @@ interface BotNavProps {
 
 function BotNav({ openModal }: BotNavProps) {
   const { showToast } = useToastManagerContext();
+  const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
 
@@ -28,7 +30,9 @@ function BotNav({ openModal }: BotNavProps) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("UserInfo");
       showToast("Çıkış Yapıldı", "s");
+      navigate("/");
       window.location.reload();
+
     }
     catch (error) {
       console.error("Çıkış işlemi sırasında hata:", error);
