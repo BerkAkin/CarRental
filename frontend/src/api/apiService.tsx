@@ -11,7 +11,6 @@ async function refreshToken() {
         const newAccessToken = refreshResponse.data.accessToken;
         if (newAccessToken) {
             localStorage.setItem("accessToken", newAccessToken);
-            console.log("TOKEN YENİLENDİ")
         }
 
         pendingRequests.forEach((request: any) => request());
@@ -41,7 +40,7 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
             const response = await axios({ method, url, data, headers, withCredentials: true });
             return { data: response.data, status: response.status };
         }
-        catch (error) {
+        catch (error: any) {
             if (axios.isAxiosError(error) && error.response?.status === 401) {
                 return new Promise<any>((resolve, reject) => {
                     pendingRequests.push(() => {
@@ -55,7 +54,7 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
                     }
                 });
             }
-            throw error;
+            throw { status: error.response.status, message: error.response.data.message };
         }
     };
 
