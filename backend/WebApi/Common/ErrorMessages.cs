@@ -19,6 +19,7 @@ namespace WebApi.Common
         public const string ACTIVATE_USER_FAIL = "Kullanıcı aktive edilemedi";
         public const string PASSWORD_ERROR = "Girilen parola yanlış";
         public const string EMAIL_EXISTS = "Bu E-mail adresi zaten mevcut";
+        public const string EMAIL_DOES_NOT_EXISTS = "Bu E-mail mevcut değil";
         public const string REGISTER_FAILED_EMPTY_INPUT = "Kayıt başarısız. Girilen bilgiler boş olamaz";
 
         public const string COMMENTS_NOT_FOUND = "Yorumlar bulunamadı";
