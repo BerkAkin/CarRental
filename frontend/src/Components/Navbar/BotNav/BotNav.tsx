@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
-import { useNavigate } from 'react-router-dom';
+import { StatusHandler } from '../../../common/StatusHandler';
 
 interface BotNavProps {
   openModal: (content: 'login' | 'register') => void;
@@ -14,7 +14,6 @@ interface BotNavProps {
 
 function BotNav({ openModal }: BotNavProps) {
   const { showToast } = useToastManagerContext();
-  const navigate = useNavigate();
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
 
@@ -26,17 +25,18 @@ function BotNav({ openModal }: BotNavProps) {
 
   const logout = async () => {
     try {
-      await apiService(endpoints.logout, "GET");
+      const { data, status } = await apiService(endpoints.logout, "GET");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("UserInfo");
-      showToast("Çıkış Yapıldı", "s");
-      navigate("/");
-      window.location.reload();
+      StatusHandler(status, data, showToast)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
 
     }
-    catch (error) {
-      console.error("Çıkış işlemi sırasında hata:", error);
-      showToast("Çıkış Yapılamadı", "d");
+    catch (error: any) {
+      const { message, status } = error;
+      StatusHandler(status, message, showToast)
     }
 
 
