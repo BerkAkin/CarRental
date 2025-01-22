@@ -148,7 +148,7 @@ namespace WebApi.Services.AuthService
             try
             {
                 user.RefreshToken = null;
-                user.RefreshTokenExpiryTime = DateTime.Now;
+                user.RefreshTokenExpiryTime = null;
                 await _repository.UpdateUser(user);
             }
             catch (Exception ex)
@@ -165,7 +165,7 @@ namespace WebApi.Services.AuthService
 
 
 
-        public async Task ResetPassword(ResetPasswordRequest request)
+        public async Task ResetPasswordRequest(ResetPasswordRequest request)
         {
             var user = await _repository.FindUser(request.Email);
             if (user is null)
@@ -178,7 +178,7 @@ namespace WebApi.Services.AuthService
                 user.ResetTokenExpiryTime = DateTime.UtcNow.AddMinutes(15);
 
                 await _repository.UpdateUser(user);
-                var resetLink = $"http://localhost:3000/reset-password?email={user.Email}&token={user.ResetToken}";
+                var resetLink = $"http://localhost:3000/resetPassword?email={user.Email}&token={user.ResetToken}";
 
                 var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "email.html");
                 var emailBody = File.ReadAllText(templatePath);
@@ -195,31 +195,30 @@ namespace WebApi.Services.AuthService
 
 
 
-        public async Task ValidateResetToken(string email, string token)
+        public async Task ResetPassword(ResetPassword model)
         {
-            var user = await _repository.FindUser(email);
-            if (user is null || user.ResetToken != token || user.ResetTokenExpiryTime < DateTime.UtcNow)
+            var user = await _repository.FindUser(model.Email);
+            if (user is null || user.ResetToken != model.Token || user.ResetTokenExpiryTime < DateTime.UtcNow)
             {
-                throw new InvalidOperationException("Geçersiz veya süresi dolmuş token. Lütfen yeniden sıfırlama isteği oluşturun");
+                throw new InvalidOperationException(ErrorMessages.PASSWORD_TOKEN_RESET_ERROR);
             }
+            try
+            {
+                user.PasswordHashed = _passwordHasher.HashPassword(model.NewPassword);
+                user.ResetToken = null;
+                user.ResetTokenExpiryTime = null;
+                await _repository.UpdateUser(user);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
         }
 
 
-
-
-        public async Task SetNewPassword(string email, string token, string newPassword)
-        {
-            var user = await _repository.FindUser(email);
-            if (user is null || user.ResetToken != token || user.ResetTokenExpiryTime < DateTime.UtcNow)
-            {
-                throw new InvalidOperationException("Geçersiz veya süresi dolmuş token.");
-            }
-            user.PasswordHashed = _passwordHasher.HashPassword(newPassword);
-            user.ResetToken = null;
-            user.ResetTokenExpiryTime = null;
-
-            await _repository.UpdateUser(user);
-        }
 
     }
 }
