@@ -79,12 +79,19 @@ namespace WebApi.Controllers.AuthController
         }
 
         [HttpPost("/ResetPasswordRequest")]
-        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        public async Task<ActionResult> ResetPasswordRequest([FromBody] ResetPasswordRequest request)
         {
-            await _authService.ResetPassword(request);
+            await _authService.ResetPasswordRequest(request);
             return Ok("Parolama Sıfırlama Maili Gönderildi");
         }
 
+
+        [HttpPost("/ResetPassword")]
+        public async Task<ActionResult> ResetPassword([FromBody] ResetPassword request)
+        {
+            await _authService.ResetPassword(request);
+            return Ok("Parolama Sıfırlama İşlemi Başarılı Lütfen Yeniden Giriş Yapınız. 3 Saniye İçinde Yönlendiriliyor");
+        }
 
 
     }
