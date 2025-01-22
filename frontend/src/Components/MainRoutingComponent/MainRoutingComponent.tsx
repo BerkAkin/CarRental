@@ -18,6 +18,7 @@ import LandingPage from "../../Pages/LandingPage/LandingPage";
 import LoginComponent from "../LoginComponent/LoginComponent";
 import RegisterComponent from "../RegisterComponent/RegisterComponent";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import ResetPasswordPage from "../../Pages/ResetPasswordPage/ResetPasswordPage";
 
 function MainRoutingComponent() {
 
@@ -60,6 +61,7 @@ function MainRoutingComponent() {
           <Route path="/Blog/:id" element={<BlogDetailPage />}></Route>
           <Route path="/PPInfo" element={<PrivacyPolicyPage />}></Route>
           <Route path="/Profile" element={<ProfilePage />}></Route>
+          <Route path="/resetPassword" element={<ResetPasswordPage />}></Route>
           <Route path="*" element={<ErrorPage ErrorMessage="Gidilmek istenen sayfa mevcut değil" />} />
         </Routes>
 
