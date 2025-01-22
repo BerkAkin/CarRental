@@ -38,7 +38,9 @@ export const endpoints = {
 
 
     refreshAccessToken: "/RefreshAccessToken",
-    resetPassword: "/ResetPasswordRequest",
+    resetPasswordRequest: "/ResetPasswordRequest",
+
+    resetPassword: "/ResetPassword"
 
 
 

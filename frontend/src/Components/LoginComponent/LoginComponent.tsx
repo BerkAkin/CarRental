@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './styles.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import loginValidationSchema from './LoginValidationSchema';
-import ListElement from '../ListElement/ListElement';
 import logo from '../../assets/logos/logo-flexper.png';
 import Image from '../Image/Image';
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
-import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../Contexts/AuthContext';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
@@ -48,7 +46,10 @@ function LoginComponent() {
             }, 2000);
             localStorage.setItem("accessToken", data);
             await fetchUserType();
-            window.location.reload();
+            StatusHandler(status, "Yeniden Hoş Geldiniz !", showToast)
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
 
         } catch (error) {
             const { status, message }: any = error;
@@ -65,13 +66,13 @@ function LoginComponent() {
             email: values.email
         };
         try {
-            const { data, status }: any = await apiService(endpoints.resetPassword, "POST", value)
+            const { data, status }: any = await apiService(endpoints.resetPasswordRequest, "POST", value)
             setSubmitting(true);
             setTimeout(() => {
                 setSubmitting(false);
             }, 2000);
 
-            StatusHandler(200, "Parola Sıfırlama Maili Gönderildi", showToast)
+            StatusHandler(200, "Parola Sıfırlama Maili Gönderildi. Lütfen Posta Kutunuzu Kontrol Edin", showToast)
 
         } catch (error) {
             const { status, message }: any = error;
