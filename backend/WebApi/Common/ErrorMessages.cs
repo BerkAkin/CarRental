@@ -18,6 +18,7 @@ namespace WebApi.Common
         public const string USER_DELETE_FAIL = "Kullanıcı silinemedi";
         public const string ACTIVATE_USER_FAIL = "Kullanıcı aktive edilemedi";
         public const string PASSWORD_ERROR = "Girilen parola yanlış";
+        public const string PASSWORD_TOKEN_RESET_ERROR = "Geçersiz veya süresi dolmuş token. Lütfen yeniden sıfırlama isteği oluşturun";
         public const string EMAIL_EXISTS = "Bu E-mail adresi zaten mevcut";
         public const string EMAIL_DOES_NOT_EXISTS = "Bu E-mail mevcut değil";
         public const string REGISTER_FAILED_EMPTY_INPUT = "Kayıt başarısız. Girilen bilgiler boş olamaz";
