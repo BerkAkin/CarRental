@@ -37,7 +37,7 @@ namespace WebApi.Services.TokenService
                     issuer: _config["Jwt:Issuer"],
                     audience: _config["Jwt:Audience"],
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(40),
+                    expires: DateTime.Now.AddHours(1),
                     signingCredentials: creds
                 );
 
