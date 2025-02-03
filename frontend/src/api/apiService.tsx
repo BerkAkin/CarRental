@@ -41,7 +41,11 @@ async function apiService(endpoint: string, method: string = "GET", data: any = 
             return { data: response.data, status: response.status };
         }
         catch (error: any) {
+
             if (axios.isAxiosError(error) && error.response?.status === 401) {
+                if (endpoint === "/Favorites" && method === "POST") {
+                    throw { status: error.response.status, message: error.response.data.message };
+                }
                 return new Promise<any>((resolve, reject) => {
                     pendingRequests.push(() => {
                         apiService(endpoint, method, data, params).then(resolve).catch(reject);
