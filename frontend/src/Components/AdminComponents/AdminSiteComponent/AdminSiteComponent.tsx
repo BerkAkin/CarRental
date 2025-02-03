@@ -1,12 +1,13 @@
 import React from 'react'
 import { useSiteSettingsContext } from '../../../Contexts/SiteSettingsContext'
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import styles from "./styles.module.css"
 import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../../common/StatusHandler';
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext';
+import mainTextValidation, { reasonTextValidation, serviceTextValidation } from './SiteSettingsValidation';
 
 
 interface SettingsMainTextProps {
@@ -84,13 +85,16 @@ function AdminSiteComponent() {
         <>
             <div className='col-4'>
                 <div className='container  p-0'>
-                    <h5>Ana Metin</h5>
                     {
                         settings?.mainText ?
                             (
                                 <>
-                                    <Formik initialValues={settings?.mainText[0]} onSubmit={updateMainText} enableReinitialize >
+                                    <Formik validationSchema={mainTextValidation} initialValues={settings?.mainText[0]} onSubmit={updateMainText} enableReinitialize >
                                         <Form>
+                                            <div className='row'>
+                                                <div className='col-12'><h5>Ana Metin <span className={styles.error}> *<ErrorMessage name="text" component="span" className={`${styles.error}`} /></span></h5>
+                                                </div>
+                                            </div>
                                             <div>
                                                 <Field rows={10} as="textarea" id="text" name="text" className={`${styles.infosTA}`} />
                                             </div>
@@ -121,13 +125,28 @@ function AdminSiteComponent() {
                             <>
 
                                 {settings?.reasons?.map((item: any) => (
-                                    <Formik key={item.id} initialValues={{ id: item.id, title: item.title, content: item.content }}
+                                    <Formik validationSchema={reasonTextValidation} key={item.id} initialValues={{ id: item.id, title: item.title, content: item.content }}
                                         onSubmit={updateReasonTexts} enableReinitialize>
                                         <Form>
+
                                             <div className="row mt-2 ">
                                                 <div className="col-10 ">
                                                     <div className='row'>
+                                                        <div className='col-12'>
+                                                            <span className={styles.error}>
+                                                                <ErrorMessage name="title" component="span" className={`${styles.error}`} />
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className='row'>
                                                         <Field id={`title-${item.id}`} name="title" className={styles.infos} />
+                                                    </div>
+                                                    <div className='row'>
+                                                        <div className='col-12'>
+                                                            <span className={styles.error}>
+                                                                <ErrorMessage name="content" component="span" className={`${styles.error}`} />
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                     <div className='row'>
                                                         <Field id={`content-${item.id}`} name="content" className={styles.infos} placeholder="İçerik" />
@@ -153,7 +172,7 @@ function AdminSiteComponent() {
                             <></>
                         )
                 }
-            </div>
+            </div >
             <div className='col-4 '>
                 <h5>Hizmetler</h5>
                 {
@@ -162,23 +181,34 @@ function AdminSiteComponent() {
                             <>
 
                                 {settings?.services?.map((item: any) => (
-                                    <Formik key={item.id} initialValues={{ id: item.id, title: item.title, content: item.content, icon: item.icon }}
+                                    <Formik validationSchema={serviceTextValidation} key={item.id} initialValues={{ id: item.id, title: item.title, content: item.content, icon: item.icon }}
                                         onSubmit={updateServiceTexts} enableReinitialize>
                                         <Form>
                                             <div className="row mt-2">
                                                 <div className="col-10">
                                                     <div className='row'>
+                                                        <div className='col-9'>
+                                                            <div className={styles.error}>
+                                                                <ErrorMessage name="title" component="span" className={`${styles.error}`} />
+                                                            </div>
+                                                            <div className={styles.error}>
+                                                                <ErrorMessage name="icon" component="span" className={`${styles.error}`} />
+                                                            </div>
+                                                            <div className={styles.error}>
+                                                                <ErrorMessage name="content" component="span" className={`${styles.error}`} />
+                                                            </div>
+                                                        </div>
                                                         <div className='col-9 p-0'>
                                                             <Field id={`title-${item.id}`} name="title" className={styles.infos} />
                                                         </div>
-                                                        <div className='col-3 ps-1 pe-0'>
+
+                                                        <div className='col-3 ps-0 pe-0'>
                                                             <Field id={`icon-${item.id}`} name="icon" className={styles.infos} />
                                                         </div>
                                                     </div>
                                                     <div className='row'>
                                                         <Field id={`content-${item.id}`} name="content" className={styles.infos} />
                                                     </div>
-
 
                                                 </div>
                                                 <div className="col-2 align-items-center d-flex">
