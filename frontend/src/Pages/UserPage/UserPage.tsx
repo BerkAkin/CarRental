@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import FavoriteCard from '../../Components/FavoriteCard/FavoriteCard';
@@ -10,6 +10,7 @@ import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
 import ConfirmationPopup from '../../Components/ConfirmationPopup/ConfirmationPopup';
 import { useConfirmContext } from '../../Contexts/ConfirmationContext';
+import userCommentValidationSchema from './UserCommentValidationSchema';
 
 
 interface InfoFormProps {
@@ -158,13 +159,13 @@ function UserPage() {
                             <div className='row'>
                                 <div>
                                     {initialCommentValues ? (
-                                        <Formik initialValues={initialCommentValues} onSubmit={submitCommentForm} enableReinitialize>
+                                        <Formik validationSchema={userCommentValidationSchema} initialValues={initialCommentValues} onSubmit={submitCommentForm} enableReinitialize>
                                             <Form>
                                                 <div className='container'>
                                                     <div className='row'>
-                                                        <div className='ps-0 d-flex justify-content-start align-items-center'>
-                                                            <p style={{ fontSize: "1.1rem", paddingTop: "5px" }}>Bizi Değerlendir !</p>
-                                                            <p className='mx-2'>{[1, 2, 3, 4, 5].map((star) => (
+                                                        <div className=' d-flex justify-content-start align-items-center'>
+                                                            <label className='me-4'>Bizi Değerlendir !</label>
+                                                            <span>{[1, 2, 3, 4, 5].map((star) => (
                                                                 <span
                                                                     key={star}
                                                                     onClick={() => setRating(star)}
@@ -173,11 +174,14 @@ function UserPage() {
                                                                     style={{ cursor: "pointer", color: star <= (hover || rating) ? "gold" : "gray", fontSize: "2rem", }}>
                                                                     ☆
                                                                 </span>
-                                                            ))}</p>
+                                                            ))}</span>
 
 
                                                         </div>
 
+                                                    </div>
+                                                    <div className='col-12'>Yorumum <span className={styles.error}>*</span>
+                                                        <span className=''> <ErrorMessage name="content" component="span" className={`${styles.error}`} /></span>
                                                     </div>
                                                     <div className='row  mt-1'>
                                                         <Field as="textarea" rows={10} id="content" name="content" className={`${styles.comment}`} />

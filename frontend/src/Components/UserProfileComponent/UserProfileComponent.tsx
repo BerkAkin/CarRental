@@ -1,11 +1,13 @@
 import styles from "./styles.module.css"
-import { Field, Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { useInfoContext } from '../../Contexts/UserInfoContext'
 import { endpoints } from "../../api/apiConfig";
 import apiService from "../../api/apiService";
 import { StatusHandler } from "../../common/StatusHandler";
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { useConfirmContext } from "../../Contexts/ConfirmationContext";
+import formatDate from "../../common/DateFormatter";
+import userProfileInfoValidationSchema from "./ProfileInfoValidationSchema";
 
 
 interface InfoFormProps {
@@ -40,24 +42,30 @@ function UserProfileComponent() {
         <>
             {userInfo ? (
                 <>
-                    <Formik initialValues={userInfo} onSubmit={updateUserInfo} enableReinitialize>
+                    <Formik validationSchema={userProfileInfoValidationSchema} initialValues={userInfo} onSubmit={updateUserInfo} enableReinitialize>
                         <div>
                             <Form>
-                                <div className='row mt-3'>
-                                    <label className={`${styles.label} mb-2`}>E-Posta</label>
+                                <div className='row mt-4'>
+                                    <div className='col-12'>E-Posta<span className={styles.error}> *</span>
+                                        <span className=''> <ErrorMessage name="email" component="span" className={`${styles.error}`} /></span>
+                                    </div>
+                                </div>
+                                <div className='row'>
                                     <Field className={`${styles.infos} `} id="email" name="email" />
                                 </div>
                                 <div className='row mt-4'>
-                                    <label className={`${styles.label} mb-2`}>Telefon Numarası</label>
+                                    <div className='col-12'>Telefon Numarası<span className={styles.error}> *</span>
+                                        <span className=''> <ErrorMessage name="phoneNum" component="span" className={`${styles.error}`} /></span>
+                                    </div>
+                                </div>
+                                <div className='row'>
                                     <Field className={`${styles.infos} mx-auto`} id="phoneNum" name="phoneNum" />
                                 </div>
+
                                 <div className='row mt-4'>
-                                    <label className={`${styles.label} mb-2`}>Üyelik Tarihi</label>
-                                    <Field className={`${styles.infos} mx-auto`} id="createdAt" name="createdAt" />
+                                    <label className={`${styles.label} mb-2`}>Üyelik Tarihi: {formatDate(userInfo.createdAt)}</label>
                                 </div>
-
-
-                                <div className='row mt-5 d-flex justify-content-center'>
+                                <div className='row mt-4 d-flex justify-content-center'>
                                     <button className={`${styles.btn}`} type='submit'>Bilgilerimi Değiştir</button>
                                 </div>
                             </Form>

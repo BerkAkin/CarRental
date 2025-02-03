@@ -118,7 +118,7 @@ function LoginComponent() {
                                         <>
                                             <div className='row mt-4'>
                                                 <div className='col-12'>E-Posta<span className={styles.error}> *</span>
-                                                    <span className=''> <ErrorMessage name="email" component="span" className={`${styles.error}`} /></span>
+                                                    <ErrorMessage name="email" component="span" className={`${styles.error}`} />
                                                 </div>
                                             </div>
                                             <div className='row mt-3'>
@@ -144,7 +144,7 @@ function LoginComponent() {
                                         <>
                                             <div className='row '>
                                                 <div className='col-12'>E-Posta<span className={styles.error}> *</span>
-                                                    <span className=''> <ErrorMessage name="email" component="span" className={`${styles.error}`} /></span>
+                                                    <ErrorMessage name="email" component="span" className={`${styles.error}`} />
                                                 </div>
                                             </div>
                                             <div className='row'>
@@ -154,7 +154,7 @@ function LoginComponent() {
                                             </div>
                                             <div className='row mt-3'>
                                                 <div className='col-12'>Parola<span className={styles.error}> *</span>
-                                                    <span className=''> <ErrorMessage name="password" component="span" className={`${styles.error}`} /></span>
+                                                    <ErrorMessage name="password" component="span" className={`${styles.error}`} />
                                                 </div>
                                             </div>
                                             <div className='row'>

@@ -1,14 +1,23 @@
 .toastContainer {
     position: fixed;
-    top: 90%;
+    top: 80%;
+    height: 50px;
     z-index: 10000;
-    justify-content: center;
-    display: flex;
 }
 
-.toastBtn {
+.toastInnerContainer {
+    box-shadow: -10px 12px 6px -7px rgba(0, 0, 0, 0.1);
+}
+
+.toastBg {
     border: none;
     outline: none;
     background-color: var(--TMBgColor) !important;
-    color: var(--TMColor) !important;
+    color: black;
+    font-weight: 500;
+}
+
+.toastIcon {
+    background-color: var(--TMIBgColor) !important;
+    font-size: 2rem;
 }
