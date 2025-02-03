@@ -80,3 +80,16 @@
 .modelsList {
     height: 650px;
 }
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+}
+
+.inputs:focus {
+    border-bottom: red 3px solid;
+}
+
+.inputs:hover {
+    border-bottom: red 3px solid;
+}
