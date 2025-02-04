@@ -1,5 +1,6 @@
 using System.Data;
 using AutoMapper;
+using FluentValidation;
 using WebApi.Common;
 using WebApi.DTOs.Auth;
 using WebApi.DTOs.Token;
@@ -9,6 +10,8 @@ using WebApi.Helpers;
 using WebApi.Repositories.AuthRepository;
 using WebApi.Services.GeneralServices.EmailService;
 using WebApi.Services.TokenService;
+using WebApi.Validators;
+using WebApi.Validators.Auth;
 
 namespace WebApi.Services.AuthService
 {
@@ -32,6 +35,9 @@ namespace WebApi.Services.AuthService
 
         public async Task Register(RegisterModel model)
         {
+            RegisterValidator validator = new RegisterValidator();
+            validator.ValidateAndThrow(model);
+            model.Email = model.Email.ToLower();
 
             var user = await _repository.FindUser(model.Email.ToLower());
             if (user is not null)
@@ -40,18 +46,16 @@ namespace WebApi.Services.AuthService
             }
 
             model.Password = _passwordHasher.HashPassword(model.Password);
-            model.Email = model.Email.ToLower();
+            var entity = _mapper.Map<User>(model);
+            entity.ResetToken = Guid.NewGuid().ToString();
+            entity.ResetTokenExpiryTime = DateTime.UtcNow.AddMinutes(15);
 
             try
             {
-                var entity = _mapper.Map<User>(model);
-                entity.ResetToken = Guid.NewGuid().ToString();
-                entity.ResetTokenExpiryTime = DateTime.UtcNow.AddMinutes(15);
                 await _repository.Register(entity);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
             }
 
@@ -60,7 +64,6 @@ namespace WebApi.Services.AuthService
 
         public async Task<TokenResponseModel> Login(string email, string password)
         {
-
             var user = await _repository.FindUser(email.ToLower());
             if (user is null)
             {
