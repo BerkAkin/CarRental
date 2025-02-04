@@ -1,10 +1,12 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Common;
 using WebApi.DTOs.Models;
 using WebApi.Entities;
 using WebApi.Exceptions;
 using WebApi.Repositories.GeneralRepositories.ModelRepository;
+using WebApi.Validators.Model;
 
 namespace WebApi.Services.GeneralServices.ModelService
 {
@@ -15,6 +17,48 @@ namespace WebApi.Services.GeneralServices.ModelService
         {
 
         }
+
+        public virtual async Task AddAsync(ModelAddModel model)
+        {
+            ModelAddValidator validator = new ModelAddValidator();
+            validator.ValidateAndThrow(model);
+            var entity = _mapper.Map<Model>(model);
+            try
+            {
+                await _repository.AddAsync(entity);
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
+        }
+
+        public virtual async Task UpdateAsync(int id, ModelUpdateModel model)
+        {
+            ModelUpdateValidator validator = new ModelUpdateValidator();
+            validator.ValidateAndThrow(model);
+
+            var entity = await _repository.GetByIdAsync(id);
+            if (entity == null)
+            {
+                throw new KeyNotFoundException(ErrorMessages.GENERAL_UPDATE_FAIL);
+            }
+            _mapper.Map(model, entity);
+            try
+            {
+                await _repository.UpdateAsync(entity);
+            }
+            catch (Exception ex)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+
+
+
+        }
+
 
         public async Task<(IEnumerable<ModelViewModel> Models, int TotalRecords)> GetAllPaginatedAsync(int pageNumber, int pageSize)
         {
