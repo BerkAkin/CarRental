@@ -20,7 +20,6 @@ using WebApi.Services.GeneralServices.ModelService;
 using WebApi.Services.GeneralServices.TypeServices;
 using WebApi.Services.TokenService;
 using WebApi.Services.UserService;
-using WebApi.Validators.LandingPage.ReasonText;
 
 public static class ServiceRegistration
 {
@@ -29,8 +28,6 @@ public static class ServiceRegistration
         //AUTOMAPPER
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        //VALIDATOR
-        services.AddValidatorsFromAssemblyContaining<ReasonAddValidator>();
 
         //REPOSITORIES
         services.AddScoped<MainTextRepository>();

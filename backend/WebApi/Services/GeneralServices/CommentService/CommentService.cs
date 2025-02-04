@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Common;
 using WebApi.DTOs.AdminDTOs;
@@ -7,6 +8,7 @@ using WebApi.Entities;
 using WebApi.Exceptions;
 using WebApi.Repositories.GeneralRepositories.CommentRepository;
 using WebApi.Repository;
+using WebApi.Validators.Comment;
 
 namespace WebApi.Services.GeneralServices.CommentService
 {
@@ -103,6 +105,8 @@ namespace WebApi.Services.GeneralServices.CommentService
 
         public async Task UpdateOwnComment(int userId, CommentUpdateModel model)
         {
+            CommentValidator validator = new CommentValidator();
+            validator.ValidateAndThrow(model);
 
             var comment = await _repository.FindCommentByUserId(userId);
             if (comment == null)
