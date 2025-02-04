@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Common;
 using WebApi.DTOs.AdminDTOs;
@@ -6,6 +7,7 @@ using WebApi.DTOs.User;
 using WebApi.Entities;
 using WebApi.Exceptions;
 using WebApi.Repositories.UserRepository;
+using WebApi.Validators.User;
 
 namespace WebApi.Services.UserService
 {
@@ -132,6 +134,8 @@ namespace WebApi.Services.UserService
         //Kullanıcı Kendi Bilgilerini Güncelleme
         public async Task UpdateOwnInfo(int id, UserUpdateModel model)
         {
+            UserInfoValidator validator = new UserInfoValidator();
+            validator.ValidateAndThrow(model);
 
             var user = await _repository.GetByIdAsync(id);
             if (user is null)
