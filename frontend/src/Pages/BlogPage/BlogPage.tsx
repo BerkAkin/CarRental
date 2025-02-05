@@ -11,6 +11,7 @@ function BlogPage() {
             <div className='container mt-4 pt-3'>
                 <div className='row'>
                     <h2 className={`${styles.header}`}>FlexBlog'da Bugün</h2>
+                    <hr></hr>
                 </div>
                 {/* foreach ile dönülecek yukarda api isteği yapılıp*/}
                 <div className='row mt-4'>
