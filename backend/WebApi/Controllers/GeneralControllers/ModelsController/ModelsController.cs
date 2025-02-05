@@ -20,14 +20,14 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ModelViewModel>>> GetAll([FromQuery] int pageNumber = 1)
+        public async Task<ActionResult<List<ModelViewModel>>> GetAll([FromQuery] string query = "", [FromQuery] int pageNumber = 1)
         {
 
             if (pageNumber < 1)
             {
                 return BadRequest("Sayfa numarası 1 veya daha büyük olmalıdır.");
             }
-            var (data, totalRecords) = await _service.GetAllPaginatedAsync(pageNumber, 8);
+            var (data, totalRecords) = await _service.GetAllPaginatedAsync(pageNumber, 8, query);
             var totalPages = (int)Math.Ceiling(totalRecords / (double)8);
             var response = new
             {
@@ -108,6 +108,9 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
             return Ok("Araç modeli güncellendi");
 
         }
+
+
+
 
 
     }
