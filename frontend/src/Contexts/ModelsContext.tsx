@@ -74,7 +74,7 @@ export const ModelsContextProvider = ({ children }: any) => {
         setModelCurrentPage(1);
     };
 
-    const fetchModels = useCallback(async (page: number, search: string = " ") => {
+    const fetchModels = useCallback(async (page: number, search: string = searchText) => {
         try {
             const { data, status }: any = await apiService(endpoints.models + `?query=${search}&pageNumber=${page}`, "GET",)
             console.log(data);
