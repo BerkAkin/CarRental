@@ -17,7 +17,8 @@ export const endpoints = {
     ownInfo: "/Users/OwnInfo",
     ownAccountDelete: "/Users/OwnAccountDelete",
 
-    models: "/Models/",
+    models: "/Models",
+    modelDetail: "/Models/",
 
     favorites: "/Favorites",
 
