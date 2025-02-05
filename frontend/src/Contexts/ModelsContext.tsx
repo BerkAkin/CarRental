@@ -47,6 +47,7 @@ export const ModelsContextProvider = ({ children }: any) => {
     const [models, setModels] = useState<Model>();
     const [error, setError] = useState<string | null>(null);
     const [modelCurrentPage, setModelCurrentPage] = useState<number>(1);
+    const [searchText, setSearchText] = useState<string>("");
 
 
     const HandleNextModelPage = () => {
@@ -68,9 +69,15 @@ export const ModelsContextProvider = ({ children }: any) => {
         }
     }
 
-    const fetchModels = useCallback(async (page: number) => {
+    const handleSearch = (text: string) => {
+        setSearchText(text);
+        setModelCurrentPage(1);
+    };
+
+    const fetchModels = useCallback(async (page: number, search: string = " ") => {
         try {
-            const { data, status }: any = await apiService(endpoints.models + `?pageNumber=${page}`, "GET",)
+            const { data, status }: any = await apiService(endpoints.models + `?query=${search}&pageNumber=${page}`, "GET",)
+            console.log(data);
             setModels(data);
         } catch (error) {
             console.log(error);
@@ -81,13 +88,14 @@ export const ModelsContextProvider = ({ children }: any) => {
 
 
     useEffect(() => {
-        fetchModels(modelCurrentPage);
-    }, [modelCurrentPage, fetchModels]);
+        fetchModels(modelCurrentPage, searchText);
+    }, [modelCurrentPage, searchText, fetchModels]);
 
 
     const values = useMemo(() => ({
         HandleNextModelPage,
         HandlePreviousModelPage,
+        handleSearch,
         models,
         error
     }), [models, error]);

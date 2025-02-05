@@ -16,6 +16,7 @@ function FAQComponent() {
                 <div className='row'>
                     <div className='col-12 mb-4'>
                         <h2 className={styles.headerColor}>Sık Sorulan Sorular</h2>
+                        <hr></hr>
                     </div>
                 </div>
                 <div className='row'>

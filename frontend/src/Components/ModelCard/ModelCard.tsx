@@ -48,7 +48,7 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                         <button onClick={() => addFavorite(id)} className={`${styles.favButton} `}>★</button>
                     </div>
                     <div className={`${styles.imgHover} row `}>
-                        <ListElement href={`Models/${id}`} text={<Image URL={dummyImg} Width='310px'></Image>} />
+                        <ListElement href={`Models/${id}`} text={<Image URL={dummyImg} Width='250px'></Image>} />
                     </div>
 
                 </div>
@@ -88,7 +88,7 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                 <div className='container mt-4 '>
                     <div className='row '>
                         <div className='col-12 mb-3 ps-3'>
-                            <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faBoltLightning}></FontAwesomeIcon>
+                            <FontAwesomeIcon style={{ color: "gold" }} icon={faBoltLightning}></FontAwesomeIcon>
                             <span className={`${styles.priceStyling} ms-2`}>
                                 {price} TL + KDV <span style={{ color: "#7A7A7A" }}>/ay</span>
                             </span>

@@ -60,18 +60,15 @@ namespace WebApi.Services.GeneralServices.ModelService
         }
 
 
-        public async Task<(IEnumerable<ModelViewModel> Models, int TotalRecords)> GetAllPaginatedAsync(int pageNumber, int pageSize)
+        public async Task<(IEnumerable<ModelViewModel> Models, int TotalRecords)> GetAllPaginatedAsync(int pageNumber, int pageSize, string query)
         {
-
-            var (data, totalRecords) = await _repository.GetAllPaginatedAsync(pageNumber, pageSize, query => query.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
+            var (data, totalRecords) = await _repository.GetAllPaginatedAsync(pageNumber, pageSize, query, func => func.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
             if (data is null)
             {
                 throw new KeyNotFoundException(ErrorMessages.MODELS_NOT_FOUND);
             }
             var DTOData = _mapper.Map<List<ModelViewModel>>(data);
             return (DTOData, totalRecords);
-
-
         }
 
         public override async Task<ModelViewIdModel> GetByIdAsync(int id)
@@ -97,9 +94,9 @@ namespace WebApi.Services.GeneralServices.ModelService
             }
             var DTOData = _mapper.Map<List<ModelSummaryViewModel>>(data);
             return (DTOData, totalRecords);
-
-
         }
+
+
 
 
     }
