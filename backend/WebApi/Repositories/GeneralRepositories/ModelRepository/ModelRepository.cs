@@ -11,7 +11,7 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
 
         }
 
-        public async Task<(IEnumerable<Model>, int TotalCounts)> GetAllPaginatedAsync(int pageNumber, int pageSize, Func<IQueryable<Model>, IQueryable<Model>> func = null)
+        public async Task<(IEnumerable<Model>, int TotalCounts)> GetAllPaginatedAsync(int pageNumber, int pageSize, string query, Func<IQueryable<Model>, IQueryable<Model>> func = null)
         {
 
             IQueryable<Model> data = _context.Set<Model>();
@@ -19,10 +19,15 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
             {
                 data = func(data);
             }
+            data = data.Where(x => x.BrandName.Contains(query) || x.ModelName.Contains(query));
             int totalCounts = await data.CountAsync();
             var paginatedData = await data.OrderByDescending(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
             return (paginatedData, totalCounts);
         }
+
+
+
+
 
 
 
