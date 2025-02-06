@@ -2,6 +2,7 @@ using AutoMapper;
 using WebApi.DTOs.AdminDTOs;
 using WebApi.DTOs.Auth;
 using WebApi.DTOs.Comment;
+using WebApi.DTOs.Contact;
 using WebApi.DTOs.FAQPage;
 using WebApi.DTOs.Favorites;
 using WebApi.DTOs.LandingPage.MainText;
@@ -88,6 +89,10 @@ namespace WebApi.Mappings
             .ForMember(ac => ac.UserName, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname))
             .ForMember(dest => dest.UserMail, opt => opt.MapFrom(src => src.User.Email));
 
+
+            CreateMap<ContactAddModel, Contact>();
+            CreateMap<Contact, ContactViewIdModel>();
+            CreateMap<Contact, ContactViewModel>();
 
 
 

@@ -12,7 +12,7 @@ using WebApi.DbOperations;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(CRDbContext))]
-    [Migration("20250122151751_InitialCreate")]
+    [Migration("20250206135755_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -40,6 +40,54 @@ namespace WebApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarTypes");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.Contact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
+
+                    b.Property<bool>("IsRead")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Permission")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("Platform")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("WebApi.Entities.FAQText", b =>

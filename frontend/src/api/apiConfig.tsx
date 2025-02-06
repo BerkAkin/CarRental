@@ -41,7 +41,9 @@ export const endpoints = {
     refreshAccessToken: "/RefreshAccessToken",
     resetPasswordRequest: "/ResetPasswordRequest",
 
-    resetPassword: "/ResetPassword"
+    resetPassword: "/ResetPassword",
+
+    contactUs: "/Contact"
 
 
 

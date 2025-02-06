@@ -130,6 +130,19 @@ namespace WebApi.DbOperations
             });
 
 
+            modelBuilder.Entity<Contact>(cn =>
+            {
+                cn.Property(cn => cn.Id).ValueGeneratedOnAdd();
+                cn.Property(cn => cn.Name).IsRequired().HasMaxLength(25);
+                cn.Property(cn => cn.Surname).IsRequired().HasMaxLength(25);
+                cn.Property(cn => cn.Email).IsRequired().HasMaxLength(70);
+                cn.Property(cn => cn.Permission).IsRequired().HasMaxLength(6);
+                cn.Property(cn => cn.Platform).IsRequired().HasMaxLength(50);
+                cn.Property(cn => cn.Phone).IsRequired().HasMaxLength(13);
+                cn.Property(cn => cn.IsRead).IsRequired().HasDefaultValue(false);
+            });
+
+
         }
 
 
@@ -145,5 +158,6 @@ namespace WebApi.DbOperations
         public DbSet<GearType> GearTypes { get; set; }
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<Model> Models { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
     }
 }

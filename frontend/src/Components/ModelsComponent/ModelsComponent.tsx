@@ -40,7 +40,9 @@ function ModelsComponent() {
                             <Formik initialValues={SearchInitialValues} onSubmit={handleSearchSubmit}>
                                 <Form>
                                     <div className='text-center pt-2 fs-5'><label htmlFor='searchText'>Model Arama</label></div>
-                                    <div className={`${styles.searchWrapper} p-2 `}><Field placeholder="Marka ya da model girin" className={`${styles.inputAreas}`} name="searchText" /></div>
+                                    <div className={`${styles.searchWrapper} p-2 `}>
+                                        <Field placeholder="Marka ya da model girin" className={`${styles.inputAreas} ps-1`} name="searchText" />
+                                    </div>
                                     <div className='d-flex justify-content-center p-2'>
                                         <button className={`${styles.btn} w-100 `} type='submit'>Ara</button>
                                     </div>
