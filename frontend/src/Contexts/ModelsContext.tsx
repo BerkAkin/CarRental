@@ -77,7 +77,6 @@ export const ModelsContextProvider = ({ children }: any) => {
     const fetchModels = useCallback(async (page: number, search: string = searchText) => {
         try {
             const { data, status }: any = await apiService(endpoints.models + `?query=${search}&pageNumber=${page}`, "GET",)
-            console.log(data);
             setModels(data);
         } catch (error) {
             console.log(error);
