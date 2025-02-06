@@ -5,6 +5,12 @@ import validationSchema from './ValidationSchema';
 import Image from '../../Components/Image/Image';
 import img from '../../assets/logos/logo-flexper.png';
 import ListElement from '../../Components/ListElement/ListElement';
+import apiService from '../../api/apiService';
+import { endpoints } from '../../api/apiConfig';
+import { useConfirmContext } from '../../Contexts/ConfirmationContext';
+import { StatusHandler } from '../../common/StatusHandler';
+import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
+import ConfirmationPopup from '../../Components/ConfirmationPopup/ConfirmationPopup';
 
 
 interface FormProps {
@@ -27,24 +33,13 @@ const initialValues: FormProps = {
     otherPlatform: ''
 }
 
-const onSubmit = async (values: FormProps, { setSubmitting }: any) => {
-    try {
-        setSubmitting(true);
-
-        setTimeout(() => {
-            setSubmitting(false);
-        }, 2000);
-    } catch (error) {
-        console.error(error);
-    }
-    finally {
-        setSubmitting(false);
-    }
-};
-
 
 function ContactPage() {
     const [isOther, setIsOther] = useState(false);
+
+    const { showToast } = useToastManagerContext();
+    const { showConfirmation } = useConfirmContext();
+
 
     const handleOtherField = (e: any) => {
         if (e.target.value == "") {
@@ -54,9 +49,27 @@ function ContactPage() {
         setIsOther(false)
     }
 
+
+    const onSubmit = async (values: FormProps, { setSubmitting }: any) => {
+        console.log(values)
+
+        showConfirmation("Mail gönderilecektir. Devam edilsin mi?", async () => {
+            try {
+                setSubmitting(true);
+                const { data, status }: any = await apiService(endpoints.contactUs, "POST", values);
+                StatusHandler(status, data, showToast)
+            } catch (error) {
+                const { status, message }: any = error;
+                StatusHandler(status, message, showToast)
+            }
+        })
+
+    };
+
     return (
 
         <>
+            <ConfirmationPopup />
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 {({ isSubmitting }) => (
                     <Form>
