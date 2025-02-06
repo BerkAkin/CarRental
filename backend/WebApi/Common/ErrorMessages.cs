@@ -40,5 +40,9 @@ namespace WebApi.Common
         public const string GENERAL_UPDATE_FAIL = "Veri güncellenemedi";
         public const string GENERAL_DELETE_FAIL = "Veri silinemedi";
 
+
+        public const string EMAIL_CANNOT_SEND = "E-Posta gönderilemedi";
+
+
     }
 }
