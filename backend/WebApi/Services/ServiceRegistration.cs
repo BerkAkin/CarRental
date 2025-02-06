@@ -2,6 +2,7 @@ using FluentValidation;
 using WebApi.DbOperations;
 using WebApi.Helpers;
 using WebApi.Repositories.AuthRepository;
+using WebApi.Repositories.ContactRepository;
 using WebApi.Repositories.GeneralRepositories.CommentRepository;
 using WebApi.Repositories.GeneralRepositories.FAQRepository;
 using WebApi.Repositories.GeneralRepositories.FavoriteRepository;
@@ -11,6 +12,7 @@ using WebApi.Repositories.GeneralRepositories.TypeRepositories;
 using WebApi.Repositories.TokenRepository;
 using WebApi.Repositories.UserRepository;
 using WebApi.Services.AuthService;
+using WebApi.Services.ContactService;
 using WebApi.Services.GeneralServices.CommentService;
 using WebApi.Services.GeneralServices.EmailService;
 using WebApi.Services.GeneralServices.FAQService;
@@ -43,6 +45,7 @@ public static class ServiceRegistration
         services.AddScoped<GearRepository>();
         services.AddScoped<FuelRepository>();
         services.AddScoped<CarTypeRepository>();
+        services.AddScoped<ContactRepository>();
 
 
         //SERVICES
@@ -61,6 +64,7 @@ public static class ServiceRegistration
         services.AddScoped<FuelService>();
         services.AddScoped<CarTypeService>();
         services.AddScoped<EmailService>();
+        services.AddScoped<ContactService>();
 
         //SEEDER
         services.AddTransient<DbSeeder>();
