@@ -42,6 +42,7 @@ namespace WebApi.Common
 
 
         public const string EMAIL_CANNOT_SEND = "E-Posta gönderilemedi";
+        public const string CONTACTS_NOT_FOUND = "İletişim istekleri bulunamadı";
 
 
     }
