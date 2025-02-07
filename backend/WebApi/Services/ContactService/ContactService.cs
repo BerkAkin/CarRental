@@ -43,10 +43,18 @@ namespace WebApi.Services.ContactService
 
         }
 
-        public override Task<List<ContactViewModel>> GetAllAsync()
+        public async Task<(List<ContactViewModel>, int)> GetAllPaginatedAsync(int pageNumber)
         {
-            return base.GetAllAsync();
+            var (data, totalRecords) = await _repository.GetAllPaginatedAsync(pageNumber, 10);
+            if (data is null)
+            {
+                throw new KeyNotFoundException(ErrorMessages.CONTACTS_NOT_FOUND);
+            }
+            var DTOData = _mapper.Map<List<ContactViewModel>>(data);
+            return (DTOData, totalRecords);
         }
+
+
         public override Task UpdateAsync(int id, object model)
         {
 
