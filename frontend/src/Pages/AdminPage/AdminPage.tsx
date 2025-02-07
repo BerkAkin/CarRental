@@ -11,6 +11,8 @@ import { ModelsContextProvider } from '../../Contexts/ModelsContext';
 import { UserInfoContextProvider } from '../../Contexts/UserInfoContext';
 import UserProfileComponent from '../../Components/UserProfileComponent/UserProfileComponent';
 import ConfirmationPopup from '../../Components/ConfirmationPopup/ConfirmationPopup';
+import { ContactContextProvider } from '../../Contexts/ContactContext';
+import Contacts from '../../Components/Contacts/Contacts';
 
 
 
@@ -37,7 +39,10 @@ function AdminPage() {
                         <a className={`${styles.navBtn} nav-link`} id="disabled-tab-2" data-bs-toggle="tab" href="#disabled-tabpanel-2">Modeller</a>
                     </li>
                     <li className="nav-item">
-                        <a className={`${styles.navBtn} nav-link`} id="disabled-tab-5" data-bs-toggle="tab" href="#disabled-tabpanel-5">Yorumlar</a>
+                        <a className={`${styles.navBtn} nav-link`} id="disabled-tab-3" data-bs-toggle="tab" href="#disabled-tabpanel-3">Yorumlar</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`${styles.navBtn} nav-link`} id="disabled-tab-4" data-bs-toggle="tab" href="#disabled-tabpanel-4">İletişim İstekleri</a>
                     </li>
                 </ul>
 
@@ -88,7 +93,7 @@ function AdminPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="tab-pane" id="disabled-tabpanel-5" role="tabpanel" aria-labelledby="disabled-tab-5">
+                    <div className="tab-pane" id="disabled-tabpanel-3" role="tabpanel" aria-labelledby="disabled-tab-3">
                         <div className='container-fluid p-0 mt-4'>
                             <div className='row'>
                                 <CommentContextProvider>
@@ -97,7 +102,18 @@ function AdminPage() {
                             </div>
                         </div>
                     </div>
+                    <div className="tab-pane" id="disabled-tabpanel-4" role="tabpanel" aria-labelledby="disabled-tab-4">
+                        <div className='container-fluid p-0 mt-4'>
+                            <div className='row'>
+                                <ContactContextProvider>
+                                    <Contacts />
+                                </ContactContextProvider>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
             </div >
 
 
