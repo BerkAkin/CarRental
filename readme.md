@@ -20,4 +20,4 @@
 
 ## AboutUs - basic company vision mission
 <img src="https://github.com/user-attachments/assets/e628f0c3-35e6-41c1-b4fb-04199053b77d" alt="Description" width="300" />
-
+TODO
