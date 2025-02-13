@@ -1,5 +1,6 @@
 using AutoMapper;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using WebApi.Common;
 using WebApi.DTOs.LandingPage.ServiceTexts;
 using WebApi.Entities;
@@ -14,6 +15,28 @@ namespace WebApi.Services.GeneralServices.LandingServices
     {
         public ServicesTextService(ServiceTextRepository repository, IMapper mapper) : base(repository, mapper)
         {
+        }
+
+        public override async Task<List<LandingServiceViewModel>> GetAllAsync()
+        {
+            var data = await _repository.GetAllAsync(func => func.Include(x => x.Icon));
+            if (data is null)
+            {
+                throw new KeyNotFoundException(ErrorMessages.GENERAL_NOT_FOUND);
+            }
+            var dtoData = _mapper.Map<List<LandingServiceViewModel>>(data);
+            return dtoData;
+        }
+
+        public override async Task<LandingServiceViewIdModel> GetByIdAsync(int id)
+        {
+            var data = await _repository.GetByIdAsync(id, func => func.Include(x => x.Icon));
+            if (data is null)
+            {
+                throw new KeyNotFoundException(ErrorMessages.GENERAL_NOT_FOUND);
+            }
+            var dtoData = _mapper.Map<LandingServiceViewIdModel>(data);
+            return dtoData;
         }
 
         public override async Task UpdateAsync(int id, LandingServiceUpdateModel model)
