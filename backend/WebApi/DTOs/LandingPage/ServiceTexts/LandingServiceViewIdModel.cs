@@ -1,3 +1,5 @@
+using WebApi.Entities;
+
 namespace WebApi.DTOs.LandingPage.ServiceTexts
 {
     public class LandingServiceViewIdModel
@@ -6,6 +8,6 @@ namespace WebApi.DTOs.LandingPage.ServiceTexts
 
         public string Title { get; set; }
         public string Content { get; set; }
-        public string Icon { get; set; }
+        public Icon Icon { get; set; }
     }
 }
