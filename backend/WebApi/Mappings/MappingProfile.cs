@@ -28,8 +28,8 @@ namespace WebApi.Mappings
             CreateMap<LandingReasonUpdateModel, LandingReasonText>();
             CreateMap<LandingReasonAddModel, LandingReasonText>();
 
-            CreateMap<LandingServiceText, LandingServiceViewModel>();
-            CreateMap<LandingServiceText, LandingServiceViewIdModel>();
+            CreateMap<LandingServiceText, LandingServiceViewModel>().ForMember(dest => dest.Icon, opt => opt.MapFrom(src => src.Icon));
+            CreateMap<LandingServiceText, LandingServiceViewIdModel>().ForMember(dest => dest.Icon, opt => opt.MapFrom(src => src.Icon));
             CreateMap<LandingServiceUpdateModel, LandingServiceText>();
             CreateMap<LandingServiceAddModel, LandingServiceText>();
 
