@@ -12,7 +12,6 @@ export const reasonTextValidation = Yup.object({
 export const serviceTextValidation = Yup.object({
     title: Yup.string().max(35, "Başlık Maks 35 karakter"),
     content: Yup.string().max(255, "İçerik Maks 255 karakter"),
-    icon: Yup.string()
 })
 
 

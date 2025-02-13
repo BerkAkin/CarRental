@@ -11,7 +11,7 @@ interface ServiceCardProps {
 
 function ServiceCard({ HeaderTxt, ParagraphTxt, Icon }: ServiceCardProps) {
 
-    const icon = selectIcon(Icon);
+    const icon = selectIcon(Icon, 50);
 
     return (
         <>

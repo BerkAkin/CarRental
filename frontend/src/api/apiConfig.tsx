@@ -43,7 +43,9 @@ export const endpoints = {
 
     resetPassword: "/ResetPassword",
 
-    contactUs: "/Contact"
+    contactUs: "/Contact",
+
+    icons: "/Icons",
 
 
 

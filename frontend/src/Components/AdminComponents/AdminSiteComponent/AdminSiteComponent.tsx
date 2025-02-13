@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSiteSettingsContext } from '../../../Contexts/SiteSettingsContext'
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import styles from "./styles.module.css"
@@ -8,6 +8,8 @@ import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../../common/StatusHandler';
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext';
 import mainTextValidation, { reasonTextValidation, serviceTextValidation } from './SiteSettingsValidation';
+import { selectIcon } from '../../../common/IconPack';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 interface SettingsMainTextProps {
@@ -19,18 +21,24 @@ interface SettingsReasonTextProps {
     title: string;
     content: string;
 }
+interface ISettingsServiceTextIcons {
+    id: number;
+    name: string;
+}
 interface SettingsServicesTextProps {
     id: number;
     title: string;
     content: string;
-    icon: string;
+    icon: ISettingsServiceTextIcons;
 }
+
 
 function AdminSiteComponent() {
 
     const { error, settings } = useSiteSettingsContext();
     const { showToast } = useToastManagerContext();
     const { showConfirmation } = useConfirmContext();
+    const [icons, setIcons] = useState<ISettingsServiceTextIcons[] | null>(null);
 
 
     const updateMainText = async (values: SettingsMainTextProps) => {
@@ -53,7 +61,7 @@ function AdminSiteComponent() {
     const updateServiceTexts = async (values: SettingsServicesTextProps) => {
         showConfirmation("Hizmet metni güncellenecektir. Devam edilsin mi?", async () => {
             try {
-                const dataToSend = { Title: values.title, Content: values.content, Icon: values.icon }
+                const dataToSend = { Title: values.title, Content: values.content, IconId: values.icon.id }
                 const { data, status }: any = await apiService(endpoints.serviceText + `${values.id}`, "PUT", dataToSend);
                 StatusHandler(status, data, showToast)
             } catch (error) {
@@ -79,8 +87,22 @@ function AdminSiteComponent() {
 
     }
 
-    if (error) return <p>{error}</p>
+    const fetchIcons = useCallback(async () => {
+        try {
+            const { data } = await apiService(endpoints.icons, "GET");
+            setIcons(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [])
 
+
+    useEffect(() => {
+        fetchIcons();
+    }, [])
+
+
+    if (error) return <p>{error}</p>
     return (
         <>
             <div className='col-4'>
@@ -139,7 +161,7 @@ function AdminSiteComponent() {
                                                         </div>
                                                     </div>
                                                     <div className='row'>
-                                                        <Field id={`title-${item.id}`} name="title" className={styles.infos} />
+                                                        <Field id={`title`} name="title" className={styles.infos} />
                                                     </div>
                                                     <div className='row'>
                                                         <div className='col-12'>
@@ -149,7 +171,7 @@ function AdminSiteComponent() {
                                                         </div>
                                                     </div>
                                                     <div className='row'>
-                                                        <Field id={`content-${item.id}`} name="content" className={styles.infos} placeholder="İçerik" />
+                                                        <Field id={`content`} name="content" className={styles.infos} placeholder="İçerik" />
                                                     </div>
 
 
@@ -181,7 +203,7 @@ function AdminSiteComponent() {
                             <>
 
                                 {settings?.services?.map((item: any) => (
-                                    <Formik validationSchema={serviceTextValidation} key={item.id} initialValues={{ id: item.id, title: item.title, content: item.content, icon: item.icon }}
+                                    <Formik validationSchema={serviceTextValidation} key={item.id} initialValues={item}
                                         onSubmit={updateServiceTexts} enableReinitialize>
                                         <Form>
                                             <div className="row mt-2">
@@ -199,15 +221,28 @@ function AdminSiteComponent() {
                                                             </div>
                                                         </div>
                                                         <div className='col-9 p-0'>
-                                                            <Field id={`title-${item.id}`} name="title" className={styles.infos} />
+                                                            <Field id={`title`} name="title" className={styles.infos} />
+
                                                         </div>
 
-                                                        <div className='col-3 ps-0 pe-0'>
-                                                            <Field id={`icon-${item.id}`} name="icon" className={styles.infos} />
+                                                        <div className='col-1 px-auto py-auto'>
+                                                            {selectIcon(item.icon.name, 25)}
                                                         </div>
+                                                        <div className='col-2 ps-0 pe-0'>
+                                                            <Field as="select" id="icon.id" name="icon.id" className={styles.infos}>
+                                                                {icons?.map((icon) => (
+
+                                                                    <option selected={icon.id === item.icon.id} key={icon.id} value={icon.id}>
+                                                                        {icon.name}
+                                                                    </option>
+                                                                ))}
+
+                                                            </Field>
+                                                        </div>
+
                                                     </div>
                                                     <div className='row'>
-                                                        <Field id={`content-${item.id}`} name="content" className={styles.infos} />
+                                                        <Field id={`content`} name="content" className={styles.infos} />
                                                     </div>
 
                                                 </div>

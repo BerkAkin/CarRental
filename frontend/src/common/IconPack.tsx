@@ -21,7 +21,7 @@ const iconMap: IIconMap = {
     "faEdit": faEdit
 }
 
-export const selectIcon = (iconName: string) => {
+export const selectIcon = (iconName: string, size: number) => {
     const icon = iconMap[iconName];
 
     if (!icon) {
@@ -29,5 +29,5 @@ export const selectIcon = (iconName: string) => {
         return null;
     }
 
-    return <FontAwesomeIcon fontSize={50} icon={icon} />
+    return <FontAwesomeIcon fontSize={size} icon={icon} />
 }

@@ -72,9 +72,7 @@ function UserProfileComponent() {
                         </div>
 
                     </Formik>
-                    <div className='row mt-2 d-flex justify-content-center'>
-                        <button className={`${styles.btn}`}>Şifremi Değiştir</button>
-                    </div>
+
                 </>
 
             ) : (
