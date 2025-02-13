@@ -51,10 +51,9 @@ namespace WebApi.DbOperations
                 landingService.Property(ls => ls.Id).ValueGeneratedOnAdd();
                 landingService.Property(ls => ls.Title).IsRequired().HasMaxLength(200);
                 landingService.Property(ls => ls.Content).IsRequired().HasMaxLength(500);
-                landingService.Property(ls => ls.Icon).HasMaxLength(20);
                 landingService.Property(ls => ls.CreatedAt).HasDefaultValueSql("GETDATE()");
                 landingService.Property(ls => ls.UpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();
-
+                landingService.HasOne(ls => ls.Icon).WithMany().HasForeignKey(ls => ls.IconId);
             });
             modelBuilder.Entity<LandingMainText>(landingMain =>
             {
@@ -142,6 +141,11 @@ namespace WebApi.DbOperations
                 cn.Property(cn => cn.IsRead).IsRequired().HasDefaultValue(false);
             });
 
+            modelBuilder.Entity<Icon>(icon =>
+            {
+                icon.Property(icon => icon.Id).ValueGeneratedOnAdd();
+            });
+
 
         }
 
@@ -159,5 +163,6 @@ namespace WebApi.DbOperations
         public DbSet<CarType> CarTypes { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Icon> Icons { get; set; }
     }
 }

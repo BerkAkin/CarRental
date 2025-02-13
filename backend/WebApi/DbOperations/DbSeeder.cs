@@ -21,6 +21,25 @@ namespace WebApi.DbOperations
                     new LandingMainText { Text = "Araç abonelik sistemi, sizi karmaşık prosedürlerle boğulmaktan kurtararak özgürlüğün tadını çıkarmanızı sağlar. Sadece istediğiniz araç modelini seçin ve her şey dahil paketlerimizden birini tercih edin. Aracınız kapınıza kadar teslim edilsin, anahtarları alın ve sadece sürmeye başlayın. Geri kalan tüm detaylar ve işlemler bizim sorumluluğumuzda. Siz sadece sürün, gerisini biz halledelim!"},
                 };
 
+                var Icons = new List<Icon>{
+                    new Icon{Name="faCar"},
+                    new Icon{Name="faParking"},
+                    new Icon{Name="faGasPump"},
+                    new Icon{Name="faRoad"},
+                    new Icon{Name="faHandSparkles"},
+                    new Icon{Name="faKey"},
+                    new Icon{Name="faGauge"},
+                    new Icon{Name="faBattery"},
+                    new Icon{Name="faTrafficLight"},
+                    new Icon{Name="faMoneyBill"},
+                    new Icon{Name="faLocationPin"},
+                    new Icon{Name="faWrench"},
+                    new Icon{Name="faEdit"},
+                };
+                _context.Icons.AddRange(Icons);
+                await _context.SaveChangesAsync();
+
+
                 var landingPageReasonTexts = new List<LandingReasonText>
                 {
                     new LandingReasonText { Title  = "Esnek Paketler", Content = "6 ve 9 aylık esnek abonelik paketlerimiz ile dilediğiniz zaman aracınızı ve abonelik paketinizi değiştirebilirsiniz. 2 yıllık bağlayıcı sözleşmelere veda edin!"},
@@ -33,12 +52,12 @@ namespace WebApi.DbOperations
 
                 var landingPageService = new List<LandingServiceText>
                 {
-                    new LandingServiceText { Title  = "Ücretsiz Araç Yıkama", Content = "İkamet ettiğiniz ildeki tüm Otovınn noktlarında ayda 2 Ücretsiz iç-dış yıkama temizlik hizmetinden yararlanabilirsiniz.", Icon ="faCar"},
-                    new LandingServiceText { Title  = "Ücretsiz Otopark", Content = "Üyeliğiniz kapsamında ayda toplamda 300 TL`lik limitiniz dahilinde yararlanabilirsiniz.", Icon ="faParking"},
-                    new LandingServiceText { Title  = "HGS Sistemleri", Content = "Araçlarımız, HGS ve OGS sistemlerini kullanarak geçiş noktalarında sorunsuz bir şekilde kullanılabilir.", Icon ="faRoad"},
-                    new LandingServiceText { Title  = "Otobil ile Yakıt alma imkanı", Content = "Flexper araç aboneliği kapsamında aracınızda Otobil cihazı mevcut olup, dilemeniz durumunda yakıtınızı bu cihaz ile para ödemeden alabilir, ay sonunda abonelik bedelinize ek olarak toplu halde ödemesini Flexper`a yapabilirsiniz.", Icon ="faGasPump"},
-                    new LandingServiceText { Title  = "Kapıya Hizmet", Content = "Size özel olarak sunulan hizmetimiz sayesinde, aracınız kapınıza teslim edilir.", Icon ="faKey"},
-                    new LandingServiceText { Title  = "Ücretsiz Vale", Content = "İkamet ettiğiniz ildeki tüm valelerden 300 TL`lik  limitiniz dahilinde yararlanabilirsiniz.", Icon ="faHandSparkles"},
+                    new LandingServiceText { Title  = "Ücretsiz Araç Yıkama", Content = "İkamet ettiğiniz ildeki tüm Otovınn noktlarında ayda 2 Ücretsiz iç-dış yıkama temizlik hizmetinden yararlanabilirsiniz.", IconId=1},
+                    new LandingServiceText { Title  = "Ücretsiz Otopark", Content = "Üyeliğiniz kapsamında ayda toplamda 300 TL`lik limitiniz dahilinde yararlanabilirsiniz.", IconId=1 },
+                    new LandingServiceText { Title  = "HGS Sistemleri", Content = "Araçlarımız, HGS ve OGS sistemlerini kullanarak geçiş noktalarında sorunsuz bir şekilde kullanılabilir.", IconId=1},
+                    new LandingServiceText { Title  = "Otobil ile Yakıt alma imkanı", Content = "Flexper araç aboneliği kapsamında aracınızda Otobil cihazı mevcut olup, dilemeniz durumunda yakıtınızı bu cihaz ile para ödemeden alabilir, ay sonunda abonelik bedelinize ek olarak toplu halde ödemesini Flexper`a yapabilirsiniz.", IconId=2},
+                    new LandingServiceText { Title  = "Kapıya Hizmet", Content = "Size özel olarak sunulan hizmetimiz sayesinde, aracınız kapınıza teslim edilir.", IconId=1},
+                    new LandingServiceText { Title  = "Ücretsiz Vale", Content = "İkamet ettiğiniz ildeki tüm valelerden 300 TL`lik  limitiniz dahilinde yararlanabilirsiniz.", IconId=1},
                 };
 
                 var FAQ = new List<FAQText>{
@@ -116,6 +135,7 @@ namespace WebApi.DbOperations
 
 
 
+
                 _context.LandingMainTexts.AddRange(landingPageMainTexts);
                 _context.LandingReasonTexts.AddRange(landingPageReasonTexts);
                 _context.LandingServiceTexts.AddRange(landingPageService);
@@ -141,6 +161,8 @@ namespace WebApi.DbOperations
 
                 _context.UserFavorites.AddRange(Favorites);
                 await _context.SaveChangesAsync();
+
+
 
             }
         }
