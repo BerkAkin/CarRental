@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Services.GeneralServices.IconService;
 
@@ -14,7 +15,7 @@ namespace WebApi.Controllers.GeneralControllers.IconController
             _service = service;
         }
 
-
+        [Authorize(Roles = "1")]
         [HttpGet]
         public async Task<IActionResult> GetIconsAsync()
         {
