@@ -6,6 +6,7 @@ using WebApi.Repositories.ContactRepository;
 using WebApi.Repositories.GeneralRepositories.CommentRepository;
 using WebApi.Repositories.GeneralRepositories.FAQRepository;
 using WebApi.Repositories.GeneralRepositories.FavoriteRepository;
+using WebApi.Repositories.GeneralRepositories.IconRepository;
 using WebApi.Repositories.GeneralRepositories.LandingRepositories;
 using WebApi.Repositories.GeneralRepositories.ModelRepository;
 using WebApi.Repositories.GeneralRepositories.TypeRepositories;
@@ -17,6 +18,7 @@ using WebApi.Services.GeneralServices.CommentService;
 using WebApi.Services.GeneralServices.EmailService;
 using WebApi.Services.GeneralServices.FAQService;
 using WebApi.Services.GeneralServices.FavoriteService;
+using WebApi.Services.GeneralServices.IconService;
 using WebApi.Services.GeneralServices.LandingServices;
 using WebApi.Services.GeneralServices.ModelService;
 using WebApi.Services.GeneralServices.TypeServices;
@@ -46,6 +48,7 @@ public static class ServiceRegistration
         services.AddScoped<FuelRepository>();
         services.AddScoped<CarTypeRepository>();
         services.AddScoped<ContactRepository>();
+        services.AddScoped<IconRepository>();
 
 
         //SERVICES
@@ -65,6 +68,7 @@ public static class ServiceRegistration
         services.AddScoped<CarTypeService>();
         services.AddScoped<EmailService>();
         services.AddScoped<ContactService>();
+        services.AddScoped<IconService>();
 
         //SEEDER
         services.AddTransient<DbSeeder>();
