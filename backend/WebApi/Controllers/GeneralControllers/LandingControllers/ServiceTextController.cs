@@ -29,11 +29,6 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
             }
             return NotFound("Veriler bulunamadı");
 
-
-
-
-
-
         }
 
         [Authorize(Roles = "1")]
@@ -59,14 +54,13 @@ namespace WebApi.Controllers.GeneralControllers.LandingControllers
             return Ok("Servis metni eklendi");
 
         }
-
         [Authorize(Roles = "1")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAsync(int id, [FromBody] LandingServiceUpdateModel model)
         {
 
             await _service.UpdateAsync(id, model);
-            return Ok("Hzimet metni güncellendi");
+            return Ok("Servis metni güncellendi");
 
         }
 
