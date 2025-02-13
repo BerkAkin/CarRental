@@ -154,6 +154,23 @@ namespace WebApi.Migrations
                     b.ToTable("GearTypes");
                 });
 
+            modelBuilder.Entity("WebApi.Entities.Icon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Icons");
+                });
+
             modelBuilder.Entity("WebApi.Entities.LandingMainText", b =>
                 {
                     b.Property<int>("Id")
@@ -233,10 +250,8 @@ namespace WebApi.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<int>("IconId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -249,6 +264,8 @@ namespace WebApi.Migrations
                         .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IconId");
 
                     b.ToTable("LandingServiceTexts");
                 });
@@ -515,6 +532,17 @@ namespace WebApi.Migrations
                     b.HasIndex("ModelId");
 
                     b.ToTable("UserFavorites");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.LandingServiceText", b =>
+                {
+                    b.HasOne("WebApi.Entities.Icon", "Icon")
+                        .WithMany()
+                        .HasForeignKey("IconId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Icon");
                 });
 
             modelBuilder.Entity("WebApi.Entities.Model", b =>
