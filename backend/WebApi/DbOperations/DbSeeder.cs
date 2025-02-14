@@ -22,19 +22,19 @@ namespace WebApi.DbOperations
                 };
 
                 var Icons = new List<Icon>{
-                    new Icon{Name="faCar"},
-                    new Icon{Name="faParking"},
-                    new Icon{Name="faGasPump"},
-                    new Icon{Name="faRoad"},
-                    new Icon{Name="faHandSparkles"},
-                    new Icon{Name="faKey"},
-                    new Icon{Name="faGauge"},
-                    new Icon{Name="faBattery"},
-                    new Icon{Name="faTrafficLight"},
-                    new Icon{Name="faMoneyBill"},
-                    new Icon{Name="faLocationPin"},
-                    new Icon{Name="faWrench"},
-                    new Icon{Name="faEdit"},
+                    new Icon{Name="faCar",Label="Araç"},
+                    new Icon{Name="faParking", Label="Park"},
+                    new Icon{Name="faGasPump", Label="Pompa"},
+                    new Icon{Name="faRoad", Label="Yol"},
+                    new Icon{Name="faHandSparkles", Label="El"},
+                    new Icon{Name="faKey", Label="Anahtar"},
+                    new Icon{Name="faGauge", Label="Gösterge"},
+                    new Icon{Name="faBattery", Label="Batarya"},
+                    new Icon{Name="faTrafficLight", Label="Trafik Işığı"},
+                    new Icon{Name="faMoneyBill", Label="Banknot"},
+                    new Icon{Name="faLocationPin", Label="Lokasyon"},
+                    new Icon{Name="faWrench", Label="İngiliz Anahtarı"},
+                    new Icon{Name="faEdit", Label="Düzenleme"},
                 };
                 _context.Icons.AddRange(Icons);
                 await _context.SaveChangesAsync();
