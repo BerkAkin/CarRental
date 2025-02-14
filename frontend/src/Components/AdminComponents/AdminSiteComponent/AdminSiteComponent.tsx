@@ -24,6 +24,7 @@ interface SettingsReasonTextProps {
 interface ISettingsServiceTextIcons {
     id: number;
     name: string;
+    label: string;
 }
 interface SettingsServicesTextProps {
     id: number;
@@ -233,7 +234,7 @@ function AdminSiteComponent() {
                                                                 {icons?.map((icon) => (
 
                                                                     <option selected={icon.id === item.icon.id} key={icon.id} value={icon.id}>
-                                                                        {icon.name}
+                                                                        {icon.label}
                                                                     </option>
                                                                 ))}
 
