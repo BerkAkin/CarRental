@@ -1,0 +1,27 @@
+.btn {
+    outline: none;
+    border: none;
+    background-color: #1A2B48;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.btn:hover {
+    background-color: #2c497c;
+}
+
+.newBtn {
+    cursor: pointer
+}
+
+.tableFontSize {
+    font-size: 0.85rem;
+}
+
+.tableInfos {
+    color: #3f3f3f !important;
+}
