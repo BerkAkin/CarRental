@@ -57,3 +57,11 @@
 
     font-size: 0.85rem;
 }
+
+.tableBackground {
+    background-color: #3f3f3f;
+}
+
+.innerBG {
+    background-color: white;
+}
