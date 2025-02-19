@@ -108,122 +108,116 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
     return (
         <>
 
-            <div className='container'>
-                <Formik initialValues={Item} validationSchema={modelValidationSchema} onSubmit={onSubmitHandler} enableReinitialize>
-                    <Form>
+            <Formik initialValues={Item} validationSchema={modelValidationSchema} onSubmit={onSubmitHandler} enableReinitialize>
+                {({ handleSubmit }) => (
+                    <>
+                        <table className={`${styles.tableFont} table-bordered table-hover table mt-2`}>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Marka</th>
+                                    <th>Model</th>
+                                    <th>Yakıt</th>
+                                    <th>Şanzıman</th>
+                                    <th>Tip</th>
+                                    <th className='text-center'>Kişi</th>
+                                    <th className='text-center'>Bagaj</th>
+                                    <th className='text-center'>Kapı</th>
+                                    <th className='text-center'>Ücret</th>
+                                    <th>Açıklama</th>
+                                    <th>Diğer Hizmetler</th>
+                                    <th>Diğer Özellikler</th>
+                                    <th>İşlemler</th>
+                                </tr>
 
 
-                        <div className='row border'>
-                            <Image URL={dummyImage} Width='200px' />
-                        </div>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td className='col-1'><Image URL={dummyImage} Width='100px' /></td>
+                                    <td className='col'>
+                                        <label htmlFor='brandName'><span className={styles.error}><ErrorMessage name="brandName" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field className={`${styles.inputs}`} name="brandName" id="brandName" />
+                                    </td>
+                                    <td className='col'>
+                                        <label htmlFor='modelName'><span className={styles.error}><ErrorMessage name="modelName" component="span" className={`${styles.error}`} /> </span></label>
+                                        <Field className={`${styles.inputs}`} name="modelName" id="modelName" />
+                                    </td>
+                                    <td className='col-1'>
+                                        <label htmlFor='fuelType.fuel'><span className={styles.error}><ErrorMessage name="fuelTypeId" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field as="select" className={`${styles.inputs}`} name="fuelType.id" id="fuelType.id" >
+                                            {Fuels.map((fuel) => (
+                                                <option key={fuel.id} value={fuel.id}>
+                                                    {fuel.fuel}
+                                                </option>
+                                            ))}
+                                        </Field></td>
+                                    <td className='col-1'>
+                                        <label htmlFor='gearType.gear'><span className={styles.error}><ErrorMessage name="gearTypeId" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field as="select" className={`${styles.inputs} `} name="gearType.id" id="gearType.id" >
+                                            {Gears.map((gear) => (
+                                                <option key={gear.id} value={gear.id}>
+                                                    {gear.gear}
+                                                </option>
+                                            ))}
+                                        </Field>
+                                    </td>
+                                    <td className='col-1'>
+                                        <label htmlFor='carType.car'><span className={styles.error}><ErrorMessage name="carTypeId" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field as="select" className={`${styles.inputs}`} name="carType.id" id="carType.id" >
+                                            {CarTypes.map((cartype) => (
+                                                <option key={cartype.id} value={cartype.id}>
+                                                    {cartype.car}
+                                                </option>
+                                            ))}
+                                        </Field>
+                                    </td>
 
-                        <div className='row'>
-                            <div className='container-fluid'>
-                                <div className='row'>
+                                    <td className='col'>
+                                        <label htmlFor='personCount'><span className={styles.error}><ErrorMessage name="personCount" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field className={`${styles.inputs} text-center`} name="personCount" id="personCount" />
+                                    </td>
+                                    <td className='col'>
+                                        <label htmlFor='luggageCount'><span className={styles.error}><ErrorMessage name="luggageCount" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field className={`${styles.inputs} text-center`} name="luggageCount" id="luggageCount" />
+                                    </td>
+                                    <td className='col'>
+                                        <label htmlFor='doorCount'><span className={styles.error}><ErrorMessage name="doorCount" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field className={`${styles.inputs} text-center`} name="doorCount" id="doorCount" />
+                                    </td>
+                                    <td className='col'>
+                                        <label htmlFor='price'><span className={styles.error}><ErrorMessage name="price" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field className={`${styles.inputs} text-center`} name="price" id="price" />
+                                    </td>
+                                    <td className='col-2'>
+                                        <label htmlFor='description'><span className={styles.error}><ErrorMessage name="description" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field as="textarea" className={`${styles.inputsTA}`} name="description" id="description" />
+                                    </td>
+                                    <td className='col-1'>
 
-                                    <div className={`col-6 border`}>
-                                        <div className='row text-center'><label htmlFor='brandName'>Marka <span className={styles.error}> * <ErrorMessage name="brandName" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'>  <Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
-                                    </div>
-                                    <div className={`col-6 border`}>
-                                        <div className='row text-center'><label htmlFor='modelName'>Model <span className={styles.error}> * <ErrorMessage name="modelName" component="span" className={`${styles.error}`} /> </span></label></div>
-                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
-                                    </div>
-                                </div>
-                                <div className='row'>
-                                    <div className={`col-4 border `}>
-                                        <div className='row text-center'><label htmlFor='fuelType.fuel'>Yakıt <span className={styles.error}> * <ErrorMessage name="fuelTypeId" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'>
-                                            <Field as="select" className={`${styles.inputs}`} name="fuelType.id" id="fuelType.id" >
-                                                {Fuels.map((fuel) => (
-                                                    <option key={fuel.id} value={fuel.id}>
-                                                        {fuel.fuel}
-                                                    </option>
-                                                ))}
-                                            </Field>
-                                        </div>
-                                    </div>
-                                    <div className={`col-4 border `}>
-                                        <div className='row text-center'><label htmlFor='gearType.gear'>Şanzıman <span className={styles.error}> * <ErrorMessage name="gearTypeId" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row '>
-                                            <Field as="select" className={`${styles.inputs} `} name="gearType.id" id="gearType.id" >
-                                                {Gears.map((gear) => (
-                                                    <option key={gear.id} value={gear.id}>
-                                                        {gear.gear}
-                                                    </option>
-                                                ))}
-                                            </Field>
-                                        </div>
-                                    </div>
-                                    <div className={`col-4  border`}>
-                                        <div className='row text-center'><label htmlFor='carType.car'>Tip <span className={styles.error}> * <ErrorMessage name="carTypeId" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row '>
-                                            <Field as="select" className={`${styles.inputs}`} name="carType.id" id="carType.id" >
-                                                {CarTypes.map((cartype) => (
-                                                    <option key={cartype.id} value={cartype.id}>
-                                                        {cartype.car}
-                                                    </option>
-                                                ))}
-                                            </Field>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='row'>
-                                    <div className={`col-12 border justify-content-center`}>
-                                        <div className='row text-center'><label htmlFor='description'>Açıklama <span className={styles.error}> * <ErrorMessage name="description" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="description" id="description" /></div>
-                                    </div>
-                                </div>
-                                <div className='row'>
-                                    <div className={`border col-4 justify-content-center`}>
-                                        <div className='row text-center'><label htmlFor='personCount'>Kişi <span className={styles.error}> * <ErrorMessage name="personCount" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="personCount" id="personCount" /></div>
-                                    </div>
-                                    <div className={`border col-4 justify-content-center`}>
-                                        <div className='row text-center'><label htmlFor='luggageCount'>Bagaj <span className={styles.error}> * <ErrorMessage name="luggageCount" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="luggageCount" id="luggageCount" /></div>
-                                    </div>
-                                    <div className={`border col-4 justify-content-center`}>
-                                        <div className='row text-center'><label htmlFor='doorCount'>Kapı <span className={styles.error}> * <ErrorMessage name="doorCount" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'><Field className={`${styles.inputs} text-center`} name="doorCount" id="doorCount" /></div>
-                                    </div>
-                                </div>
-                                <div className='row'>
-                                    <div className={`col-12 border justify-content-center`}>
-                                        <div className='row text-center'><label htmlFor='price'>Aylık Kiralama Bedeli <span className={styles.error}> * <ErrorMessage name="price" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'> <Field className={`${styles.inputs} text-center`} name="price" id="price" /></div>
-                                    </div>
-                                </div>
-                                <div className='row'>
-                                    <div className={`col-12 border justify-content-center`}>
-                                        <div className='row text-center'><label htmlFor='otherServices'>Sunulan Diğer Hizmetler <span className={styles.error}> * <ErrorMessage name="otherServices" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'>  <Field className={`${styles.inputs}`} name="otherServices" id="otherServices" /></div>
-                                    </div>
-                                </div>
-                                <div className='row '>
-                                    <div className={`col-12 border justify-content-center`}>
-                                        <div className='row text-center'><label htmlFor='otherFeatures'>Diğer Araç Özellikleri <span className={styles.error}> * <ErrorMessage name="otherFeatures" component="span" className={`${styles.error}`} /></span></label></div>
-                                        <div className='row'> <Field className={`${styles.inputs}`} name="otherFeatures" id="otherFeatures" /></div>
-                                    </div>
-                                </div>
-                                <div className='row border'>
-                                    <div className={`col-12 border justify-content-center`}>
-                                        <div className='row text-center'>
-                                            <button type='submit' className={styles.btn}>Güncelle</button>
+                                        <label htmlFor='otherServices'><span className={styles.error}><ErrorMessage name="otherServices" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field as="textarea" className={`${styles.inputsTA}`} name="otherServices" id="otherServices" />
+                                    </td>
+                                    <td className='col-1'>
 
-                                        </div>
+                                        <label htmlFor='otherFeatures'><span className={styles.error}><ErrorMessage name="otherFeatures" component="span" className={`${styles.error}`} /></span></label>
+                                        <Field as="textarea" className={`${styles.inputsTA}`} name="otherFeatures" id="otherFeatures" />
+                                    </td>
+                                    <td className='col-1'>
+                                        <button type='button' onClick={() => handleSubmit()} className={styles.btn}>Güncelle</button>
+                                        <button onClick={() => onDeleteHandler(Item.id)} className={styles.deleteBtn}>Sil</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Form>
-                </Formik>
-                <div className='row mt-2'>
-                    <button onClick={() => onDeleteHandler(Item.id)} className={styles.deleteBtn}>Sil</button>
-                </div>
-            </div>
 
+
+
+                    </>
+
+                )}
+            </Formik>
 
         </>
 
