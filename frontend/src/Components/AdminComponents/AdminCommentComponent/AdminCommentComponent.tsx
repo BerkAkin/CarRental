@@ -20,11 +20,12 @@ function AdminCommentComponent() {
 
     if (error) return <p>{error}</p>
     return (
-        <div>
-            <table className={`${styles.tableFontSize} table-bordered table-striped table-hover table mt-2 `}>
+        <div className={`${styles.innerBG} my-2 border`}>
+            <table className={`${styles.tableFontSize} table-striped table-hover table mt-3`}>
                 <thead>
                     <tr>
                         <th scope="col" className='text-center col-1'>Ad Soyad</th>
+
                         <th scope="col" className='text-center col-1'>E-Posta</th>
                         <th scope="col" className='text-center col-1'>Kullanıcı Türü</th>
                         <th scope="col" className='text-center col-1'>Aktif Mi</th>
@@ -39,13 +40,13 @@ function AdminCommentComponent() {
                         (comments?.data.map((item: any, index: number) => (
 
                             <tr key={item.id}>
-                                <td className={`${styles.tableInfos} text-center`}>{item.userName}</td>
-                                <td className={`${styles.tableInfos} text-center`}>{item.userMail}</td>
-                                <td className={`${styles.tableInfos} text-center`}>{item.userType}</td>
-                                <td className={`${styles.tableInfos} text-center`}>{item.isActive === true ? "Evet" : "Hayır"}</td>
-                                <td className={`${styles.tableInfos} text-center`}>{item.starCount}</td>
-                                <td className={`${styles.tableInfos}`}>{item.content}</td>
-                                <td className={`${styles.tableInfos} text-center`}>
+                                <td className={`${styles.tableInfos} text-center border`}>{item.userName}</td>
+                                <td className={`${styles.tableInfos} text-center border`}>{item.userMail}</td>
+                                <td className={`${styles.tableInfos} text-center border`}>{item.userType}</td>
+                                <td className={`${styles.tableInfos} text-center border`}>{item.isActive === true ? "Evet" : "Hayır"}</td>
+                                <td className={`${styles.tableInfos} text-center border`}>{item.starCount}</td>
+                                <td className={`${styles.tableInfos} border`}>{item.content}</td>
+                                <td className={`${styles.tableInfos} text-center border`}>
                                     {
                                         item.isNew === true ?
                                             (
@@ -82,7 +83,7 @@ function AdminCommentComponent() {
                         (<></>)}
                 </tbody>
             </table>
-            <div className='d-flex justify-content-end mt-4'>
+            <div className='d-flex justify-content-end my-4'>
                 <button onClick={previousPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
                 <button onClick={nextPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
             </div>
