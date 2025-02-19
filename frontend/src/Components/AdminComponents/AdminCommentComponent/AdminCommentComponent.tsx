@@ -21,7 +21,7 @@ function AdminCommentComponent() {
     if (error) return <p>{error}</p>
     return (
         <div>
-            <table className={`${styles.tableFontSize} table-striped table-hover table mt-2 `}>
+            <table className={`${styles.tableFontSize} table-bordered table-striped table-hover table mt-2 `}>
                 <thead>
                     <tr>
                         <th scope="col" className='text-center col-1'>Ad Soyad</th>
@@ -30,7 +30,7 @@ function AdminCommentComponent() {
                         <th scope="col" className='text-center col-1'>Aktif Mi</th>
                         <th scope="col">Puan</th>
                         <th scope="col" className='col-7'>Yorum</th>
-                        <th scope="col" className='text-center col-1'></th>
+                        <th scope="col" className='text-center col-1'>Yeni Mi?</th>
                         <th scope="col" >İşlemler</th>
                     </tr>
                 </thead>
@@ -39,13 +39,13 @@ function AdminCommentComponent() {
                         (comments?.data.map((item: any, index: number) => (
 
                             <tr key={item.id}>
-                                <td className='text-center'>{item.userName}</td>
-                                <td className='text-center'>{item.userMail}</td>
-                                <td className='text-center'>{item.userType}</td>
-                                <td className='text-center'>{item.isActive === true ? "Evet" : "Hayır"}</td>
-                                <td className='text-center'>{item.starCount}</td>
-                                <td >{item.content}</td>
-                                <td className='text-center'>
+                                <td className={`${styles.tableInfos} text-center`}>{item.userName}</td>
+                                <td className={`${styles.tableInfos} text-center`}>{item.userMail}</td>
+                                <td className={`${styles.tableInfos} text-center`}>{item.userType}</td>
+                                <td className={`${styles.tableInfos} text-center`}>{item.isActive === true ? "Evet" : "Hayır"}</td>
+                                <td className={`${styles.tableInfos} text-center`}>{item.starCount}</td>
+                                <td className={`${styles.tableInfos}`}>{item.content}</td>
+                                <td className={`${styles.tableInfos} text-center`}>
                                     {
                                         item.isNew === true ?
                                             (
@@ -58,7 +58,6 @@ function AdminCommentComponent() {
                                 </td>
 
                                 <td>
-
 
                                     {item.isActive === true ?
                                         (
