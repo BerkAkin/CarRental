@@ -48,12 +48,12 @@ function AdminPage() {
                             </li>
                         </ul>
                     </div>
-                    <div className='col-10'>
-                        <div >
+                    <div className={`${styles.sectionBG} col-10`}>
+                        <div>
                             <div className={`${styles.contentPanelWrapper} tab-content`} id="tab-content">
                                 <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">
-                                    <div className='container-fluid p-0'>
-                                        <div className='row'><h3>Bilgilerim</h3><hr /></div>
+                                    <div className='container-fluid'>
+                                        <div className='row pt-3'><h3>Bilgilerim</h3><hr /></div>
                                         <div className='row'>
                                             <UserInfoContextProvider>
                                                 <UserProfileComponent />
@@ -62,8 +62,10 @@ function AdminPage() {
                                     </div>
                                 </div>
                                 <div className="tab-pane" id="disabled-tabpanel-1" role="tabpanel" aria-labelledby="disabled-tab-1">
-                                    <div className='container-fluid p-0'>
-                                        <div className='row'><h3>Site Ayarları</h3><hr /></div>
+                                    <div className='container-fluid'>
+                                        <div className='row pt-3'>
+                                            <h3>Site Ayarları</h3><hr />
+                                        </div>
                                         <div className='row'>
                                             <SiteSettingsContextProvider>
                                                 <AdminSiteComponent />
@@ -72,26 +74,28 @@ function AdminPage() {
                                     </div>
                                 </div>
                                 <div className="tab-pane" id="disabled-tabpanel-2" role="tabpanel" aria-labelledby="disabled-tab-2">
-                                    <div className='container-fluid p-0'>
-                                        <div className='row'><h3>Modeller</h3><hr /></div>
+                                    <div className='container-fluid'>
+                                        <div className='row pt-3'><h3>Modeller</h3><hr /></div>
                                         <div className='row'>
                                             {
                                                 isAdd ?
                                                     (
                                                         <>
-                                                            <button onClick={handleIsAdd} className={`${styles.addBtnCancel}`}>İptal Et</button>
+
+
                                                             <TypesContextProvider>
-                                                                <AdminModelAddComponent />
+                                                                <AdminModelAddComponent cancelFunc={handleIsAdd} />
                                                             </TypesContextProvider>
                                                         </>
                                                     )
                                                     :
                                                     (
                                                         <>
-                                                            <button onClick={handleIsAdd} className={`${styles.addBtn}`}>Yeni Model Ekle</button>
+
+
                                                             <TypesContextProvider>
                                                                 <ModelsContextProvider>
-                                                                    <AdminModelsComponent />
+                                                                    <AdminModelsComponent addNewFunc={handleIsAdd} />
                                                                 </ModelsContextProvider>
                                                             </TypesContextProvider>
                                                         </>
@@ -101,9 +105,12 @@ function AdminPage() {
                                     </div>
                                 </div>
                                 <div className="tab-pane" id="disabled-tabpanel-3" role="tabpanel" aria-labelledby="disabled-tab-3">
-                                    <div className='container-fluid p-0'>
+                                    <div className='container-fluid'>
+                                        <div className='row pt-3'>
+                                            <h3>Yorumlar</h3><hr />
+                                        </div>
                                         <div className='row'>
-                                            <div className='row'><h3>Yorumlar</h3><hr /></div>
+
                                             <CommentContextProvider>
                                                 <AdminCommentComponent />
                                             </CommentContextProvider>
@@ -111,8 +118,8 @@ function AdminPage() {
                                     </div>
                                 </div>
                                 <div className="tab-pane" id="disabled-tabpanel-4" role="tabpanel" aria-labelledby="disabled-tab-4">
-                                    <div className='container-fluid p-0'>
-                                        <div className='row'><h3>İletişim İstekleri</h3><hr /></div>
+                                    <div className='container-fluid'>
+                                        <div className='row pt-3'><h3>İletişim İstekleri</h3><hr /></div>
                                         <div className='row'>
                                             <ContactContextProvider>
                                                 <AdminContactsComponent />
