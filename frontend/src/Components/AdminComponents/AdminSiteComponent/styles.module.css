@@ -19,28 +19,39 @@
 }
 
 .infosTA {
-    border: 1px solid #b3b3b3;
+    border: none;
     outline: none;
     color: #3f3f3f;
+    background-color: transparent;
+    resize: none;
     width: 100%;
-    height: 250px;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
 }
 
 .infosTA:hover {
     border-bottom: 1px solid red;
     outline: none;
+    color: black;
     cursor: pointer;
 }
 
 .infosTA:focus {
     border-bottom: 1px solid red;
     outline: none;
+    color: black;
+}
+
+.tableFontSize {
+    font-size: 0.85rem;
 }
 
 .infos {
-    border: 1px solid #b3b3b3;
+    border: none;
     outline: none;
     color: #3f3f3f;
+    background-color: transparent;
     width: 100%;
     height: 35px;
 }
@@ -49,11 +60,13 @@
     border-bottom: 1px solid red;
     outline: none;
     cursor: pointer;
+    color: black;
 }
 
 .infos:focus {
     border-bottom: 1px solid red;
     outline: none;
+    color: black;
 }
 
 .error {
