@@ -6,7 +6,7 @@ import AdminModelEditCardComponent from "../AdminModelEditCardComponent/AdminMod
 
 
 
-function AdminModelsComponent() {
+function AdminModelsComponent({ addNewFunc }: any) {
 
     const { gears, fuels, carTypes } = useTypesContext();
     const { HandleNextModelPage, HandlePreviousModelPage, models, error } = useModelsContext();
@@ -14,10 +14,9 @@ function AdminModelsComponent() {
     if (error) return <p>{error}</p>
 
     return (
-        <>
-            <div className='d-flex justify-content-end mt-4 mb-1'>
-                <button onClick={HandlePreviousModelPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
-                <button onClick={HandleNextModelPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+        <div className={`${styles.innerBG} border container my-2`}>
+            <div className='d-flex justify-content-end my-4'>
+                <button onClick={addNewFunc} className={`${styles.addBtn}`} style={{ width: "150px" }}>Yeni Model Ekle</button>
             </div>
             <div className='row'>
                 {
@@ -38,8 +37,12 @@ function AdminModelsComponent() {
                         )
                 }
             </div>
+            <div className='d-flex justify-content-end my-4'>
+                <button onClick={HandlePreviousModelPage} className={`${styles.btn} mx-3`} style={{ width: "150px" }}>Önceki Sayfa</button>
+                <button onClick={HandleNextModelPage} className={`${styles.btn}`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+            </div>
 
-        </>
+        </div>
     )
 }
 
