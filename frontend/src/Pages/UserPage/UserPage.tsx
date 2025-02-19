@@ -111,96 +111,119 @@ function UserPage() {
 
         <>
             <ConfirmationPopup />
-            <div className={`container-fluid mt-4 pt-3 `}>
-
-                <ul className="nav nav-tabs mt-2" role="tablist">
-                    <li className="nav-item " >
-                        <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
-                    </li>
-                    <li className="nav-item" >
-                        <a className={`${styles.navBtn} mx-3 nav-link`} id="disabled-tab-1" data-bs-toggle="tab" href="#disabled-tabpanel-1">Favorilerim</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className={`${styles.navBtn} nav-link`} id="disabled-tab-2" data-bs-toggle="tab" href="#disabled-tabpanel-2">Yorumum</a>
-                    </li>
-                </ul>
-
-                <div className="tab-content pt-3" id="tab-content">
-                    <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">
-                        <div className='container'>
-                            <UserInfoContextProvider>
-                                <UserProfileComponent />
-                            </UserInfoContextProvider>
-                        </div>
+            <div className={`container-fluid mt-4`}>
+                <div className='row'>
+                    <div className='col-2 border-end'>
+                        <ul className="nav nav-tabs  d-flex flex-column border-none" role="tablist">
+                            <li className="nav-item " >
+                                <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
+                            </li>
+                            <li className="nav-item" >
+                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-1" data-bs-toggle="tab" href="#disabled-tabpanel-1">Favorilerim</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-2" data-bs-toggle="tab" href="#disabled-tabpanel-2">Yorumum</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div className="tab-pane" id="disabled-tabpanel-1" role="tabpanel" aria-labelledby="disabled-tab-1">
-                        <div className='container mt-4'>
-                            <div className={`${styles.modelsList} row overflow-y-scroll`}>
-                                {(
-                                    initialFavorites?.map((favorite: FavoriteModels) => {
-                                        return (
-                                            <div className='col-3 mt-3'>
-
-                                                <FavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
-                                                    brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
-                                                    imageDirectory={favorite.imageDirectory} modelName={favorite.modelName} personCount={favorite.personCount}
-                                                    price={favorite.price}
-                                                />
-                                            </div>
-
-                                        )
-                                    })
-                                )}
+                    <div className={`${styles.sectionBG} col-10`}>
+                        <div className="tab-content pt-3" id="tab-content">
+                            <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">
+                                <div className='container-fluid'>
+                                    <div className='row pt-3'><h3>Bilgilerim</h3><hr /></div>
+                                    <div className='row'>
+                                        <UserInfoContextProvider>
+                                            <UserProfileComponent />
+                                        </UserInfoContextProvider>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="tab-pane" id="disabled-tabpanel-2" role="tabpanel" aria-labelledby="disabled-tab-2">
-                        <div className='container'>
-                            <div className='row'>
-                                <div>
-                                    {initialCommentValues ? (
-                                        <Formik validationSchema={userCommentValidationSchema} initialValues={initialCommentValues} onSubmit={submitCommentForm} enableReinitialize>
-                                            <Form>
-                                                <div className='container'>
-                                                    <div className='row'>
-                                                        <div className=' d-flex justify-content-start align-items-center'>
-                                                            <label className='me-4'>Bizi Değerlendir !</label>
-                                                            <span>{[1, 2, 3, 4, 5].map((star) => (
-                                                                <span
-                                                                    key={star}
-                                                                    onClick={() => setRating(star)}
-                                                                    onMouseEnter={() => setHover(star)}
-                                                                    onMouseLeave={() => setHover(0)}
-                                                                    style={{ cursor: "pointer", color: star <= (hover || rating) ? "gold" : "gray", fontSize: "2rem", }}>
-                                                                    ☆
-                                                                </span>
-                                                            ))}</span>
+                            <div className="tab-pane" id="disabled-tabpanel-1" role="tabpanel" aria-labelledby="disabled-tab-1">
+                                <div className='container-fluid'>
+                                    <div className='row pt-3'><h3>Favorilerim</h3><hr /></div>
+                                    <div className={`${styles.modelsList, styles.bgColor} row overflow-y-scroll border my-2 p-3`}>
+                                        {(
+                                            initialFavorites?.map((favorite: FavoriteModels) => {
+                                                return (
 
+                                                    <div className='col-2 mt-3'>
+
+                                                        <FavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
+                                                            brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
+                                                            imageDirectory={favorite.imageDirectory} modelName={favorite.modelName} personCount={favorite.personCount}
+                                                            price={favorite.price}
+                                                        />
+                                                    </div>
+
+                                                )
+                                            })
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tab-pane" id="disabled-tabpanel-2" role="tabpanel" aria-labelledby="disabled-tab-2">
+                                <div className='container-fluid'>
+                                    <div className='row pt-3'><h3>Yorumum</h3><hr /></div>
+                                    <div className={`${styles.modelsList, styles.bgColor} row border my-2 p-3`}>
+                                        <div>
+                                            {initialCommentValues ? (
+                                                <Formik validationSchema={userCommentValidationSchema} initialValues={initialCommentValues} onSubmit={submitCommentForm} enableReinitialize>
+                                                    {({ handleSubmit }) => (
+                                                        <div>
+                                                            <table className={`${styles.tableFontSize} table-striped table-hover table mt-3`}>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Yorum İçeriği</th>
+                                                                        <th>Deneyim</th>
+                                                                        <th>İşlemler</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td className='col-10 border'>
+                                                                            <ErrorMessage name="content" component="span" className={`${styles.error}`} />
+                                                                            <Field as="textarea" rows={2} id="content" name="content" className={`${styles.comment}`} />
+                                                                        </td>
+                                                                        <td className='col-1 border'>
+                                                                            <div className='mt-2'>{[1, 2, 3, 4, 5].map((star) => (
+                                                                                <span
+                                                                                    key={star}
+                                                                                    onClick={() => setRating(star)}
+                                                                                    onMouseEnter={() => setHover(star)}
+                                                                                    onMouseLeave={() => setHover(0)}
+                                                                                    style={{ cursor: "pointer", color: star <= (hover || rating) ? "gold" : "gray", fontSize: "2rem", }}>
+                                                                                    ☆
+                                                                                </span>
+                                                                            ))}</div>
+                                                                        </td>
+                                                                        <td className='col border'>
+                                                                            <button className={`${styles.btn} mt-3`} type='button' onClick={() => handleSubmit()}>Güncelle</button>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
 
                                                         </div>
+                                                    )}
 
-                                                    </div>
-                                                    <div className='col-12'>Yorumum <span className={styles.error}>*</span>
-                                                        <span className=''> <ErrorMessage name="content" component="span" className={`${styles.error}`} /></span>
-                                                    </div>
-                                                    <div className='row  mt-1'>
-                                                        <Field as="textarea" rows={10} id="content" name="content" className={`${styles.comment}`} />
-                                                    </div>
-                                                    <div className='row  mt-2'>
-                                                        <button className={`${styles.btn} mt-4 `} type='submit'>Yorumumu Güncelle</button>
-                                                    </div>
-                                                </div>
 
-                                            </Form>
-                                        </Formik>
-                                    ) : (
-                                        <p>Bilgiler yükleniyor...</p>
-                                    )}
+
+                                                </Formik>
+                                            ) : (
+                                                <p>Bilgiler yükleniyor...</p>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+
+
             </div >
         </>
     )
