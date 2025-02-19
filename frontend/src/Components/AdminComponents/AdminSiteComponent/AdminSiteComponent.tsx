@@ -106,27 +106,39 @@ function AdminSiteComponent() {
     if (error) return <p>{error}</p>
     return (
         <>
-            <div className='col-4'>
-                <div className='container  p-0'>
+            <div className='col-12 mt-3'>
+                <h4>Ana Metin</h4>
+                <div className='container-fluid p-0'>
                     {
                         settings?.mainText ?
                             (
-                                <>
-                                    <Formik validationSchema={mainTextValidation} initialValues={settings?.mainText[0]} onSubmit={updateMainText} enableReinitialize >
-                                        <Form>
-                                            <div className='row'>
-                                                <div className='col-12'><h5>Ana Metin <span className={styles.error}> *<ErrorMessage name="text" component="span" className={`${styles.error}`} /></span></h5>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <Field rows={10} as="textarea" id="text" name="text" className={`${styles.infosTA}`} />
-                                            </div>
-                                            <div className="mt-2">
-                                                <button className={`${styles.btn}`} type="submit">Ana Metni Güncelle</button>
-                                            </div>
-                                        </Form>
-                                    </Formik>
-                                </>
+                                <table className={`${styles.tableFontSize} table-striped table-bordered table-hover table mt-2`}>
+                                    <thead>
+                                        <tr>
+                                            <th className='col-11'>Ana Metin İçeriği</th>
+                                            <th className='col-1 text-center'>İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <Formik validationSchema={mainTextValidation} initialValues={settings?.mainText[0]} onSubmit={updateMainText} enableReinitialize >
+                                                {({ handleSubmit }) => (
+                                                    <>
+                                                        <td>
+                                                            <span className={styles.error}><ErrorMessage name="text" component="span" className={`${styles.error}`} /></span>
+                                                            <Field as="textarea" id="text" name="text" className={`${styles.infosTA}`} />
+                                                        </td>
+                                                        <td>
+                                                            <button className={`${styles.btn}`} type="button" onClick={() => handleSubmit()}>Güncelle</button>
+                                                        </td>
+                                                    </>
+
+                                                )}
+                                            </Formik>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                             )
                             :
                             (
@@ -136,125 +148,105 @@ function AdminSiteComponent() {
                             )
                     }
                 </div>
-
-
-
             </div>
-            <div className='col-4'>
-                <h5>Sebepler</h5>
-                {
-                    settings?.reasons ?
-                        (
-                            <>
 
-                                {settings?.reasons?.map((item: any) => (
-                                    <Formik validationSchema={reasonTextValidation} key={item.id} initialValues={{ id: item.id, title: item.title, content: item.content }}
-                                        onSubmit={updateReasonTexts} enableReinitialize>
-                                        <Form>
-
-                                            <div className="row mt-2 ">
-                                                <div className="col-10 ">
-                                                    <div className='row'>
-                                                        <div className='col-12'>
-                                                            <span className={styles.error}>
-                                                                <ErrorMessage name="title" component="span" className={`${styles.error}`} />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='row'>
-                                                        <Field id={`title`} name="title" className={styles.infos} />
-                                                    </div>
-                                                    <div className='row'>
-                                                        <div className='col-12'>
-                                                            <span className={styles.error}>
-                                                                <ErrorMessage name="content" component="span" className={`${styles.error}`} />
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='row'>
-                                                        <Field id={`content`} name="content" className={styles.infos} placeholder="İçerik" />
-                                                    </div>
-
-
-                                                </div>
-                                                <div className="col align-items-center d-flex">
-                                                    <button className={styles.btn} type="submit">Sebebi Güncelle</button>
-                                                </div>
-                                            </div>
-                                        </Form>
+            <div className='col-12 my-4'>
+                <h4>Sebepler</h4>
+                {settings?.reasons && (
+                    <table className={`${styles.tableFontSize} table-striped table-bordered table-hover table mt-2`}>
+                        <thead>
+                            <tr>
+                                <th className='col-2'>Sebep Başlığı</th>
+                                <th className='col-9'>Sebep İçeriği</th>
+                                <th className='col-1 text-center'>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {settings.reasons.map((item: any) => (
+                                <tr key={item.id}>
+                                    <Formik validationSchema={reasonTextValidation} initialValues={{ id: item.id, title: item.title, content: item.content }} onSubmit={updateReasonTexts} enableReinitialize>
+                                        {({ handleSubmit }) => (
+                                            <>
+                                                <td>
+                                                    <Field name="title" className={styles.infos} />
+                                                    <ErrorMessage name="title" component="span" className={styles.error} />
+                                                </td>
+                                                <td>
+                                                    <Field name="content" className={styles.infos} placeholder="İçerik" />
+                                                    <ErrorMessage name="content" component="span" className={styles.error} />
+                                                </td>
+                                                <td>
+                                                    <button className={styles.btn} type="button" onClick={() => handleSubmit()}>Güncelle</button>
+                                                </td>
+                                            </>
+                                        )}
                                     </Formik>
-                                ))}
-
-
-                            </>
-                        )
-
-                        :
-
-                        (
-                            <></>
-                        )
-                }
-            </div >
-            <div className='col-4 '>
-                <h5>Hizmetler</h5>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+            <div className='col-12'>
+                <h4>Hizmetler</h4>
                 {
                     settings?.services ?
                         (
                             <>
 
-                                {settings?.services?.map((item: any) => (
-                                    <Formik validationSchema={serviceTextValidation} key={item.id} initialValues={item}
-                                        onSubmit={updateServiceTexts} enableReinitialize>
-                                        <Form>
-                                            <div className="row mt-2">
-                                                <div className="col-10">
-                                                    <div className='row'>
-                                                        <div className='col-9'>
-                                                            <div className={styles.error}>
+                                <table className={`${styles.tableFontSize} table-striped table-bordered table-hover table`}>
+                                    <thead>
+                                        <tr>
+                                            <th className='col-2'>Hizmet Başlığı</th>
+                                            <th className='col-7'>Hizmet İçeriği</th>
+                                            <th className='col-1 text-center'>Hizmet İkonu</th>
+                                            <th className='col-1 text-center'>İkon Değiştir</th>
+                                            <th className='col-1 text-center'>İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {settings?.services?.map((item: any) => (
+                                            <tr>
+                                                <Formik validationSchema={serviceTextValidation} key={item.id} initialValues={item}
+                                                    onSubmit={updateServiceTexts} enableReinitialize>
+                                                    {({ handleSubmit }) => (
+                                                        <>
+                                                            <td>
                                                                 <ErrorMessage name="title" component="span" className={`${styles.error}`} />
-                                                            </div>
-                                                            <div className={styles.error}>
-                                                                <ErrorMessage name="icon" component="span" className={`${styles.error}`} />
-                                                            </div>
-                                                            <div className={styles.error}>
+                                                                <Field id={`title`} name="title" className={styles.infos} /></td>
+                                                            <td>
                                                                 <ErrorMessage name="content" component="span" className={`${styles.error}`} />
-                                                            </div>
-                                                        </div>
-                                                        <div className='col-9 p-0'>
-                                                            <Field id={`title`} name="title" className={styles.infos} />
+                                                                <Field id={`content`} name="content" className={styles.infos} />
+                                                            </td>
+                                                            <td className='text-center'>
+                                                                {selectIcon(item.icon.name, 25)}
+                                                            </td>
+                                                            <td>
+                                                                <ErrorMessage name="icon" component="span" className={`${styles.error}`} />
+                                                                <Field as="select" id="icon.id" name="icon.id" className={styles.infos}>
+                                                                    {icons?.map((icon) => (
+                                                                        <option selected={icon.id === item.icon.id} key={icon.id} value={icon.id}>
+                                                                            {icon.label}
+                                                                        </option>
+                                                                    ))}
+                                                                </Field>
+                                                            </td>
+                                                            <td>
+                                                                <button className={styles.btn} type="button" onClick={() => handleSubmit()}>Güncelle</button>
+                                                            </td>
 
-                                                        </div>
+                                                        </>
+                                                    )}
+                                                </Formik>
+                                            </tr>
 
-                                                        <div className='col-1 px-auto py-auto'>
-                                                            {selectIcon(item.icon.name, 25)}
-                                                        </div>
-                                                        <div className='col-2 ps-0 pe-0'>
-                                                            <Field as="select" id="icon.id" name="icon.id" className={styles.infos}>
-                                                                {icons?.map((icon) => (
+                                        ))}
 
-                                                                    <option selected={icon.id === item.icon.id} key={icon.id} value={icon.id}>
-                                                                        {icon.label}
-                                                                    </option>
-                                                                ))}
 
-                                                            </Field>
-                                                        </div>
 
-                                                    </div>
-                                                    <div className='row'>
-                                                        <Field id={`content`} name="content" className={styles.infos} />
-                                                    </div>
-
-                                                </div>
-                                                <div className="col-2 align-items-center d-flex">
-                                                    <button className={styles.btn} type="submit">Hizmet Güncelle</button>
-                                                </div>
-                                            </div>
-
-                                        </Form>
-                                    </Formik>
-                                ))}
+                                    </tbody>
+                                </table>
 
 
                             </>
