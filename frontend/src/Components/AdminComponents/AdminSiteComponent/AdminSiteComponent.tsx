@@ -106,13 +106,14 @@ function AdminSiteComponent() {
     if (error) return <p>{error}</p>
     return (
         <>
-            <div className='col-12 mt-3'>
+            <div className={`${styles.innerBG} col-12 my-2 p-3 border`}>
                 <h4>Ana Metin</h4>
+                <hr />
                 <div className='container-fluid p-0'>
                     {
                         settings?.mainText ?
                             (
-                                <table className={`${styles.tableFontSize} table-striped table-bordered table-hover table mt-2`}>
+                                <table className={`${styles.tableFontSize} table-striped table-hover table mt-2`}>
                                     <thead>
                                         <tr>
                                             <th className='col-11'>Ana Metin İçeriği</th>
@@ -124,11 +125,11 @@ function AdminSiteComponent() {
                                             <Formik validationSchema={mainTextValidation} initialValues={settings?.mainText[0]} onSubmit={updateMainText} enableReinitialize >
                                                 {({ handleSubmit }) => (
                                                     <>
-                                                        <td>
+                                                        <td className='border'>
                                                             <span className={styles.error}><ErrorMessage name="text" component="span" className={`${styles.error}`} /></span>
                                                             <Field as="textarea" id="text" name="text" className={`${styles.infosTA}`} />
                                                         </td>
-                                                        <td>
+                                                        <td className='border'>
                                                             <button className={`${styles.btn}`} type="button" onClick={() => handleSubmit()}>Güncelle</button>
                                                         </td>
                                                     </>
@@ -150,10 +151,11 @@ function AdminSiteComponent() {
                 </div>
             </div>
 
-            <div className='col-12 my-4'>
+            <div className={`${styles.innerBG} col-12 my-4 p-3 border`}>
                 <h4>Sebepler</h4>
+                <hr />
                 {settings?.reasons && (
-                    <table className={`${styles.tableFontSize} table-striped table-bordered table-hover table mt-2`}>
+                    <table className={`${styles.tableFontSize} table-striped  table-hover table mt-2`}>
                         <thead>
                             <tr>
                                 <th className='col-2'>Sebep Başlığı</th>
@@ -167,15 +169,15 @@ function AdminSiteComponent() {
                                     <Formik validationSchema={reasonTextValidation} initialValues={{ id: item.id, title: item.title, content: item.content }} onSubmit={updateReasonTexts} enableReinitialize>
                                         {({ handleSubmit }) => (
                                             <>
-                                                <td>
+                                                <td className='border'>
                                                     <Field name="title" className={styles.infos} />
                                                     <ErrorMessage name="title" component="span" className={styles.error} />
                                                 </td>
-                                                <td>
+                                                <td className='border'>
                                                     <Field name="content" className={styles.infos} placeholder="İçerik" />
                                                     <ErrorMessage name="content" component="span" className={styles.error} />
                                                 </td>
-                                                <td>
+                                                <td className='border'>
                                                     <button className={styles.btn} type="button" onClick={() => handleSubmit()}>Güncelle</button>
                                                 </td>
                                             </>
@@ -187,14 +189,16 @@ function AdminSiteComponent() {
                     </table>
                 )}
             </div>
-            <div className='col-12'>
+
+            <div className={`${styles.innerBG} col-12 p-3 border mb-1`}>
                 <h4>Hizmetler</h4>
+                <hr />
                 {
                     settings?.services ?
                         (
                             <>
 
-                                <table className={`${styles.tableFontSize} table-striped table-bordered table-hover table`}>
+                                <table className={`${styles.tableFontSize} table-striped table-hover table`}>
                                     <thead>
                                         <tr>
                                             <th className='col-2'>Hizmet Başlığı</th>
@@ -212,17 +216,17 @@ function AdminSiteComponent() {
                                                     onSubmit={updateServiceTexts} enableReinitialize>
                                                     {({ handleSubmit }) => (
                                                         <>
-                                                            <td>
+                                                            <td className='border'>
                                                                 <ErrorMessage name="title" component="span" className={`${styles.error}`} />
                                                                 <Field id={`title`} name="title" className={styles.infos} /></td>
-                                                            <td>
+                                                            <td className='border'>
                                                                 <ErrorMessage name="content" component="span" className={`${styles.error}`} />
                                                                 <Field id={`content`} name="content" className={styles.infos} />
                                                             </td>
-                                                            <td className='text-center'>
+                                                            <td className='text-center border'>
                                                                 {selectIcon(item.icon.name, 25)}
                                                             </td>
-                                                            <td>
+                                                            <td className='border'>
                                                                 <ErrorMessage name="icon" component="span" className={`${styles.error}`} />
                                                                 <Field as="select" id="icon.id" name="icon.id" className={styles.infos}>
                                                                     {icons?.map((icon) => (
@@ -232,7 +236,7 @@ function AdminSiteComponent() {
                                                                     ))}
                                                                 </Field>
                                                             </td>
-                                                            <td>
+                                                            <td className='border'>
                                                                 <button className={styles.btn} type="button" onClick={() => handleSubmit()}>Güncelle</button>
                                                             </td>
 
