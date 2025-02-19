@@ -48,6 +48,12 @@
     cursor: pointer
 }
 
+.tableInfos {
+    color: #3f3f3f !important;
+}
+
+
 .tableFontSize {
+
     font-size: 0.85rem;
 }

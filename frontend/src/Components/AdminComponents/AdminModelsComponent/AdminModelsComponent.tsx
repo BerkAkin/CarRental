@@ -15,7 +15,7 @@ function AdminModelsComponent() {
 
     return (
         <>
-            <div className='d-flex justify-content-end mt-4'>
+            <div className='d-flex justify-content-end mt-4 mb-1'>
                 <button onClick={HandlePreviousModelPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
                 <button onClick={HandleNextModelPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
             </div>
@@ -25,7 +25,7 @@ function AdminModelsComponent() {
                         (
                             <>
                                 {models?.data.map((item: any) => (
-                                    <div className="col-3" key={item.id}>
+                                    <div key={item.id}>
                                         <AdminModelEditCardComponent Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
                                     </div>
 
@@ -38,10 +38,7 @@ function AdminModelsComponent() {
                         )
                 }
             </div>
-            <div className=' d-flex justify-content-end mt-5'>
-                <button onClick={HandlePreviousModelPage} className={`${styles.btn} mx-3`} style={{ width: "150px" }}>Önceki Sayfa</button>
-                <button onClick={HandleNextModelPage} className={`${styles.btn}`} style={{ width: "150px" }}>Sonraki Sayfa</button>
-            </div>
+
         </>
     )
 }
