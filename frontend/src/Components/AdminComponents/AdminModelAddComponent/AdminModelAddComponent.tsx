@@ -31,7 +31,7 @@ interface AddNewCarProps {
 
 
 
-function AdminModelAddComponent() {
+function AdminModelAddComponent({ cancelFunc }: any) {
     const { showToast } = useToastManagerContext();
     const { showConfirmation } = useConfirmContext();
 
@@ -91,17 +91,17 @@ function AdminModelAddComponent() {
                     <div className='container-fluid border my-4 p-0'>
                         <div className='row m-0 p-0'>
                             <div className='col-4 '>
-                                <Image URL={dummyImage} Width='600px'></Image>
+                                <Image URL={dummyImage} Width='500px'></Image>
                             </div>
                             <div className='col-8  p-0'>
                                 <div className='container-fluid h-100'>
                                     <div className='row'>
 
-                                        <div className={`col-6 border`}>
+                                        <div className={`col-6 `}>
                                             <div className='row text-center'><label htmlFor='brandName'>Marka <span className={styles.error}> * <ErrorMessage name="brandName" component="span" className={`${styles.error}`} /></span></label></div>
                                             <div className='row'><Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
                                         </div>
-                                        <div className={`col-6 border`}>
+                                        <div className={`col-6 `}>
                                             <div className='row text-center'><label htmlFor='modelName'>Model <span className={styles.error}> * <ErrorMessage name="modelName" component="span" className={`${styles.error}`} /></span> </label></div>
                                             <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
                                         </div>
@@ -110,7 +110,7 @@ function AdminModelAddComponent() {
                                     <div className='row'>
                                     </div>
                                     <div className='row'>
-                                        <div className={`col-4 border `}>
+                                        <div className={`col-4  `}>
                                             <div className='row text-center'><label htmlFor='fuelType.fuel'>Yakıt <span className={styles.error}> * <ErrorMessage name="fuelTypeId" component="span" className={`${styles.error}`} /></span> </label></div>
                                             <div className='row'>
                                                 <Field as="select" className={`${styles.inputs}`} name="fuelTypeId" id="fuelTypeId" >
@@ -188,7 +188,9 @@ function AdminModelAddComponent() {
                                     <div className='row border'>
                                         <div className={`col-12 justify-content-center`}>
                                             <div className='row text-center'>
-                                                <button type='submit' className={styles.btn}>Ekle</button>
+                                                <div className='col p-0'><button type='submit' className={styles.btn}>Ekle</button></div>
+                                                <div className='col p-0'><button onClick={cancelFunc} className={`${styles.addBtnCancel}`}>İptal Et</button></div>
+
 
                                             </div>
 
