@@ -87,3 +87,7 @@
 table {
     max-width: 100%;
 }
+
+.innerBG {
+    background-color: white;
+}

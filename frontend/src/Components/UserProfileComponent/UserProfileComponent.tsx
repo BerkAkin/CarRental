@@ -42,14 +42,15 @@ function UserProfileComponent() {
     return (
         <>
             {userInfo ? (
-                <>
+                <div className={`${styles.bgColor} container border my-2 p-3`}>
                     <Formik validationSchema={userProfileInfoValidationSchema} initialValues={userInfo} onSubmit={updateUserInfo} enableReinitialize>
-                        <div className="">
+                        <div>
+                            <div className="row">
+                                <h4 className="text-muted text-end">Yeniden Hoş Geldin, {userInfo.name} {userInfo.surname} !</h4>
+                            </div>
                             <div className="row ">
                                 <div className="col-12 ">
-                                    <div className="row mt-4">
-                                        <h4 className="text-muted">Yeniden Hoş Geldin, {userInfo.name} {userInfo.surname} !</h4>
-                                    </div>
+
                                     <Form>
                                         <div className='row mt-4 '>
                                             <div className='col-12'>E-Posta<span className={styles.error}> *</span>
@@ -76,7 +77,7 @@ function UserProfileComponent() {
                                             <label className={`${styles.label} mb-2`}>Üyelik Tarihi: {formatDate(userInfo.createdAt)}</label>
                                         </div>
                                         <div className='row mt-4 d-flex justify-content-center'>
-                                            <div className='col-12'>
+                                            <div className='col-12 my-4'>
                                                 <button className={`${styles.btn}`} type='submit'>Bilgilerimi Değiştir</button>
                                             </div>
                                         </div>
@@ -89,7 +90,7 @@ function UserProfileComponent() {
 
                     </Formik>
 
-                </>
+                </div>
 
             ) : (
                 <p>Bilgiler yükleniyor...</p>

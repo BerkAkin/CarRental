@@ -17,3 +17,24 @@
 .tableFont {
     font-size: 0.8rem;
 }
+
+
+.addBtn {
+    outline: none;
+    border: none;
+    background-color: #1e481a;
+    color: white;
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 5px;
+    width: 100%;
+    margin: 0;
+}
+
+.addBtn:hover {
+    background-color: #3f7c2c;
+}
+
+.innerBG {
+    background-color: white;
+}

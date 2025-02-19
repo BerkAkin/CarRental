@@ -60,7 +60,7 @@ function FavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, 
                     <div className='row '>
                         <div className='col-12 mb-3 ps-3'>
                             <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faBoltLightning}></FontAwesomeIcon>
-                            <span className={`${styles.priceStyling} ms-2`}>
+                            <span className={`${styles.priceStyling} ms-1`}>
                                 {price} TL + KDV <span style={{ color: "#7A7A7A" }}>/ay</span>
                             </span>
 

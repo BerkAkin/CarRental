@@ -111,7 +111,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
             <Formik initialValues={Item} validationSchema={modelValidationSchema} onSubmit={onSubmitHandler} enableReinitialize>
                 {({ handleSubmit }) => (
                     <>
-                        <table className={`${styles.tableFont} table-bordered table-hover table mt-2`}>
+                        <table className={`${styles.tableFont} table-hover table mt-2`}>
                             <thead>
                                 <tr>
                                     <th></th>
@@ -134,16 +134,16 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td className='col-1'><Image URL={dummyImage} Width='100px' /></td>
-                                    <td className='col'>
+                                    <td className='col-1 border'><Image URL={dummyImage} Width='115px' /></td>
+                                    <td className='col border'>
                                         <label htmlFor='brandName'><span className={styles.error}><ErrorMessage name="brandName" component="span" className={`${styles.error}`} /></span></label>
                                         <Field className={`${styles.inputs}`} name="brandName" id="brandName" />
                                     </td>
-                                    <td className='col'>
+                                    <td className='col border'>
                                         <label htmlFor='modelName'><span className={styles.error}><ErrorMessage name="modelName" component="span" className={`${styles.error}`} /> </span></label>
                                         <Field className={`${styles.inputs}`} name="modelName" id="modelName" />
                                     </td>
-                                    <td className='col-1'>
+                                    <td className='col-1 border'>
                                         <label htmlFor='fuelType.fuel'><span className={styles.error}><ErrorMessage name="fuelTypeId" component="span" className={`${styles.error}`} /></span></label>
                                         <Field as="select" className={`${styles.inputs}`} name="fuelType.id" id="fuelType.id" >
                                             {Fuels.map((fuel) => (
@@ -152,7 +152,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
                                                 </option>
                                             ))}
                                         </Field></td>
-                                    <td className='col-1'>
+                                    <td className='col-1 border'>
                                         <label htmlFor='gearType.gear'><span className={styles.error}><ErrorMessage name="gearTypeId" component="span" className={`${styles.error}`} /></span></label>
                                         <Field as="select" className={`${styles.inputs} `} name="gearType.id" id="gearType.id" >
                                             {Gears.map((gear) => (
@@ -162,7 +162,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
                                             ))}
                                         </Field>
                                     </td>
-                                    <td className='col-1'>
+                                    <td className='col-1 border'>
                                         <label htmlFor='carType.car'><span className={styles.error}><ErrorMessage name="carTypeId" component="span" className={`${styles.error}`} /></span></label>
                                         <Field as="select" className={`${styles.inputs}`} name="carType.id" id="carType.id" >
                                             {CarTypes.map((cartype) => (
@@ -173,37 +173,37 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
                                         </Field>
                                     </td>
 
-                                    <td className='col'>
+                                    <td className='col border'>
                                         <label htmlFor='personCount'><span className={styles.error}><ErrorMessage name="personCount" component="span" className={`${styles.error}`} /></span></label>
                                         <Field className={`${styles.inputs} text-center`} name="personCount" id="personCount" />
                                     </td>
-                                    <td className='col'>
+                                    <td className='col border'>
                                         <label htmlFor='luggageCount'><span className={styles.error}><ErrorMessage name="luggageCount" component="span" className={`${styles.error}`} /></span></label>
                                         <Field className={`${styles.inputs} text-center`} name="luggageCount" id="luggageCount" />
                                     </td>
-                                    <td className='col'>
+                                    <td className='col border'>
                                         <label htmlFor='doorCount'><span className={styles.error}><ErrorMessage name="doorCount" component="span" className={`${styles.error}`} /></span></label>
                                         <Field className={`${styles.inputs} text-center`} name="doorCount" id="doorCount" />
                                     </td>
-                                    <td className='col'>
+                                    <td className='col border'>
                                         <label htmlFor='price'><span className={styles.error}><ErrorMessage name="price" component="span" className={`${styles.error}`} /></span></label>
                                         <Field className={`${styles.inputs} text-center`} name="price" id="price" />
                                     </td>
-                                    <td className='col-2'>
+                                    <td className='col- border'>
                                         <label htmlFor='description'><span className={styles.error}><ErrorMessage name="description" component="span" className={`${styles.error}`} /></span></label>
                                         <Field as="textarea" className={`${styles.inputsTA}`} name="description" id="description" />
                                     </td>
-                                    <td className='col-1'>
+                                    <td className='col-1 border'>
 
                                         <label htmlFor='otherServices'><span className={styles.error}><ErrorMessage name="otherServices" component="span" className={`${styles.error}`} /></span></label>
                                         <Field as="textarea" className={`${styles.inputsTA}`} name="otherServices" id="otherServices" />
                                     </td>
-                                    <td className='col-1'>
+                                    <td className='col-1 border'>
 
                                         <label htmlFor='otherFeatures'><span className={styles.error}><ErrorMessage name="otherFeatures" component="span" className={`${styles.error}`} /></span></label>
                                         <Field as="textarea" className={`${styles.inputsTA}`} name="otherFeatures" id="otherFeatures" />
                                     </td>
-                                    <td className='col-1'>
+                                    <td className='col-1 border'>
                                         <button type='button' onClick={() => handleSubmit()} className={styles.btn}>Güncelle</button>
                                         <button onClick={() => onDeleteHandler(Item.id)} className={styles.deleteBtn}>Sil</button>
                                     </td>
