@@ -9,8 +9,8 @@ function AdminContactsComponent() {
 
     if (error) return <p>{error}</p>
     return (
-        <>
-            <table className={`${styles.tableFontSize} table-bordered table-striped table-hover table mt-2 `}>
+        <div className={`${styles.innerBG} my-2 border`}>
+            <table className={`${styles.tableFontSize} table-striped table-hover table mt-2 `}>
                 <thead>
                     <tr>
                         <th scope="col" className=" col-2">Ad Soyad</th>
@@ -26,11 +26,11 @@ function AdminContactsComponent() {
                         (contacts?.data.map((item: any, index: number) => (
 
                             <tr key={item.id}>
-                                <td className={`${styles.tableInfos}`}>{item.name} {item.surname}</td>
-                                <td className={`${styles.tableInfos}`}>{item.email}</td>
-                                <td className={`${styles.tableInfos}`}>{item.phone}</td>
-                                <td className={`${styles.tableInfos}`}>{item.permission}</td>
-                                <td className={`${styles.tableInfos}`}>{item.platform}</td>
+                                <td className={`${styles.tableInfos} border`}>{item.name} {item.surname}</td>
+                                <td className={`${styles.tableInfos} border`}>{item.email}</td>
+                                <td className={`${styles.tableInfos} border`}>{item.phone}</td>
+                                <td className={`${styles.tableInfos} border`}>{item.permission}</td>
+                                <td className={`${styles.tableInfos} border`}>{item.platform}</td>
                             </tr >
 
                         ))
@@ -40,11 +40,11 @@ function AdminContactsComponent() {
                         (<></>)}
                 </tbody>
             </table>
-            <div className='d-flex justify-content-end mt-4'>
+            <div className='d-flex justify-content-end my-4'>
                 <button onClick={handlePreviousPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
                 <button onClick={handleNextPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
             </div>
-        </>
+        </div>
     )
 }
 
