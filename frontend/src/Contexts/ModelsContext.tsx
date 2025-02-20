@@ -9,6 +9,7 @@ interface Model {
     data: [
         {
             id: number,
+            slug: string,
             carType: {
                 id: number,
                 car: string
@@ -78,6 +79,7 @@ export const ModelsContextProvider = ({ children }: any) => {
         try {
             const { data, status }: any = await apiService(endpoints.models + `?query=${search}&pageNumber=${page}`, "GET",)
             setModels(data);
+            console.log(data);
         } catch (error) {
             console.log(error);
             setError("Modeller yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");

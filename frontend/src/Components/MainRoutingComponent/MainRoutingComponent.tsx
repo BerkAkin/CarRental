@@ -53,7 +53,7 @@ function MainRoutingComponent() {
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/Models" element={<ModelsPage />}></Route>
-          <Route path="/Models/:id" element={<DetailContainer />} />
+          <Route path="/Models/:slug" element={<DetailContainer />} />
           <Route path="/About" element={<AboutPage />}></Route>
           <Route path="/FAQ" element={<FAQPage />}></Route>
           <Route path="/Contact" element={<ContactPage />}></Route>

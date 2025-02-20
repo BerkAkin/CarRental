@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -18,16 +19,17 @@ namespace WebApi.Services.GeneralServices.ModelService
 
         }
 
-        public virtual async Task AddAsync(ModelAddModel model)
+        public async Task AddAsync(ModelAddModel model)
         {
             ModelAddValidator validator = new ModelAddValidator();
             validator.ValidateAndThrow(model);
             var entity = _mapper.Map<Model>(model);
             try
             {
+                entity.Slug = entity.BrandName + '-' + entity.ModelName + '-' + RandomNumGen();
                 await _repository.AddAsync(entity);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
             }
@@ -35,12 +37,12 @@ namespace WebApi.Services.GeneralServices.ModelService
 
         }
 
-        public virtual async Task UpdateAsync(int id, ModelUpdateModel model)
+        public async Task UpdateAsync(string slug, ModelUpdateModel model)
         {
             ModelUpdateValidator validator = new ModelUpdateValidator();
             validator.ValidateAndThrow(model);
 
-            var entity = await _repository.GetByIdAsync(id);
+            var entity = await _repository.GetBySlugAsync(slug);
             if (entity == null)
             {
                 throw new KeyNotFoundException(ErrorMessages.GENERAL_UPDATE_FAIL);
@@ -48,9 +50,10 @@ namespace WebApi.Services.GeneralServices.ModelService
             _mapper.Map(model, entity);
             try
             {
+                entity.Slug = entity.BrandName + '-' + entity.ModelName + '-' + RandomNumGen();
                 await _repository.UpdateAsync(entity);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
             }
@@ -71,10 +74,10 @@ namespace WebApi.Services.GeneralServices.ModelService
             return (DTOData, totalRecords);
         }
 
-        public override async Task<ModelViewIdModel> GetByIdAsync(int id)
+        public async Task<ModelViewIdModel> GetByIdAsync(string slug)
         {
 
-            var data = await _repository.GetByIdAsync(id, query => query.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
+            var data = await _repository.GetBySlugAsync(slug, query => query.Include(m => m.CarType).Include(m => m.FuelType).Include(m => m.GearType));
             if (data is null)
             {
                 throw new KeyNotFoundException(ErrorMessages.MODEL_NOT_FOUND);
@@ -96,7 +99,32 @@ namespace WebApi.Services.GeneralServices.ModelService
             return (DTOData, totalRecords);
         }
 
+        public async Task DeleteAsync(string slug)
+        {
+            var data = await _repository.GetBySlugAsync(slug);
+            if (data is null)
+            {
+                throw new KeyNotFoundException(ErrorMessages.GENERAL_DELETE_FAIL);
+            }
+            try
+            {
+                await _repository.DeleteAsync(data);
+            }
+            catch (Exception)
+            {
+                throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
+            }
+        }
 
+
+
+        private string RandomNumGen()
+        {
+            Random r = new Random();
+            var x = r.Next(0, 1000000);
+            string s = x.ToString("000000");
+            return s;
+        }
 
 
     }

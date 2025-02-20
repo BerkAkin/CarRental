@@ -5,6 +5,7 @@ namespace WebApi.DTOs.Models
     public class ModelViewIdModel
     {
         public int Id { get; set; }
+        public string Slug { get; set; }
         public CarType CarType { get; set; }
         public FuelType FuelType { get; set; }
         public GearType GearType { get; set; }

@@ -16,6 +16,7 @@ import Icon from '../../Components/Icon/Icon';
 
 interface ModelDetailsProps {
     id: number,
+    slug: string,
     carType: {
         id: number,
         car: string
@@ -45,14 +46,14 @@ interface ModelDetailsProps {
 
 function ModelDetailPage() {
 
-    const { id } = useParams();
+    const { slug } = useParams();
     const [modelDetail, setModelDetail] = useState<ModelDetailsProps>();
     const [error, setError] = useState<string>("");
 
     useEffect(() => {
         const getDetail = async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.modelDetail + id, "GET");
+                const { data, status }: any = await apiService(endpoints.modelDetail + slug, "GET");
                 setModelDetail(data);
             } catch (error) {
                 setError("Model detaylarını görüntülerken bir hata meydana geldi. Lütfen yöneticinize başvurun");

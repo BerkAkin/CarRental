@@ -6,6 +6,7 @@ namespace WebApi.DTOs.Models
     {
 
         public int Id { get; set; }
+        public string Slug { get; set; }
         public CarType CarType { get; set; }
         public GearType GearType { get; set; }
         public string BrandName { get; set; }

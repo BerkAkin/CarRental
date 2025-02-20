@@ -29,9 +29,6 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
 
 
 
-
-
-
         public async Task<(IEnumerable<Model>, int TotalRecords)> GetAllSummaryPaginatedAsync(int pageNumber, int pageSize, Func<IQueryable<Model>, IQueryable<Model>> func = null)
         {
 
@@ -47,6 +44,20 @@ namespace WebApi.Repositories.GeneralRepositories.ModelRepository
             var paginatedData = await query.OrderByDescending(m => m.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
             return (paginatedData, totalRecords);
+
+        }
+
+
+        public async Task<Model> GetBySlugAsync(string slug, Func<IQueryable<Model>, IQueryable<Model>> include = null)
+        {
+            IQueryable<Model> query = _context.Set<Model>().Where(e => EF.Property<string>(e, "Slug") == slug);
+
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            return await query.FirstOrDefaultAsync();
 
         }
 
