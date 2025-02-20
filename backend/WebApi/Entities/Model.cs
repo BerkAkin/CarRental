@@ -3,6 +3,7 @@ namespace WebApi.Entities
     public class Model
     {
         public int Id { get; set; }
+        public string Slug { get; set; }
         public int FuelTypeId { get; set; }
         public FuelType FuelType { get; set; }
         public int GearTypeId { get; set; }
