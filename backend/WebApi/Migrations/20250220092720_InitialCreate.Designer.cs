@@ -12,7 +12,7 @@ using WebApi.DbOperations;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(CRDbContext))]
-    [Migration("20250213171307_InitialCreate")]
+    [Migration("20250220092720_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -338,6 +338,10 @@ namespace WebApi.Migrations
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()

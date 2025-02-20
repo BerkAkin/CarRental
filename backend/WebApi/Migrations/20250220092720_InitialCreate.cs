@@ -152,6 +152,7 @@ namespace WebApi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FuelTypeId = table.Column<int>(type: "int", nullable: false),
                     GearTypeId = table.Column<int>(type: "int", nullable: false),
                     CarTypeId = table.Column<int>(type: "int", nullable: false),
