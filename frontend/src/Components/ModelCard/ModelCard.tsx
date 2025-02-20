@@ -14,6 +14,7 @@ import { StatusHandler } from '../../common/StatusHandler';
 
 interface ModelCardProps {
     id: number;
+    slug: string;
     image: string;
     type: string;
     brandName: string;
@@ -26,7 +27,7 @@ interface ModelCardProps {
 }
 
 
-function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount, doorCount, price }: ModelCardProps) {
+function ModelCard({ id, slug, image, type, brandName, personCount, gear, luggageCount, doorCount, price }: ModelCardProps) {
     const { showToast } = useToastManagerContext();
 
     const addFavorite = async (id: number) => {
@@ -48,7 +49,7 @@ function ModelCard({ id, image, type, brandName, personCount, gear, luggageCount
                         <button onClick={() => addFavorite(id)} className={`${styles.favButton} `}>★</button>
                     </div>
                     <div className={`${styles.imgHover} row `}>
-                        <ListElement href={`Models/${id}`} text={<Image URL={dummyImg} Width='250px'></Image>} />
+                        <ListElement href={`Models/${slug}`} text={<Image URL={dummyImg} Width='250px'></Image>} />
                     </div>
 
                 </div>
