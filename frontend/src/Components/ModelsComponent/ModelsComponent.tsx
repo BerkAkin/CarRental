@@ -65,6 +65,7 @@ function ModelsComponent() {
                                         personCount={model.personCount}
                                         image={model.imageDirectory}
                                         id={model.id}
+                                        slug={model.slug}
                                     />
                                 </div>
                             ))}
