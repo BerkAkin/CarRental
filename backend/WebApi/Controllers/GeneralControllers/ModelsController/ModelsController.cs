@@ -66,11 +66,11 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
 
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ModelViewIdModel>> GetById(int id)
+        [HttpGet("{slug}")]
+        public async Task<ActionResult<ModelViewIdModel>> GetById(string slug)
         {
 
-            var data = await _service.GetByIdAsync(id);
+            var data = await _service.GetByIdAsync(slug);
             return Ok(data);
 
 
@@ -89,22 +89,22 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         }
 
         [Authorize(Roles = "1")]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync(int id)
+        [HttpDelete("{slug}")]
+        public async Task<ActionResult> DeleteAsync(string slug)
         {
 
-            await _service.DeleteAsync(id);
+            await _service.DeleteAsync(slug);
             return Ok("Araç modeli silindi");
 
 
         }
 
         [Authorize(Roles = "1")]
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateAsync(int id, ModelUpdateModel model)
+        [HttpPut("{slug}")]
+        public async Task<ActionResult> UpdateAsync(string slug, ModelUpdateModel model)
         {
 
-            await _service.UpdateAsync(id, model);
+            await _service.UpdateAsync(slug, model);
             return Ok("Araç modeli güncellendi");
 
         }
