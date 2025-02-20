@@ -110,8 +110,9 @@ namespace WebApi.DbOperations
                 model.Property(m => m.OtherServices).IsRequired().HasConversion(v => string.Join(",", v), v => v.Split(",", StringSplitOptions.RemoveEmptyEntries));
                 model.Property(m => m.OtherFeatures).IsRequired().HasConversion(v => string.Join(",", v), v => v.Split(",", StringSplitOptions.RemoveEmptyEntries));
                 model.Property(m => m.ImageDirectory).IsRequired().HasMaxLength(500);
-                model.Property(uc => uc.CreatedAt).HasDefaultValueSql("GETDATE()");
-                model.Property(uc => uc.UpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();
+                model.Property(m => m.CreatedAt).HasDefaultValueSql("GETDATE()");
+                model.Property(m => m.UpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();
+                model.Property(m => m.Slug).IsRequired();
 
                 model.HasOne(m => m.FuelType).WithMany().HasForeignKey(m => m.FuelTypeId).OnDelete(DeleteBehavior.Restrict);
                 model.HasOne(m => m.GearType).WithMany().HasForeignKey(m => m.GearTypeId).OnDelete(DeleteBehavior.Restrict);
