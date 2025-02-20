@@ -14,6 +14,7 @@ import modelValidationSchema from '../AdminModelAddComponent/ModelValidationSche
 interface ItemProp {
     Item: {
         id: number,
+        slug: string,
         carType: {
             id: number,
             car: string
@@ -63,12 +64,14 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
 
 
     const onSubmitHandler = async (values: any) => {
+        console.log(values);
         const otherServicesArray = typeof values.otherServices === 'string' ? values.otherServices.split(',') : values.otherServices;
-        const otherFeaturesArray = typeof values.otherFeatures === 'string' ? values.otherFeatures.split(',') : values.otherServices;
+        const otherFeaturesArray = typeof values.otherFeatures === 'string' ? values.otherFeatures.split(',') : values.otherFeatures;
         const dataToSend = {
             fuelTypeId: Number(values.fuelType.id),
             gearTypeId: Number(values.gearType.id),
             carTypeId: Number(values.carType.id),
+            slug: values.slug,
             brandName: values.brandName,
             modelName: values.modelName,
             description: values.description,
@@ -82,7 +85,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
         };
         showConfirmation("Model güncellenecektir. Devam edilsin mi?", async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.models + `${values.id}`, "PUT", dataToSend)
+                const { data, status }: any = await apiService(endpoints.models + `${values.slug}`, "PUT", dataToSend)
                 StatusHandler(status, data, showToast)
             } catch (error) {
                 const { status, message }: any = error;
@@ -93,10 +96,10 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
 
     }
 
-    const onDeleteHandler = async (id: number) => {
+    const onDeleteHandler = async (slug: string) => {
         showConfirmation("Seçilen model silinecektir. Devam edilsin mi?", async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.models + id, "DELETE");
+                const { data, status }: any = await apiService(endpoints.models + `/${slug}`, "DELETE");
                 StatusHandler(status, data, showToast)
             } catch (error) {
                 const { status, message }: any = error;
@@ -205,7 +208,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
                                     </td>
                                     <td className='col-1 border'>
                                         <button type='button' onClick={() => handleSubmit()} className={styles.btn}>Güncelle</button>
-                                        <button onClick={() => onDeleteHandler(Item.id)} className={styles.deleteBtn}>Sil</button>
+                                        <button onClick={() => onDeleteHandler(Item.slug)} className={styles.deleteBtn}>Sil</button>
                                     </td>
                                 </tr>
                             </tbody>
