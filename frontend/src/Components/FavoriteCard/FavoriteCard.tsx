@@ -5,7 +5,6 @@ import Icons from '../../assets/icons/icons';
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListElement from '../ListElement/ListElement';
-import dummyImg from "../../assets/images/AboutUsImages/img";
 import Icon from '../Icon/Icon';
 
 
@@ -18,10 +17,11 @@ interface favoriteCardProps {
     modelName: string,
     personCount: number,
     price: string,
-    imageDirectory: string
+    imageDirectory: string,
+    slug: string,
 }
 
-function FavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, modelName, personCount, price, imageDirectory }: favoriteCardProps) {
+function FavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, modelName, personCount, price, imageDirectory, slug }: favoriteCardProps) {
     return (
         <div>
             <div className={`${styles.cardBg} border`}>
@@ -30,13 +30,13 @@ function FavoriteCard({ removeFavorites, modelId, carType, gearType, brandName, 
                         <button className={styles.favButton} onClick={() => removeFavorites(modelId)}>X</button>
                     </div>
                     <div className={`row`}>
-                        <ListElement href={`Models/${modelId}`} text={<Image URL={dummyImg.img} Width='310px'></Image>} />
+                        <ListElement href={`Models/${slug}`} text={<Image URL={imageDirectory} Width='310px'></Image>} />
                     </div>
                 </div>
                 <div className='container mt-2'>
                     <span className={`${styles.typeFontColor} d-flex align-items-center'`}>{carType}</span>
                     <div className={`${styles.brandColor} `}>
-                        <ListElement href={`Models/${modelId}`} text={[brandName, " ", modelName]} />
+                        <ListElement href={`Models/${slug}`} text={[brandName, " ", modelName]} />
                     </div>
                 </div>
 
