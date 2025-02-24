@@ -1,8 +1,6 @@
 import styles from "./styles.module.css";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useEffect } from "react";
-import logo from '../../assets/logos/logo-flexper.png';
 import Image from "../../Components/Image/Image";
 import apiService from "../../api/apiService";
 import { endpoints } from "../../api/apiConfig";
@@ -59,7 +57,7 @@ function ResetPasswordPage() {
             <div className='row text-center d-flex justify-content-center'>
                 <div className="row">
                     <div className="col pt-1">
-                        <Image URL={logo} Width='200px'></Image>
+                        <Image URL={"/static/logo.png"} Width='200px'></Image>
                     </div>
                 </div>
             </div>
