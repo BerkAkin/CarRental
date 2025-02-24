@@ -10,12 +10,14 @@ interface ImageParams {
 }
 
 function Image({ URL, Width, Height, Alt, Round }: ImageParams) {
+  const baseUrl = process.env.REACT_APP_BASE_API_URL;
+  const imageUrl = `${baseUrl}${URL}`;
   const ImageProps = {
     "--img-roundness": Round ? "0.5%" : ""
   } as React.CSSProperties;
   return (
     <>
-      <img className={styles.roundedImage} style={ImageProps} src={URL} width={Width} height={Height} alt={Alt}></img>
+      <img className={styles.roundedImage} style={ImageProps} src={imageUrl} width={Width} height={Height} alt={Alt}></img>
     </>
   )
 }
