@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from './styles.module.css';
 import validationSchema from './ValidationSchema';
 import Image from '../../Components/Image/Image';
-import img from '../../assets/logos/logo-flexper.png';
 import ListElement from '../../Components/ListElement/ListElement';
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
@@ -78,7 +77,7 @@ function ContactPage() {
                                 <div className={`${styles.headerColoring} col-3  d-flex flex-column justify-content-center`}>
                                     <div className='row'>
                                         <div className='text-center'>
-                                            <Image Width='250' URL={img} />
+                                            <Image Width='250' URL={"/static/logo.png"} />
                                         </div>
                                     </div>
                                     <div className='row'>
