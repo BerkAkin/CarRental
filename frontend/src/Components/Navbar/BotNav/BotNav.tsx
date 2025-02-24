@@ -1,7 +1,6 @@
 import styles from './styles.module.css'
 import ListElement from '../../ListElement/ListElement'
 import Image from '../../Image/Image';
-import flexperLogo from '../../../assets/logos/logo-flexper.png';
 import { useEffect, useState } from 'react';
 import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
@@ -48,7 +47,7 @@ function BotNav({ openModal }: BotNavProps) {
         <div className='ms-5 h-100 col-6'>
           <div className='row h-100 d-flex container-fluid '>
             <div className='col-2 align-items-center d-flex  ps-0'>
-              <Image URL={flexperLogo} Width="160" Height="40" />
+              <Image URL={"/static/logo.png"} Width="160" Height="40" />
             </div>
             <div className='col-10 d-flex align-items-center justify-content-evenly  text-center'>
               <ListElement color="#1A2B48" text='ANASAYFA' href='' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
