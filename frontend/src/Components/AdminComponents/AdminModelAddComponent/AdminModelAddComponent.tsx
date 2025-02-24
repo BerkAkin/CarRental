@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from "./styles.module.css"
 import { useTypesContext } from '../../../Contexts/TypesContext'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import Image from '../../Image/Image'
 import apiService from '../../../api/apiService'
 import { endpoints } from '../../../api/apiConfig'
-import dummyImage from '../../../assets/images/LandingImages/Mach-e.1920x1080-1920x1080.jpg'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
@@ -34,6 +33,24 @@ interface AddNewCarProps {
 function AdminModelAddComponent({ cancelFunc }: any) {
     const { showToast } = useToastManagerContext();
     const { showConfirmation } = useConfirmContext();
+    const { gears, fuels, carTypes } = useTypesContext();
+    const [ImageDirectory, SetImageDirectory] = useState();
+
+    const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const { data } = await apiService(endpoints.uploadModelImage, "POST", formData, "", true);
+            SetImageDirectory(data.image);
+
+            showToast("Görsel başarıyla yüklendi!", "success");
+        } catch (error) {
+            showToast("Görsel yüklenirken hata oluştu!", "error");
+        }
+    }
 
     const addNewCarSubmitHandler = async (values: AddNewCarProps) => {
 
@@ -48,9 +65,9 @@ function AdminModelAddComponent({ cancelFunc }: any) {
             luggageCount: Number(values.luggageCount),
             doorCount: Number(values.doorCount),
             price: Number(values.price),
-            otherServices: values.otherServices.split(",") || [],
-            otherFeatures: values.otherFeatures.split(",") || [],
-            imageDirectory: values.imageDirectory,
+            otherServices: values.otherServices,
+            otherFeatures: values.otherFeatures,
+            imageDirectory: ImageDirectory,
         };
 
         showConfirmation("Oluşturulan model eklenecektir. Devam edilsin mi?", async () => {
@@ -81,7 +98,7 @@ function AdminModelAddComponent({ cancelFunc }: any) {
         imageDirectory: ""
     }
 
-    const { gears, fuels, carTypes } = useTypesContext()
+
     return (
         <div>
             <Formik validationSchema={modelValidationSchema} initialValues={initialValuesOfAddCar} onSubmit={addNewCarSubmitHandler}>
@@ -91,7 +108,17 @@ function AdminModelAddComponent({ cancelFunc }: any) {
                     <div className='container-fluid border my-4 p-0'>
                         <div className='row m-0 p-0'>
                             <div className='col-4 '>
-                                <Image URL={dummyImage} Width='500px'></Image>
+                                <Image URL={""} Width='500px'></Image>
+                                <Field type="file" accept="image/*" name="imageDirectory">
+                                    {({ form }: any) => (
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(event) => handleImageUpload(event)}
+                                            className={`${styles.inputs} text-center`}
+                                        />
+                                    )}
+                                </Field>
                             </div>
                             <div className='col-8  p-0'>
                                 <div className='container-fluid h-100'>
