@@ -23,12 +23,31 @@ function AdminModelsComponent({ addNewFunc }: any) {
                     models && gears && carTypes && fuels ?
                         (
                             <>
-                                {models?.data.map((item: any) => (
-                                    <div key={item.id}>
-                                        <AdminModelEditCardComponent Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
-                                    </div>
+                                <table className={`${styles.tableFont} table-hover table mt-2`}>
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Marka</th>
+                                            <th>Model</th>
+                                            <th>Yakıt</th>
+                                            <th>Şanzıman</th>
+                                            <th>Tip</th>
+                                            <th className='text-center'>Kişi</th>
+                                            <th className='text-center'>Bagaj</th>
+                                            <th className='text-center'>Kapı</th>
+                                            <th className='text-center'>Ücret</th>
+                                            <th>Açıklama</th>
+                                            <th>Diğer Hizmetler</th>
+                                            <th>Diğer Özellikler</th>
+                                            <th>İşlemler</th>
+                                        </tr>
+                                    </thead>
 
-                                ))}
+                                    {models?.data.map((item: any) => (
+                                        <AdminModelEditCardComponent Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
+
+                                    ))}
+                                </table>
                             </>
                         )
                         :

@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Common;
 using WebApi.DTOs.Models;
@@ -24,9 +25,9 @@ namespace WebApi.Services.GeneralServices.ModelService
             ModelAddValidator validator = new ModelAddValidator();
             validator.ValidateAndThrow(model);
             var entity = _mapper.Map<Model>(model);
+            entity.Slug = entity.BrandName + '-' + entity.ModelName + '-' + RandomNumGen();
             try
             {
-                entity.Slug = entity.BrandName + '-' + entity.ModelName + '-' + RandomNumGen();
                 await _repository.AddAsync(entity);
             }
             catch (Exception)
@@ -37,12 +38,12 @@ namespace WebApi.Services.GeneralServices.ModelService
 
         }
 
-        public async Task UpdateAsync(string slug, ModelUpdateModel model)
+        public async Task UpdateAsync(ModelUpdateModel model)
         {
             ModelUpdateValidator validator = new ModelUpdateValidator();
             validator.ValidateAndThrow(model);
 
-            var entity = await _repository.GetBySlugAsync(slug);
+            var entity = await _repository.GetBySlugAsync(model.Slug);
             if (entity == null)
             {
                 throw new KeyNotFoundException(ErrorMessages.GENERAL_UPDATE_FAIL);
@@ -114,6 +115,44 @@ namespace WebApi.Services.GeneralServices.ModelService
             {
                 throw new DatabaseException(ErrorMessages.DATABASE_ERROR);
             }
+        }
+
+
+        public async Task<string> UploadImage(IFormFile file)
+        {
+            if (file is null || file.Length == 0)
+            {
+                throw new DatabaseException("Dosya Seçilemedi");
+            }
+
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+            var extension = Path.GetExtension(file.FileName).ToLower();
+
+            if (!allowedExtensions.Contains(extension))
+            {
+                throw new DatabaseException("Sadece JPG, PNG veya WebP dosyaları yükleyebilirsiniz.");
+            }
+
+            if (file.Length > 5 * 1024 * 1024)
+            {
+                throw new DatabaseException("Dosya boyutu maksimum 5MB olabilir.");
+            }
+
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            var url = $"/uploads/{fileName}";
+            return url;
         }
 
 

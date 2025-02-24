@@ -107,8 +107,8 @@ namespace WebApi.DbOperations
                 model.Property(m => m.PersonCount).IsRequired();
                 model.Property(m => m.LuggageCount).IsRequired();
                 model.Property(m => m.DoorCount).IsRequired();
-                model.Property(m => m.OtherServices).IsRequired().HasConversion(v => string.Join(",", v), v => v.Split(",", StringSplitOptions.RemoveEmptyEntries));
-                model.Property(m => m.OtherFeatures).IsRequired().HasConversion(v => string.Join(",", v), v => v.Split(",", StringSplitOptions.RemoveEmptyEntries));
+                model.Property(m => m.OtherServices).IsRequired();
+                model.Property(m => m.OtherFeatures).IsRequired();
                 model.Property(m => m.ImageDirectory).IsRequired().HasMaxLength(500);
                 model.Property(m => m.CreatedAt).HasDefaultValueSql("GETDATE()");
                 model.Property(m => m.UpdatedAt).HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();

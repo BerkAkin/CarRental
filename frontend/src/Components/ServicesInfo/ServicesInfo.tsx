@@ -1,5 +1,4 @@
 import ServiceCard from './ServiceCard/ServiceCard'
-import img from '../../assets/images/ServiceImages/images'
 import Image from '../../Components/Image/Image'
 
 
@@ -29,7 +28,7 @@ function ServicesInfo({ ServicesLeft, ServicesRight }: serviceInfoProps) {
                     </div>
 
                     <div className='col-6 d-flex align-items-center '>
-                        <div className='container-fluid '><Image URL={img.img} Width="620px" Height="500" /></div>
+                        <div className='container-fluid '><Image URL={"/static/service.png"} Width="620px" Height="500" /></div>
                     </div>
 
                     <div className='col-3'>

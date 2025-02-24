@@ -100,13 +100,21 @@ namespace WebApi.Controllers.GeneralControllers.ModelsController
         }
 
         [Authorize(Roles = "1")]
-        [HttpPut("{slug}")]
-        public async Task<ActionResult> UpdateAsync(string slug, ModelUpdateModel model)
+        [HttpPut]
+        public async Task<ActionResult> UpdateAsync(ModelUpdateModel model)
         {
 
-            await _service.UpdateAsync(slug, model);
+            await _service.UpdateAsync(model);
             return Ok("Araç modeli güncellendi");
 
+        }
+
+
+        [HttpPost("uploadImage")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            var data = await _service.UploadImage(file);
+            return Ok(new { image = data });
         }
 
 

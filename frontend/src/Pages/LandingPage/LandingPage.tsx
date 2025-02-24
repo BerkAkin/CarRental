@@ -46,8 +46,8 @@ function LandingPage() {
     <div className={`${style.innerContainerSizing} pt-5`}>
 
       <LandingInfo Text={mainText} />
-      <WhyInfo ImgURL="image1.jpg" Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
-      <WhyInfo ImgURL="image2.jpg" InfoBars={groupedData[1] || []} Align={true} />
+      <WhyInfo ImgURL="/static/whyone.jpg" Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
+      <WhyInfo ImgURL="/static/whytwo.jpg" InfoBars={groupedData[1] || []} Align={true} />
       <ServicesInfo ServicesLeft={groupedService[0] || []} ServicesRight={groupedService[1] || []} />
 
       <div className='my-3 pt-5'>

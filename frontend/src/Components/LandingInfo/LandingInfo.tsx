@@ -1,9 +1,7 @@
 import React from 'react'
 import Image from '../../Components/Image/Image'
 import styles from './styles.module.css'
-import images from '../../assets/images/LandingImages/images';
 import ListElement from '../../Components/ListElement/ListElement';
-import ToastMessage from '../ToastMessage/ToastMessage';
 
 interface landingInfoProps {
     Text: string[];
@@ -31,7 +29,7 @@ function LandingInfo({ Text }: landingInfoProps) {
                         </div>
                     </div>
                     <div className='col-8'>
-                        <Image URL={images.img} Width="1230px" Height="690px" />
+                        <Image URL={"/static/landing.jpg"} Width="1230px" Height="690px" />
                     </div>
                 </div>
             </div>

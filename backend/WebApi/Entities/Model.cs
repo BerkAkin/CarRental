@@ -17,8 +17,8 @@ namespace WebApi.Entities
         public int LuggageCount { get; set; }
         public int DoorCount { get; set; }
         public int Price { get; set; }
-        public string[] OtherServices { get; set; }
-        public string[] OtherFeatures { get; set; }
+        public string OtherServices { get; set; }
+        public string OtherFeatures { get; set; }
         public string ImageDirectory { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

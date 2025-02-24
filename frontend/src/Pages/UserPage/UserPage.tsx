@@ -33,7 +33,8 @@ interface FavoriteModels {
     modelName: string,
     personCount: number,
     price: string,
-    imageDirectory: string
+    imageDirectory: string,
+    slug: string,
 }
 
 function UserPage() {
@@ -151,7 +152,7 @@ function UserPage() {
                                                         <FavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
                                                             brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
                                                             imageDirectory={favorite.imageDirectory} modelName={favorite.modelName} personCount={favorite.personCount}
-                                                            price={favorite.price}
+                                                            price={favorite.price} slug={favorite.slug}
                                                         />
                                                     </div>
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from "./styles.module.css"
 import Image from '../Image/Image';
-import icon from '../../assets/icons/favicon.png'
 
 interface ToastMessageProps {
     Message: string;
@@ -28,7 +27,7 @@ function ToastMessage({ Message, Type }: ToastMessageProps) {
                         <div className='col-3'>
                             <div className={`${styles.toastInnerContainer} row h-100`}>
                                 <div style={TMIcon} className={`${styles.toastIcon} border-ends col-2 d-flex align-items-center justify-content-center`}>
-                                    <Image URL={icon} Width='40' />
+                                    <Image URL={"/static/favicon.png"} Width='40' />
                                 </div>
                                 <div style={TMType} className={`${styles.toastBg} col-10 d-flex align-items-center justify-content-center`}>
                                     <span> {Message}</span>
