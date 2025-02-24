@@ -1,7 +1,5 @@
-import React from 'react'
 import styles from './styles.module.css'
 import Image from '../Image/Image';
-import img from '../../assets/images/LandingImages/Mach-e.1920x1080-1920x1080.jpg'
 import CategoryPill from '../CategoryPill/CategoryPill';
 import ListElement from '../ListElement/ListElement';
 
@@ -10,7 +8,6 @@ interface BlogCardProps {
     ImageUrl: string;
     Title: string;
     Description: string;
-    /*  date için backend yazıldığında burası değişip date nesnesi olacak ve api isteğinden dönen cevapta spread operatörleriyle Date:new Date(post.date)*/
     Date: string;
 }
 
@@ -20,7 +17,7 @@ function BlogCard({ Id, ImageUrl, Title, Description, Date }: BlogCardProps) {
             <div className={`${styles.cardBg} container border`}>
                 <div className={`${styles.cardInner} row`}>
                     <div className='col-4 border-end overflow-hidden'>
-                        <Image URL={img} Width='380' />
+                        <Image URL={""} Width='380' />
                     </div>
                     <div className='col-8'>
                         <div className='row h-25'>
