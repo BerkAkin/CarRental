@@ -126,7 +126,7 @@ namespace WebApi.DbOperations
                 };
 
                 var Models = new List<Model>{
-                    new Model{Slug ="toyota-corolla-136241",BrandName = "Toyota",ModelName = "Corolla",Description = "Reliable and fuel-efficient compact car.",PersonCount = 5,LuggageCount = 3,DoorCount = 4,Price = 20000,FuelTypeId = 1, GearTypeId = 1,CarTypeId = 1, OtherServices = new[] { "Roadside Assistance", "Free Delivery" },OtherFeatures = new[] { "Air Conditioning", "Bluetooth" },ImageDirectory = "images/toyota_corolla.jpg",CreatedAt = DateTime.Now,UpdatedAt = DateTime.Now},
+                    new Model{Slug ="toyota-corolla-136241",BrandName = "Toyota",ModelName = "Corolla",Description = "Reliable and fuel-efficient compact car.",PersonCount = 5,LuggageCount = 3,DoorCount = 4,Price = 20000,FuelTypeId = 1, GearTypeId = 1,CarTypeId = 1, OtherServices = "Roadside Assistance,Free Delivery",OtherFeatures = "Air Conditioning,Bluetooth" ,ImageDirectory = "images/toyota_corolla.jpg",CreatedAt = DateTime.Now,UpdatedAt = DateTime.Now},
                 };
 
                 var Favorites = new List<UserFavorite>{
