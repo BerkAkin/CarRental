@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styles from './styles.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import loginValidationSchema from './LoginValidationSchema';
-import logo from '../../assets/logos/logo-flexper.png';
 import Image from '../Image/Image';
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
@@ -108,7 +107,7 @@ function LoginComponent() {
                                     </div>
                                     <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
                                         <div>
-                                            <Image URL={logo} Width='150px'></Image>
+                                            <Image URL={"/static/logo.png"} Width='150px'></Image>
                                         </div>
 
                                     </div>
