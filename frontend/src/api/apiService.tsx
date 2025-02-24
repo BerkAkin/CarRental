@@ -1,9 +1,11 @@
 import axios from "axios";
-import { BASE_URL, endpoints } from "./apiConfig";
+import { endpoints } from "./apiConfig";
 
 
 let pendingRequests: any[] = [];
 let isRefreshing = false;
+
+const BASE_URL = process.env.REACT_APP_BASE_API_URL;
 
 async function refreshToken() {
     try {
@@ -21,15 +23,22 @@ async function refreshToken() {
 }
 
 
-async function apiService(endpoint: string, method: string = "GET", data: any = null, params: string = "") {
+async function apiService(endpoint: string, method: string = "GET", data: any = null, params: string = "", multipart?: boolean) {
 
 
     const url = `${BASE_URL}${endpoint}${params}`;
     const token = localStorage.getItem("accessToken") || "";
 
-    const headers: Record<string, string> = {
+
+    let headers: Record<string, string> = {
         "Content-Type": "application/json",
     };
+
+    if (multipart) {
+        headers = {
+            "Content-Type": "multipart/form-data",
+        };
+    }
 
     if (token) {
         headers["Authorization"] = `Bearer ${token}`;
