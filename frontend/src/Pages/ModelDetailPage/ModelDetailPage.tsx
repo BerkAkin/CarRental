@@ -36,10 +36,8 @@ interface ModelDetailsProps {
     luggageCount: number,
     doorCount: number,
     price: number,
-    otherServices: [
-    ],
-    otherFeatures: [
-    ],
+    otherServices: string
+    otherFeatures: string,
     imageDirectory: string
 }
 
@@ -49,6 +47,8 @@ function ModelDetailPage() {
     const { slug } = useParams();
     const [modelDetail, setModelDetail] = useState<ModelDetailsProps>();
     const [error, setError] = useState<string>("");
+    const otherFeatures = modelDetail?.otherFeatures.split(",").map(service => service.trim());
+    const otherServices = modelDetail?.otherServices.split(",").map(service => service.trim());
 
     useEffect(() => {
         const getDetail = async () => {
@@ -171,7 +171,7 @@ function ModelDetailPage() {
                                 </div>
                                 <div className='row'>
                                     <div className='container mt-1'>
-                                        {modelDetail?.otherFeatures.map((item, key) => (
+                                        {otherFeatures?.map((item, key) => (
                                             <div className='row' key={key}>
                                                 <div className='col-1'>
                                                     <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
@@ -191,7 +191,7 @@ function ModelDetailPage() {
                                 <div className='row'>
                                     <div className='container mt-1'>
                                         <div className='row'>
-                                            {modelDetail?.otherServices.map((item, key) => (
+                                            {otherServices?.map((item, key) => (
                                                 <div className='row' key={key}>
                                                     <div className='col-1'>
                                                         <GreenCheck width="15" height="15" />
