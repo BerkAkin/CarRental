@@ -2,7 +2,6 @@ import styles from './styles.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import registerValidationSchema from './RegisterValidationSchema';
 import Image from '../Image/Image';
-import logo from '../../assets/logos/logo-flexper.png';
 import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
@@ -62,7 +61,7 @@ function RegisterComponent() {
                                         </div>
                                         <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
                                             <div>
-                                                <Image URL={logo} Width='150px'></Image>
+                                                <Image URL={"/static/logo.png"} Width='150px'></Image>
                                             </div>
 
                                         </div>
