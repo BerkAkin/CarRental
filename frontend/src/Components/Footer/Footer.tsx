@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './styles.module.css'
 import Image from '../Image/Image';
-import logo from '../../assets/logos/logo-flexper.png'
 import ListComponent from './List/ListComponent';
 
 function Footer() {
@@ -42,7 +41,7 @@ function Footer() {
         <footer className="container py-5 bg-light">
           <div className='row mb-5'>
             <div className='col-3 justify-content-center d-flex '>
-              <Image URL={logo} Width="200" Height="50" />
+              <Image URL={"/static/logo.png"} Width="200" Height="50" />
             </div>
           </div>
           <div className='row text-center'>
