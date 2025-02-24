@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.DbOperations;
 using WebApi.Middlewares;
@@ -48,6 +49,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 
@@ -61,11 +63,27 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseRouting();
+
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
+
+
+
+app.UseStaticFiles();
+void AddStaticFiles(string folder)
+{
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.WebRootPath, folder)),
+        RequestPath = $"/{folder}"
+    });
+}
+AddStaticFiles("static");
+AddStaticFiles("uploads");
 
 
 using (var scope = app.Services.CreateScope())
