@@ -29,10 +29,8 @@ interface Model {
             luggageCount: number,
             doorCount: number,
             price: number,
-            otherServices: [
-            ],
-            otherFeatures: [
-            ],
+            otherServices: string,
+            otherFeatures: string,
             imageDirectory: string,
         }
     ];
