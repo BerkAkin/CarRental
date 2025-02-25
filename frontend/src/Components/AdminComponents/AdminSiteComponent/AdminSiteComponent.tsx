@@ -36,7 +36,7 @@ interface SettingsServicesTextProps {
 
 function AdminSiteComponent() {
 
-    const { error, settings } = useSiteSettingsContext();
+    const { error, settings, fetchSettings } = useSiteSettingsContext();
     const { showToast } = useToastManagerContext();
     const { showConfirmation } = useConfirmContext();
     const [icons, setIcons] = useState<ISettingsServiceTextIcons[] | null>(null);
@@ -48,6 +48,7 @@ function AdminSiteComponent() {
                 const dataToSend = { Text: values.text };
                 const { data, status }: any = await apiService(endpoints.mainText + `${values.id}`, "PUT", dataToSend);
                 StatusHandler(status, data, showToast)
+                fetchSettings();
             } catch (error) {
                 const { status, message }: any = error;
                 StatusHandler(status, message, showToast)
@@ -64,7 +65,8 @@ function AdminSiteComponent() {
             try {
                 const dataToSend = { Title: values.title, Content: values.content, IconId: values.icon.id }
                 const { data, status }: any = await apiService(endpoints.serviceText + `${values.id}`, "PUT", dataToSend);
-                StatusHandler(status, data, showToast)
+                StatusHandler(status, data, showToast);
+                fetchSettings();
             } catch (error) {
                 const { status, message }: any = error;
                 StatusHandler(status, message, showToast)
@@ -80,6 +82,8 @@ function AdminSiteComponent() {
                 const dataToSend = { Title: values.title, Content: values.content }
                 const { data, status }: any = await apiService(endpoints.reasonText + `${values.id}`, "PUT", dataToSend);
                 StatusHandler(status, data, showToast)
+                fetchSettings();
+
             } catch (error) {
                 const { status, message }: any = error;
                 StatusHandler(status, message, showToast)
