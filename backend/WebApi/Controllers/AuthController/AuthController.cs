@@ -38,7 +38,7 @@ namespace WebApi.Controllers.AuthController
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.Strict,
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(3),
             };
             Response.Cookies.Append("refreshToken", tokens.RefreshToken, cookieOptions);
 
@@ -58,7 +58,7 @@ namespace WebApi.Controllers.AuthController
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.Strict,
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(3),
             };
             Response.Cookies.Delete("refreshToken");
             Response.Cookies.Append("refreshToken", tokens.RefreshToken, cookieOptions);
