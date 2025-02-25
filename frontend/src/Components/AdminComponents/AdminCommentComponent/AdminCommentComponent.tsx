@@ -10,7 +10,6 @@ function AdminCommentComponent() {
 
     const handleMark = async (id: number) => {
         try {
-            console.log(id)
             await apiService(endpoints.markAsRead, "PUT", id);
         }
         catch (Error) {
