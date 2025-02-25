@@ -30,15 +30,18 @@ namespace WebApi.Middlewares
             var statusCode = exception switch
             {
                 DatabaseException => 500,
+                RefreshException => 452,
                 KeyNotFoundException => 404,
                 InvalidOperationException => 400,
                 DuplicateNameException => 409,
+                UnauthorizedAccessException => 401,
                 _ => 500
             };
 
             var message = exception switch
             {
                 DatabaseException => "Sunucu tarafında hata oluştu, lütfen yöneticiyle iletişime geçin: ",
+                RefreshException => "Oturum süresi doldu, lütfen yeniden giriş yapınız.",
                 KeyNotFoundException => "Veri bulunamadı: ",
                 InvalidOperationException => "Geçersiz işlem: ",
                 DuplicateNameException => "Birden fazla kayıt hatası: ",
