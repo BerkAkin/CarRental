@@ -59,6 +59,7 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
     const values = useMemo(() => ({
         settings,
         error,
+        fetchSettings,
     }), [settings, error]);
 
     return (
