@@ -1,5 +1,6 @@
 import axios from "axios";
 import { endpoints } from "./apiConfig";
+import { useNavigate } from "react-router-dom";
 
 
 let pendingRequests: any[] = [];
@@ -17,8 +18,14 @@ async function refreshToken() {
 
         pendingRequests.forEach((request: any) => request());
         pendingRequests = [];
-    } catch (error) {
-        console.error("Token yenileme işlemi başarısız oldu", error);
+    } catch (error: any) {
+        if (error.status == 452) {
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("UserInfo");
+            window.location.href = "/";
+            await apiService(endpoints.logout);
+            console.error("Token yenileme işlemi başarısız oldu", error);
+        }
     }
 }
 
