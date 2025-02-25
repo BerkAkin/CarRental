@@ -24,7 +24,8 @@ interface ModelData {
 interface SliderContextType {
     textData: TextData[] | null,
     modelData: ModelData[] | null
-    sliderError: string
+    sliderError: string,
+    fetchData: () => {},
 }
 
 
@@ -59,6 +60,7 @@ export const SliderDataProvider = ({ children }: { children: ReactNode }) => {
         textData,
         modelData,
         sliderError: error,
+        fetchData,
     };
 
     return (
