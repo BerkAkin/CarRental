@@ -19,7 +19,6 @@ interface InfoFormProps {
 function UserProfileComponent() {
 
     const { userInfo, loading, error } = useInfoContext();
-    console.log(userInfo)
     const { showConfirmation } = useConfirmContext();
     const { showToast } = useToastManagerContext();
 
