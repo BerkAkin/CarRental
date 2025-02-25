@@ -50,7 +50,6 @@ function ContactPage() {
 
 
     const onSubmit = async (values: FormProps, { setSubmitting }: any) => {
-        console.log(values)
 
         showConfirmation("Mail gönderilecektir. Devam edilsin mi?", async () => {
             try {

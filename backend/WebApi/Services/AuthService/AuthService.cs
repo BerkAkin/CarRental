@@ -1,6 +1,7 @@
 using System.Data;
 using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Common;
 using WebApi.DTOs.Auth;
 using WebApi.DTOs.Token;
@@ -78,7 +79,7 @@ namespace WebApi.Services.AuthService
             {
                 var refreshToken = _tokenService.GenerateRefreshToken();
                 user.RefreshToken = refreshToken;
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(3);
                 user.IsActive = true;
                 await _repository.UpdateUser(user);
 
@@ -104,8 +105,12 @@ namespace WebApi.Services.AuthService
         public async Task<TokenResponseModel> RefreshAccessToken(string refreshToken)
         {
 
-            var user = await _repository.GetUserByRefreshToken(refreshToken);
+            if (string.IsNullOrEmpty(refreshToken))
+            {
+                throw new RefreshException(ErrorMessages.REFRESH_TOKEN_EXPIRED_LOGIN_NEEDED);
+            }
 
+            var user = await _repository.GetUserByRefreshToken(refreshToken);
             if (user == null)
             {
                 throw new UnauthorizedAccessException(ErrorMessages.NO_USER_OR_REFRESH_TOKEN);
@@ -113,17 +118,24 @@ namespace WebApi.Services.AuthService
 
             if (user.RefreshTokenExpiryTime < DateTime.Now)
             {
-                throw new UnauthorizedAccessException(ErrorMessages.REFRESH_TOKEN_EXPIRED_LOGIN_NEEDED);
+                user.RefreshToken = null;
+                user.RefreshTokenExpiryTime = null;
+                await _repository.UpdateUser(user);
+                throw new RefreshException(ErrorMessages.REFRESH_TOKEN_EXPIRED_LOGIN_NEEDED);
             }
 
             try
             {
-                string newAccessToken = _tokenService.GenerateAccessToken(user);
+                user.RefreshToken = null;
+                user.RefreshTokenExpiryTime = null;
+
+
                 string newRefreshToken = _tokenService.GenerateRefreshToken();
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+                user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(3);
                 user.RefreshToken = newRefreshToken;
                 await _repository.UpdateUser(user);
 
+                string newAccessToken = _tokenService.GenerateAccessToken(user);
                 var response = new TokenResponseModel
                 {
                     AccessToken = newAccessToken,

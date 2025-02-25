@@ -73,11 +73,10 @@ export const ModelsContextProvider = ({ children }: any) => {
         setModelCurrentPage(1);
     };
 
-    const fetchModels = useCallback(async (page: number, search: string = searchText) => {
+    const fetchModels = useCallback(async (page: number = modelCurrentPage, search: string = searchText) => {
         try {
             const { data, status }: any = await apiService(endpoints.models + `?query=${search}&pageNumber=${page}`, "GET",)
             setModels(data);
-            console.log(data);
         } catch (error) {
             console.log(error);
             setError("Modeller yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
@@ -95,8 +94,9 @@ export const ModelsContextProvider = ({ children }: any) => {
         HandleNextModelPage,
         HandlePreviousModelPage,
         handleSearch,
+        fetchModels,
         models,
-        error
+        error,
     }), [models, error]);
 
 

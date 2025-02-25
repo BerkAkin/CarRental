@@ -11,7 +11,7 @@ namespace WebApi.Common
         public const string NO_LOGGED_IN_USER = "Giriş yapmış bir kullanıcı yok";
 
         public const string NO_USER_OR_REFRESH_TOKEN = "Kullanıcı bulunamadı veya refresh token geçersiz";
-        public const string REFRESH_TOKEN_EXPIRED_LOGIN_NEEDED = "Refresh token süresi dolmuş. Yeniden giriş yapılmalı";
+        public const string REFRESH_TOKEN_EXPIRED_LOGIN_NEEDED = "Oturum süresi doldu. Lütfen yeniden giriş yapın";
         public const string USER_NOT_FOUND = "Kullanıcı bulunamadı";
         public const string USERS_NOT_FOUND = "Kullanıcılar bulunamadı";
         public const string USER_UPDATE_FAIL = "Kullanıcı güncellenemedi";

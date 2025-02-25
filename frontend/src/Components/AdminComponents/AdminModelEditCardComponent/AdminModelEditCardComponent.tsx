@@ -8,6 +8,7 @@ import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
 import modelValidationSchema from '../AdminModelAddComponent/ModelValidationSchema'
+import { useModelsContext } from '../../../Contexts/ModelsContext'
 
 
 interface ItemProp {
@@ -59,6 +60,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
 
     const { showToast } = useToastManagerContext();
     const { showConfirmation } = useConfirmContext();
+    const { fetchModels } = useModelsContext();
     const [ImageDirectory, SetImageDirectory] = useState(Item.imageDirectory);
 
     const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +102,8 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
         showConfirmation("Model güncellenecektir. Devam edilsin mi?", async () => {
             try {
                 const { data, status }: any = await apiService(endpoints.models, "PUT", dataToSend)
-                StatusHandler(status, data, showToast)
+                StatusHandler(status, data, showToast);
+                fetchModels();
             } catch (error) {
                 const { status, message }: any = error;
                 StatusHandler(status, message, showToast)
@@ -115,6 +118,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
             try {
                 const { data, status }: any = await apiService(endpoints.models + `/${slug}`, "DELETE");
                 StatusHandler(status, data, showToast)
+                fetchModels();
             } catch (error) {
                 const { status, message }: any = error;
                 StatusHandler(status, message, showToast)
