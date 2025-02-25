@@ -33,7 +33,6 @@ function ResetPasswordPage() {
         }
         try {
             const { status, data } = await apiService(endpoints.resetPassword, "POST", values);
-            console.log(status, data)
             StatusHandler(200, data, showToast);
             setTimeout(() => {
                 navigate("/")
