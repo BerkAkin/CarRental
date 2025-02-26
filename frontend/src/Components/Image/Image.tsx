@@ -3,7 +3,7 @@ import styles from "./styles.module.css"
 
 interface ImageParams {
   URL: string;
-  Width: string;
+  Width?: string;
   Height?: string;
   Alt?: string;
   Round?: boolean;
@@ -17,7 +17,7 @@ function Image({ URL, Width, Height, Alt, Round }: ImageParams) {
   } as React.CSSProperties;
   return (
     <>
-      <img className={styles.roundedImage} style={ImageProps} src={imageUrl} width={Width} height={Height} alt={Alt}></img>
+      <img className={`${styles.roundedImage} img-fluid`} style={ImageProps} src={imageUrl} alt={Alt}></img>
     </>
   )
 }
