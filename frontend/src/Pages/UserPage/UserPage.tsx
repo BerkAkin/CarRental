@@ -13,13 +13,6 @@ import { useConfirmContext } from '../../Contexts/ConfirmationContext';
 import userCommentValidationSchema from './UserCommentValidationSchema';
 
 
-interface InfoFormProps {
-    email: string;
-    phoneNum: string;
-    createdAt: string;
-}
-
-
 interface CommentFormProps {
     content: string;
     starCount: number;
@@ -49,22 +42,23 @@ function UserPage() {
     const [hover, setHover] = useState(0);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
+    const fetchUserData = async () => {
+        try {
+            const { data: dataC, status: statusC }: any = await apiService(endpoints.ownComment, "GET")
+            const { data: dataF, status: statusF }: any = await apiService(endpoints.favorites, "GET")
 
-                const { data: dataC, status: statusC }: any = await apiService(endpoints.ownComment, "GET")
-                const { data: dataF, status: statusF }: any = await apiService(endpoints.favorites, "GET")
-
-                setInitialCommentValues(dataC);
-                setinitialFavorites(dataF);
-                setRating(dataC.starCount);
-            } catch (error) {
-                setError("Kullanıcı yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
-
-            }
+            setInitialCommentValues(dataC);
+            setinitialFavorites(dataF);
+            setRating(dataC.starCount);
+        } catch (error) {
+            setError("Kullanıcı yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
 
         }
+
+    }
+
+    useEffect(() => {
+
         fetchUserData();
     }, [])
 
@@ -87,9 +81,11 @@ function UserPage() {
         try {
             const { data, status }: any = await apiService(endpoints.favorites, "DELETE", id);
             StatusHandler(status, data, showToast)
+            fetchUserData();
         } catch (error) {
             const { status, message }: any = error;
             StatusHandler(status, message, showToast)
+            fetchUserData();
         }
     }
 
