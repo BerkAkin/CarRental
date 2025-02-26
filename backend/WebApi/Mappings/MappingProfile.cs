@@ -82,7 +82,8 @@ namespace WebApi.Mappings
             .ForMember(dest => dest.ModelName, opt => opt.MapFrom(src => src.Model.ModelName))
             .ForMember(dest => dest.PersonCount, opt => opt.MapFrom(src => src.Model.PersonCount))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Model.Price))
-            .ForMember(dest => dest.ImageDirectory, opt => opt.MapFrom(src => src.Model.ImageDirectory));
+            .ForMember(dest => dest.ImageDirectory, opt => opt.MapFrom(src => src.Model.ImageDirectory))
+            .ForMember(dest => dest.Slug, opt => opt.MapFrom(src => src.Model.Slug));
 
             CreateMap<UserComment, AdminCommentViewModel>()
             .ForMember(ac => ac.UserType, opt => opt.MapFrom(src => src.User.Role.Name))
