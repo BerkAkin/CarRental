@@ -114,8 +114,8 @@ function UserPage() {
             <ConfirmationPopup />
             <div className={`container-fluid mt-4`}>
                 <div className='row'>
-                    <div className='col-2 border-end'>
-                        <ul className="nav nav-tabs  d-flex flex-column border-none" role="tablist">
+                    <div className='col-md-2 col-12 border-end'>
+                        <ul className="nav nav-tabs  d-md-flex flex-md-column border-none" role="tablist">
                             <li className="nav-item " >
                                 <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
                             </li>
@@ -127,7 +127,7 @@ function UserPage() {
                             </li>
                         </ul>
                     </div>
-                    <div className={`${styles.sectionBG} col-10`}>
+                    <div className={`${styles.sectionBG} col-12 col-md-10`}>
                         <div className="tab-content pt-3" id="tab-content">
                             <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">
                                 <div className='container-fluid'>
@@ -147,7 +147,7 @@ function UserPage() {
                                             initialFavorites?.map((favorite: FavoriteModels) => {
                                                 return (
 
-                                                    <div className='col-2 mt-3'>
+                                                    <div className='col-sm-6 col-lg-4 col-xxl-2 col-12 mt-3'>
 
                                                         <FavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
                                                             brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
@@ -170,7 +170,7 @@ function UserPage() {
                                             {initialCommentValues ? (
                                                 <Formik validationSchema={userCommentValidationSchema} initialValues={initialCommentValues} onSubmit={submitCommentForm} enableReinitialize>
                                                     {({ handleSubmit }) => (
-                                                        <div>
+                                                        <div className='table-responsive'>
                                                             <table className={`${styles.tableFontSize} table-striped table-hover table mt-3`}>
                                                                 <thead>
                                                                     <tr>
