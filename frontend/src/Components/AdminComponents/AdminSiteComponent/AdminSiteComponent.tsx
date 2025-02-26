@@ -110,14 +110,14 @@ function AdminSiteComponent() {
     if (error) return <p>{error}</p>
     return (
         <>
-            <div className={`${styles.innerBG} col-12 my-2 p-3 border`}>
+            <div className={`${styles.innerBG} col-12 my-2 p-3 border table-responsive`}>
                 <h4>Ana Metin</h4>
                 <hr />
-                <div className='container-fluid p-0'>
+                <div className='container-fluid p-0 '>
                     {
                         settings?.mainText ?
                             (
-                                <table className={`${styles.tableFontSize} table-striped table-hover table mt-2`}>
+                                <table className={`${styles.tableFontSize} table-striped table-hover table table-responsive mt-2`}>
                                     <thead>
                                         <tr>
                                             <th className='col-11'>Ana Metin İçeriği</th>
@@ -155,15 +155,15 @@ function AdminSiteComponent() {
                 </div>
             </div>
 
-            <div className={`${styles.innerBG} col-12 my-4 p-3 border`}>
+            <div className={`${styles.innerBG} col-12 my-4 p-3 border table-responsive`}>
                 <h4>Sebepler</h4>
                 <hr />
                 {settings?.reasons && (
-                    <table className={`${styles.tableFontSize} table-striped  table-hover table mt-2`}>
+                    <table className={`${styles.tableFontSize} table-striped table-responsive table-hover table mt-2`}>
                         <thead>
                             <tr>
-                                <th className='col-2'>Sebep Başlığı</th>
-                                <th className='col-9'>Sebep İçeriği</th>
+                                <th className='col-2'>Başlık</th>
+                                <th className='col-9'>İçerik</th>
                                 <th className='col-1 text-center'>İşlemler</th>
                             </tr>
                         </thead>
@@ -194,7 +194,7 @@ function AdminSiteComponent() {
                 )}
             </div>
 
-            <div className={`${styles.innerBG} col-12 p-3 border mb-1`}>
+            <div className={`${styles.innerBG} col-12 p-3 border mb-1 table-responsive`}>
                 <h4>Hizmetler</h4>
                 <hr />
                 {
@@ -202,12 +202,12 @@ function AdminSiteComponent() {
                         (
                             <>
 
-                                <table className={`${styles.tableFontSize} table-striped table-hover table`}>
+                                <table className={`${styles.tableFontSize} table-striped table-hover table `}>
                                     <thead>
                                         <tr>
-                                            <th className='col-2'>Hizmet Başlığı</th>
-                                            <th className='col-7'>Hizmet İçeriği</th>
-                                            <th className='col-1 text-center'>Hizmet İkonu</th>
+                                            <th className='col-2'>Başlık</th>
+                                            <th className='col-7'>İçerik</th>
+                                            <th className='col-1 text-center'>İkon</th>
                                             <th className='col-1 text-center'>İkon Değiştir</th>
                                             <th className='col-1 text-center'>İşlemler</th>
                                         </tr>
