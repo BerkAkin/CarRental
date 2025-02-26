@@ -81,79 +81,79 @@ function ModelDetailPage() {
 
 
                 <div className='row mt-4'>
-                    <div className='col-6 d-flex align-items-center'>
+                    <div className='col-lg-6 col-12 d-flex align-items-center'>
                         <Image URL={`${modelDetail?.imageDirectory}`} Width='600' />
                     </div>
 
-                    <div className='col-6 '>
-                        <div className='row h-50'>
-                            <div className='col-6'>
-                                <div className='row'>
+                    <div className='col-lg-6 col-12 '>
+                        <div className='row h-50 mt-4'>
+                            <div className={`col-sm-6 col-12`}>
+                                <div className='row text-center'>
                                     <h3>Araç Bilgisi</h3>
                                 </div>
                                 <div className='row'>
                                     <div className='container mt-1'>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2 '>
-                                                <p className={styles.feats}>{modelDetail?.brandName} - {modelDetail?.modelName} </p>
-                                            </div>
-                                        </div>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2 '>
-                                                <p className={styles.feats}>{modelDetail?.carType.car}</p>
-                                            </div>
-                                        </div>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2 '>
-                                                <p className={styles.feats}>{modelDetail?.gearType.gear}</p>
-                                            </div>
-                                        </div>
-                                        <div className='row'>
-                                            <div className='col-1'>
-                                                <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faTag}></FontAwesomeIcon>
-                                            </div>
-                                            <div className='col-11 ps-2 '>
-                                                <p className={styles.feats}>{modelDetail?.fuelType.fuel}</p>
-                                            </div>
-                                        </div>
 
+                                        <div className='row'>
+                                            <div className='col-12 d-flex justify-content-center align-items-center'>
+                                                <FontAwesomeIcon style={{ color: "#1A2B48", paddingBottom: "15px" }} icon={faTag}></FontAwesomeIcon>
+                                                <div className='ps-2'>
+                                                    <p className={styles.feats}>{modelDetail?.brandName} - {modelDetail?.modelName} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-12 d-flex justify-content-center align-items-center'>
+                                                <FontAwesomeIcon style={{ color: "#1A2B48", paddingBottom: "15px" }} icon={faTag}></FontAwesomeIcon>
+                                                <div className='ps-2'>
+                                                    <p className={styles.feats}>{modelDetail?.carType.car}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-12 d-flex justify-content-center align-items-center'>
+                                                <FontAwesomeIcon style={{ color: "#1A2B48", paddingBottom: "15px" }} icon={faTag}></FontAwesomeIcon>
+                                                <div className='ps-2'>
+                                                    <p className={styles.feats}>{modelDetail?.gearType.gear}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-12 d-flex justify-content-center align-items-center'>
+                                                <FontAwesomeIcon style={{ color: "#1A2B48", paddingBottom: "15px" }} icon={faTag}></FontAwesomeIcon>
+                                                <div className='ps-2'>
+                                                    <p className={styles.feats}>{modelDetail?.fuelType.fuel}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className='col-6'>
-                                <div className='row'>
+                            <div className='col-12 col-sm-6 m-sm-0 mt-5'>
+                                <div className='row text-center'>
                                     <h3>Kapasite Bilgisi</h3>
                                 </div>
                                 <div className='row'>
                                     <div className='container mt-1'>
                                         <div className='row'>
-                                            <div className='col-2 d-flex justify-content-center'>
+                                            <div className='col-4 d-flex justify-content-center'>
                                                 <Icon TooltipText='Kişi Kapasitesi'><img className={`${styles.IconSize}`} src={Icons.PersonIcon}></img></Icon>
                                             </div>
-                                            <div className='col-2 d-flex justify-content-center'>
+                                            <div className='col-4 d-flex justify-content-center'>
                                                 <Icon TooltipText='Bagaj'> <img className={`${styles.IconSize}`} src={Icons.LuggageIcon}></img></Icon>
                                             </div>
-                                            <div className='col-2 d-flex justify-content-center '>
+                                            <div className='col-4 d-flex justify-content-center '>
                                                 <Icon TooltipText='Kapı Sayısı'> <img className={`${styles.IconSize}`} src={Icons.CarDoorIcon}></img></Icon>
                                             </div>
                                         </div>
                                         <div className='row'>
-                                            <div className='col-2 d-flex justify-content-center '>
+                                            <div className='col-4 d-flex justify-content-center '>
                                                 <p>{modelDetail?.personCount}</p>
                                             </div>
-                                            <div className='col-2 d-flex justify-content-center'>
+                                            <div className='col-4 d-flex justify-content-center'>
                                                 <p>{modelDetail?.luggageCount}</p>
                                             </div>
-                                            <div className='col-2 d-flex justify-content-center'>
+                                            <div className='col-4 d-flex justify-content-center'>
                                                 <p>{modelDetail?.doorCount}</p>
                                             </div>
 
@@ -164,28 +164,30 @@ function ModelDetailPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className='row h-50 pt-3 mt-4'>
-                            <div className='col-6 '>
-                                <div className='row'>
+                        <div className='row h-50 mt-4'>
+                            <div className='col-sm-6 col-12'>
+                                <div className='row text-center'>
                                     <h3>Araç Özellikleri</h3>
                                 </div>
                                 <div className='row'>
                                     <div className='container mt-1'>
+
                                         {otherFeatures?.map((item, key) => (
                                             <div className='row' key={key}>
-                                                <div className='col-1'>
-                                                    <FontAwesomeIcon style={{ color: "#1A2B48" }} icon={faStar}></FontAwesomeIcon>
-                                                </div>
-                                                <div className='col-11 ps-2'>
-                                                    <p className={`${styles.feats}`}>{item}</p>
+                                                <div className='col-12 d-flex justify-content-center align-items-center'>
+                                                    <FontAwesomeIcon style={{ color: "#1A2B48", paddingBottom: "15px" }} icon={faStar}></FontAwesomeIcon>
+                                                    <div className='ps-2'>
+                                                        <p className={styles.feats}>{item}</p>
+                                                    </div>
                                                 </div>
                                             </div>
+
                                         ))}
                                     </div>
                                 </div>
                             </div>
-                            <div className='col-6'>
-                                <div className='row'>
+                            <div className='col-sm-6 col-12 m-sm-0 mt-5'>
+                                <div className='row text-center'>
                                     <h3> Diğer Hizmetler</h3>
                                 </div>
                                 <div className='row'>
@@ -193,13 +195,13 @@ function ModelDetailPage() {
                                         <div className='row'>
                                             {otherServices?.map((item, key) => (
                                                 <div className='row' key={key}>
-                                                    <div className='col-1'>
-                                                        <GreenCheck width="15" height="15" />
-                                                    </div>
-                                                    <div className='col-11 ps-2'>
-                                                        <p className={styles.feats}>{item}</p>
+                                                    <div className='col-12 d-flex justify-content-center align-items-center'>
+                                                        <GreenCheck width="15" height="15" /><div className='ps-2'>
+                                                            <p className={styles.feats}>{item}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             ))}
                                         </div>
                                     </div>
@@ -208,7 +210,7 @@ function ModelDetailPage() {
                         </div>
                     </div>
                 </div>
-                <div className='mt-5 d-flex justify-content-end'>
+                <div className='mt-5 pt-5 pt-md-0 d-md-flex justify-content-end'>
                     <div className={`p-2 ${styles.BtnBg} text-center`}>
                         <ListElement href="Contact" text={"Bize Ulaşın"} color='White' hoverColor='White' boldness='500' isHover={true} />
                     </div>

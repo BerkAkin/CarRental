@@ -15,11 +15,15 @@ function ServiceCard({ HeaderTxt, ParagraphTxt, Icon }: ServiceCardProps) {
 
     return (
         <>
-            <div className='my-4'>
-                <div className='h-25 justify-content-center row'>{icon}</div>
-                <div className='h-25 my-2 row'><Header Align="center" Text={HeaderTxt} /></div>
-                <div className='h-50 row'><Paragraph Align="center" Text={ParagraphTxt} /></div>
-            </div>
+            <div >
+                <div className='justify-content-center row'>
+                    {icon}
+                </div>
+                <div className='row'>
+                    <Header Align="center" Text={HeaderTxt} />
+                    <Paragraph Align="center" Text={ParagraphTxt} />
+                </div>
+            </div >
         </>
     )
 }

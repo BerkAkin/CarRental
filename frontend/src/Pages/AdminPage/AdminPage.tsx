@@ -29,8 +29,8 @@ function AdminPage() {
             <ConfirmationPopup />
             <div className={`container-fluid mt-4`}>
                 <div className='row'>
-                    <div className='col-2 border-end'>
-                        <ul className="nav nav-tabs d-flex flex-column border-none" role="tablist">
+                    <div className='col-md-2 col-12 border-end'>
+                        <ul className="nav nav-tabs d-md-flex flex-md-column border-none" role="tablist">
                             <li className="nav-item " >
                                 <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
                             </li>
@@ -48,7 +48,7 @@ function AdminPage() {
                             </li>
                         </ul>
                     </div>
-                    <div className={`${styles.sectionBG} col-10`}>
+                    <div className={`${styles.sectionBG} col-md-10 col-12`}>
                         <div>
                             <div className={`${styles.contentPanelWrapper} tab-content`} id="tab-content">
                                 <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">

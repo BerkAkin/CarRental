@@ -71,16 +71,16 @@ function ContactPage() {
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 {({ isSubmitting }) => (
                     <Form>
-                        <div className='container mt-4'>
+                        <div className='container mt-md-4'>
                             <div className='row'>
-                                <div className={`${styles.headerColoring} col-3  d-flex flex-column justify-content-center`}>
+                                <div className={`${styles.headerColoring} col-md-3 col-12 d-flex flex-column justify-content-center`}>
                                     <div className='row'>
-                                        <div className='text-center'>
+                                        <div className='text-center d-none d-md-block'>
                                             <Image Width='250' URL={"/static/logo.png"} />
                                         </div>
                                     </div>
                                     <div className='row'>
-                                        <div className='text-center mt-4'>
+                                        <div className='text-center mt-md-4 '>
                                             <h1>"Süper Abonelik Sistemi" Bilgi Talep ve İletişim Formu</h1>
                                         </div>
                                     </div>
@@ -98,10 +98,10 @@ function ContactPage() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`col-9 border-start d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
+                                <div className={`col-md-9 col-12 border-start d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
                                     <div className='container '>
                                         <div className='row'>
-                                            <p>* Zorunlu Alanlar</p>
+                                            <p ><span className={styles.error}>*</span> Zorunlu Alanlar</p>
                                         </div>
                                         <div className='row'>
                                             <div className='col-6'><label htmlFor="name">1. İsim <span className={styles.error}>*</span><span className=''> <ErrorMessage name="name" component="span" className={`${styles.error}`} /></span></label></div>
@@ -113,7 +113,7 @@ function ContactPage() {
                                         </div>
                                         <div className='row mt-4'>
                                             <div className='col-6 '><label htmlFor="email">3. E-Posta <span className={styles.error}>*</span><span className=''>  <ErrorMessage name="email" component="span" className={`${styles.error}`} /></span></label></div>
-                                            <div className='col-6 '><label htmlFor="phone">4. Telefon Numarası <span className={styles.error}>*</span><span className=''>  <ErrorMessage name="phone" component="span" className={`${styles.error}`} /></span></label></div>
+                                            <div className='col-6 '><label htmlFor="phone">4. Telefon <span className={styles.error}>*</span><span className=''>  <ErrorMessage name="phone" component="span" className={`${styles.error}`} /></span></label></div>
                                         </div>
                                         <div className='row mt-2'>
                                             <div className='col-6 d-flex flex-column'><Field className={styles.inputAreas} type="email" id="email" name="email" /></div>

@@ -57,8 +57,8 @@ function MainRoutingComponent() {
           <Route path="/About" element={<AboutPage />}></Route>
           <Route path="/FAQ" element={<FAQPage />}></Route>
           <Route path="/Contact" element={<ContactPage />}></Route>
-          <Route path="/Blog" element={<BlogPage />}></Route>
-          <Route path="/Blog/:id" element={<BlogDetailPage />}></Route>
+          {/* <Route path="/Blog" element={<BlogPage />}></Route>
+          <Route path="/Blog/:id" element={<BlogDetailPage />}></Route> */}
           <Route path="/PPInfo" element={<PrivacyPolicyPage />}></Route>
           <Route path="/Profile" element={<ProfilePage />}></Route>
           <Route path="/resetPassword" element={<ResetPasswordPage />}></Route>

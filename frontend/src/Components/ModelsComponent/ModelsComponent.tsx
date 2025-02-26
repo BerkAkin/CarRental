@@ -35,7 +35,7 @@ function ModelsComponent() {
                     <hr></hr>
                 </div>
                 <div className={`row mt-4`}>
-                    <div className='col-2  mt-4 p-0'>
+                    <div className='col-12 col-lg-2 mt-lg-4 p-0'>
                         <div className={`${styles.searchCard} `}>
                             <Formik initialValues={SearchInitialValues} onSubmit={handleSearchSubmit}>
                                 <Form>
@@ -51,10 +51,10 @@ function ModelsComponent() {
                         </div>
 
                     </div>
-                    <div className='col-10'>
+                    <div className='col-lg-10 col-12'>
                         <div className='row'>
                             {models?.data.map((model: any) => (
-                                <div className='col-3 mt-4' key={model.id}>
+                                <div className='col-sm-6 col-lg-4 col-xl-4 col-xxl-3 col-12 mt-4' key={model.id}>
                                     <ModelCard
                                         price={model.price.toString()}
                                         brandName={model.brandName}

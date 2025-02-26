@@ -22,11 +22,11 @@ function AdminModelsComponent({ addNewFunc }: any) {
                 {
                     models && gears && carTypes && fuels ?
                         (
-                            <>
+                            <div className="table-responsive">
                                 <table className={`${styles.tableFont} table-hover table mt-2`}>
                                     <thead>
                                         <tr>
-                                            <th></th>
+                                            <th>Fotoğraf</th>
                                             <th>Marka</th>
                                             <th>Model</th>
                                             <th>Yakıt</th>
@@ -48,7 +48,7 @@ function AdminModelsComponent({ addNewFunc }: any) {
 
                                     ))}
                                 </table>
-                            </>
+                            </div>
                         )
                         :
                         (
