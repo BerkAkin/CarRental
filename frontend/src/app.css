@@ -4,6 +4,11 @@
     font-family: "DmSansLight";
 }
 
+html,
+body {
+    overflow-x: hidden;
+}
+
 @font-face {
     font-family: 'DmSansLight';
     src: local('DMSans'), url(./fonts/DMSans.ttf) format('truetype');
