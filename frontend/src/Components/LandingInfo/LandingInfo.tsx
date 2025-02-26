@@ -12,11 +12,14 @@ function LandingInfo({ Text }: landingInfoProps) {
         <div>
             <div className='container-fluid mt-3'>
                 <div className='row'>
-                    <div className='col-4 d-flex justify-content-center flex-column'>
-                        <div className='row ps-5 my-4'>
+                    <div className='col-xl-12 col-xxl-8'>
+                        <Image URL={"/static/landing.jpg"} Width="1230px" Height="690px" />
+                    </div>
+                    <div className='col-xxl-4 d-flex justify-content-center flex-column'>
+                        <div className='row text-center my-4'>
                             <h1 id={styles["landingText"]}>Her şey dahil araç abonelik sistemi</h1>
                         </div>
-                        <div className='row ps-5 mt-2 mb-4'>
+                        <div className='row mt-2 mb-4 text-center'>
                             <h6 className={styles.textContent}>
                                 {Text}
                             </h6>
@@ -28,9 +31,7 @@ function LandingInfo({ Text }: landingInfoProps) {
 
                         </div>
                     </div>
-                    <div className='col-8'>
-                        <Image URL={"/static/landing.jpg"} Width="1230px" Height="690px" />
-                    </div>
+
                 </div>
             </div>
         </div>
