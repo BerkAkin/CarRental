@@ -19,7 +19,7 @@ function AdminCommentComponent() {
 
     if (error) return <p>{error}</p>
     return (
-        <div className={`${styles.innerBG} my-2 border`}>
+        <div className={`${styles.innerBG} my-2 border table-responsive`}>
             <table className={`${styles.tableFontSize} table-striped table-hover table mt-3`}>
                 <thead>
                     <tr>
