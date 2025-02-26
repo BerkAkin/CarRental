@@ -12,5 +12,6 @@ namespace WebApi.DTOs.Favorites
         public int PersonCount { get; set; }
         public int Price { get; set; }
         public string ImageDirectory { get; set; }
+        public string Slug { get; set; }
     }
 }
