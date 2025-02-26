@@ -1,6 +1,6 @@
 .Form {
     background-color: #ffffff;
-    width: 450px;
+    max-width: 450px;
     height: 380px;
     border: 1px solid rgba(0, 0, 0, 0.521);
     z-index: 9999;
