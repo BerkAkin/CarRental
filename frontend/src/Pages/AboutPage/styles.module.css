@@ -13,3 +13,7 @@
 .header {
     color: #7A7A7A;
 }
+
+.innerContainer {
+    min-height: 700px;
+}
