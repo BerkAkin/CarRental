@@ -17,7 +17,7 @@ function Image({ URL, Width, Height, Alt, Round }: ImageParams) {
   } as React.CSSProperties;
   return (
     <>
-      <img className={`${styles.roundedImage} img-fluid`} style={ImageProps} src={imageUrl} alt={Alt}></img>
+      <img className={`${styles.roundedImage} img-fluid`} style={ImageProps} src={imageUrl} alt={Alt} loading="lazy"></img>
     </>
   )
 }
