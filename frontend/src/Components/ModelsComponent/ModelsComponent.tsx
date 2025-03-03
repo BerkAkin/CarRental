@@ -3,6 +3,8 @@ import { useModelsContext } from '../../Contexts/ModelsContext';
 import ModelCard from '../ModelCard/ModelCard';
 import { useCallback, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
+import Skeleton from '../Skeletons/Skeleton/Skeleton';
+import SkeletonCard from '../Skeletons/SkeletonCard/SkeletonCard';
 
 
 interface ISearchForm {
@@ -12,7 +14,7 @@ interface ISearchForm {
 
 function ModelsComponent() {
 
-    const { error, models, HandleNextModelPage, HandlePreviousModelPage, handleSearch } = useModelsContext();
+    const { error, models, isLoading, HandleNextModelPage, HandlePreviousModelPage, handleSearch } = useModelsContext();
 
     const SearchInitialValues: ISearchForm = {
         query: ""
@@ -29,7 +31,7 @@ function ModelsComponent() {
         <>
 
 
-            <div className={`container mt-4 pt-3`}>
+            <div className={`${styles.mainContainer} container mt-4 pt-3`}>
                 <div className='row'>
                     <h2 style={{ color: "#7A7A7A" }}>Modeller</h2>
                     <hr></hr>
@@ -51,27 +53,42 @@ function ModelsComponent() {
                         </div>
 
                     </div>
-                    <div className='col-lg-10 col-12'>
-                        <div className='row'>
-                            {models?.data.map((model: any) => (
-                                <div className='col-sm-6 col-lg-4 col-xl-4 col-xxl-3 col-12 mt-4' key={model.id}>
-                                    <ModelCard
-                                        price={model.price.toString()}
-                                        brandName={model.brandName}
-                                        type={model.carType.car}
-                                        doorCount={model.doorCount}
-                                        gear={model.gearType.gear}
-                                        luggageCount={model.luggageCount}
-                                        personCount={model.personCount}
-                                        image={model.imageDirectory}
-                                        id={model.id}
-                                        slug={model.slug}
-                                    />
+                    <div className={`${styles.modelWrapperInside} col-lg-10 col-12`}>
+                        {isLoading ?
+                            <div className='row'>
+                                <div className='col-sm-6 col-lg-4 col-xl-4 col-xxl-3 col-12 mt-4'>
+                                    <SkeletonCard />
                                 </div>
-                            ))}
-
-                        </div>
-
+                                <div className='col-sm-6 col-lg-4 col-xl-4 col-xxl-3 col-12 mt-4'>
+                                    <SkeletonCard />
+                                </div>
+                                <div className='col-sm-6 col-lg-4 col-xl-4 col-xxl-3 col-12 mt-4'>
+                                    <SkeletonCard />
+                                </div>
+                                <div className='col-sm-6 col-lg-4 col-xl-4 col-xxl-3 col-12 mt-4'>
+                                    <SkeletonCard />
+                                </div>
+                            </div>
+                            :
+                            <div className='row'>
+                                {models?.data.map((model: any) => (
+                                    <div className='col-sm-6 col-lg-4 col-xl-4 col-xxl-3 col-12 mt-4' key={model.id}>
+                                        <ModelCard
+                                            price={model.price.toString()}
+                                            brandName={model.brandName}
+                                            type={model.carType.car}
+                                            doorCount={model.doorCount}
+                                            gear={model.gearType.gear}
+                                            luggageCount={model.luggageCount}
+                                            personCount={model.personCount}
+                                            image={model.imageDirectory}
+                                            id={model.id}
+                                            slug={model.slug}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        }
                     </div>
 
                     {

@@ -11,7 +11,7 @@ function AboutPage() {
 
     return (
         <>
-            <div className='container mt-4 pt-3'>
+            <div className={`${styles.innerContainer} container mt-4 pt-3`}>
                 <div className='row'>
                     <h2 className={`${styles.header}`}>Biz Kimiz ?</h2>
                     <hr></hr>

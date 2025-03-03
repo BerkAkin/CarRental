@@ -10,3 +10,7 @@
 .BtnBg {
     background-color: #1A2B48;
 }
+
+.innerContainer {
+    min-height: 700px;
+}

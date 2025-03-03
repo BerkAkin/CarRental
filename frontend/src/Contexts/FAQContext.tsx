@@ -8,6 +8,7 @@ const FAQContext = createContext<any>({});
 export const FAQContextProvider = ({ children }: any) => {
     const [FAQs, SetFAQs] = useState<any>();
     const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<null | boolean>(true);
 
     const fetchData = useCallback(async () => {
         try {
@@ -17,6 +18,9 @@ export const FAQContextProvider = ({ children }: any) => {
         catch (error: any) {
             console.log(error);
             setError("Sık Sorulan Sorular yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
+        }
+        finally {
+            setIsLoading(false)
         }
 
 
@@ -30,7 +34,8 @@ export const FAQContextProvider = ({ children }: any) => {
     const values = useMemo(() => ({
         FAQs,
         error,
-    }), [FAQs, error])
+        isLoading
+    }), [FAQs, error, isLoading])
 
     return (
         <FAQContext.Provider value={values}>

@@ -34,3 +34,11 @@
 .inputAreas:hover {
     border-bottom: red 3px solid;
 }
+
+.mainContainer {
+    min-height: 700px;
+}
+
+.modelWrapperInside {
+    min-height: 700px;
+}

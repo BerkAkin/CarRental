@@ -1,6 +1,7 @@
 import ServiceCard from './ServiceCard/ServiceCard'
 import Image from '../../Components/Image/Image'
 import styles from './styles.module.css'
+import Skeleton from '../Skeletons/Skeleton/Skeleton';
 
 
 interface IServiceInfoIcon {
@@ -10,9 +11,10 @@ interface IServiceInfoIcon {
 interface serviceInfoProps {
     ServicesLeft: { title: string, content: string, icon: IServiceInfoIcon }[]
     ServicesRight: { title: string, content: string, icon: IServiceInfoIcon }[]
+    isLoading: boolean;
 }
 
-function ServicesInfo({ ServicesLeft, ServicesRight }: serviceInfoProps) {
+function ServicesInfo({ ServicesLeft, ServicesRight, isLoading }: serviceInfoProps) {
 
     return (
         <>
@@ -21,11 +23,16 @@ function ServicesInfo({ ServicesLeft, ServicesRight }: serviceInfoProps) {
                 <div className='row '>
 
                     <div className='col-lg-3 col-12'>
-                        {ServicesLeft.map((data, index) => (
-                            <div key={index} className={`${styles.reasonTabHeight} row`}>
-                                <ServiceCard HeaderTxt={data.title} Icon={data.icon.name} ParagraphTxt={data.content} />
-                            </div>
-                        ))}
+                        {isLoading ?
+                            <Skeleton />
+                            :
+                            <>
+                                {ServicesLeft.map((data, index) => (
+                                    <div key={index} className={`${styles.reasonTabHeight} row`}>
+                                        <ServiceCard HeaderTxt={data.title} Icon={data.icon.name} ParagraphTxt={data.content} />
+                                    </div>
+                                ))}
+                            </>}
                     </div>
 
                     <div className='col-lg-6 col-12 d-flex align-items-center my-5'>
@@ -33,11 +40,16 @@ function ServicesInfo({ ServicesLeft, ServicesRight }: serviceInfoProps) {
                     </div>
 
                     <div className='col-lg-3 col-12 '>
-                        {ServicesRight.map((data, index) => (
-                            <div key={index} className={`${styles.reasonTabHeight} row`}>
-                                <ServiceCard HeaderTxt={data.title} Icon={data.icon.name} ParagraphTxt={data.content} />
-                            </div>
-                        ))}
+                        {isLoading ?
+                            <Skeleton />
+                            :
+                            <>
+                                {ServicesRight.map((data, index) => (
+                                    <div key={index} className={`${styles.reasonTabHeight} row`}>
+                                        <ServiceCard HeaderTxt={data.title} Icon={data.icon.name} ParagraphTxt={data.content} />
+                                    </div>
+                                ))}
+                            </>}
                     </div>
 
                 </div>

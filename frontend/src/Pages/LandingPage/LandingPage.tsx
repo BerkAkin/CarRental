@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import style from './styles.module.css'
+import styles from './styles.module.css'
 import LandingInfo from '../../Components/LandingInfo/LandingInfo';
 import WhyInfo from '../../Components/WhyInfo/WhyInfo'
 import ServicesInfo from '../../Components/ServicesInfo/ServicesInfo';
@@ -17,6 +17,7 @@ function LandingPage() {
 
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +28,9 @@ function LandingPage() {
       catch (err) {
         setError("Anasayfada bir hata meydana geldi. Lütfen yöneticinize başvurun");
         console.error(error);
+      }
+      finally {
+        setIsLoading(false);
       }
     }
     fetchData();
@@ -40,15 +44,15 @@ function LandingPage() {
   const groupedService = groupInThrees(services);
 
 
-  if (error) return <p>{error}</p>
+  if (error) return (<div className={`${styles.skeletonContainer}`}>{error}</div>)
+
 
   return (
-    <div className={`${style.innerContainerSizing} pt-5`}>
-
-      <LandingInfo Text={mainText} />
-      <WhyInfo ImgURL="/static/whyone.jpg" Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
-      <WhyInfo ImgURL="/static/whytwo.jpg" InfoBars={groupedData[1] || []} Align={true} />
-      <ServicesInfo ServicesLeft={groupedService[0] || []} ServicesRight={groupedService[1] || []} />
+    <div className={`${styles.innerContainerSizing} pt-5`}>
+      <LandingInfo isLoading={isLoading} Text={mainText} />
+      <WhyInfo isLoading={isLoading} ImgURL="/static/whyone.jpg" Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
+      <WhyInfo isLoading={isLoading} ImgURL="/static/whytwo.jpg" InfoBars={groupedData[1] || []} Align={true} />
+      <ServicesInfo isLoading={isLoading} ServicesLeft={groupedService[0] || []} ServicesRight={groupedService[1] || []} />
 
       <div className='my-3 pt-5'>
         {

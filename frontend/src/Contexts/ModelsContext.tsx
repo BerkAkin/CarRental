@@ -45,6 +45,7 @@ export const ModelsContextProvider = ({ children }: any) => {
 
     const [models, setModels] = useState<Model>();
     const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<null | boolean>(true);
     const [modelCurrentPage, setModelCurrentPage] = useState<number>(1);
     const [searchText, setSearchText] = useState<string>("");
 
@@ -74,6 +75,7 @@ export const ModelsContextProvider = ({ children }: any) => {
     };
 
     const fetchModels = useCallback(async (page: number = modelCurrentPage, search: string = searchText) => {
+        setIsLoading(true)
         try {
             const { data, status }: any = await apiService(endpoints.models + `?query=${search}&pageNumber=${page}`, "GET",)
             setModels(data);
@@ -81,13 +83,17 @@ export const ModelsContextProvider = ({ children }: any) => {
             console.log(error);
             setError("Modeller yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
         }
-
-    }, [])
+        finally {
+            setIsLoading(false)
+        }
+    }, [modelCurrentPage, searchText])
 
 
     useEffect(() => {
         fetchModels(modelCurrentPage, searchText);
-    }, [modelCurrentPage, searchText, fetchModels]);
+    }, [fetchModels]);
+
+
 
 
     const values = useMemo(() => ({
@@ -97,7 +103,8 @@ export const ModelsContextProvider = ({ children }: any) => {
         fetchModels,
         models,
         error,
-    }), [models, error]);
+        isLoading
+    }), [models, error, isLoading]);
 
 
     return (
