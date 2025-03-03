@@ -13,6 +13,7 @@ import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import ListElement from '../../Components/ListElement/ListElement';
 import Icon from '../../Components/Icon/Icon';
+import SkeletonDetail from '../../Components/Skeletons/SkeletonDetail/SkeletonDetail';
 
 interface ModelDetailsProps {
     id: number,
@@ -47,6 +48,7 @@ function ModelDetailPage() {
     const { slug } = useParams();
     const [modelDetail, setModelDetail] = useState<ModelDetailsProps>();
     const [error, setError] = useState<string>("");
+    const [isloading, SetIsLoading] = useState<null | boolean>(true);
     const otherFeatures = modelDetail?.otherFeatures.split(",").map(service => service.trim());
     const otherServices = modelDetail?.otherServices.split(",").map(service => service.trim());
 
@@ -58,6 +60,8 @@ function ModelDetailPage() {
             } catch (error) {
                 setError("Model detaylarını görüntülerken bir hata meydana geldi. Lütfen yöneticinize başvurun");
                 console.error(error);
+            } finally {
+                SetIsLoading(false);
             }
         }
         getDetail();
@@ -65,10 +69,12 @@ function ModelDetailPage() {
 
 
     if (error) return <p>{error}</p>
+    if (isloading) return <SkeletonDetail />
 
     return (
         <>
-            <div className='container my-5 py-5 '>
+
+            <div className={`${styles.innerContainer} container my-5 py-5`}>
                 <div className='row'>
                     <div className='col-12'>
                         <h2>{modelDetail?.fuelType.fuel} – {modelDetail?.gearType.gear} {modelDetail?.brandName} {modelDetail?.modelName}</h2>
