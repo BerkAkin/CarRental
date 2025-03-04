@@ -11,6 +11,8 @@ import { StatusHandler } from '../../common/StatusHandler';
 import ConfirmationPopup from '../../Components/ConfirmationPopup/ConfirmationPopup';
 import { useConfirmContext } from '../../Contexts/ConfirmationContext';
 import userCommentValidationSchema from './UserCommentValidationSchema';
+import SkeletonCard from '../../Components/Skeletons/SkeletonCard/SkeletonCard';
+import Skeleton from '../../Components/Skeletons/Skeleton/Skeleton';
 
 
 interface CommentFormProps {
@@ -37,6 +39,7 @@ function UserPage() {
 
     const [initialCommentValues, setInitialCommentValues] = useState<CommentFormProps>();
     const [initialFavorites, setinitialFavorites] = useState<FavoriteModels[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
@@ -53,6 +56,9 @@ function UserPage() {
         } catch (error) {
             setError("Kullanıcı yüklenirken bir hata meydana geldi. Lütfen yöneticinize başvurun");
 
+        }
+        finally {
+            setIsLoading(false);
         }
 
     }
@@ -138,29 +144,41 @@ function UserPage() {
                             <div className="tab-pane" id="disabled-tabpanel-1" role="tabpanel" aria-labelledby="disabled-tab-1">
                                 <div className='container-fluid'>
                                     <div className='row pt-3'><h3>Favorilerim</h3><hr /></div>
-                                    <div className={`${styles.modelsList, styles.bgColor} row overflow-y-scroll border my-2 p-3`}>
-                                        {(
-                                            initialFavorites?.map((favorite: FavoriteModels) => {
-                                                return (
+                                    {isLoading ?
+                                        <div className={`${styles.modelsList, styles.bgColor} row overflow-y-scroll border my-2 p-3`}>
+                                            <div className='col-sm-6 col-lg-4 col-xxl-2 col-12 mt-3'>
+                                                <SkeletonCard />
+                                            </div>
+                                            <div className='col-sm-6 col-lg-4 col-xxl-2 col-12 mt-3'>
+                                                <SkeletonCard />
+                                            </div>
+                                        </div>
+                                        :
+                                        <div className={`${styles.modelsList, styles.bgColor} row overflow-y-scroll border my-2 p-3`}>
+                                            {(
+                                                initialFavorites?.map((favorite: FavoriteModels) => {
+                                                    return (
 
-                                                    <div className='col-sm-6 col-lg-4 col-xxl-2 col-12 mt-3'>
+                                                        <div className='col-sm-6 col-lg-4 col-xxl-2 col-12 mt-3'>
 
-                                                        <FavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
-                                                            brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
-                                                            imageDirectory={favorite.imageDirectory} modelName={favorite.modelName} personCount={favorite.personCount}
-                                                            price={favorite.price} slug={favorite.slug}
-                                                        />
-                                                    </div>
+                                                            <FavoriteCard removeFavorites={removeFavorite} modelId={favorite.modelId}
+                                                                brandName={favorite.brandName} carType={favorite.carType} gearType={favorite.gearType}
+                                                                imageDirectory={favorite.imageDirectory} modelName={favorite.modelName} personCount={favorite.personCount}
+                                                                price={favorite.price} slug={favorite.slug}
+                                                            />
+                                                        </div>
 
-                                                )
-                                            })
-                                        )}
-                                    </div>
+                                                    )
+                                                })
+                                            )}
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div className="tab-pane" id="disabled-tabpanel-2" role="tabpanel" aria-labelledby="disabled-tab-2">
                                 <div className='container-fluid'>
                                     <div className='row pt-3'><h3>Yorumum</h3><hr /></div>
+
                                     <div className={`${styles.modelsList, styles.bgColor} row border my-2 p-3`}>
                                         <div>
                                             {initialCommentValues ? (
@@ -207,7 +225,11 @@ function UserPage() {
 
                                                 </Formik>
                                             ) : (
-                                                <p>Bilgiler yükleniyor...</p>
+                                                <div className={`${styles.modelsList, styles.bgColor} row border my-2 p-3`}>
+                                                    <div>
+                                                        <Skeleton />
+                                                    </div>
+                                                </div>
                                             )}
                                         </div>
                                     </div>
