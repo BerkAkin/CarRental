@@ -11,9 +11,9 @@ function TopNav() {
             <ul className="ms-sm-2 d-flex">
               <a href="mailto:empty" style={{ color: "white", textDecoration: "none", fontSize: "0.8em", marginTop: "2px" }}>emptyMail</a>
               <div className="vr ms-2 me-2 ms-sm-4 me-sm-3"></div>
-              <ListElement text="emptyPhoneNumber" fs="0.8em" boldness="500" href="" color="white" isHover={false} />
+              <ListElement text="emptyPhoneNumber" fs="0.8em" boldness="500" href=" " color="white" isHover={false} />
               <div className="vr ms-2 me-2 ms-sm-3 me-sm-3"></div>
-              <ListElement text=" WhatsApp" fs="0.8em" boldness="500" href="" color="white" isHover={false} />
+              <ListElement text=" WhatsApp" fs="0.8em" boldness="500" href=" " color="white" isHover={false} />
             </ul>
           </div>
         </div>

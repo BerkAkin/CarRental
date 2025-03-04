@@ -2,6 +2,10 @@
   text-decoration: none;
 }
 
+.listItem .activeLink {
+  color: red !important;
+  font-weight: bold !important;
+}
 
 .listItem:hover a {
   color: var(--hover-color) !important;

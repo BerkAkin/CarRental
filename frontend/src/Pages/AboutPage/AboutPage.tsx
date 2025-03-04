@@ -12,10 +12,10 @@ function AboutPage() {
     return (
         <>
             <div className={`${styles.innerContainer} container mt-4 pt-3`}>
-                <div className='row'>
+                {/* <div className='row'>
                     <h2 className={`${styles.header}`}>Biz Kimiz ?</h2>
                     <hr></hr>
-                </div>
+                </div> */}
                 <div className='row mt-4'>
                     <div className='col-12 d-flex justify-content-center'>
                         <Image Height='420' Width='1300' URL={"/static/banner.jpg"} Alt='banner'></Image>
