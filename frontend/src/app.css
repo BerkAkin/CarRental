@@ -12,4 +12,5 @@ body {
 @font-face {
     font-family: 'DmSansLight';
     src: local('DMSans'), url(./fonts/DMSans.ttf) format('truetype');
+    font-display: block;
 }
