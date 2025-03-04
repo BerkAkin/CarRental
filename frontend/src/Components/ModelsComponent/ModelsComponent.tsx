@@ -32,10 +32,10 @@ function ModelsComponent() {
 
 
             <div className={`${styles.mainContainer} container mt-4 pt-3`}>
-                <div className='row'>
+                {/* <div className='row'>
                     <h2 style={{ color: "#7A7A7A" }}>Modeller</h2>
                     <hr></hr>
-                </div>
+                </div> */}
                 <div className={`row mt-4`}>
                     <div className='col-12 col-lg-2 mt-lg-4 p-0'>
                         <div className={`${styles.searchCard} `}>
