@@ -1,5 +1,6 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import ListElement from '../../ListElement/ListElement';
+import styles from './styles.module.css'
 
 type linkItemObj = {
     Text: string;
@@ -11,6 +12,14 @@ interface ListCompProps {
     Items: linkItemObj[]
 }
 
+const scrollTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+}
+
+
 function ListComponent({ Title, Items }: ListCompProps) {
     return (
         <div className="col-12 col-sm-6 col-md-3 mb-3">
@@ -20,8 +29,8 @@ function ListComponent({ Title, Items }: ListCompProps) {
                     <hr />
                 </div>
                 {Items.map((item, index) => (
-                    <div className='col my-2' key={index}>
-                        <ListElement text={item.Text} fs="0.9em" href={item.Href} color="#7A7A7A" isHover={true} hoverColor='#E00000' />
+                    <div className={`col my-2`} key={index} onClick={scrollTop}>
+                        <Link className={`${styles.listColorsOverride}`} to={item.Href}>{item.Text}</Link>
                     </div>
                 ))}
             </div>
