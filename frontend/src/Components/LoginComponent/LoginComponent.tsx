@@ -8,6 +8,7 @@ import { endpoints } from '../../api/apiConfig';
 import { useAuthContext } from '../../Contexts/AuthContext';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
+import forgetValidationSchema from './ForgetValidationSchema';
 
 
 interface LoginProps {
@@ -19,11 +20,13 @@ interface ResetProps {
     email: string;
 }
 
-const initialValues = {
+const initialLoginValues = {
     email: '',
     password: ''
 }
-
+const initialForgetValues = {
+    email: ''
+}
 
 function LoginComponent() {
 
@@ -93,96 +96,118 @@ function LoginComponent() {
     }
 
     return (
+        <>
+            {isReset ?
+                <Formik initialValues={initialForgetValues} validationSchema={forgetValidationSchema} onSubmit={handleSubmit}>
+                    {({ isSubmitting }) => (
+                        <Form>
+                            <div className={`${styles.outerContainer} `}>
+                                <div className={`${styles.Form}`}>
+                                    <div className='container w-100 h-100'>
+                                        <div className={`${styles.headerArea} row`}>
+                                            <div className='col-6 d-flex justify-content-start align-items-center'>
+                                                <p className={`${styles.headerText} ps-1 pt-4`}>Parola Sıfırla</p>
+                                            </div>
+                                            <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
+                                                <div>
+                                                    <Image URL={"/static/logo.png"} Width='150px'></Image>
+                                                </div>
 
+                                            </div>
+                                        </div>
 
-        <Formik initialValues={initialValues} validationSchema={loginValidationSchema} onSubmit={handleSubmit}>
-            {({ isSubmitting }) => (
-                <Form>
-                    <div className={`${styles.outerContainer} `}>
-                        <div className={`${styles.Form}`}>
-                            <div className='container w-100 h-100'>
-                                <div className={`${styles.headerArea} row`}>
-                                    <div className='col-6 d-flex justify-content-start align-items-center'>
-                                        <p className={`${styles.headerText} ps-1 pt-4`}>{isReset ? "Parola Sıfırla" : "Giriş Yap"}</p>
-                                    </div>
-                                    <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
-                                        <div>
-                                            <Image URL={"/static/logo.png"} Width='150px'></Image>
+                                        <div className='row mt-4'>
+                                            <div className='col-12'>E-Posta<span className={styles.error}> *</span>
+                                                <ErrorMessage name="email" component="span" className={`${styles.error}`} />
+                                            </div>
+                                        </div>
+                                        <div className='row mt-3'>
+                                            <div className='col-12'>
+                                                <Field className={`${styles.inputs}`} type="email" id="email" name="email" />
+                                            </div>
+                                        </div>
+                                        <div className='row mt-4'>
+                                            <div className='col-12 '>
+                                                <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>PAROLA SIFIRLA</button>
+                                            </div>
+                                        </div>
+                                        <div className='row mt-3'>
+                                            <div className='col-6 ps-3 d-flex justify-content-start'>
+                                                <button className={`${styles.operationBtn}`} onClick={handleIsReset}>Giriş Yap</button>
+                                            </div>
                                         </div>
 
                                     </div>
-                                </div>
-                                {isReset ?
-                                    (
-                                        <>
-                                            <div className='row mt-4'>
-                                                <div className='col-12'>E-Posta<span className={styles.error}> *</span>
-                                                    <ErrorMessage name="email" component="span" className={`${styles.error}`} />
-                                                </div>
-                                            </div>
-                                            <div className='row mt-3'>
-                                                <div className='col-12'>
-                                                    <Field className={`${styles.inputs}`} type="email" id="email" name="email" />
-                                                </div>
-                                            </div>
-                                            <div className='row mt-4'>
-                                                <div className='col-12 '>
-                                                    <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>PAROLA SIFIRLA</button>
-                                                </div>
-                                            </div>
-                                            <div className='row mt-4'>
-                                                <div className='col-6 ps-3 d-flex justify-content-start'>
-                                                    <button className={`${styles.operationBtn}`} onClick={handleIsReset}>Giriş Yap</button>
 
-                                                </div>
+                                </div>
+                            </div>
+                        </Form>
+                    )}
+
+                </Formik>
+
+                :
+
+                <Formik initialValues={initialLoginValues} validationSchema={loginValidationSchema} onSubmit={handleSubmit}>
+                    {({ isSubmitting }) => (
+                        <Form>
+                            <div className={`${styles.outerContainer} `}>
+                                <div className={`${styles.Form}`}>
+                                    <div className='container w-100 h-100'>
+                                        <div className={`${styles.headerArea} row`}>
+                                            <div className='col-6 d-flex justify-content-start align-items-center'>
+                                                <p className={`${styles.headerText} ps-1 pt-4`}>{isReset ? "Parola Sıfırla" : "Giriş Yap"}</p>
                                             </div>
-                                        </>
-                                    )
-                                    :
-                                    (
-                                        <>
-                                            <div className='row '>
-                                                <div className='col-12'>E-Posta<span className={styles.error}> *</span>
-                                                    <ErrorMessage name="email" component="span" className={`${styles.error}`} />
+                                            <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
+                                                <div>
+                                                    <Image URL={"/static/logo.png"} Width='150px'></Image>
                                                 </div>
+
                                             </div>
-                                            <div className='row'>
-                                                <div className='col-12'>
-                                                    <Field className={`${styles.inputs}`} type="email" id="email" name="email" />
-                                                </div>
+                                        </div>
+                                        <div className='row '>
+                                            <div className='col-12'>E-Posta<span className={styles.error}> *</span>
+                                                <ErrorMessage name="email" component="span" className={`${styles.error}`} />
                                             </div>
-                                            <div className='row mt-3'>
-                                                <div className='col-12'>Parola<span className={styles.error}> *</span>
-                                                    <ErrorMessage name="password" component="span" className={`${styles.error}`} />
-                                                </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-12'>
+                                                <Field className={`${styles.inputs}`} type="email" id="email" name="email" />
                                             </div>
-                                            <div className='row'>
-                                                <div className='col-12'>
-                                                    <Field className={`${styles.inputs}`} type="text" id="password" name="password" />
-                                                </div>
+                                        </div>
+                                        <div className='row mt-3'>
+                                            <div className='col-12'>Parola<span className={styles.error}> *</span>
+                                                <ErrorMessage name="password" component="span" className={`${styles.error}`} />
                                             </div>
-                                            <div className='row mt-4'>
-                                                <div className='col-12 '>
-                                                    <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>GİRİŞ YAP</button>
-                                                </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className='col-12'>
+                                                <Field className={`${styles.inputs}`} type="text" id="password" name="password" />
                                             </div>
-                                            <div className='row mt-3'>
-                                                <div className='col-6 ps-3 d-flex justify-content-start'>
-                                                    <button className={`${styles.operationBtn}`} onClick={handleIsReset}>Parolamı Unuttum</button>
-                                                </div>
+                                        </div>
+                                        <div className='row mt-4'>
+                                            <div className='col-12 '>
+                                                <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>GİRİŞ YAP</button>
                                             </div>
-                                        </>
-                                    )}
+                                        </div>
+                                        <div className='row mt-3'>
+                                            <div className='col-6 ps-3 d-flex justify-content-start'>
+                                                <button className={`${styles.operationBtn}`} onClick={handleIsReset}>Parolamı Unuttum</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                             </div>
 
-                        </div>
-                    </div>
+                        </Form>
 
-                </Form>
+                    )}
 
-            )}
-
-        </Formik>
+                </Formik>
+            }
+        </>
 
 
 
