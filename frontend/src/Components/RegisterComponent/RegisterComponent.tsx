@@ -6,6 +6,7 @@ import apiService from '../../api/apiService';
 import { endpoints } from '../../api/apiConfig';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
+import { useNavigate } from 'react-router-dom';
 
 
 interface RegisterProps {
@@ -20,6 +21,7 @@ interface RegisterProps {
 
 function RegisterComponent() {
     const { showToast } = useToastManagerContext();
+    const navigate = useNavigate();
 
     const initialValues: RegisterProps = {
         email: '',
@@ -35,6 +37,10 @@ function RegisterComponent() {
             setSubmitting(true);
             setTimeout(() => {
                 setSubmitting(false);
+            }, 2000);
+            StatusHandler(status, data, showToast)
+            setTimeout(() => {
+                window.location.reload();
             }, 2000);
 
         } catch (error) {
