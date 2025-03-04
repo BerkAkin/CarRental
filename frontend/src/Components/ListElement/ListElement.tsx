@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Image from "../Image/Image";
 
 
@@ -32,7 +32,7 @@ function ListElement({ text, href, isHover, hoverColor, color, fs, boldness }: L
 
   return (
     <li onClick={scrollTop} className={`list-group-item ${styles.listItem}`}>
-      <Link style={linkStyle} className={` ${styles.linkBg}`} to={`/` + href}>{text}</Link>
+      <NavLink style={linkStyle} className={({ isActive }) => `${styles.linkBg} ${isActive ? styles.activeLink : ""}`} to={`/${href}`}>{text}</NavLink>
     </li>
   );
 }
