@@ -77,7 +77,7 @@ export default function SimpleSlider<T>({ header, items, renderFunction, slidesT
 
     return (
         <>
-            <div className="container mt-4 pt-5">
+            <div className="container my-4 py-5">
                 <div className="row mb-3 ms-1">
                     <h2>{header}</h2>
                 </div>
