@@ -5,7 +5,7 @@ import ListElement from "../../ListElement/ListElement";
 function TopNav() {
   return (
     <>
-      <div className={`${styles.navbarBg} container-fluid`}>
+      <div className={`${styles.navbarStyling} container-fluid`}>
         <div className="container pt-2 ms-sm-5 ">
           <div className="row pt-1 ">
             <ul className="ms-sm-2 d-flex">
