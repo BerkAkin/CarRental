@@ -14,3 +14,15 @@ body {
     src: local('DMSans'), url(./fonts/DMSans.ttf) format('truetype');
     font-display: block;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #962222;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b62828;
+}
