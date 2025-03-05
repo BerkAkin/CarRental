@@ -26,6 +26,7 @@
     color: #3f3f3f !important;
 }
 
-.innerBG {
+.inner {
     background-color: white;
+    min-height: 700px;
 }
