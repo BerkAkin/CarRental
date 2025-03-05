@@ -6,6 +6,7 @@ import apiService from '../../../api/apiService';
 import { endpoints } from '../../../api/apiConfig';
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../../common/StatusHandler';
+import { useNavigate } from 'react-router-dom';
 
 interface BotNavProps {
   openModal: (content: 'login' | 'register') => void;
@@ -15,6 +16,8 @@ function BotNav({ openModal }: BotNavProps) {
   const { showToast } = useToastManagerContext();
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("accessToken");
@@ -28,6 +31,7 @@ function BotNav({ openModal }: BotNavProps) {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("UserInfo");
       StatusHandler(status, data, showToast)
+      navigate("/")
       setTimeout(() => {
         window.location.reload();
       }, 1000);
@@ -46,7 +50,7 @@ function BotNav({ openModal }: BotNavProps) {
       <nav className={`${styles.botNav} navbar navbar-expand-lg`}>
         <div className="container-fluid">
           <a className="navbar-brand"> <Image URL={"/static/logo.png"} Width="160" Height="40" /></a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button className={`${styles.navbarToggleCustom} navbar-toggler`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">

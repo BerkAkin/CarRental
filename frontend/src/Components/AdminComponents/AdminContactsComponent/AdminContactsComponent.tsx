@@ -9,7 +9,7 @@ function AdminContactsComponent() {
 
     if (error) return <p>{error}</p>
     return (
-        <div className={`${styles.innerBG} my-2 border table-responsive`}>
+        <div className={`${styles.inner} my-2 border table-responsive`}>
             <table className={`${styles.tableFontSize} table-striped table-hover table mt-2 `}>
                 <thead>
                     <tr>

@@ -14,7 +14,7 @@ function AdminModelsComponent({ addNewFunc }: any) {
     if (error) return <p>{error}</p>
 
     return (
-        <div className={`${styles.innerBG} border container my-2`}>
+        <div className={`${styles.inner} border container my-2`}>
             <div className='d-flex justify-content-end my-4'>
                 <button onClick={addNewFunc} className={`${styles.addBtn}`} style={{ width: "150px" }}>Yeni Model Ekle</button>
             </div>

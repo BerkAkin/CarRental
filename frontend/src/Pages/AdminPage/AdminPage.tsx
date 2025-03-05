@@ -27,28 +27,28 @@ function AdminPage() {
     return (
         <>
             <ConfirmationPopup />
-            <div className={`container-fluid mt-4`}>
-                <div className='row'>
-                    <div className='col-md-2 col-12 border-end'>
-                        <ul className="nav nav-tabs d-md-flex flex-md-column border-none" role="tablist">
-                            <li className="nav-item " >
-                                <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">Bilgilerim</a>
+            <div className={`container-fluid`}>
+                <div className={` row`}>
+                    <div className={`col-md-1 col-12 mt-4`}>
+                        <ul className="nav d-md-flex flex-md-column pb-1" role="tablist">
+                            <li className="nav-item" >
+                                <a className={`${styles.navBtn} nav-link active`} id="disabled-tab-0" data-bs-toggle="tab" href="#disabled-tabpanel-0">BİLGİLERİM</a>
                             </li>
                             <li className="nav-item" >
-                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-1" data-bs-toggle="tab" href="#disabled-tabpanel-1">Site Ayarları</a>
+                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-1" data-bs-toggle="tab" href="#disabled-tabpanel-1">SİTE AYARLARI</a>
                             </li>
                             <li className="nav-item">
-                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-2" data-bs-toggle="tab" href="#disabled-tabpanel-2">Modeller</a>
+                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-2" data-bs-toggle="tab" href="#disabled-tabpanel-2">MODELLER</a>
                             </li>
                             <li className="nav-item">
-                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-3" data-bs-toggle="tab" href="#disabled-tabpanel-3">Yorumlar</a>
+                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-3" data-bs-toggle="tab" href="#disabled-tabpanel-3">YORUMLAR</a>
                             </li>
                             <li className="nav-item">
-                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-4" data-bs-toggle="tab" href="#disabled-tabpanel-4">İletişim İstekleri</a>
+                                <a className={`${styles.navBtn} nav-link`} id="disabled-tab-4" data-bs-toggle="tab" href="#disabled-tabpanel-4">İLETİŞİM</a>
                             </li>
                         </ul>
                     </div>
-                    <div className={`${styles.sectionBG} col-md-10 col-12`}>
+                    <div className={`${styles.section} col-md-11 col-12 border-start`}>
                         <div>
                             <div className={`${styles.contentPanelWrapper} tab-content`} id="tab-content">
                                 <div className="tab-pane active" id="disabled-tabpanel-0" role="tabpanel" aria-labelledby="disabled-tab-0">

@@ -71,7 +71,7 @@ function ContactPage() {
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 {({ isSubmitting }) => (
                     <Form>
-                        <div className='container mt-md-4'>
+                        <div className='container my-5'>
                             <div className='row'>
                                 <div className={`${styles.headerColoring} col-md-3 col-12 d-flex flex-column justify-content-center`}>
                                     <div className='row'>
@@ -98,7 +98,7 @@ function ContactPage() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className={`col-md-9 col-12 border-start d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
+                                <div className={`col-md-9 col-12 d-flex flex-column justify-content-center  ${styles.bodyColoring}`}>
                                     <div className='container '>
                                         <div className='row'>
                                             <p ><span className={styles.error}>*</span> Zorunlu Alanlar</p>

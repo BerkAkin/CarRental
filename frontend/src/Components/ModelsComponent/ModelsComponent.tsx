@@ -31,19 +31,19 @@ function ModelsComponent() {
         <>
 
 
-            <div className={`${styles.mainContainer} container mt-4 pt-3`}>
+            <div className={`${styles.mainContainer} container my-lg-4 py-3`}>
                 {/* <div className='row'>
                     <h2 style={{ color: "#7A7A7A" }}>Modeller</h2>
                     <hr></hr>
                 </div> */}
-                <div className={`row mt-4`}>
+                <div className={`row my-lg-4`}>
                     <div className='col-12 col-lg-2 mt-lg-4 p-0'>
                         <div className={`${styles.searchCard} `}>
                             <Formik initialValues={SearchInitialValues} onSubmit={handleSearchSubmit}>
                                 <Form>
-                                    <div className='text-center pt-2 fs-5'><label htmlFor='searchText'>Model Arama</label></div>
+                                    <div className='text-center pt-2 fs-5'><label htmlFor='searchText'>Araç Ara</label></div>
                                     <div className={`${styles.searchWrapper} p-2 `}>
-                                        <Field placeholder="Marka ya da model girin" className={`${styles.inputAreas} ps-1`} name="searchText" />
+                                        <Field placeholder="Marka ya da model" className={`${styles.inputAreas} ps-1`} name="searchText" />
                                     </div>
                                     <div className='d-flex justify-content-center p-2'>
                                         <button className={`${styles.btn} w-100 `} type='submit'>Ara</button>

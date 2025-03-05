@@ -1,12 +1,21 @@
-.navBtn {
-    color: #1A2B48 !important;
-    text-decoration: none !important;
-    font-size: 0.9em !important;
-    font-weight: 700 !important;
-    border-radius: 0 !important;
-    border: none !important;
-}
+ .navBtn {
+     text-decoration: none !important;
+     color: #1a2b48 !important;
+     font-weight: 700 !important;
+     border-radius: 0 !important;
+     border: none !important;
+     font-size: 0.9rem;
+ }
 
-.sectionBG {
-    background-color: rgb(248, 248, 248);
-}
+ .section {
+     background-color: rgb(248, 248, 248);
+     min-height: 1000px;
+ }
+
+ .navBtn:hover {
+     color: red !important;
+ }
+
+ .contentSizing {
+     min-height: 1000px;
+ }

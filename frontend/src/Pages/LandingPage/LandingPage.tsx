@@ -48,7 +48,7 @@ function LandingPage() {
 
 
   return (
-    <div className={`${styles.innerContainerSizing} pt-5`}>
+    <div className={`${styles.innerContainerSizing} py-5`}>
       <LandingInfo isLoading={isLoading} Text={mainText} />
       <WhyInfo isLoading={isLoading} ImgURL="/static/whyone.jpg" Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
       <WhyInfo isLoading={isLoading} ImgURL="/static/whytwo.jpg" InfoBars={groupedData[1] || []} Align={true} />
