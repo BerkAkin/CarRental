@@ -36,8 +36,8 @@ function Footer() {
 
   return (
     <>
-      <div className='mt-5 pt-5'></div>
-      <div className={`${styles.footerBg} mt-5 pt-5 container-fluid`}>
+      <div className=''></div>
+      <div className={`${styles.footerBg}  pt-5 container-fluid`}>
         <footer className="container py-5 bg-light">
           <div className='row mb-5'>
             <div className='col-md-3 col-12 justify-content-center d-flex '>
