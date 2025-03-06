@@ -10,7 +10,7 @@ function AdminContactsComponent() {
     if (error) return <p>{error}</p>
     return (
         <div className={`${styles.inner} my-2 border table-responsive`}>
-            <table className={`${styles.tableFontSize} table-striped table-hover table mt-2 `}>
+            <table className={`${styles.tableFontSize} table-hover table mt-2 border`}>
                 <thead>
                     <tr>
                         <th scope="col" className=" col-2">Ad Soyad</th>
@@ -41,8 +41,8 @@ function AdminContactsComponent() {
                 </tbody>
             </table>
             <div className='d-flex justify-content-end my-4'>
-                <button onClick={handlePreviousPage} className={`${styles.btn}`} style={{ width: "150px" }}>Önceki Sayfa</button>
-                <button onClick={handleNextPage} className={`${styles.btn} ms-3`} style={{ width: "150px" }}>Sonraki Sayfa</button>
+                <button onClick={handlePreviousPage} className={`${styles.btn}`} style={{ width: "40px" }}>←</button>
+                <button onClick={handleNextPage} className={`${styles.btn} ms-3`} style={{ width: "40px" }}>→</button>
             </div>
         </div>
     )
