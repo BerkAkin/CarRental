@@ -1,50 +1,48 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../Contexts/AuthContext';
 import AdminPage from '../AdminPage/AdminPage';
-import ErrorPage from '../ErrorPage/ErrorPage';
+import ErrorPage from '../ErrorPage/InfoPage';
 import UserPage from '../UserPage/UserPage';
-
-
 
 function ProfilePage() {
 
     const { checkUser } = useAuthContext();
     const [isUserValid, setIsUserValid] = useState<boolean | null>(null);
     const [roleId, setRoleId] = useState<number | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    useEffect(() => {
 
-        const checkUserStatus = async () => {
+    const checkUserStatus = async () => {
+        try {
             const result = await checkUser();
             setIsUserValid(result);
-        };
+            const userInfo = JSON.parse(localStorage.getItem("UserInfo") || "{}");
+            setRoleId(userInfo?.roleId || null);
+        } catch (error) {
+            console.error("Kullanıcı doğrulama hatası:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-        const userInfo = JSON.parse(localStorage.getItem("UserInfo") || "{}");
-        setRoleId(userInfo?.roleId);
+    useEffect(() => {
         checkUserStatus();
     }, []);
 
-    if (isUserValid) {
-        if (roleId === 1) {
 
-            return (
-                <>
-                    <AdminPage />
-                </>
-            )
-
-        }
-        else if (roleId === 2) {
-            return (
-                <>
-                    <UserPage />
-                </>
-            )
-        }
+    if (isLoading) {
+        return <ErrorPage Type="Bilgi" Message="Veriler Yükleniyor, Lütfen Bekleyin." />;
     }
-    return <ErrorPage ErrorMessage='Sayfayı görüntülemek için yetkiniz olduğundan emin olun veya giriş yapın' />;
 
+    if (isUserValid === false || isUserValid === null) {
+        return <ErrorPage Type="Hata" Message="Lütfen giriş yapınız ya da yetkiniz olduğundan emin olunuz." />;
+    }
 
+    if (roleId === 1) {
+        return <AdminPage />;
+    } else {
+        return <UserPage />;
+    }
 }
 
-export default ProfilePage
+export default ProfilePage;
