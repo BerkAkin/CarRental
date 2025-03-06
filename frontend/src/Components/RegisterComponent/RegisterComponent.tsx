@@ -119,7 +119,7 @@ function RegisterComponent() {
                                     </div>
                                     <div className='row'>
                                         <div className='col-12'>
-                                            <Field className={`${styles.inputs}`} type="text" id="password" name="password" />
+                                            <Field className={`${styles.inputs}`} type="password" id="password" name="password" />
                                         </div>
                                     </div>
                                     <div className='row mt-4'>
