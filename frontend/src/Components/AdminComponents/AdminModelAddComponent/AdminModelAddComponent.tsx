@@ -83,9 +83,9 @@ function AdminModelAddComponent({ cancelFunc }: any) {
     }
 
     const initialValuesOfAddCar: AddNewCarProps = {
-        fuelTypeId: 0,
-        gearTypeId: 0,
-        carTypeId: 0,
+        fuelTypeId: 1,
+        gearTypeId: 1,
+        carTypeId: 1,
         brandName: "",
         modelName: "",
         description: "",
