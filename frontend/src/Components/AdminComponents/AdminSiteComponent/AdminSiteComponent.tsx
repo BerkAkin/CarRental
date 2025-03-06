@@ -121,7 +121,7 @@ function AdminSiteComponent() {
                                     <thead>
                                         <tr>
                                             <th className='col-11'>Ana Metin İçeriği</th>
-                                            <th className='col-1 text-center'>İşlemler</th>
+                                            <th className='col-1 text-center'></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -134,7 +134,7 @@ function AdminSiteComponent() {
                                                             <Field as="textarea" id="text" name="text" className={`${styles.infosTA}`} />
                                                         </td>
                                                         <td className='border'>
-                                                            <button className={`${styles.btn}`} type="button" onClick={() => handleSubmit()}>Güncelle</button>
+                                                            <button className={`${styles.btn}`} type="button" onClick={() => handleSubmit()}>↻</button>
                                                         </td>
                                                     </>
 
@@ -164,7 +164,7 @@ function AdminSiteComponent() {
                             <tr>
                                 <th className='col-2'>Başlık</th>
                                 <th className='col-9'>İçerik</th>
-                                <th className='col-1 text-center'>İşlemler</th>
+                                <th className='col-1 text-center'></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -182,7 +182,7 @@ function AdminSiteComponent() {
                                                     <ErrorMessage name="content" component="span" className={styles.error} />
                                                 </td>
                                                 <td className='border'>
-                                                    <button className={styles.btn} type="button" onClick={() => handleSubmit()}>Güncelle</button>
+                                                    <button className={styles.btn} type="button" onClick={() => handleSubmit()}>↻</button>
                                                 </td>
                                             </>
                                         )}
@@ -209,7 +209,7 @@ function AdminSiteComponent() {
                                             <th className='col-7'>İçerik</th>
                                             <th className='col-1 text-center'>İkon</th>
                                             <th className='col-1 text-center'>İkon Değiştir</th>
-                                            <th className='col-1 text-center'>İşlemler</th>
+                                            <th className='col-1 text-center'></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -241,7 +241,7 @@ function AdminSiteComponent() {
                                                                 </Field>
                                                             </td>
                                                             <td className='border'>
-                                                                <button className={styles.btn} type="button" onClick={() => handleSubmit()}>Güncelle</button>
+                                                                <button className={styles.btn} type="button" onClick={() => handleSubmit()}>↻</button>
                                                             </td>
 
                                                         </>
