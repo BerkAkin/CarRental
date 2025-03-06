@@ -77,52 +77,13 @@
     background-color: #f32b2b;
 }
 
-.error {
-    color: red;
-    font-size: 0.8rem;
-}
 
 table {
     max-width: 100%;
 }
 
-.innerBG {
-    background-color: white;
-}
+
 
 .imgDivision {
     max-width: 115px;
 }
-
-/* @media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
-
-    .inputs {
-        height: 25px;
-    }
-
-    .inputsTA {
-        height: 25px;
-        max-height: 100px;
-    }
-
-    table,
-    thead,
-    tbody,
-    th,
-    td,
-    tr {
-        display: block;
-    }
-
-    thead tr {
-        position: absolute;
-    }
-
-    td {
-        position: relative;
-        padding-left: 50%;
-    }
-
-
-} */

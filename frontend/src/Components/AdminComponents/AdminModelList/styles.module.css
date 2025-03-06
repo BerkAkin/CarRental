@@ -1,0 +1,37 @@
+.btn {
+    outline: none;
+    border: none;
+    background-color: #1A2B48;
+    color: white;
+    padding: 5px;
+    width: 40px;
+}
+
+.btn:hover {
+    background-color: #2c497c;
+}
+
+.deleteBtn {
+    outline: none;
+    border: none;
+    background-color: #E00000;
+    color: white;
+    padding: 5px;
+    width: 40px;
+
+}
+
+.deleteBtn:hover {
+    background-color: #f32b2b;
+}
+
+
+table {
+    max-width: 100%;
+}
+
+
+
+.imgDivision {
+    max-width: 115px;
+}

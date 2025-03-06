@@ -7,8 +7,8 @@ import { endpoints } from '../../../api/apiConfig'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
-import modelValidationSchema from '../AdminModelAddComponent/ModelValidationSchema'
 import { useModelsContext } from '../../../Contexts/ModelsContext'
+import modelEditValidationSchema from './ModelEditValidationSchema'
 
 
 interface ItemProp {
@@ -56,7 +56,7 @@ interface ItemProp {
 
 
 
-function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp) {
+function AdminModelEditCard({ Item, Gears, Fuels, CarTypes }: ItemProp) {
 
     const { showToast } = useToastManagerContext();
     const { showConfirmation } = useConfirmContext();
@@ -129,7 +129,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
     return (
         <>
 
-            <Formik initialValues={Item} onSubmit={onSubmitHandler} enableReinitialize>
+            <Formik initialValues={Item} onSubmit={onSubmitHandler} validationSchema={modelEditValidationSchema} enableReinitialize>
 
                 {({ handleSubmit }) => (
                     <>
@@ -222,7 +222,7 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
                                     <Field as="textarea" className={`${styles.inputsTA}`} name="otherFeatures" id="otherFeatures" />
                                 </td>
                                 <td className='col-12'>
-                                    <button type='button' onClick={() => handleSubmit()} className={styles.btn}>Güncelle</button>
+                                    <button type='button' onClick={() => handleSubmit()} className={styles.btn}>Düzenle</button>
                                     <button onClick={() => onDeleteHandler(Item.slug)} className={styles.deleteBtn}>Sil</button>
 
                                 </td>
@@ -246,4 +246,4 @@ function AdminModelEditCardComponent({ Item, Gears, Fuels, CarTypes }: ItemProp)
     )
 }
 
-export default AdminModelEditCardComponent
+export default AdminModelEditCard
