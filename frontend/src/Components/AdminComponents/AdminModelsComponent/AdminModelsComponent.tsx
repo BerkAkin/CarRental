@@ -3,6 +3,8 @@ import { useTypesContext } from '../../../Contexts/TypesContext'
 import { useModelsContext } from '../../../Contexts/ModelsContext';
 import SkeletonTable from "../../Skeletons/SkeletonTable/SkeletonTable";
 import AdminModelList from "../AdminModelList/AdminModelList";
+import { useState } from "react";
+import AdminModelEditCard from "../AdminModelEditCard/AdminModelEditCard";
 
 
 
@@ -11,6 +13,20 @@ function AdminModelsComponent({ addNewFunc }: any) {
 
     const { gears, fuels, carTypes } = useTypesContext();
     const { HandleNextModelPage, HandlePreviousModelPage, models, error, isLoading } = useModelsContext();
+
+    const [isEdit, setIsEdit] = useState(false);
+    const [model, setModel] = useState(null);
+
+    const setItemAndEditStatus = (Item: any) => {
+        setIsEdit(true);
+        setModel(Item);
+    }
+
+    const onCancelEdit = () => {
+        setIsEdit(!isEdit);
+        setModel(null);
+    }
+
 
     return (
 
@@ -24,45 +40,58 @@ function AdminModelsComponent({ addNewFunc }: any) {
                     :
                     (
                         <>
-                            <div className='d-flex justify-content-end my-4'>
-                                <button onClick={addNewFunc} className={`${styles.addBtn}`} style={{ width: "150px" }}>Yeni Model Ekle</button>
-                            </div>
+                            {isEdit ? <></> :
+                                <div className='d-flex justify-content-end my-4'>
+
+                                    <button onClick={addNewFunc} className={`${styles.addBtn}`} style={{ width: "40px" }}>+</button>
+
+                                </div>
+                            }
                             <div className='row'>
-                                {
-                                    models && gears && carTypes && fuels ?
-                                        (
-                                            <div className="table-responsive">
-                                                <table className={`${styles.tableFont} border table-hover table mt-2`}>
-                                                    <thead>
-                                                        <tr className="text-center">
+                                {isEdit ? <AdminModelEditCard CancelBtn={onCancelEdit} Gears={gears} CarTypes={carTypes} Fuels={fuels} Item={model!} /> :
 
-                                                            <th>Marka</th>
-                                                            <th>Model</th>
-                                                            <th>Tip</th>
-                                                            <th>Yakıt</th>
-                                                            <th>Şanzıman</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
+                                    <>
+                                        {
+                                            models && gears && carTypes && fuels ?
+                                                (
+                                                    <div className="table-responsive">
+                                                        <table className={`${styles.tableFont} border table-hover table mt-2`}>
+                                                            <thead>
+                                                                <tr className="text-center">
 
-                                                    {models?.data.map((item: any) => (
-                                                        <AdminModelList Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
+                                                                    <th>Marka</th>
+                                                                    <th>Model</th>
+                                                                    <th>Tip</th>
+                                                                    <th>Yakıt</th>
+                                                                    <th>Şanzıman</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
 
-                                                    ))}
-                                                </table>
-                                            </div>
-                                        )
-                                        :
-                                        (
+                                                            {models?.data.map((item: any) => (
+                                                                <AdminModelList setItemAndEditStatus={() => setItemAndEditStatus(item)} Item={item} CarTypes={carTypes} Fuels={fuels} Gears={gears} />
 
-                                            <SkeletonTable />
-                                        )
+                                                            ))}
+                                                        </table>
+                                                    </div>
+                                                )
+                                                :
+                                                (
+
+                                                    <SkeletonTable />
+                                                )
+                                        }
+                                    </>
+
                                 }
+
                             </div>
-                            <div className='d-flex justify-content-end my-4'>
-                                <button onClick={HandlePreviousModelPage} className={`${styles.btn} mx-3`} style={{ width: "40px" }}>←</button>
-                                <button onClick={HandleNextModelPage} className={`${styles.btn}`} style={{ width: "40px" }}>→</button>
-                            </div>
+                            {isEdit ? <></> :
+                                <div className='d-flex justify-content-end my-4'>
+                                    <button onClick={HandlePreviousModelPage} className={`${styles.btn} mx-3`} style={{ width: "40px" }}>←</button>
+                                    <button onClick={HandleNextModelPage} className={`${styles.btn}`} style={{ width: "40px" }}>→</button>
+                                </div>
+                            }
 
                         </>
                     )

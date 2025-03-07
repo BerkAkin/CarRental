@@ -100,136 +100,157 @@ function AdminModelAddComponent({ cancelFunc }: any) {
 
 
     return (
-        <div>
-            <Formik validationSchema={modelValidationSchema} initialValues={initialValuesOfAddCar} onSubmit={addNewCarSubmitHandler}>
 
-                <Form>
+        <Formik validationSchema={modelValidationSchema} initialValues={initialValuesOfAddCar} onSubmit={addNewCarSubmitHandler}>
+            <Form>
 
-                    <div className='container-fluid border my-4 p-0'>
-                        <div className='row m-0 p-0'>
-                            <div className='col-4 '>
-                                <Image URL={""} Width='500px'></Image>
-                                <Field type="file" accept="image/*" name="imageDirectory">
-                                    {({ form }: any) => (
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            onChange={(event) => handleImageUpload(event)}
-                                            className={`${styles.inputs} text-center`}
-                                        />
-                                    )}
-                                </Field>
-                            </div>
-                            <div className='col-8  p-0'>
-                                <div className='container-fluid h-100'>
-                                    <div className='row'>
-
-                                        <div className={`col-6 `}>
-                                            <div className='row text-center'><label htmlFor='brandName'>Marka <span className={styles.error}> * <ErrorMessage name="brandName" component="span" className={`${styles.error}`} /></span></label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="brandName" id="brandName" /></div>
-                                        </div>
-                                        <div className={`col-6 `}>
-                                            <div className='row text-center'><label htmlFor='modelName'>Model <span className={styles.error}> * <ErrorMessage name="modelName" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="modelName" id="modelName" /></div>
-                                        </div>
-                                    </div>
-
-                                    <div className='row'>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`col-4  `}>
-                                            <div className='row text-center'><label htmlFor='fuelType.fuel'>Yakıt <span className={styles.error}> * <ErrorMessage name="fuelTypeId" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'>
-                                                <Field as="select" className={`${styles.inputs}`} name="fuelTypeId" id="fuelTypeId" >
-                                                    {fuels?.map((fuel: any) => (
-                                                        <option key={fuel.id} value={fuel.id}>
-                                                            {fuel.fuel}
-                                                        </option>
-                                                    ))}
-                                                </Field>
-                                            </div>
-                                        </div>
-                                        <div className={`col-4 border `}>
-                                            <div className='row text-center'><label htmlFor='gearType.gear'>Şanzıman <span className={styles.error}> * <ErrorMessage name="gearTypeId" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row '>
-                                                <Field as="select" className={`${styles.inputs} `} name="gearTypeId" id="gearTypeId" >
-                                                    {gears?.map((gear: any) => (
-                                                        <option key={gear.id} value={gear.id}>
-                                                            {gear.gear}
-                                                        </option>
-                                                    ))}
-                                                </Field>
-                                            </div>
-                                        </div>
-                                        <div className={`col-4  border`}>
-                                            <div className='row text-center'><label htmlFor='carType.car'>Tip <span className={styles.error}> * <ErrorMessage name="carTypeId" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row '>
-                                                <Field as="select" className={`${styles.inputs}`} name="carTypeId" id="carTypeId" >
-                                                    {carTypes?.map((cartype: any) => (
-                                                        <option key={cartype.id} value={cartype.id}>
-                                                            {cartype.car}
-                                                        </option>
-                                                    ))}
-                                                </Field>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='description'>Açıklama <span className={styles.error}> * <ErrorMessage name="description" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="description" id="description" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`border col-4 justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='personCount'>Kişi Sayısı <span className={styles.error}> * <ErrorMessage name="personCount" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="personCount" id="personCount" /></div>
-                                        </div>
-                                        <div className={`border col-4 justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='luggageCount'>Bagaj Sayısı <span className={styles.error}> * <ErrorMessage name="luggageCount" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="luggageCount" id="luggageCount" /></div>
-                                        </div>
-                                        <div className={`border col-4 justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='doorCount'>Kapı Sayısı <span className={styles.error}> * <ErrorMessage name="doorCount" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'><Field className={`${styles.inputs} text-center`} name="doorCount" id="doorCount" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='price'>Aylık Kiralama Bedeli <span className={styles.error}> * <ErrorMessage name="price" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'> <Field className={`${styles.inputs} text-center`} name="price" id="price" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='otherServices'>Sunulan Diğer Hizmetler <span className={styles.error}> * <ErrorMessage name="otherServices" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'>  <Field className={`${styles.inputs}`} name="otherServices" id="otherServices" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row '>
-                                        <div className={`col-12 border justify-content-center`}>
-                                            <div className='row text-center'><label htmlFor='otherFeatures'>Diğer Araç Özellikleri <span className={styles.error}> * <ErrorMessage name="otherFeatures" component="span" className={`${styles.error}`} /></span> </label></div>
-                                            <div className='row'> <Field className={`${styles.inputs}`} name="otherFeatures" id="otherFeatures" /></div>
-                                        </div>
-                                    </div>
-                                    <div className='row border'>
-                                        <div className={`col-12 justify-content-center`}>
-                                            <div className='row text-center'>
-                                                <div className='col p-0'><button type='submit' className={styles.btn}>Ekle</button></div>
-                                                <div className='col p-0'><button onClick={cancelFunc} className={`${styles.addBtnCancel}`}>İptal Et</button></div>
-
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div className={`${styles.bgColor} container-fluid border `}>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end'></div>
+                        <div className='col-9 border-bottom pt-3'>
+                            <Field type="file" accept="image/*" name="imageDirectory">
+                                {({ form }: any) => (
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(event) => handleImageUpload(event)}
+                                        className={`${styles.inputs}`}
+                                    />
+                                )}
+                            </Field>
                         </div>
                     </div>
-                </Form>
-            </Formik>
-        </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='brandName'>Marka: <span className={styles.error}><ErrorMessage name="brandName" component="span" className={`${styles.error}`} /></span></label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="brandName" id="brandName" />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='modelName'>Model: <span className={styles.error}><ErrorMessage name="modelName" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="modelName" id="modelName" />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='fuelType.fuel'>Yakıt: <span className={styles.error}><ErrorMessage name="fuelTypeId" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field as="select" className={`${styles.inputs}`} name="fuelTypeId" id="fuelTypeId" >
+                                {fuels?.map((fuel: any) => (
+                                    <option key={fuel.id} value={fuel.id}>
+                                        {fuel.fuel}
+                                    </option>
+                                ))}
+                            </Field>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='gearType.gear'>Şanzıman: <span className={styles.error}><ErrorMessage name="gearTypeId" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field as="select" className={`${styles.inputs} `} name="gearTypeId" id="gearTypeId" >
+                                {gears?.map((gear: any) => (
+                                    <option key={gear.id} value={gear.id}>
+                                        {gear.gear}
+                                    </option>
+                                ))}
+                            </Field>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='carType.car'>Tip: <span className={styles.error}><ErrorMessage name="carTypeId" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field as="select" className={`${styles.inputs}`} name="carTypeId" id="carTypeId" >
+                                {carTypes?.map((cartype: any) => (
+                                    <option key={cartype.id} value={cartype.id}>
+                                        {cartype.car}
+                                    </option>
+                                ))}
+                            </Field>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='description'>Açıklama: <span className={styles.error}><ErrorMessage name="description" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="description" id="description" />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='personCount'>Kişi: <span className={styles.error}><ErrorMessage name="personCount" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="personCount" id="personCount" />
+                        </div>
+                    </div>
+
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='luggageCount'>Bagaj: <span className={styles.error}><ErrorMessage name="luggageCount" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="luggageCount" id="luggageCount" />
+                        </div>
+                    </div><div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='doorCount'>Kapı Sayısı: <span className={styles.error}><ErrorMessage name="doorCount" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="doorCount" id="doorCount" />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='price'>Ücret: <span className={styles.error}><ErrorMessage name="price" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="price" id="price" />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='otherServices'>Servisler: <span className={styles.error}><ErrorMessage name="otherServices" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="otherServices" id="otherServices" />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'>
+                            <label htmlFor='otherFeatures'>Özellikler: <span className={styles.error}><ErrorMessage name="otherFeatures" component="span" className={`${styles.error}`} /></span> </label>
+                        </div>
+                        <div className='col-9 border-bottom'>
+                            <Field className={`${styles.inputs}`} name="otherFeatures" id="otherFeatures" />
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-3 border-bottom border-end align-items-center d-flex'></div>
+                        <div className='col-9 border-bottom'></div>
+                    </div>
+                    <div className='row my-2'>
+                        <div className='col-6'>
+                            <button onClick={cancelFunc} className={`${styles.cancelBtn}`}>✖</button>
+                        </div>
+                        <div className='col-6'>
+                            <button type='submit' className={styles.btn}>✔</button>
+                        </div>
+                    </div>
+
+                </div>
+            </Form>
+        </Formik>
+
     )
 }
 
