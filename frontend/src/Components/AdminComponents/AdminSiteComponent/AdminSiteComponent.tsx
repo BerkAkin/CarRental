@@ -120,8 +120,8 @@ function AdminSiteComponent() {
                                 <table className={`${styles.tableFontSize} table-striped table-hover table table-responsive mt-2`}>
                                     <thead>
                                         <tr>
-                                            <th className='col-11'>Ana Metin İçeriği</th>
-                                            <th className='col-1 text-center'></th>
+                                            <th className='col-12'>Ana Metin İçeriği</th>
+                                            <th className='col text-center'></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -162,9 +162,9 @@ function AdminSiteComponent() {
                     <table className={`${styles.tableFontSize} table-striped table-responsive table-hover table mt-2`}>
                         <thead>
                             <tr>
-                                <th className='col-2'>Başlık</th>
+                                <th className='col-3'>Başlık</th>
                                 <th className='col-9'>İçerik</th>
-                                <th className='col-1 text-center'></th>
+                                <th className='col text-center'></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -205,11 +205,11 @@ function AdminSiteComponent() {
                                 <table className={`${styles.tableFontSize} table-striped table-hover table `}>
                                     <thead>
                                         <tr>
-                                            <th className='col-2'>Başlık</th>
+                                            <th className='col-3'>Başlık</th>
                                             <th className='col-7'>İçerik</th>
                                             <th className='col-1 text-center'>İkon</th>
                                             <th className='col-1 text-center'>İkon Değiştir</th>
-                                            <th className='col-1 text-center'></th>
+                                            <th className='col text-center'></th>
                                         </tr>
                                     </thead>
                                     <tbody>
