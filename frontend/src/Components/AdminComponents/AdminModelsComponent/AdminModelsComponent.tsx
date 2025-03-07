@@ -43,7 +43,7 @@ function AdminModelsComponent({ addNewFunc }: any) {
                             {isEdit ? <></> :
                                 <div className='d-flex justify-content-end my-4'>
 
-                                    <button onClick={addNewFunc} className={`${styles.addBtn}`} style={{ width: "150px" }}>Yeni Model Ekle</button>
+                                    <button onClick={addNewFunc} className={`${styles.addBtn}`} style={{ width: "40px" }}>+</button>
 
                                 </div>
                             }
