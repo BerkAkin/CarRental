@@ -116,19 +116,7 @@ function AdminModelEditCard({ Item, Gears, Fuels, CarTypes, CancelBtn }: ItemPro
 
     }
 
-    const onDeleteHandler = async (slug: string) => {
-        showConfirmation("Seçilen model silinecektir. Devam edilsin mi?", async () => {
-            try {
-                const { data, status }: any = await apiService(endpoints.models + `/${slug}`, "DELETE");
-                StatusHandler(status, data, showToast)
-                fetchModels();
-            } catch (error) {
-                const { status, message }: any = error;
-                StatusHandler(status, message, showToast)
-            }
-        })
 
-    }
     return (
         <>
 
@@ -271,7 +259,7 @@ function AdminModelEditCard({ Item, Gears, Fuels, CarTypes, CancelBtn }: ItemPro
                             </div>
                             <div className='row my-3'>
                                 <div className='col-6  '>
-                                    <button type='button' onClick={() => handleSubmit()} className={styles.btn}>✔</button>
+                                    <button type='button' onClick={() => handleSubmit()} className={styles.btn}>↻</button>
                                 </div>
                                 <div className='col-6  '>
                                     <button onClick={CancelBtn} className={styles.deleteBtn}>✖</button>
