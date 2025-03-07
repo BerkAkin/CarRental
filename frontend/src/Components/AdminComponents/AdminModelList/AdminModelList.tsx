@@ -10,9 +10,10 @@ import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
 import modelValidationSchema from '../AdminModelAddComponent/ModelValidationSchema'
 import { useModelsContext } from '../../../Contexts/ModelsContext'
 import modelEditValidationSchema from '../AdminModelEditCard/ModelEditValidationSchema'
-
+import AdminModelEditCard from '../AdminModelEditCard/AdminModelEditCard'
 
 interface ItemProp {
+    setItemAndEditStatus: () => void;
     Item: {
         id: number,
         slug: string,
@@ -53,7 +54,7 @@ interface ItemProp {
     }[];
 }
 
-function AdminModelList({ Item, Gears, Fuels, CarTypes }: ItemProp) {
+function AdminModelList({ Item, Gears, Fuels, CarTypes, setItemAndEditStatus }: ItemProp) {
 
     const { showToast } = useToastManagerContext();
     const { showConfirmation } = useConfirmContext();
@@ -72,48 +73,35 @@ function AdminModelList({ Item, Gears, Fuels, CarTypes }: ItemProp) {
                 StatusHandler(status, message, showToast)
             }
         })
-
     }
 
+
     return (
-        <>
-            <tbody className='border'>
-                <tr>
-                    <td className='col-2 border text-center'>
-                        {Item.brandName}
-                    </td>
-                    <td className='col-2 border text-center'>
-                        {Item.modelName}
-                    </td>
-                    <td className='col-2 border text-center'>
-                        {Item.carType.car}
-                    </td>
-                    <td className='col-2 border text-center'>
-                        {Item.fuelType.fuel}
-                    </td>
-                    <td className='col-2 border text-center'>
-                        {Item.gearType.gear}
-                    </td>
+        <tbody className='border'>
+            <tr>
+                <td className='col-2 border text-center'>
+                    {Item.brandName}
+                </td>
+                <td className='col-2 border text-center'>
+                    {Item.modelName}
+                </td>
+                <td className='col-2 border text-center'>
+                    {Item.carType.car}
+                </td>
+                <td className='col-2 border text-center'>
+                    {Item.fuelType.fuel}
+                </td>
+                <td className='col-2 border text-center'>
+                    {Item.gearType.gear}
+                </td>
 
-                    <td className='col-1 border text-center p-1'>
-                        <button type='button' className={styles.btn}>✎</button>
-                        <button onClick={() => onDeleteHandler(Item.slug)} className={`${styles.deleteBtn} mx-2 m-0`}>✖</button>
-                    </td>
+                <td className='col-1 border text-center p-1'>
+                    <button onClick={setItemAndEditStatus} type='button' className={styles.btn} >✎</button>
+                    <button onClick={() => onDeleteHandler(Item.slug)} className={`${styles.deleteBtn} mx-2 m-0`}>✖</button>
+                </td>
 
-                </tr>
-            </tbody>
-
-
-
-
-
-        </>
-
-
-
-
-
-
+            </tr>
+        </tbody>
     )
 }
 
