@@ -259,10 +259,10 @@ function AdminModelEditCard({ Item, Gears, Fuels, CarTypes, CancelBtn }: ItemPro
                             </div>
                             <div className='row my-3'>
                                 <div className='col-6  '>
-                                    <button type='button' onClick={() => handleSubmit()} className={styles.btn}>↻</button>
+                                    <button onClick={CancelBtn} className={styles.deleteBtn}>✖</button>
                                 </div>
                                 <div className='col-6  '>
-                                    <button onClick={CancelBtn} className={styles.deleteBtn}>✖</button>
+                                    <button type='button' onClick={() => handleSubmit()} className={styles.btn}>↻</button>
                                 </div>
                             </div>
                         </div>
