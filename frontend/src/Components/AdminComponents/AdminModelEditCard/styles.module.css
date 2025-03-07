@@ -5,7 +5,7 @@
     border: none;
     color: #7A7A7A;
     background-color: transparent;
-    height: 100px;
+    height: 40px;
 }
 
 .inputsTA {
@@ -15,8 +15,8 @@
     border: none;
     color: #7A7A7A;
     background-color: transparent;
-    height: 100px;
-    max-height: 100px;
+    height: 40px;
+    max-height: 40;
     align-content: center;
 }
 
@@ -85,5 +85,9 @@ table {
 
 
 .imgDivision {
-    max-width: 115px;
+    max-width: 350px;
+}
+
+.error {
+    color: red;
 }
