@@ -36,7 +36,7 @@ function ServicesInfo({ ServicesLeft, ServicesRight, isLoading }: serviceInfoPro
                     </div>
 
                     <div className='col-lg-6 col-12 d-flex align-items-center my-5'>
-                        <Image URL={"/static/service.png"} Width="620px" Height="500" />
+                        <Image URL={process.env.REACT_APP_STATIC_IMAGE + "service.png"} Width="620px" Height="500" />
                     </div>
 
                     <div className='col-lg-3 col-12 '>
