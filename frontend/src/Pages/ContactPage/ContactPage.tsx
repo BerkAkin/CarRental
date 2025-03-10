@@ -5,7 +5,6 @@ import validationSchema from './ValidationSchema';
 import Image from '../../Components/Image/Image';
 import ListElement from '../../Components/ListElement/ListElement';
 import apiService from '../../api/apiService';
-import { endpoints } from '../../api/apiConfig';
 import { useConfirmContext } from '../../Contexts/ConfirmationContext';
 import { StatusHandler } from '../../common/StatusHandler';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
@@ -54,7 +53,7 @@ function ContactPage() {
         showConfirmation("Mail gönderilecektir. Devam edilsin mi?", async () => {
             try {
                 setSubmitting(true);
-                const { data, status }: any = await apiService(endpoints.contactUs, "POST", values);
+                const { data, status }: any = await apiService(process.env.REACT_APP_CONTACT_US_ENDPOINT, "POST", values);
                 StatusHandler(status, data, showToast)
             } catch (error) {
                 const { status, message }: any = error;
@@ -76,7 +75,7 @@ function ContactPage() {
                                 <div className={`${styles.headerColoring} col-md-3 col-12 d-flex flex-column justify-content-center`}>
                                     <div className='row'>
                                         <div className='text-center d-none d-md-block'>
-                                            <Image Width='250' URL={"/static/logo.png"} />
+                                            <Image Width='250' URL={process.env.REACT_APP_STATIC_IMAGE + "logo.png"} />
                                         </div>
                                     </div>
                                     <div className='row'>
