@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState, } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
 
 interface TextData {
     content: string;
@@ -41,7 +40,7 @@ export const SliderDataProvider = ({ children }: { children: ReactNode }) => {
 
     const fetchData = async () => {
         try {
-            const { data, status }: any = await apiService(endpoints.commentsLatest, "GET");
+            const { data, status }: any = await apiService(process.env.REACT_APP_COMMENTS_LATEST_ENDPOINT, "GET");
             setTextData(data);
         }
         catch (error) {
