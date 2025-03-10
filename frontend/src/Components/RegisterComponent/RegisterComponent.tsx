@@ -16,9 +16,13 @@ interface RegisterProps {
     password: string;
 }
 
+interface IRegister {
+    closeModal: () => void
+}
 
 
-function RegisterComponent() {
+
+function RegisterComponent({ closeModal }: IRegister) {
     const { showToast } = useToastManagerContext();
     const navigate = useNavigate();
 
@@ -122,8 +126,12 @@ function RegisterComponent() {
                                         </div>
                                     </div>
                                     <div className='row mt-4'>
-                                        <div className='col-12 '>
-                                            <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>ÜYE OL</button>
+
+                                        <div className='col-6 '>
+                                            <button className={`${styles.btnCancel}`} onClick={closeModal} disabled={isSubmitting}>İptal</button>
+                                        </div>
+                                        <div className='col-6 '>
+                                            <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>Üye Ol</button>
                                         </div>
                                     </div>
                                     <div className='row mt-3'>
