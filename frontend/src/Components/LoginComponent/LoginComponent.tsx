@@ -4,7 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import loginValidationSchema from './LoginValidationSchema';
 import Image from '../Image/Image';
 import apiService from '../../api/apiService';
-import { endpoints } from '../../api/apiConfig';
 import { useAuthContext } from '../../Contexts/AuthContext';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
@@ -41,7 +40,7 @@ function LoginComponent() {
 
     const handleLogin = async (values: LoginProps, { setSubmitting }: any) => {
         try {
-            const { data, status }: any = await apiService(endpoints.login, "POST", values)
+            const { data, status }: any = await apiService(process.env.REACT_APP_LOGIN_ENDPOINT, "POST", values)
             setSubmitting(true);
             setTimeout(() => {
                 setSubmitting(false);
@@ -68,7 +67,7 @@ function LoginComponent() {
             email: values.email
         };
         try {
-            const { data, status }: any = await apiService(endpoints.resetPasswordRequest, "POST", value)
+            const { data, status }: any = await apiService(process.env.REACT_APP_RESET_PASSWORD_REQUEST_ENDPOINT, "POST", value)
             setSubmitting(true);
             setTimeout(() => {
                 setSubmitting(false);
@@ -110,7 +109,7 @@ function LoginComponent() {
                                             </div>
                                             <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
                                                 <div>
-                                                    <Image URL={"/static/logo.png"} Width='150px'></Image>
+                                                    <Image URL={process.env.REACT_APP_STATIC_IMAGE + "logo.png"} Width='150px'></Image>
                                                 </div>
 
                                             </div>
@@ -160,7 +159,7 @@ function LoginComponent() {
                                             </div>
                                             <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
                                                 <div>
-                                                    <Image URL={"/static/logo.png"} Width='150px'></Image>
+                                                    <Image URL={process.env.REACT_APP_STATIC_IMAGE + "logo.png"} Width='150px'></Image>
                                                 </div>
 
                                             </div>
