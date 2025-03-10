@@ -3,7 +3,6 @@ import { useSiteSettingsContext } from '../../../Contexts/SiteSettingsContext'
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import styles from "./styles.module.css"
 import apiService from '../../../api/apiService';
-import { endpoints } from '../../../api/apiConfig';
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../../common/StatusHandler';
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext';
@@ -46,7 +45,7 @@ function AdminSiteComponent() {
         showConfirmation("Ana metin güncellenecektir. Devam edilsin mi?", async () => {
             try {
                 const dataToSend = { Text: values.text };
-                const { data, status }: any = await apiService(endpoints.mainText + `${values.id}`, "PUT", dataToSend);
+                const { data, status }: any = await apiService(process.env.REACT_APP_MAIN_TEXT_ENDPOINT + `${values.id}`, "PUT", dataToSend);
                 StatusHandler(status, data, showToast)
                 fetchSettings();
             } catch (error) {
@@ -64,7 +63,7 @@ function AdminSiteComponent() {
         showConfirmation("Hizmet metni güncellenecektir. Devam edilsin mi?", async () => {
             try {
                 const dataToSend = { Title: values.title, Content: values.content, IconId: values.icon.id }
-                const { data, status }: any = await apiService(endpoints.serviceText + `${values.id}`, "PUT", dataToSend);
+                const { data, status }: any = await apiService(process.env.REACT_APP_SERVICE_TEXT_ENDPOINT + `${values.id}`, "PUT", dataToSend);
                 StatusHandler(status, data, showToast);
                 fetchSettings();
             } catch (error) {
@@ -80,7 +79,7 @@ function AdminSiteComponent() {
         showConfirmation("Sebep metni güncellenecektir. Devam edilsin mi?", async () => {
             try {
                 const dataToSend = { Title: values.title, Content: values.content }
-                const { data, status }: any = await apiService(endpoints.reasonText + `${values.id}`, "PUT", dataToSend);
+                const { data, status }: any = await apiService(process.env.REACT_APP_REASON_TEXT_ENDPOINT + `${values.id}`, "PUT", dataToSend);
                 StatusHandler(status, data, showToast)
                 fetchSettings();
 
@@ -94,7 +93,7 @@ function AdminSiteComponent() {
 
     const fetchIcons = useCallback(async () => {
         try {
-            const { data } = await apiService(endpoints.icons, "GET");
+            const { data } = await apiService(process.env.REACT_APP_ICONS_ENDPOINT, "GET");
             setIcons(data);
         } catch (error) {
             console.log(error);
