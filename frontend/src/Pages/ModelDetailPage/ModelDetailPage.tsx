@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Image from '../../Components/Image/Image';
 import { ReactComponent as GreenCheck } from '../../assets/icons/greenCheck.svg';
@@ -6,11 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faTag } from '@fortawesome/free-solid-svg-icons'
 import styles from './styles.module.css'
 import Icons from '../../assets/icons/icons';
-import sliderModels from '../../common/sliderModels';
-import SimpleSlider from '../../Components/SimpleSlider/SimpleSlider';
-import SliderModelCard from '../../Components/SliderModelCard/SliderModelCard';
 import apiService from '../../api/apiService';
-import { endpoints } from '../../api/apiConfig';
 import ListElement from '../../Components/ListElement/ListElement';
 import Icon from '../../Components/Icon/Icon';
 import SkeletonDetail from '../../Components/Skeletons/SkeletonDetail/SkeletonDetail';
@@ -55,7 +51,7 @@ function ModelDetailPage() {
     useEffect(() => {
         const getDetail = async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.modelDetail + slug, "GET");
+                const { data, status }: any = await apiService(process.env.REACT_APP_MODEL_DETAIL_ENDPOINT! + slug, "GET");
                 setModelDetail(data);
             } catch (error) {
                 setError("Model detaylarını görüntülerken bir hata meydana geldi. Lütfen yöneticinize başvurun");
