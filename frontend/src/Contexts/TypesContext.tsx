@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
 
 
 
@@ -28,9 +27,9 @@ export const TypesContextProvider = ({ children }: any) => {
     const [fuels, setFuels] = useState<Fuels[]>();
 
     const fetchTypes = useCallback(async () => {
-        const { data: dataF, status: statusF }: any = await apiService(endpoints.fuels, "GET");
-        const { data: dataG, status: statusG }: any = await apiService(endpoints.gears, "GET");
-        const { data: dataC, status: statusC }: any = await apiService(endpoints.carTypes, "GET");
+        const { data: dataF, status: statusF }: any = await apiService(process.env.REACT_APP_FUELS_ENDPOINT, "GET");
+        const { data: dataG, status: statusG }: any = await apiService(process.env.REACT_APP_GEARS_ENDPOINT, "GET");
+        const { data: dataC, status: statusC }: any = await apiService(process.env.REACT_APP_CAR_TYPES_ENDPOINT, "GET");
 
         setFuels(dataF);
         setGears(dataG);
