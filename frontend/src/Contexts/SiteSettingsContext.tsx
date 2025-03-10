@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
 
 
 interface SettingsMainTextProps {
@@ -37,7 +36,7 @@ export const SiteSettingsContextProvider = ({ children }: any) => {
 
     const fetchSettings = useCallback(async () => {
         try {
-            const { data, status }: any = await apiService(endpoints.homepage, "GET");
+            const { data, status }: any = await apiService(process.env.REACT_APP_BASE_API_HOMEPAGE_ENDPOINT, "GET");
             setSettings(data);
         }
         catch (error) {
