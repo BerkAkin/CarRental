@@ -19,6 +19,11 @@ interface ResetProps {
     email: string;
 }
 
+
+interface ILogin {
+    closeModal: () => void
+}
+
 const initialLoginValues = {
     email: '',
     password: ''
@@ -27,7 +32,7 @@ const initialForgetValues = {
     email: ''
 }
 
-function LoginComponent() {
+function LoginComponent({ closeModal }: ILogin) {
 
     const { fetchUserType } = useAuthContext();
     const { showToast } = useToastManagerContext();
@@ -185,14 +190,19 @@ function LoginComponent() {
                                             </div>
                                         </div>
                                         <div className='row mt-4'>
-                                            <div className='col-12 '>
-                                                <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>GİRİŞ YAP</button>
+                                            <div className='col-6'>
+                                                <button className={`${styles.btnCancel}`} onClick={closeModal} disabled={isSubmitting}>İptal</button>
                                             </div>
+                                            <div className='col-6'>
+                                                <button className={`${styles.btn}`} type="submit" disabled={isSubmitting}>Giriş Yap</button>
+                                            </div>
+
                                         </div>
                                         <div className='row mt-3'>
                                             <div className='col-6 ps-3 d-flex justify-content-start'>
                                                 <button className={`${styles.operationBtn}`} onClick={handleIsReset}>Parolamı Unuttum</button>
                                             </div>
+
                                         </div>
 
                                     </div>

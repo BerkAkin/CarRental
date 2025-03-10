@@ -38,6 +38,22 @@
 
 }
 
+
+
+.btnCancel {
+    background-color: #E00000;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    border: none;
+    width: 100%;
+}
+
+.btnCancel:hover {
+    background-color: #f32b2b;
+
+}
+
 .headerText {
     font-size: 1.5rem;
 }
