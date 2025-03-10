@@ -1,7 +1,6 @@
 import styles from "./styles.module.css"
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { useInfoContext } from '../../Contexts/UserInfoContext'
-import { endpoints } from "../../api/apiConfig";
 import apiService from "../../api/apiService";
 import { StatusHandler } from "../../common/StatusHandler";
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
@@ -27,7 +26,7 @@ function UserProfileComponent() {
     const updateUserInfo = async (values: InfoFormProps) => {
         showConfirmation("Kullanıcı bilgileri güncellensin mi? ", async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.ownInfo, "PUT", values);
+                const { data, status }: any = await apiService(process.env.REACT_APP_OWN_INFO_ENDPOINT, "PUT", values);
                 StatusHandler(status, data, showToast)
             } catch (error) {
                 const { status, message }: any = error;

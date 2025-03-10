@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
 
 
 interface SingleContact {
@@ -52,7 +51,7 @@ export const ContactContextProvider = ({ children }: any) => {
 
     const fetchContacts = useCallback(async (page: number) => {
         try {
-            const { data, status }: any = await apiService(endpoints.contactUs + `?pageNumber=${page || 1}`, "GET")
+            const { data, status }: any = await apiService(process.env.REACT_APP_CONTACT_US_ENDPOINT + `?pageNumber=${page || 1}`, "GET")
             setContacts(data);
         }
         catch (error) {

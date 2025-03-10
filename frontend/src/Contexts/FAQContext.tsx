@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
 
 
 const FAQContext = createContext<any>({});
@@ -12,7 +11,7 @@ export const FAQContextProvider = ({ children }: any) => {
 
     const fetchData = useCallback(async () => {
         try {
-            const { data, status }: any = await apiService(endpoints.faq, "GET");
+            const { data, status }: any = await apiService(process.env.REACT_APP_FAQ_ENDPOINT, "GET");
             SetFAQs(data);
         }
         catch (error: any) {

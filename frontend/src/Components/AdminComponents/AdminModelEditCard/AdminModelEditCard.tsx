@@ -3,7 +3,6 @@ import styles from './styles.module.css'
 import Image from '../../Image/Image'
 import { Formik, Field, ErrorMessage } from 'formik'
 import apiService from '../../../api/apiService'
-import { endpoints } from '../../../api/apiConfig'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
@@ -72,7 +71,7 @@ function AdminModelEditCard({ Item, Gears, Fuels, CarTypes, CancelBtn }: ItemPro
         formData.append("file", file);
 
         try {
-            const { data } = await apiService(endpoints.uploadModelImage, "POST", formData, "", true);
+            const { data } = await apiService(process.env.REACT_APP_UPLOAD_MODEL_IMAGE_ENDPOINT, "POST", formData, "", true);
             SetImageDirectory(data.image);
 
             showToast("Görsel başarıyla yüklendi!", "success");
@@ -103,7 +102,7 @@ function AdminModelEditCard({ Item, Gears, Fuels, CarTypes, CancelBtn }: ItemPro
 
         showConfirmation("Model güncellenecektir. Devam edilsin mi?", async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.models, "PUT", dataToSend)
+                const { data, status }: any = await apiService(process.env.REACT_APP_MODELS_ENDPOINT, "PUT", dataToSend)
                 StatusHandler(status, data, showToast);
                 fetchModels();
                 CancelBtn();

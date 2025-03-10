@@ -3,7 +3,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Image from "../../Components/Image/Image";
 import apiService from "../../api/apiService";
-import { endpoints } from "../../api/apiConfig";
 import { StatusHandler } from "../../common/StatusHandler";
 import { useToastManagerContext } from "../../Contexts/ToastManagerContext";
 
@@ -32,7 +31,7 @@ function ResetPasswordPage() {
             return
         }
         try {
-            const { status, data } = await apiService(endpoints.resetPassword, "POST", values);
+            const { status, data } = await apiService(process.env.REACT_APP_RESET_PASSWORD, "POST", values);
             StatusHandler(200, data, showToast);
             setTimeout(() => {
                 navigate("/")
@@ -56,7 +55,7 @@ function ResetPasswordPage() {
             <div className='row text-center d-flex justify-content-center'>
                 <div className="row">
                     <div className="col pt-1">
-                        <Image URL={"/static/logo.png"} Width='200px'></Image>
+                        <Image URL={process.env.REACT_APP_STATIC_IMAGE + "logo.png"} Width='200px'></Image>
                     </div>
                 </div>
             </div>

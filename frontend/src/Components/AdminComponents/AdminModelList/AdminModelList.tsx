@@ -1,16 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from './styles.module.css'
-import Image from '../../Image/Image'
-import { Formik, Field, ErrorMessage } from 'formik'
 import apiService from '../../../api/apiService'
-import { endpoints } from '../../../api/apiConfig'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
-import modelValidationSchema from '../AdminModelAddComponent/ModelValidationSchema'
 import { useModelsContext } from '../../../Contexts/ModelsContext'
-import modelEditValidationSchema from '../AdminModelEditCard/ModelEditValidationSchema'
-import AdminModelEditCard from '../AdminModelEditCard/AdminModelEditCard'
 
 interface ItemProp {
     setItemAndEditStatus: () => void;
@@ -65,7 +59,7 @@ function AdminModelList({ Item, Gears, Fuels, CarTypes, setItemAndEditStatus }: 
     const onDeleteHandler = async (slug: string) => {
         showConfirmation("Seçilen model silinecektir. Devam edilsin mi?", async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.models + `/${slug}`, "DELETE");
+                const { data, status }: any = await apiService(process.env.REACT_APP_MODELS_ENDPOINT + `/${slug}`, "DELETE");
                 StatusHandler(status, data, showToast)
                 fetchModels();
             } catch (error) {

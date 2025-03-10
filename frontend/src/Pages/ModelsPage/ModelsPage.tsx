@@ -1,6 +1,4 @@
-import React from 'react'
-import styles from "./styles.module.css";
-import { ModelsContextProvider, useModelsContext } from '../../Contexts/ModelsContext';
+import { ModelsContextProvider } from '../../Contexts/ModelsContext';
 import ModelsComponent from '../../Components/ModelsComponent/ModelsComponent';
 
 function ModelsPage() {

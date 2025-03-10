@@ -3,7 +3,6 @@ import ListElement from '../../ListElement/ListElement'
 import Image from '../../Image/Image';
 import { useEffect, useState } from 'react';
 import apiService from '../../../api/apiService';
-import { endpoints } from '../../../api/apiConfig';
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../../common/StatusHandler';
 import { useNavigate } from 'react-router-dom';
@@ -27,7 +26,7 @@ function BotNav({ openModal }: BotNavProps) {
 
   const logout = async () => {
     try {
-      const { data, status } = await apiService(endpoints.logout, "GET");
+      const { data, status } = await apiService(process.env.REACT_APP_LOGOUT_ENDPOINT, "GET");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("UserInfo");
       StatusHandler(status, data, showToast)
@@ -49,7 +48,7 @@ function BotNav({ openModal }: BotNavProps) {
     <>
       <nav className={`${styles.botNav} navbar navbar-expand-lg`}>
         <div className="container-fluid">
-          <a className="navbar-brand"> <Image URL={"/static/logo.png"} Width="160" Height="40" /></a>
+          <a className="navbar-brand"> <Image URL={process.env.REACT_APP_STATIC_IMAGE + "logo.png"} Width="160" Height="40" /></a>
           <button className={`${styles.navbarToggleCustom} navbar-toggler`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>

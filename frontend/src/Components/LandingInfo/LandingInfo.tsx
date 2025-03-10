@@ -15,7 +15,7 @@ function LandingInfo({ Text, isLoading }: landingInfoProps) {
             <div className='container-fluid mt-3'>
                 <div className='row'>
                     <div className={`col-xl-12 col-xxl-8`}>
-                        <Image URL={"/static/landing.jpg"} Width="1230px" Height="690px" />
+                        <Image URL={process.env.REACT_APP_STATIC_IMAGE + "landing.jpg"} Width="1230px" Height="690px" />
                     </div>
                     <div className='col-xxl-4 d-flex justify-content-center flex-column'>
                         <div className='row text-center my-4'>

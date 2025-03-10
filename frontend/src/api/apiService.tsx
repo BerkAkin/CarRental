@@ -1,6 +1,4 @@
 import axios from "axios";
-import { endpoints } from "./apiConfig";
-import { useNavigate } from "react-router-dom";
 
 
 let pendingRequests: any[] = [];
@@ -10,7 +8,7 @@ const BASE_URL = process.env.REACT_APP_BASE_API_URL;
 
 async function refreshToken() {
     try {
-        const refreshResponse = await axios.post(`${BASE_URL}${endpoints.refreshAccessToken}`, {}, { withCredentials: true });
+        const refreshResponse = await axios.post(`${BASE_URL}${process.env.REACT_APP_REFRESH_ACCESS_TOKEN_ENDPOINT}`, {}, { withCredentials: true });
         const newAccessToken = refreshResponse.data.accessToken;
         if (newAccessToken) {
             localStorage.setItem("accessToken", newAccessToken);
@@ -23,14 +21,14 @@ async function refreshToken() {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("UserInfo");
             window.location.href = "/";
-            await apiService(endpoints.logout);
+            await apiService(process.env.REACT_APP_LOGOUT_ENDPOINT);
             console.error("Token yenileme işlemi başarısız oldu", error);
         }
     }
 }
 
 
-async function apiService(endpoint: string, method: string = "GET", data: any = null, params: string = "", multipart?: boolean) {
+async function apiService(endpoint: string | undefined, method: string = "GET", data: any = null, params: string = "", multipart?: boolean) {
 
 
     const url = `${BASE_URL}${endpoint}${params}`;

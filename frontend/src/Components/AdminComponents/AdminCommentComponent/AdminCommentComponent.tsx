@@ -1,8 +1,6 @@
-import React from 'react'
 import styles from "./styles.module.css"
 import { useCommentsContext } from '../../../Contexts/CommentContext';
 import apiService from '../../../api/apiService';
-import { endpoints } from '../../../api/apiConfig';
 
 function AdminCommentComponent() {
 
@@ -10,7 +8,7 @@ function AdminCommentComponent() {
 
     const handleMark = async (id: number) => {
         try {
-            await apiService(endpoints.markAsRead, "PUT", id);
+            await apiService(process.env.REACT_APP_MARK_AS_READ_ENDPOINT, "PUT", id);
         }
         catch (Error) {
             console.log(Error);

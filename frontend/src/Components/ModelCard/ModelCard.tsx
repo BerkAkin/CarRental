@@ -1,13 +1,10 @@
-import React from 'react'
 import styles from './styles.module.css';
 import Image from '../Image/Image';
 import Icons from '../../assets/icons/icons';
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ListElement from '../ListElement/ListElement';
-import dummyImg from "../../assets/images/LandingImages/Mach-e.1920x1080-1920x1080.jpg";
 import apiService from '../../api/apiService';
-import { endpoints } from '../../api/apiConfig';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import Icon from '../Icon/Icon';
 import { StatusHandler } from '../../common/StatusHandler';
@@ -32,7 +29,7 @@ function ModelCard({ id, slug, image, type, brandName, personCount, gear, luggag
     const { showToast } = useToastManagerContext();
     const addFavorite = async (id: number) => {
         try {
-            const { data, status }: any = await apiService(endpoints.favorites, "POST", id);
+            const { data, status }: any = await apiService(process.env.REACT_APP_FAVORITES_ENDPOINT, "POST", id);
             StatusHandler(status, data, showToast)
         } catch (error: any) {
             const { status, message } = error;

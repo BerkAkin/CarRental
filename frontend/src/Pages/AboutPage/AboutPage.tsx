@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from '../../Components/Image/Image'
 import styles from './styles.module.css';
 import SimpleSlider from '../../Components/SimpleSlider/SimpleSlider';
@@ -18,7 +17,8 @@ function AboutPage() {
                 </div> */}
                 <div className='row mt-4'>
                     <div className='col-12 d-flex justify-content-center'>
-                        <Image Height='420' Width='1300' URL={"/static/banner.jpg"} Alt='banner'></Image>
+                        <Image Height='420' Width='1300' URL={process.env.REACT_APP_STATIC_IMAGE + "banner.jpg"} Alt='banner'></Image>
+
                     </div>
                 </div>
                 <div className='row my-5 pt-1'>

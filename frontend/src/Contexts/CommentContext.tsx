@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
 import { useToastManagerContext } from "./ToastManagerContext";
 import { StatusHandler } from "../common/StatusHandler";
 
@@ -58,7 +57,7 @@ export const CommentContextProvider = ({ children }: any) => {
 
     const fetchComments = useCallback(async (page: number) => {
         try {
-            const { data, status }: any = await apiService(endpoints.comments + `?pageNumber=${page || 1}`, "GET");
+            const { data, status }: any = await apiService(process.env.REACT_APP_COMMENTS_ENDPOINT + `?pageNumber=${page || 1}`, "GET");
             setComments(data);
         } catch (error) {
             console.log(error)
@@ -67,7 +66,7 @@ export const CommentContextProvider = ({ children }: any) => {
 
     }, []);
 
-    const updateCommentStatus = useCallback(async (endpoint: string, id: number) => {
+    const updateCommentStatus = useCallback(async (endpoint: string | undefined, id: number) => {
         try {
             const { data, status }: any = await apiService(endpoint, "PUT", id);
             await fetchComments(commentsCurrentPage);
@@ -85,8 +84,8 @@ export const CommentContextProvider = ({ children }: any) => {
     }, [commentsCurrentPage, fetchComments]);
 
 
-    const refuseComment = useCallback((id: number) => { updateCommentStatus(endpoints.refuseComment, id) }, []);
-    const acceptComment = useCallback((id: number) => { updateCommentStatus(endpoints.acceptComment, id) }, []);
+    const refuseComment = useCallback((id: number) => { updateCommentStatus(process.env.REACT_APP_REFUSE_COMMENT_ENDPOINT, id) }, []);
+    const acceptComment = useCallback((id: number) => { updateCommentStatus(process.env.REACT_APP_ACCEPT_COMMENT_ENDPOINT, id) }, []);
 
 
     const values = useMemo(() => ({

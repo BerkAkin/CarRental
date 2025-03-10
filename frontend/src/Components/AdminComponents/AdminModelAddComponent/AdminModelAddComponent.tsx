@@ -2,9 +2,7 @@ import React, { useContext, useState } from 'react'
 import styles from "./styles.module.css"
 import { useTypesContext } from '../../../Contexts/TypesContext'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
-import Image from '../../Image/Image'
 import apiService from '../../../api/apiService'
-import { endpoints } from '../../../api/apiConfig'
 import { useToastManagerContext } from '../../../Contexts/ToastManagerContext'
 import { StatusHandler } from '../../../common/StatusHandler'
 import { useConfirmContext } from '../../../Contexts/ConfirmationContext'
@@ -43,7 +41,7 @@ function AdminModelAddComponent({ cancelFunc }: any) {
         formData.append("file", file);
 
         try {
-            const { data } = await apiService(endpoints.uploadModelImage, "POST", formData, "", true);
+            const { data } = await apiService(process.env.REACT_APP_UPLOAD_MODEL_IMAGE_ENDPOINT, "POST", formData, "", true);
             SetImageDirectory(data.image);
 
             showToast("Görsel başarıyla yüklendi!", "success");
@@ -72,7 +70,7 @@ function AdminModelAddComponent({ cancelFunc }: any) {
 
         showConfirmation("Oluşturulan model eklenecektir. Devam edilsin mi?", async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.models, "POST", dataToSend);
+                const { data, status }: any = await apiService(process.env.REACT_APP_MODELS_ENDPOINT, "POST", dataToSend);
                 StatusHandler(status, data, showToast)
             } catch (error) {
                 const { status, message }: any = error;

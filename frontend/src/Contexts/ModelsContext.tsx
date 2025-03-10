@@ -1,8 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
-
-
 
 interface Model {
     currentPage: number;
@@ -77,7 +74,7 @@ export const ModelsContextProvider = ({ children }: any) => {
     const fetchModels = useCallback(async (page: number = modelCurrentPage, search: string = searchText) => {
         setIsLoading(true)
         try {
-            const { data, status }: any = await apiService(endpoints.models + `?query=${search}&pageNumber=${page}`, "GET",)
+            const { data, status }: any = await apiService(process.env.REACT_APP_MODELS_ENDPOINT + `?query=${search}&pageNumber=${page}`, "GET",)
             setModels(data);
         } catch (error) {
             console.log(error);

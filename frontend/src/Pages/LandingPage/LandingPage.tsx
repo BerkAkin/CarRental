@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import LandingInfo from '../../Components/LandingInfo/LandingInfo';
 import WhyInfo from '../../Components/WhyInfo/WhyInfo'
@@ -6,7 +6,6 @@ import ServicesInfo from '../../Components/ServicesInfo/ServicesInfo';
 import SimpleSlider from '../../Components/SimpleSlider/SimpleSlider';
 import SliderCommentCard from '../../Components/SliderCommentCard/SliderCommentCard';
 import apiService from '../../api/apiService';
-import { endpoints } from '../../api/apiConfig';
 import { useSliderContext } from '../../Contexts/SliderContext';
 import groupInThrees from '../../common/GroupSplitter';
 
@@ -22,7 +21,7 @@ function LandingPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data, status }: any = await apiService(endpoints.homepage, "GET");
+        const { data, status }: any = await apiService(process.env.REACT_APP_BASE_API_HOMEPAGE_ENDPOINT, "GET");
         setData(data);
       }
       catch (err) {
@@ -50,8 +49,8 @@ function LandingPage() {
   return (
     <div className={`${styles.innerContainerSizing} py-5`}>
       <LandingInfo isLoading={isLoading} Text={mainText} />
-      <WhyInfo isLoading={isLoading} ImgURL="/static/whyone.jpg" Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
-      <WhyInfo isLoading={isLoading} ImgURL="/static/whytwo.jpg" InfoBars={groupedData[1] || []} Align={true} />
+      <WhyInfo isLoading={isLoading} ImgURL={process.env.REACT_APP_STATIC_IMAGE + "whyone.jpg"} Header="Neden Flexper ?" InfoBars={groupedData[0] || []} Align={false} />
+      <WhyInfo isLoading={isLoading} ImgURL={process.env.REACT_APP_STATIC_IMAGE + "whytwo.jpg"} InfoBars={groupedData[1] || []} Align={true} />
       <ServicesInfo isLoading={isLoading} ServicesLeft={groupedService[0] || []} ServicesRight={groupedService[1] || []} />
 
       <div className='my-3 pt-5'>

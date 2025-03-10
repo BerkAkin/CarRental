@@ -41,7 +41,7 @@ function Footer() {
         <footer className="container py-5 bg-light">
           <div className='row mb-5'>
             <div className='col-md-3 col-12 justify-content-center d-flex '>
-              <Image URL={"/static/logo.png"} Width="200" Height="50" />
+              <Image URL={process.env.REACT_APP_STATIC_IMAGE + "logo.png"} Width="200" Height="50" />
             </div>
           </div>
           <div className='row text-center'>
