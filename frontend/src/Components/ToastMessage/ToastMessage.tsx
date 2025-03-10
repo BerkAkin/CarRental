@@ -27,7 +27,7 @@ function ToastMessage({ Message, Type }: ToastMessageProps) {
                         <div className='col-3'>
                             <div className={`${styles.toastInnerContainer} row h-100`}>
                                 <div style={TMIcon} className={`${styles.toastIcon} border-ends col-2 d-flex align-items-center justify-content-center`}>
-                                    <Image URL={"/static/favicon.png"} Width='40' />
+                                    <Image URL={process.env.REACT_APP_STATIC_IMAGE + "favicon.png"} Width='40' />
                                 </div>
                                 <div style={TMType} className={`${styles.toastBg} col-10 d-flex align-items-center justify-content-center`}>
                                     <span> {Message}</span>
