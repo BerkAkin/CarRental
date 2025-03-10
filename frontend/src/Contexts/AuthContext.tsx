@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useEffect } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
 
 
 export const authContext = createContext<any>({});
@@ -9,7 +8,7 @@ export const AuthContextProvider = ({ children }: any) => {
 
     const fetchUserType = useCallback(async () => {
         try {
-            const { data, status }: any = await apiService(endpoints.userType, "GET");
+            const { data, status }: any = await apiService(process.env.REACT_APP_USER_TYPE_ENDPOINT, "GET");
             localStorage.setItem("UserInfo", JSON.stringify(data));
         } catch (error) {
             console.log("ACxtFtchErr");
@@ -20,7 +19,7 @@ export const AuthContextProvider = ({ children }: any) => {
     const checkUser = useCallback(async () => {
         try {
             const userInfo = JSON.parse(localStorage.getItem("UserInfo") || " {}");
-            const { data: result, status }: any = await apiService(endpoints.checkMe, "GET", null, `?RoleId=${userInfo?.roleId}&Email=${userInfo?.email}`);
+            const { data: result, status }: any = await apiService(process.env.REACT_APP_CHECK_ME_ENDPOINT, "GET", null, `?RoleId=${userInfo?.roleId}&Email=${userInfo?.email}`);
             return result;
         } catch (error) {
             console.log("ACxtChkErr");
