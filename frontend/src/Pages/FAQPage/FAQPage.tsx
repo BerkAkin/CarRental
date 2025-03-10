@@ -1,4 +1,4 @@
-import { FAQContextProvider, useFAQContext } from '../../Contexts/FAQContext'
+import { FAQContextProvider } from '../../Contexts/FAQContext'
 import FAQComponent from "../../Components/FAQComponent/FAQComponent";
 
 function FAQPage() {
