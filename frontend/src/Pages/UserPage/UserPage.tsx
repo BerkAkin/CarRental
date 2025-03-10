@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import apiService from '../../api/apiService';
-import { endpoints } from '../../api/apiConfig';
 import FavoriteCard from '../../Components/FavoriteCard/FavoriteCard';
 import { UserInfoContextProvider } from '../../Contexts/UserInfoContext';
 import UserProfileComponent from '../../Components/UserProfileComponent/UserProfileComponent';
@@ -47,8 +46,8 @@ function UserPage() {
 
     const fetchUserData = async () => {
         try {
-            const { data: dataC, status: statusC }: any = await apiService(endpoints.ownComment, "GET")
-            const { data: dataF, status: statusF }: any = await apiService(endpoints.favorites, "GET")
+            const { data: dataC, status: statusC }: any = await apiService(process.env.REACT_APP_OWN_COMMENT_ENDPOINT, "GET")
+            const { data: dataF, status: statusF }: any = await apiService(process.env.REACT_APP_FAVORITES_ENDPOINT, "GET")
 
             setInitialCommentValues(dataC);
             setinitialFavorites(dataF);
@@ -74,7 +73,7 @@ function UserPage() {
         values.starCount = rating;
         showConfirmation("Yorum güncellenecektir. Devam edilsin mi?", async () => {
             try {
-                const { data, status }: any = await apiService(endpoints.ownComment, "PUT", values);
+                const { data, status }: any = await apiService(process.env.REACT_APP_OWN_COMMENT_ENDPOINT, "PUT", values);
                 StatusHandler(status, data, showToast)
             } catch (error) {
                 const { status, message }: any = error;
@@ -85,7 +84,7 @@ function UserPage() {
 
     const removeFavorite = async (id: number) => {
         try {
-            const { data, status }: any = await apiService(endpoints.favorites, "DELETE", id);
+            const { data, status }: any = await apiService(process.env.REACT_APP_FAVORITES_ENDPOINT, "DELETE", id);
             StatusHandler(status, data, showToast)
             fetchUserData();
         } catch (error) {
@@ -97,8 +96,8 @@ function UserPage() {
 
     const deleteAccount = async () => {
         try {
-            await apiService(endpoints.ownAccountDelete, "DELETE");
-            await apiService(endpoints.logout, "GET");
+            await apiService(process.env.REACT_APP_OWN_ACCOUNT_DELETE_ENDPOINT, "DELETE");
+            await apiService(process.env.REACT_APP_LOGOUT_ENDPOINT, "GET");
             localStorage.removeItem("accessToken");
             showToast("Çıkış Yapıldı ve Hesap Askıya Alındı", "s")
             window.location.reload();
