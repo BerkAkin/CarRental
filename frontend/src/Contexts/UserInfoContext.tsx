@@ -1,7 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import apiService from "../api/apiService";
-import { endpoints } from "../api/apiConfig";
-import { useToastManagerContext } from "./ToastManagerContext";
 
 interface InfoFormProps {
     email: string;
@@ -20,7 +18,7 @@ export const UserInfoContextProvider = ({ children }: any) => {
 
     const fetchInfo = useCallback(async () => {
         try {
-            const { data, status }: any = await apiService(endpoints.ownInfo, "GET");
+            const { data, status }: any = await apiService(process.env.REACT_APP_OWN_INFO_ENDPOINT, "GET");
             setUserInfo(data);
         } catch (error) {
             setError("Kullanıcı bilgileri alınırken hata oluştu. Lütfen yöneticinize başvurun")
