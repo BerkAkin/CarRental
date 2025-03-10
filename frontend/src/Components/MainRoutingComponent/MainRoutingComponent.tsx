@@ -31,6 +31,10 @@ function MainRoutingComponent() {
     setIsModalOpen(true);
   }
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  }
+
   const closeModal = () => setIsModalOpen(false);
 
 
@@ -46,7 +50,7 @@ function MainRoutingComponent() {
         {
           isModalOpen ?
             <Modal closeModal={closeModal} >
-              {modalContent == 'login' ? <LoginComponent /> : <RegisterComponent />}
+              {modalContent == 'login' ? <LoginComponent closeModal={handleCloseModal} /> : <RegisterComponent closeModal={handleCloseModal} />}
             </Modal> : ""
         }
 
