@@ -60,9 +60,9 @@ function BotNav({ openModal }: BotNavProps) {
               <li className="nav-item ms-4">
                 <ListElement color="#1A2B48" text='MODELLER' href='Models' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
               </li>
-              <li className="nav-item ms-4">
+              {/* <li className="nav-item ms-4">
                 <ListElement color="#1A2B48" text='FLEXBLOG' href='Blog' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
-              </li>
+              </li> */}
               <li className="nav-item ms-4">
                 <ListElement color="#1A2B48" text='SSS' href='FAQ' boldness='700' fs='0.9em' isHover={true} hoverColor='#E00000' />
               </li>
