@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import registerValidationSchema from './RegisterValidationSchema';
 import Image from '../Image/Image';
 import apiService from '../../api/apiService';
-import { endpoints } from '../../api/apiConfig';
 import { useToastManagerContext } from '../../Contexts/ToastManagerContext';
 import { StatusHandler } from '../../common/StatusHandler';
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +32,7 @@ function RegisterComponent() {
 
     const onSubmit = async (values: RegisterProps, { setSubmitting }: any) => {
         try {
-            const { data, status }: any = await apiService(endpoints.register, "POST", values)
+            const { data, status }: any = await apiService(process.env.REACT_APP_REGISTER_ENDPOINT, "POST", values)
             setSubmitting(true);
             setTimeout(() => {
                 setSubmitting(false);
@@ -67,7 +66,7 @@ function RegisterComponent() {
                                         </div>
                                         <div className='col-6 d-flex justify-content-center pt-2 align-items-center'>
                                             <div>
-                                                <Image URL={"/static/logo.png"} Width='150px'></Image>
+                                                <Image URL={process.env.REACT_APP_STATIC_IMAGE + "logo.png"} Width='150px'></Image>
                                             </div>
 
                                         </div>
